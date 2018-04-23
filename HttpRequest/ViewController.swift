@@ -14,7 +14,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     let apis = ["HTTP Get connection",
                 "HTTP POST connection",
-                "HTTP POST Authentication"]
+                "HTTP POST Authentication",
+                "HTTP GET SignIned Connection"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                           completionHandler: { (data, responce, error) in
                             self.detail(data: data!)
                 })
+            break
+        case 3:
+            HttpRequest(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
+                .getHttp(completion: { (data, responce, error) in
+                    self.detail(data: data!)
+            })
+            break
+            
+        case 4:
+            
             break
         default:
             print ("DEfault")
