@@ -13,8 +13,8 @@ import UIKit
  * Http method
  */
 public enum HTTPMethod: String{
-    case Post = "POST"
-    case Get  = "GET"
+    case post = "POST"
+    case get  = "GET"
     case Put = "PUT"
     case Delete = "DELETE"
 }
@@ -51,28 +51,26 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         }
     }
     
-    public func PayAppAuthentication(url: String, param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
-        
+    public func postHttp(param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .Post).PayAppSigin(param: param)
-        self.sendRequest(request: request)
+        self.sendRequest(request: (self.request?.postHttp(param: param))!)
     }
     
     public func PayAppPost(url: String, param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .Post).PayAppPost(param: param)
+        let request: URLRequest = Request(url: url, method: .post).PayAppPost(param: param)
         self.sendRequest(request: request)
     }
     
     public func PayAppPostImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .Post).PayAppUpoloadImage(param: param, imageParam: imageParam)
+        let request: URLRequest = Request(url: url, method: .post).PayAppUpoloadImage(param: param, imageParam: imageParam)
         self.sendRequest(request: request)
     }
     
     public func PayImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, Data>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .Post).PayAppImage(param: param, imageParam: imageParam)
+        let request: URLRequest = Request(url: url, method: .post).PayAppImage(param: param, imageParam: imageParam)
         self.sendRequest(request: request)
     }
     
@@ -88,7 +86,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         let user: String = URLEncode().URLUTF8Encode(param: userId)
         let followers: String = url + "?" + user
-        let request: URLRequest = Request(url: followers, method: .Get).twitFollowersRequest(beare: beare)
+        let request: URLRequest = Request(url: followers, method: .get).twitFollowersRequest(beare: beare)
         self.sendRequest(request: request)
     }
     
@@ -102,7 +100,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         self.successHandler = completionHandler
         
-        let request: URLRequest = Request(url: url, method: .Post).twitBeareRequest(param: param)
+        let request: URLRequest = Request(url: url, method: .post).twitBeareRequest(param: param)
         self.sendRequest(request: request)
     }
     
@@ -116,7 +114,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         self.successHandler = completionHandler
         
-        let request: URLRequest = Request(url: url, method: .Post).twitOAuthRequest(/*oAuth: OAuthKit(),*/ param: param)
+        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: OAuthKit(),*/ param: param)
         self.sendRequest(request: request)
     }
     
@@ -130,7 +128,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         self.successHandler = completionHandler
         
-        let request: URLRequest = Request(url: url, method: .Post).twitOAuthRequest(/*oAuth: oAuth,*/ param: param)
+        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: oAuth,*/ param: param)
         self.sendRequest(request: request)
     }
     
@@ -145,7 +143,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
     func showUser(parame: [String:String], success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
         self.successHandler = success
         let u = "https://api.twitter.com/1.1/users/show.json"
-        let request: URLRequest = Request(url: u, method: .Get).twitterUser(param: parame)
+        let request: URLRequest = Request(url: u, method: .get).twitterUser(param: parame)
         self.sendRequest(request: request)
     }
     
@@ -153,7 +151,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         self.successHandler = success
         let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
         
-        let request: URLRequest = Request(url: u, method: .Post).postTweet(tweet: tweet, imgae: img)
+        let request: URLRequest = Request(url: u, method: .post).postTweet(tweet: tweet, imgae: img)
         self.sendRequest(request: request)
         
     }

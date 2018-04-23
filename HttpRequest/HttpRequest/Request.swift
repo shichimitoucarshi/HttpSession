@@ -32,7 +32,7 @@ class Request {
         return self.urlReq
     }
     
-    public func  PayAppSigin (param: Dictionary<String, String>) -> URLRequest{
+    public func  postHttp (param: Dictionary<String, String>) -> URLRequest{
         self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
         self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -96,13 +96,13 @@ class Request {
      * Twitter Request Token, Access Token
      */
     public func twitOAuthRequest(/*oAuth: OAuthKit,*/ param: Dictionary<String, String>) ->URLRequest{
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!, method: .Post, parameters: param, isMediaUpload: false)
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!, method: .post, parameters: param, isMediaUpload: false)
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         return self.urlReq
     }
     
     public func twitterUser(param: [String: String]) -> URLRequest {
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .Get ,parameters: param, isMediaUpload: false)
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .get ,parameters: param, isMediaUpload: false)
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(4))!
         self.urlReq.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
@@ -142,7 +142,7 @@ class Request {
         var parameters = Dictionary<String, Any>()
         parameters["status"] = tweet
         
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .Post ,parameters:parameters, isMediaUpload: true)
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .post ,parameters:parameters, isMediaUpload: true)
         
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         
