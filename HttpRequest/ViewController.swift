@@ -12,7 +12,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     @IBOutlet weak var tableView: UITableView!
     
-    let apis = ["HTTP Get connection"]
+    let apis = ["HTTP Get connection",
+                "HTTP POST connection"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     
     func detailViewController (text: String) {
-        DispatchQueue.main.sync {
-            let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as! DetailViewController
-            print ("text: \(text)")
-            self.navigationController?.pushViewController(detailViewController, animated: true)
-            detailViewController.text = text
+        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as! DetailViewController
+        print ("text: \(text)")
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+        detailViewController.text = text
+    }
+    
+    func detail(data: Data) {
+        DispatchQueue.main.async {
+            let responceStr = String(data: data, encoding: .utf8)
+            self.detailViewController(text: responceStr!)
         }
     }
     
@@ -51,9 +57,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         switch indexPath.row {
         case 0:
-            HttpRequest(url: "http://153.126.160.55/getApi.json", method: .Get).getHttp(completion: { (data, responce, error) in
-                let responceStr = String(data: data!, encoding: .utf8)
-                self.detailViewController(text: responceStr!)
+            HttpRequest(url: "http://153.126.160.55/getApi.json", method: .get)
+                .getHttp(completion: { (data, responce, error) in
+                self.detail(data: data!)
+            })
+            break
+        case 1:
+            HttpRequest(url: "http://153.126.160.55/postApi.json",method: .post)
+                .postHttp(param: ["http_post":"Http Request POST 😄"],
+                          completionHandler: { (data, responce, error) in
+                self.detail(data: data!)
             })
         default:
             print ("DEfault")
