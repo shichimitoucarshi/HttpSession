@@ -18,6 +18,7 @@
 		C73C4869208E31C100176EFB /* TwitterAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4863208E31C100176EFB /* TwitterAuth.swift */; };
 		C73C486C208E31D700176EFB /* URLEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C486B208E31D700176EFB /* URLEncode.swift */; };
 		C73C4871208E327500176EFB /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4870208E327500176EFB /* Multipart.swift */; };
+		C73C4873208E3F9000176EFB /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4872208E3F9000176EFB /* Cookie.swift */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
 		C791EF45208BA01000592178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF44208BA01000592178 /* ViewController.swift */; };
 		C791EF48208BA01000592178 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF46208BA01000592178 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		C73C4863208E31C100176EFB /* TwitterAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterAuth.swift; sourceTree = "<group>"; };
 		C73C486B208E31D700176EFB /* URLEncode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEncode.swift; sourceTree = "<group>"; };
 		C73C4870208E327500176EFB /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
+		C73C4872208E3F9000176EFB /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		C791EF3F208BA01000592178 /* HttpRequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpRequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C791EF44208BA01000592178 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				C73C4857208E31BB00176EFB /* AuthUtils.swift */,
 				C73C4858208E31BB00176EFB /* HMAC.swift */,
 				C73C4859208E31BB00176EFB /* SHA1.swift */,
+				C73C4872208E3F9000176EFB /* Cookie.swift */,
 			);
 			path = AuthKit;
 			sourceTree = "<group>";
@@ -136,11 +139,11 @@
 		C791EF7C208E01E600592178 /* HttpRequest */ = {
 			isa = PBXGroup;
 			children = (
+				C791EF82208E01E600592178 /* HttpRequest.swift */,
+				C791EF85208E01E600592178 /* Request.swift */,
 				C73C4856208E31BB00176EFB /* AuthKit */,
 				C73C486A208E31D700176EFB /* Encode */,
-				C791EF82208E01E600592178 /* HttpRequest.swift */,
 				C73C486D208E322200176EFB /* Multipart */,
-				C791EF85208E01E600592178 /* Request.swift */,
 				C73C485D208E31C100176EFB /* TwitterKit */,
 			);
 			path = HttpRequest;
@@ -229,6 +232,7 @@
 				C73C485B208E31BC00176EFB /* HMAC.swift in Sources */,
 				C73C4865208E31C100176EFB /* Followers.swift in Sources */,
 				C73C4869208E31C100176EFB /* TwitterAuth.swift in Sources */,
+				C73C4873208E3F9000176EFB /* Cookie.swift in Sources */,
 				C73C485A208E31BB00176EFB /* AuthUtils.swift in Sources */,
 				C73C4871208E327500176EFB /* Multipart.swift in Sources */,
 				C73C485C208E31BC00176EFB /* SHA1.swift in Sources */,

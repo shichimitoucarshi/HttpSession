@@ -32,17 +32,20 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
     var url: String!
     var request: Request?
     
-    init(url: String, method: HTTPMethod){
-        self.request = Request(url: url, method: method)
+    var isCookie: Bool = false
+    
+    init(url: String, method: HTTPMethod, cookie: Bool = false){
+        self.isCookie = cookie
+        self.request = Request(url: url, method: method,cookie:cookie)
     }
     /*
      * Callback function
      * success Handler
      *
      */
-    public typealias CompletionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
+    public typealias completionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
     
-    var successHandler: CompletionHandler?
+    var successHandler: completionHandler?
     
     public func getHttp (completion: @escaping(Data?, HTTPURLResponse?,Error?) -> Void) {
         
@@ -56,10 +59,10 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         self.sendRequest(request: (self.request?.postHttp(param: param))!)
     }
     
-    public func PayAppPost(url: String, param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
+    public func signIn(param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .post).PayAppPost(param: param)
-        self.sendRequest(request: request)
+        self.isCookie = true
+        self.sendRequest(request: (self.request?.postHttp(param: param))!)
     }
     
     public func PayAppPostImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
@@ -193,16 +196,14 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         }
         print (self.response)
         
+        if self.isCookie == true{
+            self.isCookie = false
+            Cookie.shared.set(responce: response)
+        }
         /*
          * status code
          */
-//        guard self.response.statusCode >= 400 else {
-            //let body = String(data: self.responseData, encoding: .utf8)
-            //print ("responce: \(body)")
-            //print ("get: \(String(describing: String(data:self.responseData, encoding:String.Encoding.utf8)))")
-            self.successHandler!(self.responseData,self.response,error)
-//            return
-//        }
+        self.successHandler!(self.responseData,self.response,error)
     }
     
     /*

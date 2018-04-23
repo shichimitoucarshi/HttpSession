@@ -13,7 +13,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     
     let apis = ["HTTP Get connection",
-                "HTTP POST connection"]
+                "HTTP POST connection",
+                "HTTP POST Authentication"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                           completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
+            break
+        case 2:
+            HttpRequest(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
+                .signIn(param: ["http_sign_in":"Http Request SignIn 💯",
+                                "user_id":"keisukeYamagishi",
+                                "password": "password_jisjdhsnjfbns"],
+                          completionHandler: { (data, responce, error) in
+                            self.detail(data: data!)
+                })
+            break
         default:
             print ("DEfault")
         }

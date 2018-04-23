@@ -17,19 +17,17 @@ class Request {
     /*
      * Initializer
      * parame: URLRequest
-     *         URL
      *
      */
-    init (url: String, method: HTTPMethod){
+    init (url: String, method: HTTPMethod, cookie: Bool = false){
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
         self.urlReq.httpShouldHandleCookies = false
         self.urlReq.timeoutInterval = 60
-    }
-    
-    public func getHttp() -> URLRequest {
-        return self.urlReq
+        if cookie == true {
+            self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
+        }
     }
     
     public func  postHttp (param: Dictionary<String, String>) -> URLRequest{
@@ -64,7 +62,7 @@ class Request {
         var data = multi.createMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
         
         data.append( multi.textMultiPart(uuid: uuid, param: param))
-        self.urlReq.allHTTPHeaderFields = Request.getCookie()
+//        self.urlReq.allHTTPHeaderFields = Request.getCookie()
         self.urlReq.httpBody = data
         self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
         self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
@@ -81,7 +79,7 @@ class Request {
         
         var data = multi.imgMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
         
-        self.urlReq.allHTTPHeaderFields = Request.getCookie()
+//        self.urlReq.allHTTPHeaderFields = Request.getCookie()
         self.urlReq.httpBody = data
         self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
         self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
@@ -174,21 +172,21 @@ class Request {
         return self.urlReq
     }
     
-//    static public func getCookie() -> [String : String]{
-//        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: POSTKey.authUrl)!)
+//    static public func cookie(url: String) -> [String : String]{
+//        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: url)!)
 //        return HTTPCookie.requestHeaderFields(with: cookie!)
 //    }
-    
-    static public func setCookie(responce: URLResponse){
-        
-        let res = responce as! HTTPURLResponse
-        
-        let cookies = HTTPCookie.cookies(withResponseHeaderFields: res.allHeaderFields as! [String : String], for: res.url!)
-        
-        for i in 0 ..< cookies.count{
-            let cookie = cookies[i]
-            HTTPCookieStorage.shared.setCookie(cookie)
-            
-        }
-    }
+//    
+//    static public func setCookie(responce: URLResponse){
+//        
+//        let res = responce as! HTTPURLResponse
+//        
+//        let cookies = HTTPCookie.cookies(withResponseHeaderFields: res.allHeaderFields as! [String : String], for: res.url!)
+//        
+//        for i in 0 ..< cookies.count{
+//            let cookie = cookies[i]
+//            HTTPCookieStorage.shared.setCookie(cookie)
+//            
+//        }
+//    }
 }
