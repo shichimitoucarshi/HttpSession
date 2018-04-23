@@ -43,17 +43,17 @@ class Request {
         return self.urlReq
     }
     
-    public func PayAppPost (param: Dictionary<String, String>) -> URLRequest{
-        self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
-        self.urlReq.allHTTPHeaderFields = Request.getCookie()//header
-        let value: String = URLEncode().URLUTF8Encode(param: param)
-        let pData: Data = value.data(using: .utf8)! as Data
-        self.urlReq.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
-        self.urlReq.httpBody = pData as Data
-        return self.urlReq
-    }
+//    public func PayAppPost (param: Dictionary<String, String>) -> URLRequest{
+//        self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//        self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+//        self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
+//        self.urlReq.allHTTPHeaderFields = Request.getCookie()//header
+//        let value: String = URLEncode().URLUTF8Encode(param: param)
+//        let pData: Data = value.data(using: .utf8)! as Data
+//        self.urlReq.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
+//        self.urlReq.httpBody = pData as Data
+//        return self.urlReq
+//    }
     
     public func PayAppUpoloadImage(param: Dictionary<String, String>, imageParam: Dictionary<String, String>) -> URLRequest{
         
@@ -174,10 +174,10 @@ class Request {
         return self.urlReq
     }
     
-    static public func getCookie() -> [String : String]{
-        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: POSTKey.authUrl)!)
-        return HTTPCookie.requestHeaderFields(with: cookie!)
-    }
+//    static public func getCookie() -> [String : String]{
+//        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: POSTKey.authUrl)!)
+//        return HTTPCookie.requestHeaderFields(with: cookie!)
+//    }
     
     static public func setCookie(responce: URLResponse){
         
