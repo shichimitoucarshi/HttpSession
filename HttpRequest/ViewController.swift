@@ -89,9 +89,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
             
         case 4:
-            let image: String? = Bundle.main.path(forResource: "GPSButton001", ofType: "png")
+            var dto: MultipartDto = MultipartDto()
+            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
             let img: Data = try! Data(contentsOf:  URL(fileURLWithPath:image!))
-            HttpRequest(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":img], completionHandler: { (data, responce, error) in
+            
+            dto.fileName = "Hello.txt"
+            dto.mimeType = "text/plain"
+            dto.data = img
+            
+            HttpRequest(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break

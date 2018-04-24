@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+struct MultipartDto {
+    var fileName = ""
+    var mimeType = ""
+    var data: Data = Data()
+}
+
 class Request {
     
     var url: URL!
@@ -41,50 +47,17 @@ class Request {
         return self.urlReq
     }
     
-//    public func PayAppPost (param: Dictionary<String, String>) -> URLRequest{
-//        self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-//        self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
-//        self.urlReq.allHTTPHeaderFields = Request.getCookie()//header
-//        let value: String = URLEncode().URLUTF8Encode(param: param)
-//        let pData: Data = value.data(using: .utf8)! as Data
-//        self.urlReq.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
-//        self.urlReq.httpBody = pData as Data
-//        return self.urlReq
-//    }
-    
-    public func upoloadImage(param: Dictionary<String, String>, imageParam: Dictionary<String, String>) -> URLRequest{
+    public func multipartReq(param: Dictionary<String, MultipartDto>) -> URLRequest{
         
-        let uuid = UUID().uuidString
-        
-        let multi = Multipart(uuid: uuid)
-        
-        var data = multi.createMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
-        
-        data.append( multi.textMultiPart(uuid: uuid, param: param))
-        self.urlReq.httpBody = data
+        let multipart: Multipart = Multipart()
+        let data:Data = multipart.multiparts(params: param)
+        self.urlReq.httpMethod = "POST"
+        self.urlReq.setValue("multipart/form-data; boundary=\(multipart.bundary)", forHTTPHeaderField: "Content-Type")
         self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
-        self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
-        
-        return self.urlReq
-        
-    }
-    
-    public func multipartReq(param: Dictionary<String, Any>) -> URLRequest{
-        
-        let uuid = UUID().uuidString
-
-        let multi = Multipart(uuid: uuid)
-        
-        var data = multi.multiparts( mineType: "image/png", param: param as! Dictionary<String, Data>)
-        
         self.urlReq.httpBody = data
-        self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
-        self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
-        
         return self.urlReq
     }
-
+    
     /*
      * Authenticate: OAuth
      * Header: Authorization
