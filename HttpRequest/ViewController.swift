@@ -15,7 +15,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     let apis = ["HTTP Get connection",
                 "HTTP POST connection",
                 "HTTP POST Authentication",
-                "HTTP GET SignIned Connection"]
+                "HTTP GET SignIned Connection",
+                "HTTP POST Upload image png"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +74,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 2:
             HttpRequest(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
-                .signIn(param: ["http_sign_in":"Http Request SignIn 💯",
-                                "user_id":"keisukeYamagishi",
+                .signIn(param: ["http_sign_in":"Http Request SignIn",
+                                "userId":"keisukeYamagishi",
                                 "password": "password_jisjdhsnjfbns"],
                           completionHandler: { (data, responce, error) in
                             self.detail(data: data!)
@@ -88,7 +89,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
             
         case 4:
+            var dto: MultipartDto = MultipartDto()
+            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
+            let img: Data = try! Data(contentsOf:  URL(fileURLWithPath:image!))
             
+            dto.fileName = "Hello.txt"
+            dto.mimeType = "text/plain"
+            dto.data = img
+            
+            HttpRequest(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
+                self.detail(data: data!)
+            })
             break
         default:
             print ("DEfault")

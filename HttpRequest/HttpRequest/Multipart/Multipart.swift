@@ -10,49 +10,35 @@ import Foundation
 
 class Multipart {
     
+    public var bundary: String
+    public var uuid: String
     
-    
-    public var bundary: String!
-    public var uuid: String!
-    
-    init(uuid: String){
-        self.bundary = "multipart/form-data; boundary=" + uuid
-        self.uuid = uuid
+    init(){
+        self.uuid = UUID().uuidString
+        self.bundary = String(format: "----\(self.uuid)")
     }
     
-    func imgMultiPart( mineType: String, ImageParam: Dictionary<String, Data>) -> Data{
-        
-        var post: Data = Data()
-        var count: Int = 0
-        for(key, value) in ImageParam {
-            
-            let userId = "shichimi"
-            
-            let imgName = "\(userId)_\(count).jpg"
-            count = count + 1
-            post.append(multipart(boundary: self.uuid, key: key, fileName: imgName as String, mineType: mineType, postData: value as Data))
-            
-        }
-        return post
-    }
-
-    func createMultiPart(mineType: String, ImageParam: Dictionary<String, String>) -> Data{
+//    func multiparts(mineType: String, params: Dictionary<String, Data>) -> Data{
+//
+//        var post: Data = Data()
+//
+//        for(key, value) in params {
+//            post.append(multipart( key: key, fileName: "lplp.png" as String, mineType: mineType, data: value))
+//        }
+//        return post
+//    }
+//
+    
+    func multiparts(params: Dictionary<String, MultipartDto>) -> Data{
         
         var post: Data = Data()
         
-        for(key, value) in ImageParam {
-            
-            let imgName: NSString = (value as NSString)
-            let imagePath = Bundle.main.path(forResource: imgName.deletingPathExtension, ofType: imgName.pathExtension)
-            
-            let imageData: NSData = try! NSData(contentsOfFile: imagePath!)
-            
-            post.append(multipart(boundary: self.uuid, key: key, fileName: imgName as String, mineType: mineType, postData: imageData as Data))
-            
+        for(key, value) in params {
+            let dto: MultipartDto = value
+            post.append(multipart(key: key, fileName: dto.fileName as String, mineType: dto.mimeType, data: dto.data))
         }
         return post
     }
-    
     func textMultiPart(uuid: String, param: Dictionary<String, String>) -> Data{
         var multiPart: Data = Data()
         
@@ -70,25 +56,18 @@ class Multipart {
         return multiPart
     }
     
-    func multipart(boundary: String, key: String, fileName: String, mineType: String, postData: Data) -> Data{
+    func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
         
-        var multiPart: Data = Data()
+        var body = Data()
+        let CRLF = "\r\n"
+        body.append(("--\(self.bundary)" + CRLF).data(using: .utf8)!)
+        body.append(("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(fileName)\"" + CRLF).data(using: .utf8)!)
+        body.append(("Content-Type: \(mineType)" + CRLF + CRLF).data(using: .utf8)!)
+        body.append(data)
+        body.append(CRLF.data(using: .utf8)!)
+        body.append(("--\(self.bundary)--" + CRLF).data(using: .utf8)!)
         
-        multiPart.append("--\(boundary)\r\n".data(using: .utf8)!)
-        
-        multiPart.append("Content-Disposition: form-data;".data(using: .utf8)!)
-        
-        multiPart.append("name=\"\(key)\";".data(using: .utf8)!)
-        
-        multiPart.append("filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-        
-        multiPart.append("Content-Type: \(mineType)\r\n\r\n".data(using: .utf8)!)
-        
-        multiPart.append(postData)
-        
-        multiPart.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        return multiPart as Data
+        return body
     }
     
     static func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {

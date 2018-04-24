@@ -19,6 +19,7 @@
 		C73C486C208E31D700176EFB /* URLEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C486B208E31D700176EFB /* URLEncode.swift */; };
 		C73C4871208E327500176EFB /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4870208E327500176EFB /* Multipart.swift */; };
 		C73C4873208E3F9000176EFB /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4872208E3F9000176EFB /* Cookie.swift */; };
+		C73C4875208E559000176EFB /* GPSButton001.png in Resources */ = {isa = PBXBuildFile; fileRef = C73C4874208E559000176EFB /* GPSButton001.png */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
 		C791EF45208BA01000592178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF44208BA01000592178 /* ViewController.swift */; };
 		C791EF48208BA01000592178 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF46208BA01000592178 /* Main.storyboard */; };
@@ -27,7 +28,21 @@
 		C791EF91208E01E600592178 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF82208E01E600592178 /* HttpRequest.swift */; };
 		C791EF94208E01E600592178 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF85208E01E600592178 /* Request.swift */; };
 		C791EF9C208E04F000592178 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF9B208E04F000592178 /* DetailViewController.swift */; };
+		C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F189208F0CC70034CD7F /* Re120.jpg */; };
+		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C7F2F18D208F12370034CD7F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C73C4857208E31BB00176EFB /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
@@ -42,6 +57,7 @@
 		C73C486B208E31D700176EFB /* URLEncode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEncode.swift; sourceTree = "<group>"; };
 		C73C4870208E327500176EFB /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		C73C4872208E3F9000176EFB /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		C73C4874208E559000176EFB /* GPSButton001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GPSButton001.png; sourceTree = "<group>"; };
 		C791EF3F208BA01000592178 /* HttpRequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpRequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C791EF44208BA01000592178 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +68,8 @@
 		C791EF82208E01E600592178 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
 		C791EF85208E01E600592178 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		C791EF9B208E04F000592178 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = HttpRequest/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
+		C7F2F189208F0CC70034CD7F /* Re120.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Re120.jpg; sourceTree = "<group>"; };
+		C7F2F18B208F103B0034CD7F /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				C791EF42208BA01000592178 /* AppDelegate.swift */,
+				C73C4874208E559000176EFB /* GPSButton001.png */,
+				C7F2F189208F0CC70034CD7F /* Re120.jpg */,
+				C7F2F18B208F103B0034CD7F /* re.txt */,
 				C791EF49208BA01000592178 /* Assets.xcassets */,
 				C791EF9B208E04F000592178 /* DetailViewController.swift */,
 				C791EF7C208E01E600592178 /* HttpRequest */,
@@ -159,6 +180,7 @@
 				C791EF3B208BA01000592178 /* Sources */,
 				C791EF3C208BA01000592178 /* Frameworks */,
 				C791EF3D208BA01000592178 /* Resources */,
+				C7F2F18D208F12370034CD7F /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -209,8 +231,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C791EF4D208BA01000592178 /* LaunchScreen.storyboard in Resources */,
+				C7F2F18C208F103B0034CD7F /* re.txt in Resources */,
 				C791EF4A208BA01000592178 /* Assets.xcassets in Resources */,
+				C73C4875208E559000176EFB /* GPSButton001.png in Resources */,
 				C791EF48208BA01000592178 /* Main.storyboard in Resources */,
+				C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
