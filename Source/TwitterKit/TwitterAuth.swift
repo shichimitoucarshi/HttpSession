@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-open class TwitterAuth {
+class TwitterAuth {
     
-    public static func twitterOAuth (urlType: String) {
+    static func twitterOAuth (urlType: String) {
         HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post)
             .twitterOAuth(param: ["oauth_callback" : urlType],
                           completionHandler: { (data, response, error) in
@@ -27,7 +27,7 @@ open class TwitterAuth {
             })
     }
     
-    public static func requestToken(token: String, completion :@escaping(Twiter) -> Void){
+    static func requestToken(token: String, completion :@escaping(Twiter) -> Void){
         let splitParam = token.queryStringParameters
         /*
          * Twitter OAuth Request Token

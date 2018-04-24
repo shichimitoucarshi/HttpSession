@@ -12,7 +12,7 @@
  * https://apps.twitter.com/app/14638399
  */
 public struct TwitterApi {
-    static let comsumerKey: String = "asUtVd2W7rsnzfqVg6MgfEyTs"
-    static let comsumerSecret: String  = "bQg3KRHC271nV35XRABO3ahfo65pSi3XFrFNBX4I3Svq1G1WcN"
+    static let comsumerKey: String = "NNKAREvWGCn7Riw02gcOYXSVP"
+    static let comsumerSecret: String  = "pxA18XddLaEvDgonl0ptMBKt54oFCW4GK8ZyPGvbYTitBvH3kM"
 }
 

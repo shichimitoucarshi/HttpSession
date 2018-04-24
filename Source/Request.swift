@@ -9,107 +9,76 @@
 import Foundation
 import UIKit
 
+struct MultipartDto {
+    var fileName = ""
+    var mimeType = ""
+    var data: Data = Data()
+}
+
 class Request {
     
-    var Url: URL!
-    var request: URLRequest!
+    var url: URL!
+    var urlReq: URLRequest!
     
     /*
      * Initializer
      * parame: URLRequest
-     *         URL
      *
      */
-    init (url: String, method: HTTPMethod){
-        self.Url = URL(string: url)!
-        self.request = URLRequest(url: self.Url)
-        self.request.httpMethod = method.rawValue
-        self.request.httpShouldHandleCookies = false
-        self.request.timeoutInterval = 60
+    init (url: String, method: HTTPMethod, cookie: Bool = false){
+        self.url = URL(string: url)!
+        self.urlReq = URLRequest(url: self.url)
+        self.urlReq.httpMethod = method.rawValue
+        self.urlReq.httpShouldHandleCookies = false
+        self.urlReq.timeoutInterval = 60
+        if cookie == true {
+            self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
+        }
     }
     
-    public func getHttp() -> URLRequest {
-        return self.request
-    }
-    
-    public func  PayAppSigin (param: Dictionary<String, String>) -> URLRequest{
-        self.request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        self.request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        self.request.setValue("application/json", forHTTPHeaderField: "Accept")
+    public func  postHttp (param: Dictionary<String, String>) -> URLRequest{
+        self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
         let value: String = URLEncode().URLUTF8Encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data
-        self.request.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
-        self.request.httpBody = pData as Data
-        return self.request
+        self.urlReq.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
+        self.urlReq.httpBody = pData as Data
+        return self.urlReq
     }
     
-    public func PayAppPost (param: Dictionary<String, String>) -> URLRequest{
-        self.request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        self.request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        self.request.setValue("application/json", forHTTPHeaderField: "Accept")
-        self.request.allHTTPHeaderFields = Request.getCookie()//header
-        let value: String = URLEncode().URLUTF8Encode(param: param)
-        let pData: Data = value.data(using: .utf8)! as Data
-        self.request.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
-        self.request.httpBody = pData as Data
-        return self.request
+    public func multipartReq(param: Dictionary<String, MultipartDto>) -> URLRequest{
+        
+        let multipart: Multipart = Multipart()
+        let data:Data = multipart.multiparts(params: param)
+        self.urlReq.httpMethod = "POST"
+        self.urlReq.setValue("multipart/form-data; boundary=\(multipart.bundary)", forHTTPHeaderField: "Content-Type")
+        self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
+        self.urlReq.httpBody = data
+        return self.urlReq
     }
     
-    public func PayAppUpoloadImage(param: Dictionary<String, String>, imageParam: Dictionary<String, String>) -> URLRequest{
-        
-        let uuid = UUID().uuidString
-        
-        let multi = Multipart(uuid: uuid)
-        
-        var data = multi.createMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
-        
-        data.append( multi.textMultiPart(uuid: uuid, param: param))
-        self.request.allHTTPHeaderFields = Request.getCookie()
-        self.request.httpBody = data
-        self.request.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
-        self.request.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
-        
-        return self.request
-        
-    }
-    
-    public func PayAppImage(param: Dictionary<String, String>, imageParam: Dictionary<String, Data>) -> URLRequest{
-        
-        let uuid = UUID().uuidString
-
-        let multi = Multipart(uuid: uuid)
-        
-        var data = multi.imgMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
-        
-        self.request.allHTTPHeaderFields = Request.getCookie()
-        self.request.httpBody = data
-        self.request.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
-        self.request.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
-        
-        return self.request
-    }
-
     /*
      * Authenticate: OAuth
      * Header: Authorization
      *
      * Twitter Request Token, Access Token
      */
-    public func twitOAuthRequest(/*oAuth: OAuthKit,*/ param: Dictionary<String, String>) ->URLRequest{
-        let signature: String = OAuthKit().authorizationHeader(for: self.Url!, method: .Post, parameters: param, isMediaUpload: false)
-        self.request.setValue(signature, forHTTPHeaderField: "Authorization")
-        return self.request
+    public func twitterOAuth(param: Dictionary<String, String>) ->URLRequest{
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!, method: .post, parameters: param, isMediaUpload: false)
+        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
+        return self.urlReq
     }
     
     public func twitterUser(param: [String: String]) -> URLRequest {
-        let signature: String = OAuthKit().authorizationHeader(for: self.Url!,method: .Get ,parameters: param, isMediaUpload: false)
-        self.request.setValue(signature, forHTTPHeaderField: "Authorization")
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .get ,parameters: param, isMediaUpload: false)
+        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(4))!
-        self.request.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+        self.urlReq.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
         let query = param.urlEncodedQueryString(using: .utf8)
-        let str = self.Url.absoluteString + (self.Url.absoluteString.range(of: "?") != nil ? "&" : "?") + query
-        self.request.url = URL(string: str)
-        return self.request
+        let str = self.url.absoluteString + (self.url.absoluteString.range(of: "?") != nil ? "&" : "?") + query
+        self.urlReq.url = URL(string: str)
+        return self.urlReq
     }
     
     /*
@@ -122,12 +91,12 @@ class Request {
      */
     public func twitBeareRequest(param: Dictionary<String, String>) -> URLRequest{
         let credential = URLEncode().base64EncodedCredentials()
-        self.request.setValue("Basic " + credential, forHTTPHeaderField: "Authorization")
-        self.request.setValue("application/x-www-form-urlencoded; charset=utf8", forHTTPHeaderField: "Content-Type")
+        self.urlReq.setValue("Basic " + credential, forHTTPHeaderField: "Authorization")
+        self.urlReq.setValue("application/x-www-form-urlencoded; charset=utf8", forHTTPHeaderField: "Content-Type")
         let value: String = URLEncode().URLUTF8Encode(param: param)
         let par: NSData = value.data(using: String.Encoding.utf8)! as NSData
-        self.request.httpBody = par as Data
-        return self.request
+        self.urlReq.httpBody = par as Data
+        return self.urlReq
     }
     
     func postTweet(tweet: String, imgae: UIImage) -> URLRequest {
@@ -135,16 +104,16 @@ class Request {
         let boundary = "--" + UUID().uuidString
         
         let contentType = "multipart/form-data; boundary=\(boundary)"
-        self.request!.setValue(contentType, forHTTPHeaderField:"Content-Type")
+        self.urlReq!.setValue(contentType, forHTTPHeaderField:"Content-Type")
         
         var body: Data = Data()
         
         var parameters = Dictionary<String, Any>()
         parameters["status"] = tweet
         
-        let signature: String = OAuthKit().authorizationHeader(for: self.Url!,method: .Post ,parameters:parameters, isMediaUpload: true)
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .post ,parameters:parameters, isMediaUpload: true)
         
-        self.request.setValue(signature, forHTTPHeaderField: "Authorization")
+        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         
         let multipartData = Multipart.mulipartContent(with: boundary, data: UIImagePNGRepresentation(imgae)!, fileName: "media.jpg", parameterName: "media[]", mimeType: "application/octet-stream")
         body.append(multipartData)
@@ -157,10 +126,10 @@ class Request {
         
         body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
         
-        self.request!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
-        self.request!.httpBody = body
+        self.urlReq!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
+        self.urlReq!.httpBody = body
         
-        return self.request
+        return self.urlReq
     }
     
     /*
@@ -170,25 +139,7 @@ class Request {
      *
      */
     public func twitFollowersRequest(beare: String) -> URLRequest{
-        self.request.setValue("Bearer " + beare, forHTTPHeaderField: "Authorization")
-        return self.request
-    }
-    
-    static public func getCookie() -> [String : String]{
-        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: POSTKey.authUrl)!)
-        return HTTPCookie.requestHeaderFields(with: cookie!)
-    }
-    
-    static public func setCookie(responce: URLResponse){
-        
-        let res = responce as! HTTPURLResponse
-        
-        let cookies = HTTPCookie.cookies(withResponseHeaderFields: res.allHeaderFields as! [String : String], for: res.url!)
-        
-        for i in 0 ..< cookies.count{
-            let cookie = cookies[i]
-            HTTPCookieStorage.shared.setCookie(cookie)
-            
-        }
+        self.urlReq.setValue("Bearer " + beare, forHTTPHeaderField: "Authorization")
+        return self.urlReq
     }
 }

@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-struct MultipartDto {
+public struct MultipartDto {
     var fileName = ""
     var mimeType = ""
     var data: Data = Data()
 }
 
-class Request {
+open class Request {
     
     var url: URL!
     var urlReq: URLRequest!
@@ -25,7 +25,7 @@ class Request {
      * parame: URLRequest
      *
      */
-    init (url: String, method: HTTPMethod, cookie: Bool = false){
+    public init (url: String, method: HTTPMethod, cookie: Bool = false){
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
@@ -99,7 +99,7 @@ class Request {
         return self.urlReq
     }
     
-    func postTweet(tweet: String, imgae: UIImage) -> URLRequest {
+    public func postTweet(tweet: String, imgae: UIImage) -> URLRequest {
         
         let boundary = "--" + UUID().uuidString
         

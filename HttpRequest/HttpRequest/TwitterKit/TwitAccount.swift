@@ -8,12 +8,18 @@
 
 import Foundation
 
-struct OAuth {
+public struct OAuth {
     var token: String = ""
     var secret: String = ""
 }
 
-class TwitAccount {
+public struct Twiter {
+    var oAuth: OAuth = OAuth()
+    var screenName = ""
+    var userId = ""
+}
+
+open class TwitAccount {
     
     public static let shared: TwitAccount = TwitAccount()
     
@@ -21,18 +27,13 @@ class TwitAccount {
      * member value
      *
      */
-    var screen_name: String?
-    var user_id: String?
-    var oAuth: OAuth = OAuth(token: "", secret: "")
+    var twitter: Twiter = Twiter()
     
     /*
      * initialize
      *
      */
-    private init(){
-        self.screen_name = ""
-        self.user_id = ""
-    }
+    private init(){}
     
     /*
      * set Twitter' user info
@@ -44,10 +45,9 @@ class TwitAccount {
     }
     
     private func setAccount(param: Dictionary<String, String>){
-        self.screen_name = param["screen_name"]
-        self.user_id = param["user_id"]
-        self.oAuth.token = param["oauth_token"]!
-        self.oAuth.secret = param["oauth_token_secret"]!
-        
+        self.twitter.screenName = param["screen_name"]!
+        self.twitter.userId = param["user_id"]!
+        self.twitter.oAuth.token = param["oauth_token"]!
+        self.twitter.oAuth.secret = param["oauth_token_secret"]!
     }
 }

@@ -53,7 +53,7 @@ class OAuthKit{
         authorization["oauth_timestamp"] = String(Int(Date().timeIntervalSince1970))
         authorization["oauth_nonce"] = UUID().uuidString
         
-        authorization["oauth_token"] ??= TwitAccount.shared.oAuth.token //RMTwitterManager().selectToken().first?.oAuthToken
+        authorization["oauth_token"] ??= TwitAccount.shared.twitter.oAuth.token //RMTwitterManager().selectToken().first?.oAuthToken
         
         for (key, value) in parameters where key.hasPrefix("oauth_") {
             authorization.updateValue(value, forKey: key)
@@ -83,7 +83,7 @@ class OAuthKit{
      *
      */
     func oauthSignature(for url: URL, method: HTTPMethod, parameters: Dictionary<String, Any>) -> String {
-        let tokenSecret = TwitAccount.shared.oAuth.secret //RMTwitterManager().selectToken().first?.oAuthSecret ?? ""
+        let tokenSecret = TwitAccount.shared.twitter.oAuth.secret //RMTwitterManager().selectToken().first?.oAuthSecret ?? ""
         let encodedConsumerSecret = TwitterApi.comsumerSecret.UrlEncode()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         let parameterComponents = parameters.urlEncodedQueryString(using: .utf8).components(separatedBy: "&").sorted()
