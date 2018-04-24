@@ -34,6 +34,10 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
     
     var isCookie: Bool = false
     
+    override init(){
+        super.init()
+    }
+    
     init(url: String, method: HTTPMethod, cookie: Bool = false){
         self.isCookie = cookie
         self.request = Request(url: url, method: method,cookie:cookie)
@@ -119,7 +123,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
      * Authenticate OAuth
      *
      */
-    public func twitOAuth(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+    public func requestToken(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         
         self.successHandler = completionHandler
         self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
@@ -143,10 +147,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
     func postTweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         self.successHandler = success
         let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        
-        let request: URLRequest = Request(url: u, method: .post).postTweet(tweet: tweet, imgae: img)
-        self.sendRequest(request: request)
-        
+        self.sendRequest(request: (Request(url:u, method: .post).postTweet(tweet: tweet, imgae: img)))
     }
     
     /*

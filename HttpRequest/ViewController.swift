@@ -12,12 +12,14 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
     @IBOutlet weak var tableView: UITableView!
     
-    let apis = ["HTTP Get connection",
+    var apis = ["HTTP Get connection",
                 "HTTP POST connection",
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
                 "HTTP POST Twitter OAuth"]
+    
+    var isAuth = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,6 +106,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 5:
             TwitterAuth.twitterOAuth(urlType: "httpRequest://success")
+            if isAuth == false {
+                self.isAuth = true
+                self.apis.append("Tweet")
+                self.tableView.reloadData()
+            }
+            break
+        case 6:
+            HttpRequest().postTweet(tweet: "Hello", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
+                self.detail(data: data!)
+            })
             break
         default:
             print ("Default")

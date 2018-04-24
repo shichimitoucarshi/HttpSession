@@ -35,7 +35,7 @@ class TwitterAuth {
          *
          */
         HttpRequest(url: "https://api.twitter.com/oauth/access_token",method: .post)
-            .twitOAuth(param: splitParam,
+            .requestToken(param: splitParam,
                        completionHandler: { (data, response, error) in
                         
                         let accesToken:[String:String] = (String(data: data!, encoding: .utf8)?.queryStringParameters)!
