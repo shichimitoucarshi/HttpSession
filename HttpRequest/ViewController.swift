@@ -103,23 +103,10 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             break
         case 5:
-            HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post).twitOAuthenticate(url: "https://api.twitter.com/oauth/request_token",
-                                                                                                             param: ["oauth_callback" : "httpRequest://success"],
-                                                                                                             completionHandler: { (data, response, error) in
-                                                                                                                
-                                                                                                                let responseData = String(data:data!, encoding:String.Encoding.utf8)
-                                                                                                                
-                                                                                                                var attributes = responseData?.queryStringParameters
-                                                                                                                
-                                                                                                                let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + (attributes?["oauth_token"])!
-                                                                                                                
-                                                                                                                let queryURL = URL(string: url)!
-                                                                                                                
-                                                                                                                UIApplication.shared.openURL(queryURL)
-            })
+            TwitterAuth.twitterOAuth(urlType: "httpRequest://success")
             break
         default:
-            print ("DEfault")
+            print ("Default")
         }
         
     }

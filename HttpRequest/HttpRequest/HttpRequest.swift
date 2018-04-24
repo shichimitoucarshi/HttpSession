@@ -107,7 +107,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
      * Authenticate: OAuth
      *
      */
-    public func twitOAuthenticate(url: String,  param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+    public func twitterOAuth(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         
         self.successHandler = completionHandler
         self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
