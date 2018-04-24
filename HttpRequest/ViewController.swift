@@ -16,7 +16,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP POST connection",
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
-                "HTTP POST Upload image png"]
+                "HTTP POST Upload image png",
+                "HTTP POST Twitter OAuth"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +100,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             HttpRequest(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
+            })
+            break
+        case 5:
+            HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post).twitOAuthenticate(url: "https://api.twitter.com/oauth/request_token",
+                                                                                                             param: ["oauth_callback" : "httpRequest://success"],
+                                                                                                             completionHandler: { (data, response, error) in
+                                                                                                                
+                                                                                                                let responseData = String(data:data!, encoding:String.Encoding.utf8)
+                                                                                                                
+                                                                                                                var attributes = responseData?.queryStringParameters
+                                                                                                                
+                                                                                                                let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + (attributes?["oauth_token"])!
+                                                                                                                
+                                                                                                                let queryURL = URL(string: url)!
+                                                                                                                
+                                                                                                                UIApplication.shared.openURL(queryURL)
             })
             break
         default:

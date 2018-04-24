@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+//        self.oAuth()
         // Override point for customization after application launch.
         return true
     }
@@ -40,7 +41,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        if(url.absoluteString.hasPrefix("brewtter://")){
+            
+            let splitPrefix: String = url.absoluteString.replacingOccurrences(of: "brewtter://success?", with: "")
+            
+            let splitParam = splitPrefix.queryStringParameters
+            
+            /*
+             * Twitter OAuth Request Token
+             * URL: https://api.twitter.com/oauth/access_token
+             *
+             */
+            HttpRequest(url: "https://api.twitter.com/oauth/access_token",method: .post).twitOAuth(param: splitParam,
+                                                  completionHandler: { (data, response, error) in
+                                                    
+                                                    let accesToken:[String:String] = (String(data: data!, encoding: .utf8)?.queryStringParameters)!
+                                                    
+                                                    print (accesToken)
+                                                    /*
+                                                     * set authenticate user's info
+                                                     *
+                                                     */
+                                                    TwitAccount.shared.setTwiAccount(data: data!)
+            })
+        }
+        return true
+    }
+    
+    func oAuth(){
+        /*
+         * Twitter OAuth
+         * Twitter Request token
+         * URL: https://api.twitter.com/oauth/request_token
+         * can get the OAuth token and let the user authenticate.
+         *
+         */
+        HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post).twitOAuthenticate(url: "https://api.twitter.com/oauth/request_token",
+                                        param: ["oauth_callback" : "httpRequest://success"],
+                                        completionHandler: { (data, response, error) in
+                                            
+                                            let responseData = String(data:data!, encoding:String.Encoding.utf8)
+                                            
+                                            var attributes = responseData?.queryStringParameters
+                                            
+                                            let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + (attributes?["oauth_token"])!
+                                            
+                                            let queryURL = URL(string: url)!
+                                            
+                                            UIApplication.shared.openURL(queryURL)
+        })
+    }
 
 }
 
