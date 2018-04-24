@@ -111,8 +111,8 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         self.successHandler = completionHandler
         
-        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: OAuthKit(),*/ param: param)
-        self.sendRequest(request: request)
+//        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: OAuthKit(),*/ param: param)
+//        self.sendRequest(request: request)
     }
     
     /*
@@ -125,8 +125,8 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         
         self.successHandler = completionHandler
         
-        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: oAuth,*/ param: param)
-        self.sendRequest(request: request)
+//        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: oAuth,*/ param: param)
+//        self.sendRequest(request: request)
     }
     
     public func twitCDN(url: String, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void){
