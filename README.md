@@ -56,6 +56,8 @@ $ git clone https://github.com/keisukeYamagishi/HttpSession.git
 
 ## Sample code
 
+POST http method
+
 ```swift
 
 HttpSession(url: "http://153.126.160.55/postApi.json",method: .post)
