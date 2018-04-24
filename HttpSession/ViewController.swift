@@ -63,20 +63,20 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         switch indexPath.row {
         case 0:
-            HttpRequest(url: "http://153.126.160.55/getApi.json", method: .get)
+            HttpSession(url: "http://153.126.160.55/getApi.json", method: .get)
                 .getHttp(completion: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break
         case 1:
-            HttpRequest(url: "http://153.126.160.55/postApi.json",method: .post)
+            HttpSession(url: "http://153.126.160.55/postApi.json",method: .post)
                 .postHttp(param: ["http_post":"Http Request POST 😄"],
                           completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break
         case 2:
-            HttpRequest(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
+            HttpSession(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
                 .signIn(param: ["http_sign_in":"Http Request SignIn",
                                 "userId":"keisukeYamagishi",
                                 "password": "password_jisjdhsnjfbns"],
@@ -85,7 +85,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 })
             break
         case 3:
-            HttpRequest(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
+            HttpSession(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
                 .getHttp(completion: { (data, responce, error) in
                     self.detail(data: data!)
             })
@@ -100,7 +100,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             dto.mimeType = "text/plain"
             dto.data = img
             
-            HttpRequest(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
+            HttpSession(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break
@@ -113,7 +113,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             }
             break
         case 6:
-            HttpRequest().postTweet(tweet: "Hello", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
+            HttpSession().postTweet(tweet: "Hello", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break

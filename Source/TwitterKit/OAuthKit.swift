@@ -8,10 +8,10 @@
 
 import Foundation
 
-class OAuthKit{
+open class OAuthKit{
     
-    var consumerSecret: String!
-    var tokenSecret: String!
+    public var consumerSecret: String!
+    public var tokenSecret: String!
     
     /*
      * initialize function
@@ -19,7 +19,7 @@ class OAuthKit{
      * comsumerSecret: String
      * tokenSecret: String
      */
-    init(){
+    public init(){
         self.consumerSecret = ""
         self.tokenSecret = ""
     }
@@ -30,7 +30,7 @@ class OAuthKit{
      * set comsumerSecret value
      * set tokenSecret value
      */
-    init(comsumersecret: String, tokenSecret: String) {
+    public init(comsumersecret: String, tokenSecret: String) {
         self.consumerSecret = comsumersecret
         self.tokenSecret = tokenSecret
     }
@@ -45,7 +45,7 @@ class OAuthKit{
      *
      *
      */
-    func authorizationHeader(for url: URL,method: HTTPMethod, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
+    public func authorizationHeader(for url: URL,method: HTTPMethod, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
         var authorization = Dictionary<String, Any>()
         authorization["oauth_version"] = OAuth.version
         authorization["oauth_signature_method"] =  OAuth.signatureMethod
@@ -82,7 +82,7 @@ class OAuthKit{
      * create signature value
      *
      */
-    func oauthSignature(for url: URL, method: HTTPMethod, parameters: Dictionary<String, Any>) -> String {
+    public func oauthSignature(for url: URL, method: HTTPMethod, parameters: Dictionary<String, Any>) -> String {
         let tokenSecret = TwitAccount.shared.twitter.oAuth.secret //RMTwitterManager().selectToken().first?.oAuthSecret ?? ""
         let encodedConsumerSecret = TwitterApi.comsumerSecret.UrlEncode()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"

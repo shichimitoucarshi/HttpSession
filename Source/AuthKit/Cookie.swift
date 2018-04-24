@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Cookie {
+open class Cookie {
     
-    static let shared: Cookie = Cookie()
+    public static let shared: Cookie = Cookie()
     
     private
     init(){}

@@ -20,25 +20,25 @@ public enum HTTPMethod: String{
 }
 
 
-class HttpRequest : NSObject, URLSessionDataDelegate {
+open class HttpSession : NSObject, URLSessionDataDelegate {
     
     /*
      * member's value
      *
      */
-    var responseData: Data = Data()
-    var response: HTTPURLResponse!
-    var dataTask: URLSessionDataTask!
-    var url: String!
-    var request: Request?
+    public var responseData: Data = Data()
+    public var response: HTTPURLResponse!
+    public var dataTask: URLSessionDataTask!
+    public var url: String!
+    public var request: Request?
     
-    var isCookie: Bool = false
+    public var isCookie: Bool = false
     
-    override init(){
+    public override init(){
         super.init()
     }
     
-    init(url: String, method: HTTPMethod, cookie: Bool = false){
+    public init(url: String, method: HTTPMethod, cookie: Bool = false){
         self.isCookie = cookie
         self.request = Request(url: url, method: method,cookie:cookie)
     }
@@ -49,7 +49,7 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
      */
     public typealias completionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
     
-    var successHandler: completionHandler?
+    public var successHandler: completionHandler?
     
     public func getHttp (completion: @escaping(Data?, HTTPURLResponse?,Error?) -> Void) {
         

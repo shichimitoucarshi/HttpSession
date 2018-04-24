@@ -20,14 +20,14 @@
 		C73C4871208E327500176EFB /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4870208E327500176EFB /* Multipart.swift */; };
 		C73C4873208E3F9000176EFB /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4872208E3F9000176EFB /* Cookie.swift */; };
 		C73C4875208E559000176EFB /* GPSButton001.png in Resources */ = {isa = PBXBuildFile; fileRef = C73C4874208E559000176EFB /* GPSButton001.png */; };
+		C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C788B72E208F752900B3F108 /* DetailViewController.swift */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
 		C791EF45208BA01000592178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF44208BA01000592178 /* ViewController.swift */; };
 		C791EF48208BA01000592178 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF46208BA01000592178 /* Main.storyboard */; };
 		C791EF4A208BA01000592178 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C791EF49208BA01000592178 /* Assets.xcassets */; };
 		C791EF4D208BA01000592178 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF4B208BA01000592178 /* LaunchScreen.storyboard */; };
-		C791EF91208E01E600592178 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF82208E01E600592178 /* HttpRequest.swift */; };
+		C791EF91208E01E600592178 /* HttpSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF82208E01E600592178 /* HttpSession.swift */; };
 		C791EF94208E01E600592178 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF85208E01E600592178 /* Request.swift */; };
-		C791EF9C208E04F000592178 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF9B208E04F000592178 /* DetailViewController.swift */; };
 		C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F189208F0CC70034CD7F /* Re120.jpg */; };
 		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
 /* End PBXBuildFile section */
@@ -58,16 +58,16 @@
 		C73C4870208E327500176EFB /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		C73C4872208E3F9000176EFB /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		C73C4874208E559000176EFB /* GPSButton001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GPSButton001.png; sourceTree = "<group>"; };
-		C791EF3F208BA01000592178 /* HttpRequest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpRequest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C788B72E208F752900B3F108 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		C791EF3F208BA01000592178 /* HttpSessionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpSessionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C791EF44208BA01000592178 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C791EF47208BA01000592178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C791EF49208BA01000592178 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C791EF4C208BA01000592178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C791EF4E208BA01000592178 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C791EF82208E01E600592178 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
+		C791EF82208E01E600592178 /* HttpSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpSession.swift; sourceTree = "<group>"; };
 		C791EF85208E01E600592178 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		C791EF9B208E04F000592178 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = HttpRequest/DetailViewController.swift; sourceTree = SOURCE_ROOT; };
 		C7F2F189208F0CC70034CD7F /* Re120.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Re120.jpg; sourceTree = "<group>"; };
 		C7F2F18B208F103B0034CD7F /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -126,7 +126,7 @@
 		C791EF36208BA01000592178 = {
 			isa = PBXGroup;
 			children = (
-				C791EF41208BA01000592178 /* HttpRequest */,
+				C791EF41208BA01000592178 /* HttpSession */,
 				C791EF40208BA01000592178 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,48 +134,48 @@
 		C791EF40208BA01000592178 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C791EF3F208BA01000592178 /* HttpRequest.app */,
+				C791EF3F208BA01000592178 /* HttpSessionSample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C791EF41208BA01000592178 /* HttpRequest */ = {
+		C791EF41208BA01000592178 /* HttpSession */ = {
 			isa = PBXGroup;
 			children = (
 				C791EF42208BA01000592178 /* AppDelegate.swift */,
+				C788B72E208F752900B3F108 /* DetailViewController.swift */,
 				C73C4874208E559000176EFB /* GPSButton001.png */,
 				C7F2F189208F0CC70034CD7F /* Re120.jpg */,
 				C7F2F18B208F103B0034CD7F /* re.txt */,
 				C791EF49208BA01000592178 /* Assets.xcassets */,
-				C791EF9B208E04F000592178 /* DetailViewController.swift */,
-				C791EF7C208E01E600592178 /* HttpRequest */,
+				C791EF7C208E01E600592178 /* HttpSession */,
 				C791EF4E208BA01000592178 /* Info.plist */,
 				C791EF4B208BA01000592178 /* LaunchScreen.storyboard */,
 				C791EF46208BA01000592178 /* Main.storyboard */,
 				C791EF44208BA01000592178 /* ViewController.swift */,
 			);
-			path = HttpRequest;
+			path = HttpSession;
 			sourceTree = "<group>";
 		};
-		C791EF7C208E01E600592178 /* HttpRequest */ = {
+		C791EF7C208E01E600592178 /* HttpSession */ = {
 			isa = PBXGroup;
 			children = (
-				C791EF82208E01E600592178 /* HttpRequest.swift */,
+				C791EF82208E01E600592178 /* HttpSession.swift */,
 				C791EF85208E01E600592178 /* Request.swift */,
 				C73C4856208E31BB00176EFB /* AuthKit */,
 				C73C486A208E31D700176EFB /* Encode */,
 				C73C486D208E322200176EFB /* Multipart */,
 				C73C485D208E31C100176EFB /* TwitterKit */,
 			);
-			path = HttpRequest;
+			path = HttpSession;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C791EF3E208BA01000592178 /* HttpRequest */ = {
+		C791EF3E208BA01000592178 /* HttpSessionSample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C791EF51208BA01000592178 /* Build configuration list for PBXNativeTarget "HttpRequest" */;
+			buildConfigurationList = C791EF51208BA01000592178 /* Build configuration list for PBXNativeTarget "HttpSessionSample" */;
 			buildPhases = (
 				C791EF3B208BA01000592178 /* Sources */,
 				C791EF3C208BA01000592178 /* Frameworks */,
@@ -186,9 +186,9 @@
 			);
 			dependencies = (
 			);
-			name = HttpRequest;
+			name = HttpSessionSample;
 			productName = HttpRequest;
-			productReference = C791EF3F208BA01000592178 /* HttpRequest.app */;
+			productReference = C791EF3F208BA01000592178 /* HttpSessionSample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -207,7 +207,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C791EF3A208BA01000592178 /* Build configuration list for PBXProject "HttpRequest" */;
+			buildConfigurationList = C791EF3A208BA01000592178 /* Build configuration list for PBXProject "HttpSessionSample" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -220,7 +220,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C791EF3E208BA01000592178 /* HttpRequest */,
+				C791EF3E208BA01000592178 /* HttpSessionSample */,
 			);
 		};
 /* End PBXProject section */
@@ -247,13 +247,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				C791EF45208BA01000592178 /* ViewController.swift in Sources */,
+				C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */,
 				C791EF94208E01E600592178 /* Request.swift in Sources */,
 				C73C486C208E31D700176EFB /* URLEncode.swift in Sources */,
 				C73C4864208E31C100176EFB /* BeareToken.swift in Sources */,
 				C73C4868208E31C100176EFB /* TwitterApiKey.swift in Sources */,
 				C73C4867208E31C100176EFB /* TwitAccount.swift in Sources */,
-				C791EF9C208E04F000592178 /* DetailViewController.swift in Sources */,
-				C791EF91208E01E600592178 /* HttpRequest.swift in Sources */,
+				C791EF91208E01E600592178 /* HttpSession.swift in Sources */,
 				C73C485B208E31BC00176EFB /* HMAC.swift in Sources */,
 				C73C4865208E31C100176EFB /* Followers.swift in Sources */,
 				C73C4869208E31C100176EFB /* TwitterAuth.swift in Sources */,
@@ -401,9 +401,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3DW67HS9F;
-				INFOPLIST_FILE = HttpRequest/Info.plist;
+				INFOPLIST_FILE = HttpSession/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpRequest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpSession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -416,9 +416,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D3DW67HS9F;
-				INFOPLIST_FILE = HttpRequest/Info.plist;
+				INFOPLIST_FILE = HttpSession/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpRequest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpSession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -428,7 +428,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C791EF3A208BA01000592178 /* Build configuration list for PBXProject "HttpRequest" */ = {
+		C791EF3A208BA01000592178 /* Build configuration list for PBXProject "HttpSessionSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C791EF4F208BA01000592178 /* Debug */,
@@ -437,7 +437,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C791EF51208BA01000592178 /* Build configuration list for PBXNativeTarget "HttpRequest" */ = {
+		C791EF51208BA01000592178 /* Build configuration list for PBXNativeTarget "HttpSessionSample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C791EF52208BA01000592178 /* Debug */,

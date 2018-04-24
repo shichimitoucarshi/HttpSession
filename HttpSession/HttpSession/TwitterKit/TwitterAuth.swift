@@ -12,7 +12,7 @@ import UIKit
 open class TwitterAuth {
     
     public static func twitterOAuth (urlType: String) {
-        HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post)
+        HttpSession(url: "https://api.twitter.com/oauth/request_token", method: .post)
             .twitterOAuth(param: ["oauth_callback" : urlType],
                           completionHandler: { (data, response, error) in
                             let responseData = String(data:data!, encoding:String.Encoding.utf8)
@@ -34,7 +34,7 @@ open class TwitterAuth {
          * URL: https://api.twitter.com/oauth/access_token
          *
          */
-        HttpRequest(url: "https://api.twitter.com/oauth/access_token",method: .post)
+        HttpSession(url: "https://api.twitter.com/oauth/access_token",method: .post)
             .requestToken(param: splitParam,
                        completionHandler: { (data, response, error) in
                         

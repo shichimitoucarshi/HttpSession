@@ -8,28 +8,17 @@
 
 import Foundation
 
-class Multipart {
+open class Multipart {
     
     public var bundary: String
     public var uuid: String
     
-    init(){
+    public init(){
         self.uuid = UUID().uuidString
         self.bundary = String(format: "----\(self.uuid)")
     }
     
-//    func multiparts(mineType: String, params: Dictionary<String, Data>) -> Data{
-//
-//        var post: Data = Data()
-//
-//        for(key, value) in params {
-//            post.append(multipart( key: key, fileName: "lplp.png" as String, mineType: mineType, data: value))
-//        }
-//        return post
-//    }
-//
-    
-    func multiparts(params: Dictionary<String, MultipartDto>) -> Data{
+    public func multiparts(params: Dictionary<String, MultipartDto>) -> Data{
         
         var post: Data = Data()
         
@@ -39,7 +28,8 @@ class Multipart {
         }
         return post
     }
-    func textMultiPart(uuid: String, param: Dictionary<String, String>) -> Data{
+    
+    public func textMultiPart(uuid: String, param: Dictionary<String, String>) -> Data{
         var multiPart: Data = Data()
         
         for(key, value) in param{
@@ -56,7 +46,7 @@ class Multipart {
         return multiPart
     }
     
-    func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
+    public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
         
         var body = Data()
         let CRLF = "\r\n"
@@ -70,7 +60,7 @@ class Multipart {
         return body
     }
     
-    static func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
+    public static func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName!)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"

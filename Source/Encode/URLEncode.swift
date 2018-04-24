@@ -10,8 +10,6 @@ import Foundation
 
 class URLEncode : NSObject {
     
-    let Utf8: String.Encoding = .utf8
-    
     /*
      * Base64 encode with comsumer key and comsmer secret
      * Twitter Beare token
@@ -61,7 +59,7 @@ extension String{
     /*
      * PersentEncode
      */
-    func UrlEncode(_ encodeAll: Bool = false) -> String {
+    public func UrlEncode(_ encodeAll: Bool = false) -> String {
         var allowedCharacterSet: CharacterSet = .urlQueryAllowed
         allowedCharacterSet.remove(charactersIn: "\n:#/?@!$&'()*+,;=")
         if !encodeAll {
@@ -79,7 +77,7 @@ extension String{
      * }
      *
      */
-    var queryStringParameters: Dictionary<String, String> {
+    public var queryStringParameters: Dictionary<String, String> {
         
         var parameters = Dictionary<String, String>()
         
@@ -111,7 +109,7 @@ extension Dictionary {
      * encoded Dictionary's value
      *
      */
-    func urlEncodedQueryString(using encoding: String.Encoding) -> String {
+    public func urlEncodedQueryString(using encoding: String.Encoding) -> String {
         var parts = [String]()
         
         for (key, value) in self {
@@ -126,18 +124,18 @@ extension Dictionary {
 
 extension Data {
     
-    var rawBytes: [UInt8] {
+    public var rawBytes: [UInt8] {
         let count = self.count / MemoryLayout<UInt8>.size
         var bytesArray = [UInt8](repeating: 0, count: count)
         (self as NSData).getBytes(&bytesArray, length:count * MemoryLayout<UInt8>.size)
         return bytesArray
     }
     
-    init(bytes: [UInt8]) {
+    public init(bytes: [UInt8]) {
         self.init(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
     }
     
-    mutating func append(_ bytes: [UInt8]) {
+    public mutating func append(_ bytes: [UInt8]) {
         self.append(UnsafePointer<UInt8>(bytes), count: bytes.count)
     }
 }
@@ -149,7 +147,7 @@ extension Int {
     }
 }
 
-func arrayOfBytes<T>(_ value:T, length: Int? = nil) -> [UInt8] {
+public func arrayOfBytes<T>(_ value:T, length: Int? = nil) -> [UInt8] {
     let totalBytes = length ?? (MemoryLayout<T>.size * 8)
     let valuePointer = UnsafeMutablePointer<T>.allocate(capacity: 1)
     valuePointer.pointee = value

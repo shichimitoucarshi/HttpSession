@@ -8,18 +8,18 @@
 
 import Foundation
 
-struct OAuth {
+public struct OAuth {
     var token: String = ""
     var secret: String = ""
 }
 
-struct Twiter {
+public struct Twiter {
     var oAuth: OAuth = OAuth()
     var screenName = ""
     var userId = ""
 }
 
-class TwitAccount {
+open class TwitAccount {
     
     public static let shared: TwitAccount = TwitAccount()
     

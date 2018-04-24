@@ -20,7 +20,7 @@ public enum HTTPMethod: String{
 }
 
 
-open class HttpRequest : NSObject, URLSessionDataDelegate {
+open class HttpSession : NSObject, URLSessionDataDelegate {
     
     /*
      * member's value

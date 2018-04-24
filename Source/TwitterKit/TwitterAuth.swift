@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
-class TwitterAuth {
+open class TwitterAuth {
     
-    static func twitterOAuth (urlType: String) {
-        HttpRequest(url: "https://api.twitter.com/oauth/request_token", method: .post)
+    public static func twitterOAuth (urlType: String) {
+        HttpSession(url: "https://api.twitter.com/oauth/request_token", method: .post)
             .twitterOAuth(param: ["oauth_callback" : urlType],
                           completionHandler: { (data, response, error) in
                             let responseData = String(data:data!, encoding:String.Encoding.utf8)
@@ -27,14 +27,14 @@ class TwitterAuth {
             })
     }
     
-    static func requestToken(token: String, completion :@escaping(Twiter) -> Void){
+    public static func requestToken(token: String, completion :@escaping(Twiter) -> Void){
         let splitParam = token.queryStringParameters
         /*
          * Twitter OAuth Request Token
          * URL: https://api.twitter.com/oauth/access_token
          *
          */
-        HttpRequest(url: "https://api.twitter.com/oauth/access_token",method: .post)
+        HttpSession(url: "https://api.twitter.com/oauth/access_token",method: .post)
             .requestToken(param: splitParam,
                        completionHandler: { (data, response, error) in
                         
