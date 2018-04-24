@@ -32,6 +32,18 @@
 		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		C7F2F18D208F12370034CD7F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		C73C4857208E31BB00176EFB /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
 		C73C4858208E31BB00176EFB /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
@@ -168,6 +180,7 @@
 				C791EF3B208BA01000592178 /* Sources */,
 				C791EF3C208BA01000592178 /* Frameworks */,
 				C791EF3D208BA01000592178 /* Resources */,
+				C7F2F18D208F12370034CD7F /* CopyFiles */,
 			);
 			buildRules = (
 			);

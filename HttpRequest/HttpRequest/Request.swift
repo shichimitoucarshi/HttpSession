@@ -64,7 +64,7 @@ class Request {
      *
      * Twitter Request Token, Access Token
      */
-    public func twitOAuthRequest(/*oAuth: OAuthKit,*/ param: Dictionary<String, String>) ->URLRequest{
+    public func twitterOAuth(param: Dictionary<String, String>) ->URLRequest{
         let signature: String = OAuthKit().authorizationHeader(for: self.url!, method: .post, parameters: param, isMediaUpload: false)
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         return self.urlReq
@@ -142,22 +142,4 @@ class Request {
         self.urlReq.setValue("Bearer " + beare, forHTTPHeaderField: "Authorization")
         return self.urlReq
     }
-    
-//    static public func cookie(url: String) -> [String : String]{
-//        let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: url)!)
-//        return HTTPCookie.requestHeaderFields(with: cookie!)
-//    }
-//    
-//    static public func setCookie(responce: URLResponse){
-//        
-//        let res = responce as! HTTPURLResponse
-//        
-//        let cookies = HTTPCookie.cookies(withResponseHeaderFields: res.allHeaderFields as! [String : String], for: res.url!)
-//        
-//        for i in 0 ..< cookies.count{
-//            let cookie = cookies[i]
-//            HTTPCookieStorage.shared.setCookie(cookie)
-//            
-//        }
-//    }
 }
