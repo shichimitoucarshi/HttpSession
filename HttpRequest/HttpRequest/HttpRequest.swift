@@ -65,16 +65,16 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
         self.sendRequest(request: (self.request?.postHttp(param: param))!)
     }
     
-    public func PayAppPostImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
-        self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .post).PayAppUpoloadImage(param: param, imageParam: imageParam)
-        self.sendRequest(request: request)
-    }
+//    public func PayAppPostImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
+//        self.successHandler = completionHandler
+//        let request: URLRequest = Request(url: url, method: .post).upoloadImage(param: param, imageParam: imageParam)
+//        self.sendRequest(request: request)
+//    }
     
-    public func PayImage(url: String, param: Dictionary<String, String>, imageParam: Dictionary<String, Data>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
+    public func upload(param: Dictionary<String, Any>,
+                       completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.successHandler = completionHandler
-        let request: URLRequest = Request(url: url, method: .post).PayAppImage(param: param, imageParam: imageParam)
-        self.sendRequest(request: request)
+        self.sendRequest(request: (self.request?.multipartReq(param: param))!)
     }
     
     /*

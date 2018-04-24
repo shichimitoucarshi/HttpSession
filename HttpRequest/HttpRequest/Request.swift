@@ -53,7 +53,7 @@ class Request {
 //        return self.urlReq
 //    }
     
-    public func PayAppUpoloadImage(param: Dictionary<String, String>, imageParam: Dictionary<String, String>) -> URLRequest{
+    public func upoloadImage(param: Dictionary<String, String>, imageParam: Dictionary<String, String>) -> URLRequest{
         
         let uuid = UUID().uuidString
         
@@ -62,7 +62,6 @@ class Request {
         var data = multi.createMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
         
         data.append( multi.textMultiPart(uuid: uuid, param: param))
-//        self.urlReq.allHTTPHeaderFields = Request.getCookie()
         self.urlReq.httpBody = data
         self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
         self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")
@@ -71,15 +70,14 @@ class Request {
         
     }
     
-    public func PayAppImage(param: Dictionary<String, String>, imageParam: Dictionary<String, Data>) -> URLRequest{
+    public func multipartReq(param: Dictionary<String, Any>) -> URLRequest{
         
         let uuid = UUID().uuidString
 
         let multi = Multipart(uuid: uuid)
         
-        var data = multi.imgMultiPart( mineType: "image/jpeg", ImageParam: imageParam)
+        var data = multi.multiparts( mineType: "image/png", param: param as! Dictionary<String, Data>)
         
-//        self.urlReq.allHTTPHeaderFields = Request.getCookie()
         self.urlReq.httpBody = data
         self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
         self.urlReq.setValue(multi.bundary, forHTTPHeaderField: "Content-Type")

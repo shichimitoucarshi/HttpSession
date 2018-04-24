@@ -20,17 +20,21 @@ class Multipart {
         self.uuid = uuid
     }
     
-    func imgMultiPart( mineType: String, ImageParam: Dictionary<String, Data>) -> Data{
+    func multiparts( mineType: String, param: Dictionary<String, Any>) -> Data{
         
         var post: Data = Data()
         var count: Int = 0
-        for(key, value) in ImageParam {
+        for(key, value) in param {
             
             let userId = "shichimi"
             
-            let imgName = "\(userId)_\(count).jpg"
+            let imgName = "\(userId)_\(count).png"
             count = count + 1
-            post.append(multipart(boundary: self.uuid, key: key, fileName: imgName as String, mineType: mineType, postData: value as Data))
+            post.append(multipart(boundary: self.uuid,
+                                  key: key,
+                                  fileName: imgName as String,
+                                  mineType: mineType,
+                                  postData: value as! Data))
             
         }
         return post
