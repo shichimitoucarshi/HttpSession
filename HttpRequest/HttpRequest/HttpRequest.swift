@@ -107,12 +107,10 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
      * Authenticate: OAuth
      *
      */
-    public func twitOAuthenticate(url: String,  param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+    public func twitterOAuth(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         
         self.successHandler = completionHandler
-        
-//        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: OAuthKit(),*/ param: param)
-//        self.sendRequest(request: request)
+        self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
     }
     
     /*
@@ -121,12 +119,10 @@ class HttpRequest : NSObject, URLSessionDataDelegate {
      * Authenticate OAuth
      *
      */
-    public func twitOAuthenticateSignIn(url: String, /*oAuth: OAuthKit,*/  param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+    public func twitOAuth(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         
         self.successHandler = completionHandler
-        
-//        let request: URLRequest = Request(url: url, method: .post).twitOAuthRequest(/*oAuth: oAuth,*/ param: param)
-//        self.sendRequest(request: request)
+        self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
     }
     
     public func twitCDN(url: String, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void){

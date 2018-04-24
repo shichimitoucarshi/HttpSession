@@ -16,7 +16,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP POST connection",
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
-                "HTTP POST Upload image png"]
+                "HTTP POST Upload image png",
+                "HTTP POST Twitter OAuth"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +102,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 self.detail(data: data!)
             })
             break
+        case 5:
+            TwitterAuth.twitterOAuth(urlType: "httpRequest://success")
+            break
         default:
-            print ("DEfault")
+            print ("Default")
         }
         
     }
