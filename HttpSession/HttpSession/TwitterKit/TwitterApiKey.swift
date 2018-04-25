@@ -12,7 +12,15 @@
  * https://apps.twitter.com/app/14638399
  */
 public struct TwitterApi {
-    static let comsumerKey: String = "NNKAREvWGCn7Riw02gcOYXSVP"
-    static let comsumerSecret: String  = "pxA18XddLaEvDgonl0ptMBKt54oFCW4GK8ZyPGvbYTitBvH3kM"
+    var key: String = ""
+    var secret: String = ""
 }
 
+open class TwitterKey {
+    
+    static let shared: TwitterKey = TwitterKey()
+    public var api: TwitterApi = TwitterApi()
+    
+    private init(){}
+    
+}

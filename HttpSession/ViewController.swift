@@ -105,15 +105,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             break
         case 5:
-            TwitterAuth.twitterOAuth(urlType: "httpRequest://success")
-            if isAuth == false {
-                self.isAuth = true
-                self.apis.append("Tweet")
-                self.tableView.reloadData()
-            }
+            TwitterAuth.twitterOAuth(urlType: "httpRequest://success", completion: { (data, responce, error) in
+                if self.isAuth == false {
+                    self.isAuth = true
+                    self.apis.append("Tweet")
+                    self.tableView.reloadData()
+                }
+                print ("responce: \(String(describing: responce))")
+            })
             break
         case 6:
-            HttpSession().postTweet(tweet: "Hello", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
+            HttpSession().postTweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break

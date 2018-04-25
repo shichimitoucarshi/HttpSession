@@ -11,23 +11,27 @@ import UIKit
 
 open class TwitterAuth {
     
-    public static func twitterOAuth (urlType: String) {
+    public static func twitterOAuth (urlType: String, completion:@escaping (_ data: Data?, _ responce: HTTPURLResponse?, _ error: Error?) -> Void) {
         HttpSession(url: "https://api.twitter.com/oauth/request_token", method: .post)
             .twitterOAuth(param: ["oauth_callback" : urlType],
                           completionHandler: { (data, response, error) in
                             let responseData = String(data:data!, encoding:String.Encoding.utf8)
                             var attributes = responseData?.queryStringParameters
-                            let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + (attributes?["oauth_token"])!
-                            let queryURL = URL(string: url)!
-                            if #available(iOS 10.0, *) {
-                                UIApplication.shared.open(queryURL, options: [:])
-                            } else {
-                                UIApplication.shared.openURL(queryURL)
+                            
+                            if let attrbute = attributes?["oauth_token"] {
+                                let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + attrbute
+                                let queryURL = URL(string: url)!
+                                if #available(iOS 10.0, *) {
+                                    UIApplication.shared.open(queryURL, options: [:])
+                                } else {
+                                    UIApplication.shared.openURL(queryURL)
+                                }
                             }
+                            completion(data,response,error)
             })
     }
     
-    public static func requestToken(token: String, completion :@escaping(Twiter) -> Void){
+    public static func requestToken(token: String, completion :@escaping(_ twtter: Twiter?, _ data: Data?, _ responce:HTTPURLResponse?, _ error: Error?) -> Void){
         let splitParam = token.queryStringParameters
         /*
          * Twitter OAuth Request Token
@@ -46,7 +50,7 @@ open class TwitterAuth {
                          */
                         TwitAccount.shared.setTwiAccount(data: data!)
                         
-                        completion(TwitAccount.shared.twitter)
+                        completion(TwitAccount.shared.twitter,data,response,error)
         })
     }
     
