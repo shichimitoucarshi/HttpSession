@@ -182,9 +182,6 @@ open class HttpSession : NSObject, URLSessionDataDelegate {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         #endif
         
-        if error != nil {
-            return
-        }
         print (self.response)
         
         if self.isCookie == true{
