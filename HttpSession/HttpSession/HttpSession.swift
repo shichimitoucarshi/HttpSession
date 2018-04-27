@@ -27,9 +27,9 @@ open class HttpSession : NSObject, URLSessionDataDelegate {
      *
      */
     public var responseData: Data = Data()
-    public var response: HTTPURLResponse!
+    public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask!
-    public var url: String!
+    public var url: String?
     public var request: Request?
     
     public var isCookie: Bool = false
@@ -178,20 +178,11 @@ open class HttpSession : NSObject, URLSessionDataDelegate {
      *
      */
     public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        #if os(iOS)
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        #endif
-        
-        print (self.response)
-        
         if self.isCookie == true{
             self.isCookie = false
-            Cookie.shared.set(responce: response)
+            Cookie.shared.set(responce: response!)
         }
-        /*
-         * status code
-         */
-        self.successHandler!(self.responseData,self.response,error)
+        self.successHandler?(self.responseData,self.response,error)
     }
     
     /*
@@ -210,7 +201,7 @@ open class HttpSession : NSObject, URLSessionDataDelegate {
      */
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
-        self.responseData.count = 0
+//        self.responseData.count = 0
         completionHandler(.allow)
 
     }
