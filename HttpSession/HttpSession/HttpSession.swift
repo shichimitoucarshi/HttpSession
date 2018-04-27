@@ -13,10 +13,14 @@ import UIKit
  * Http method
  */
 public enum HTTPMethod: String{
-    case post = "POST"
     case get  = "GET"
-    case Put = "PUT"
-    case Delete = "DELETE"
+    case head = "HEAD"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+    case connect = "CONNECT"
+    case options = "OPTIONS"
+    case trace = "TRACE"
 }
 
 
