@@ -77,7 +77,7 @@ open class Request {
                     
                     return "\(os)/\(version)"
                 }()
-                return "\(executable)/\(appVersion) (\(bundle)) \(version) buildver \(appBuild)"
+                return "\(executable)/\(appVersion) (\(bundle)) kCFBundleVersionKey/\(appBuild) \(version)"
             }
             return "HttpSession"
         }()

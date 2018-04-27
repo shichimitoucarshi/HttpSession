@@ -17,6 +17,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
+                "HTTP CDN",
                 "HTTP POST Twitter OAuth"]
     
     var isAuth = false
@@ -34,17 +35,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         // Dispose of any resources that can be recreated.
     }
     
-    func detailViewController (text: String) {
+    func detailViewController (param: String, text: String) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as! DetailViewController
         print ("text: \(text)")
         self.navigationController?.pushViewController(detailViewController, animated: true)
-        detailViewController.text = text
+        detailViewController.text = "param:\n\(param)\n responce:\n \(text)"
     }
     
-    func detail(data: Data) {
+    func detail(data: Data, param: String = "") {
         DispatchQueue.main.async {
             let responceStr = String(data: data, encoding: .utf8)
-            self.detailViewController(text: responceStr!)
+            self.detailViewController(param: param, text: responceStr!)
         }
     }
     
@@ -69,19 +70,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             break
         case 1:
+            let param = ["http_post":"Http Request POST 😄"]
             HttpSession(url: "http://153.126.160.55/postApi.json",method: .post)
-                .postHttp(param: ["http_post":"Http Request POST 😄"],
+                .postHttp(param: param,
                           completionHandler: { (data, responce, error) in
-                self.detail(data: data!)
+                self.detail(data: data!, param: param.hashString())
             })
             break
         case 2:
+            let param = ["http_sign_in":"Http Request SignIn",
+                         "userId":"keisukeYamagishi",
+                         "password": "password_jisjdhsnjfbns"]
+            
             HttpSession(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
-                .signIn(param: ["http_sign_in":"Http Request SignIn",
-                                "userId":"keisukeYamagishi",
-                                "password": "password_jisjdhsnjfbns"],
+                .signIn(param: param,
                           completionHandler: { (data, responce, error) in
-                            self.detail(data: data!)
+                            self.detail(data: data!,param: param.hashString())
                 })
             break
         case 3:
@@ -105,6 +109,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             break
         case 5:
+            HttpSession().download(param: ["Downkload": "DEDED"], delegate: self, task: { (e, q, a) in
+                print ("weded")
+            }, completion: { (url) in
+                print("UR")
+            }, failuer: { (error) in
+                print ("dedede")
+            }, handler: {(data,responce, error) in
+                print (responce)
+                print ("data: \(String(data: data!, encoding: .utf8))")
+                print (error)
+            })
+            break
+        case 6:
             TwitterAuth.twitterOAuth(urlType: "httpRequest://success", completion: { (data, responce, error) in
                 if self.isAuth == false {
                     self.isAuth = true
@@ -114,7 +131,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 print ("responce: \(String(describing: responce))")
             })
             break
-        case 6:
+        case 7:
             HttpSession().postTweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
                 self.detail(data: data!)
             })
@@ -122,7 +139,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         default:
             print ("Default")
         }
-        
     }
+}
+
+extension Dictionary {
+    
+    func hashString() -> String {
+        
+        var hashStr: String = ""
+        
+        for (key,value) in self {
+            
+            hashStr += "key: \(key) value: \(value)\n"
+            
+        }
+        return hashStr
+    }
+    
 }
 
