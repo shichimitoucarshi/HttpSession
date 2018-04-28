@@ -26,7 +26,7 @@
 		C791EF48208BA01000592178 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF46208BA01000592178 /* Main.storyboard */; };
 		C791EF4A208BA01000592178 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C791EF49208BA01000592178 /* Assets.xcassets */; };
 		C791EF4D208BA01000592178 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF4B208BA01000592178 /* LaunchScreen.storyboard */; };
-		C791EF91208E01E600592178 /* HttpSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF82208E01E600592178 /* HttpSession.swift */; };
+		C791EF91208E01E600592178 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF82208E01E600592178 /* Http.swift */; };
 		C791EF94208E01E600592178 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF85208E01E600592178 /* Request.swift */; };
 		C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F189208F0CC70034CD7F /* Re120.jpg */; };
 		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
@@ -66,7 +66,7 @@
 		C791EF49208BA01000592178 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C791EF4C208BA01000592178 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C791EF4E208BA01000592178 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C791EF82208E01E600592178 /* HttpSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpSession.swift; sourceTree = "<group>"; };
+		C791EF82208E01E600592178 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
 		C791EF85208E01E600592178 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		C7F2F189208F0CC70034CD7F /* Re120.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Re120.jpg; sourceTree = "<group>"; };
 		C7F2F18B208F103B0034CD7F /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 		C791EF7C208E01E600592178 /* HttpSession */ = {
 			isa = PBXGroup;
 			children = (
-				C791EF82208E01E600592178 /* HttpSession.swift */,
+				C791EF82208E01E600592178 /* Http.swift */,
 				C791EF85208E01E600592178 /* Request.swift */,
 				C73C4856208E31BB00176EFB /* AuthKit */,
 				C73C486A208E31D700176EFB /* Encode */,
@@ -261,7 +261,7 @@
 				C73C4864208E31C100176EFB /* BeareToken.swift in Sources */,
 				C73C4868208E31C100176EFB /* TwitterApiKey.swift in Sources */,
 				C73C4867208E31C100176EFB /* TwitAccount.swift in Sources */,
-				C791EF91208E01E600592178 /* HttpSession.swift in Sources */,
+				C791EF91208E01E600592178 /* Http.swift in Sources */,
 				C73C485B208E31BC00176EFB /* HMAC.swift in Sources */,
 				C73C4865208E31C100176EFB /* Followers.swift in Sources */,
 				C73C4869208E31C100176EFB /* TwitterAuth.swift in Sources */,

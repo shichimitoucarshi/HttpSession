@@ -17,7 +17,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
-                "HTTP CDN",
                 "HTTP POST Twitter OAuth"]
     
     var isAuth = false
@@ -64,35 +63,40 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         switch indexPath.row {
         case 0:
-            HttpSession(url: "http://153.126.160.55/getApi.json", method: .get)
-                .getHttp(completion: { (data, responce, error) in
+            Http(url: "http://153.126.160.55/getApi.json", method: .get)
+                .session(completion: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break
         case 1:
+            
             let param = ["http_post":"Http Request POST 😄"]
-            HttpSession(url: "http://153.126.160.55/postApi.json",method: .post)
-                .postHttp(param: param,
-                          completionHandler: { (data, responce, error) in
+            
+            Http(url: "http://153.126.160.55/postApi.json",method: .post)
+                .session(param: param,
+                          completion: { (data, responce, error) in
                 self.detail(data: data!, param: param.hashString())
             })
             break
         case 2:
+            
             let param = ["http_sign_in":"Http Request SignIn",
                          "userId":"keisukeYamagishi",
                          "password": "password_jisjdhsnjfbns"]
             
-            HttpSession(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
-                .signIn(param: param,
-                          completionHandler: { (data, responce, error) in
+            Http(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
+                .session(param: param,
+                          completion: { (data, responce, error) in
                             self.detail(data: data!,param: param.hashString())
                 })
             break
         case 3:
-            HttpSession(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
-                .getHttp(completion: { (data, responce, error) in
+            
+            Http(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
+                .session(completion: { (data, responce, error) in
                     self.detail(data: data!)
             })
+            
             break
             
         case 4:
@@ -104,24 +108,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             dto.mimeType = "text/plain"
             dto.data = img
             
-            HttpSession(url:"http://153.126.160.55/imageUp.json",method: .get).upload(param: ["img":dto], completionHandler: { (data, responce, error) in
+            Http(url:"http://153.126.160.55/imageUp.json",method: .get)
+                .upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
+            
             break
         case 5:
-            HttpSession().download(param: ["Downkload": "DEDED"], delegate: self, task: { (e, q, a) in
-                print ("weded")
-            }, completion: { (url) in
-                print("UR")
-            }, failuer: { (error) in
-                print ("dedede")
-            }, handler: {(data,responce, error) in
-                print (responce)
-                print ("data: \(String(data: data!, encoding: .utf8))")
-                print (error)
-            })
-            break
-        case 6:
             TwitterAuth.twitterOAuth(urlType: "httpRequest://success", completion: { (data, responce, error) in
                 if self.isAuth == false {
                     self.isAuth = true
@@ -131,8 +124,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 print ("responce: \(String(describing: responce))")
             })
             break
-        case 7:
-            HttpSession().postTweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
+        case 6:
+            Http().postTweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
                 self.detail(data: data!)
             })
             break
