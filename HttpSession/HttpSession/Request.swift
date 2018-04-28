@@ -89,14 +89,27 @@ open class Request {
         ]
     }()
     
+    public func headers(header: [String:String]) {
+        
+        _ = header.map { (arg) -> [String: String] in
+            self.urlReq.setValue(arg.value, forHTTPHeaderField: arg.key)
+            return [arg.key:arg.value]
+        }
+    }
+    
     public func  postHttp (param: Dictionary<String, String>) -> URLRequest{
-        self.urlReq.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("application/json", forHTTPHeaderField: "Accept")
+        
         let value: String = URLEncode().URLUTF8Encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data
-        self.urlReq.setValue(pData.count.description, forHTTPHeaderField: "Content-Length")
+        
+        let header: [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
+                                       "Accept": "application/json",
+                                       "Content-Length": pData.count.description]
+        
+        self.headers(header: header)
+        
         self.urlReq.httpBody = pData as Data
+        
         return self.urlReq
     }
     
@@ -104,9 +117,11 @@ open class Request {
         
         let multipart: Multipart = Multipart()
         let data:Data = multipart.multiparts(params: param)
-        self.urlReq.httpMethod = "POST"
-        self.urlReq.setValue("multipart/form-data; boundary=\(multipart.bundary)", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
+        
+        let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)",
+            "Content-Length":"\(data.count)"]
+        
+        self.headers(header: header)
         self.urlReq.httpBody = data
         return self.urlReq
     }

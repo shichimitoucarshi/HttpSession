@@ -108,20 +108,31 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             dto.mimeType = "text/plain"
             dto.data = img
             
-            Http(url:"http://153.126.160.55/imageUp.json",method: .get)
+            Http(url:"http://153.126.160.55/imageUp.json",method: .post)
                 .upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
             
             break
         case 5:
-            TwitterAuth.twitterOAuth(urlType: "httpRequest://success", completion: { (data, responce, error) in
-                if self.isAuth == false {
-                    self.isAuth = true
+            Twitter().oAuth(urlType: "httpRequest://success", completion: { (data, response, error) in
+                let responseData = String(data:data!, encoding:String.Encoding.utf8)
+                var attributes = responseData?.queryStringParameters
+                
+                if let attrbute = attributes?["oauth_token"] {
+                    let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + attrbute
+                    let queryURL = URL(string: url)!
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(queryURL, options: [:])
+                    } else {
+                        UIApplication.shared.openURL(queryURL)
+                    }
                     self.apis.append("Tweet")
-                    self.tableView.reloadData()
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
                 }
-                print ("responce: \(String(describing: responce))")
             })
             break
         case 6:

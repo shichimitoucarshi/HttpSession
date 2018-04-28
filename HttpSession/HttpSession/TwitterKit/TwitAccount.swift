@@ -13,7 +13,7 @@ public struct OAuth {
     var secret: String = ""
 }
 
-public struct Twiter {
+public struct TwiterUser {
     var oAuth: OAuth = OAuth()
     var screenName = ""
     var userId = ""
@@ -27,7 +27,7 @@ open class TwitAccount {
      * member value
      *
      */
-    var twitter: Twiter = Twiter()
+    var twitter: TwiterUser = TwiterUser()
     
     /*
      * initialize
