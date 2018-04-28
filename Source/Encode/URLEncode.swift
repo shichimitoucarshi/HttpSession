@@ -15,8 +15,8 @@ class URLEncode : NSObject {
      * Twitter Beare token
      */
     public func base64EncodedCredentials() -> String {
-        let encodedKey = TwitterApi.comsumerKey.UrlEncode()
-        let encodedSecret = TwitterApi.comsumerSecret.UrlEncode()
+        let encodedKey = TwitterKey.shared.api.key.UrlEncode() //comsumerKey.UrlEncode()
+        let encodedSecret = TwitterKey.shared.api.secret.UrlEncode() //comsumerSecret.UrlEncode()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
         guard let data = bearerTokenCredentials.data(using: .utf8) else {
             return ""
