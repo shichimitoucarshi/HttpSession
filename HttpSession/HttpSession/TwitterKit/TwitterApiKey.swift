@@ -12,13 +12,13 @@
  * https://apps.twitter.com/app/14638399
  */
 public struct TwitterApi {
-    var key: String = ""
-    var secret: String = ""
+    public var key: String = ""
+    public var secret: String = ""
 }
 
 open class TwitterKey {
     
-    static let shared: TwitterKey = TwitterKey()
+    public static let shared: TwitterKey = TwitterKey()
     public var api: TwitterApi = TwitterApi()
     
     private init(){}
