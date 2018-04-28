@@ -105,7 +105,7 @@ open class Http : NSObject, URLSessionDataDelegate {
         self.sendRequest(request: request)
     }
     
-    func postTweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+    public func postTweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         self.completion = success
         let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
         self.sendRequest(request: (Request(url:u, method: .post).postTweet(tweet: tweet, imgae: img)))
