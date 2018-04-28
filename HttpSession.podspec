@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "HttpSession"
-  s.version      = "1.1.1"
+  s.version      = "1.1.2"
   s.summary      = "Http Session "
   s.description  = <<-DESC
                         TCP / IP based HTTP communication can be simplified
