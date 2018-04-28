@@ -121,14 +121,6 @@ open class Http : NSObject, URLSessionDataDelegate {
         self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
     }
     
-    public func twitCDN(url: String, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void){
-        self.completion = completionHandler
-        
-        let request: URLRequest = URLRequest(url: URL(string: url)!)
-        
-        self.sendRequest(request: request)
-    }
-    
     func showUser(parame: [String:String], success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
         self.completion = success
         let u = "https://api.twitter.com/1.1/users/show.json"

@@ -20,6 +20,7 @@
 		C73C4871208E327500176EFB /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4870208E327500176EFB /* Multipart.swift */; };
 		C73C4873208E3F9000176EFB /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C4872208E3F9000176EFB /* Cookie.swift */; };
 		C73C4875208E559000176EFB /* GPSButton001.png in Resources */ = {isa = PBXBuildFile; fileRef = C73C4874208E559000176EFB /* GPSButton001.png */; };
+		C740641620946BB3005507AD /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641520946BB3005507AD /* Twitter.swift */; };
 		C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C788B72E208F752900B3F108 /* DetailViewController.swift */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
 		C791EF45208BA01000592178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF44208BA01000592178 /* ViewController.swift */; };
@@ -58,6 +59,7 @@
 		C73C4870208E327500176EFB /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		C73C4872208E3F9000176EFB /* Cookie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		C73C4874208E559000176EFB /* GPSButton001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GPSButton001.png; sourceTree = "<group>"; };
+		C740641520946BB3005507AD /* Twitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		C788B72E208F752900B3F108 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C791EF3F208BA01000592178 /* HttpSessionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpSessionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				C73C4861208E31C100176EFB /* TwitAccount.swift */,
 				C73C4862208E31C100176EFB /* TwitterApiKey.swift */,
 				C73C4863208E31C100176EFB /* TwitterAuth.swift */,
+				C740641520946BB3005507AD /* Twitter.swift */,
 			);
 			path = TwitterKit;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 				C73C4869208E31C100176EFB /* TwitterAuth.swift in Sources */,
 				C73C4873208E3F9000176EFB /* Cookie.swift in Sources */,
 				C73C485A208E31BB00176EFB /* AuthUtils.swift in Sources */,
+				C740641620946BB3005507AD /* Twitter.swift in Sources */,
 				C73C4871208E327500176EFB /* Multipart.swift in Sources */,
 				C73C485C208E31BC00176EFB /* SHA1.swift in Sources */,
 				C73C4866208E31C100176EFB /* OAuthKit.swift in Sources */,

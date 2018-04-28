@@ -18,8 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         TwitterKey.shared.api.key = "NNKAREvWGCn7Riw02gcOYXSVP"
         TwitterKey.shared.api.secret = "pxA18XddLaEvDgonl0ptMBKt54oFCW4GK8ZyPGvbYTitBvH3kM"
-//        self.oAuth()
-        // Override point for customization after application launch.
+
         return true
     }
 
