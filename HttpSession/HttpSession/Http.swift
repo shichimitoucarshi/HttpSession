@@ -58,6 +58,7 @@ open class Http : NSObject, URLSessionDataDelegate {
     
     public func session(param: Dictionary<String, String> = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
+        self.request?.headers(header: param)
         self.sendRequest(request: (self.request?.postHttp(param: param))!)
     }
     
@@ -95,30 +96,6 @@ open class Http : NSObject, URLSessionDataDelegate {
         
         let request: URLRequest = Request(url: url, method: .post).twitBeareRequest(param: param)
         self.sendRequest(request: request)
-    }
-    
-    /*
-     * Twitter Request Token
-     * HttpMethod: POST
-     * Authenticate: OAuth
-     *
-     */
-    public func twitterOAuth(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
-        
-        self.completion = completionHandler
-        self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
-    }
-    
-    /*
-     * HttpMethod: POST
-     * Twitter Access Token
-     * Authenticate OAuth
-     *
-     */
-    public func requestToken(param: Dictionary<String, String>, completionHandler: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
-        
-        self.completion = completionHandler
-        self.sendRequest(request: (self.request?.twitterOAuth(param: param))!)
     }
     
     func showUser(parame: [String:String], success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {

@@ -7,12 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
 class Twitter {
     
     var request: Request!
     
-    init() {
+    init() {}
+    
+     /*
+     * Twitter OAuth
+     *
+     */
+    public func oAuth(urlType: String, completion: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
+        let url = "https://api.twitter.com/oauth/request_token"
+        let httpSession = Http(url: url, method: .post)
+        httpSession.request?.headers(header: self.authorize(url: url, param: ["oauth_callback" : urlType]))
+        httpSession.session { (data, responce, error) in
+            completion(data, responce,error)
+        }
     }
     
     /*
@@ -21,77 +34,48 @@ class Twitter {
      * Authenticate: OAuth
      *
      */
-    /*
-     Http(url: "https://api.twitter.com/oauth/request_token", method: .post)
-     .twitterOAuth(param: ["oauth_callback" : urlType],
-     completionHandler: { (data, response, error) in
-     let responseData = String(data:data!, encoding:String.Encoding.utf8)
-     var attributes = responseData?.queryStringParameters
-     
-     if let attrbute = attributes?["oauth_token"] {
-     let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + attrbute
-     let queryURL = URL(string: url)!
-     if #available(iOS 10.0, *) {
-     UIApplication.shared.open(queryURL, options: [:])
-     } else {
-     UIApplication.shared.openURL(queryURL)
-     }
-     }
-     completion(data,response,error)
-     })
-     */
-    
-    /*
-     *
-     public static func requestToken(token: String, completion :@escaping(_ twtter: Twiter?, _ data: Data?, _ responce:HTTPURLResponse?, _ error: Error?) -> Void){
-     let splitParam = token.queryStringParameters
-     /*
-     * Twitter OAuth Request Token
-     * URL: https://api.twitter.com/oauth/access_token
-     *
-     */
-     Http(url: "https://api.twitter.com/oauth/access_token",method: .post)
-     .requestToken(param: splitParam,
-     completionHandler: { (data, response, error) in
-     
-     let accesToken:[String:String] = (String(data: data!, encoding: .utf8)?.queryStringParameters)!
-     print (accesToken)
-     /*
-     * set authenticate user's info
-     *
-     */
-     TwitAccount.shared.setTwiAccount(data: data!)
-     
-     completion(TwitAccount.shared.twitter,data,response,error)
-     })
-     }
-     
-     */
-    
-    public func oAuth(urlType: String, completion: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
-        let url = "https://api.twitter.com/oauth/request_token"
-        let signature: String = OAuthKit().authorizationHeader(for: URL(string: url)!,
-                                                               method: .post,
-                                                               parameters: ["oauth_callback" : urlType],
-                                                               isMediaUpload: false)
-        
-        let httpSession = Http(url: url, method: .post)
-        httpSession.request?.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
-        httpSession.session(completion: completion)
-    }
-    
     public func access(token: String,
-                       completion: @escaping(_ data: Data?, _ responce:HTTPURLResponse?, _ error: Error?) -> Void) {
+                       success: @escaping(TwiterUser) -> Void, failuer: @escaping(Error?,HTTPURLResponse?)->Void) {
         
         let url = "https://api.twitter.com/oauth/access_token"
         let param = token.queryStringParameters
+
+        Http(url: url, method: .post)
+            .session(param: self.authorize(url: url, param: param)) { (data, responce, error) in
+            /*
+             * set authenticate user's info
+             *
+             */
+            if (responce?.statusCode)! < 300 {
+                TwitAccount.shared.setTwiAccount(data: data!)
+                success(TwitAccount.shared.twitter)
+            }else{
+                if let err = error {
+                    failuer(err, responce)
+                }
+            }
+        }
+    }
+    
+    public func tweet (tweet: String, img: UIImage, success: @escaping (Data?) -> Void, failuer: @escaping (HTTPURLResponse?,Error?) -> Void) {
+        let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
+        Http(request: Request(url:u, method: .post).postTweet(tweet: tweet, img: img))
+            .session { (data, responce, error) in
+            if (responce?.statusCode)! < 300 {
+                success(data)
+            }else{
+                if let err = error {
+                    failuer(responce, err)
+                }
+            }
+        }
+    }
+    
+    private func authorize(url: String, param: [String: String], upload: Bool = false) -> [String: String] {
         let signature: String = OAuthKit().authorizationHeader(for: URL(string: url)!,
                                                                method: .post,
                                                                parameters: param,
                                                                isMediaUpload: false)
-        
-        let httpSession = Http(url: url, method: .post)
-        httpSession.request?.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
-        httpSession.session(completion: completion)
+        return ["Authorization": signature]
     }
 }

@@ -118,12 +118,10 @@ open class Request {
         let multipart: Multipart = Multipart()
         let data:Data = multipart.multiparts(params: param)
         
-//        let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)",
-//            "Content-Length":"\(data.count)"]
+        let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)",
+            "Content-Length":"\(data.count)"]
         
-        self.urlReq.setValue("multipart/form-data; boundary=\(multipart.bundary)", forHTTPHeaderField: "Content-Type")
-        self.urlReq.setValue("\(data.count)", forHTTPHeaderField: "Content-Length")
-//        self.headers(header: header)
+        self.headers(header: header)
         self.urlReq.httpBody = data
         return self.urlReq
     }
