@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class Twitter {
+open class Twitter {
     
     var request: Request!
     
-    init() {}
+    public init() {}
     
      /*
      * Twitter OAuth

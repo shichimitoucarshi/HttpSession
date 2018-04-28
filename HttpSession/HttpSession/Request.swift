@@ -10,9 +10,14 @@ import Foundation
 import UIKit
 
 public struct MultipartDto {
-    var fileName = ""
-    var mimeType = ""
-    var data: Data = Data()
+    public var fileName: String!
+    public var mimeType: String!
+    public var data: Data!
+    public init(){
+        self.fileName = ""
+        self.mimeType = ""
+        self.data = Data()
+    }
 }
 
 open class Request {
