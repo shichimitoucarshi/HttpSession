@@ -135,6 +135,7 @@ open class Request {
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(4))!
         self.urlReq.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+        
         let query = param.urlEncodedQueryString(using: .utf8)
         let str = self.url.absoluteString + (self.url.absoluteString.range(of: "?") != nil ? "&" : "?") + query
         self.urlReq.url = URL(string: str)

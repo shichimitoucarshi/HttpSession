@@ -11,6 +11,8 @@
  * Brewtter App Token
  * https://apps.twitter.com/app/14638399
  */
+import Foundation
+
 public struct TwitterApi {
     public var key: String = ""
     public var secret: String = ""
@@ -20,7 +22,13 @@ open class TwitterKey {
     
     public static let shared: TwitterKey = TwitterKey()
     public var api: TwitterApi = TwitterApi()
+    public var beareToken: String? = ""
     
     private init(){}
     
+    public func setBeareToken(data: Data){
+        if let beare = try! JSONSerialization.jsonObject(with: data, options: []) as? [String: String] {
+            self.beareToken = beare["access_token"]
+        }
+    }
 }

@@ -10,10 +10,9 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         TwitterKey.shared.api.key = "NNKAREvWGCn7Riw02gcOYXSVP"
@@ -48,14 +47,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(url.absoluteString.hasPrefix("httprequest://")){
             let splitPrefix: String = url.absoluteString.replacingOccurrences(of: "httprequest://success?", with: "")
-            Twitter().access(token: splitPrefix, success: { (twitter) in
-                print (twitter)
-            }, failuer: { (error,responce)  in
+            Twitter.access(token: splitPrefix, success: {
+                Twitter.beare(success: {
+                    print ("SUCCESS")
+                }, failuer: { (responce, error) in
+                    print("Error: \(error) responce: \(responce)")
+                })
+            }, failuer: { (responce, error) in
                 print ("Error: \(error) responce: \(responce)")
             })
-//            TwitterAuth.requestToken(token: splitPrefix, completion: { (twitter, data, responce, error) in
-//                print (twitter!)
-//            })
+            
         }
         return true
     }
