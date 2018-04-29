@@ -60,13 +60,13 @@ POST http method
 
 ```swift
 
-HttpSession(url: "http://153.126.160.55/postApi.json",method: .post)
-            .postHttp(param: ["http_post":"Http Request POST 😄"],
-                      completionHandler: { (data, responce, error) in
-                        
-                        let responceStr = String(data: data!, encoding: .utf8)
-                        print ("session: \(responceStr)")
-            })
+let param = ["http_post":"Http Request POST 😄"]
+            
+Http(url: "http://153.126.160.55/postApi.json",method: .post)
+  .session(param: param,
+  completion: { (data, responce, error) in {
+  self.detail(data: data!, param: param.hashString())
+})
 
 ```
 
