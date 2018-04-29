@@ -59,56 +59,13 @@ open class Http : NSObject, URLSessionDataDelegate {
     public func session(param: Dictionary<String, String> = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
         self.request?.headers(header: param)
-        self.sendRequest(request: (self.request?.postHttp(param: param))!)
+        self.sendRequest(request: (self.request?.post(param: param))!)
     }
     
     public func upload(param: Dictionary<String, MultipartDto>,
                        completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completionHandler
-        self.sendRequest(request: (self.request?.multipartReq(param: param))!)
-    }
-    
-    /*
-     * Follower List
-     * HttpMethod: GET
-     * Authenticate: Beare
-     * 
-     */
-    public func twitFollowerList(url: String, beare: String, userId: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
-        
-        self.completion = completionHandler
-        
-        let user: String = URLEncode().URLUTF8Encode(param: userId)
-        let followers: String = url + "?" + user
-        let request: URLRequest = Request(url: followers, method: .get).twitFollowersRequest(beare: beare)
-        self.sendRequest(request: request)
-    }
-    
-    /*
-     * Twitter Beare Token Request
-     * HttpMethod: POST
-     * Authenticate: BeareToken
-     *
-     */
-    public func twitBearerToken(url: String, param: Dictionary<String, String>, completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void) {
-        
-        self.completion = completionHandler
-        
-        let request: URLRequest = Request(url: url, method: .post).twitBeareRequest(param: param)
-        self.sendRequest(request: request)
-    }
-    
-    func showUser(parame: [String:String], success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
-        self.completion = success
-        let u = "https://api.twitter.com/1.1/users/show.json"
-        let request: URLRequest = Request(url: u, method: .get).twitterUser(param: parame)
-        self.sendRequest(request: request)
-    }
-    
-    public func postTweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
-        self.completion = success
-        let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        self.sendRequest(request: (Request(url:u, method: .post).postTweet(tweet: tweet, imgae: img)))
+        self.sendRequest(request: (self.request?.multipart(param: param))!)
     }
     
     /*
@@ -149,8 +106,6 @@ open class Http : NSObject, URLSessionDataDelegate {
      */
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
-//        self.responseData.count = 0
         completionHandler(.allow)
-
     }
 }

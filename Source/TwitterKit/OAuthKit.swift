@@ -84,12 +84,12 @@ open class OAuthKit{
      */
     public func oauthSignature(for url: URL, method: HTTPMethod, parameters: Dictionary<String, Any>) -> String {
         let tokenSecret = TwitAccount.shared.twitter.oAuth.secret
-        let encodedConsumerSecret = TwitterKey.shared.api.secret.UrlEncode()
+        let encodedConsumerSecret = TwitterKey.shared.api.secret.percentEncode()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
         let parameterComponents = parameters.urlEncodedQueryString(using: .utf8).components(separatedBy: "&").sorted()
         let parameterString = parameterComponents.joined(separator: "&")
-        let encodedParameterString = parameterString.UrlEncode()
-        let encodedURL = url.absoluteString.UrlEncode()
+        let encodedParameterString = parameterString.percentEncode()
+        let encodedURL = url.absoluteString.percentEncode()
         let signatureBaseString = "\(method.rawValue)&\(encodedURL)&\(encodedParameterString)"
         let key = signingKey.data(using: .utf8)!
         let msg = signatureBaseString.data(using: .utf8)!

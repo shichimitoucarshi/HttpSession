@@ -34,10 +34,9 @@ open class Request {
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
-        self.urlReq.httpShouldHandleCookies = false
-        self.urlReq.timeoutInterval = 60
         self.urlReq.allHTTPHeaderFields = Request.appInfo
         if cookie == true {
+            self.urlReq.httpShouldHandleCookies = false
             self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
         }
     }
@@ -102,13 +101,13 @@ open class Request {
         }
     }
     
-    public func  postHttp (param: Dictionary<String, String>) -> URLRequest{
+    public func post(param: Dictionary<String, String>) -> URLRequest{
         
-        let value: String = URLEncode().URLUTF8Encode(param: param)
+        let value: String = URI().encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data
         
         let header: [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
-                                       "Accept": "application/json",
+                                       "Accept": "application/x-www-form-urlencoded",
                                        "Content-Length": pData.count.description]
         
         self.headers(header: header)
@@ -118,7 +117,7 @@ open class Request {
         return self.urlReq
     }
     
-    public func multipartReq(param: Dictionary<String, MultipartDto>) -> URLRequest{
+    public func multipart(param: Dictionary<String, MultipartDto>) -> URLRequest{
         
         let multipart: Multipart = Multipart()
         let data:Data = multipart.multiparts(params: param)
@@ -131,23 +130,12 @@ open class Request {
         return self.urlReq
     }
     
-    /*
-     * Authenticate: OAuth
-     * Header: Authorization
-     *
-     * Twitter Request Token, Access Token
-     */
-    public func twitterOAuth(param: Dictionary<String, String>) ->URLRequest{
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!, method: .post, parameters: param, isMediaUpload: false)
-        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
-        return self.urlReq
-    }
-    
     public func twitterUser(param: [String: String]) -> URLRequest {
         let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .get ,parameters: param, isMediaUpload: false)
         self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
         let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(4))!
         self.urlReq.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
+        
         let query = param.urlEncodedQueryString(using: .utf8)
         let str = self.url.absoluteString + (self.url.absoluteString.range(of: "?") != nil ? "&" : "?") + query
         self.urlReq.url = URL(string: str)
@@ -163,10 +151,10 @@ open class Request {
      * Twitter Beare Token
      */
     public func twitBeareRequest(param: Dictionary<String, String>) -> URLRequest{
-        let credential = URLEncode().base64EncodedCredentials()
+        let credential = URI().base64EncodedCredentials()
         self.urlReq.setValue("Basic " + credential, forHTTPHeaderField: "Authorization")
         self.urlReq.setValue("application/x-www-form-urlencoded; charset=utf8", forHTTPHeaderField: "Content-Type")
-        let value: String = URLEncode().URLUTF8Encode(param: param)
+        let value: String = URI().twitterEncode(param: param)
         let par: NSData = value.data(using: String.Encoding.utf8)! as NSData
         self.urlReq.httpBody = par as Data
         return self.urlReq
