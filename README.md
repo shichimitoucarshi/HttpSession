@@ -58,7 +58,7 @@ $ git clone https://github.com/keisukeYamagishi/HttpSession.git
 
 GET http method
 
-```
+```swift
 Http(url: "http://153.126.160.55/getApi.json", method: .get)
   .session(completion: { (data, responce, error) in
     self.detail(data: data!)
