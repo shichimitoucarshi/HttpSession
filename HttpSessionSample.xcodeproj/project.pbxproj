@@ -12,7 +12,7 @@
 		C740642B2094B908005507AD /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641A2094B908005507AD /* Cookie.swift */; };
 		C740642C2094B908005507AD /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641B2094B908005507AD /* HMAC.swift */; };
 		C740642D2094B908005507AD /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641C2094B908005507AD /* SHA1.swift */; };
-		C740642E2094B908005507AD /* URLEncode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641E2094B908005507AD /* URLEncode.swift */; };
+		C740642E2094B908005507AD /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641E2094B908005507AD /* URI.swift */; };
 		C740642F2094B908005507AD /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C740641F2094B908005507AD /* Http.swift */; };
 		C74064302094B908005507AD /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74064212094B908005507AD /* Multipart.swift */; };
 		C74064312094B908005507AD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74064222094B908005507AD /* Request.swift */; };
@@ -48,7 +48,7 @@
 		C740641A2094B908005507AD /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		C740641B2094B908005507AD /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
 		C740641C2094B908005507AD /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
-		C740641E2094B908005507AD /* URLEncode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEncode.swift; sourceTree = "<group>"; };
+		C740641E2094B908005507AD /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
 		C740641F2094B908005507AD /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
 		C74064212094B908005507AD /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		C74064222094B908005507AD /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -106,7 +106,7 @@
 		C740641D2094B908005507AD /* Encode */ = {
 			isa = PBXGroup;
 			children = (
-				C740641E2094B908005507AD /* URLEncode.swift */,
+				C740641E2094B908005507AD /* URI.swift */,
 			);
 			path = Encode;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				C791EF45208BA01000592178 /* ViewController.swift in Sources */,
 				C740642A2094B908005507AD /* AuthUtils.swift in Sources */,
 				C740642C2094B908005507AD /* HMAC.swift in Sources */,
-				C740642E2094B908005507AD /* URLEncode.swift in Sources */,
+				C740642E2094B908005507AD /* URI.swift in Sources */,
 				C74064352094B908005507AD /* TwitAccount.swift in Sources */,
 				C74064312094B908005507AD /* Request.swift in Sources */,
 				C740642B2094B908005507AD /* Cookie.swift in Sources */,

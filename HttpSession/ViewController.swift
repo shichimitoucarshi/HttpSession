@@ -115,30 +115,47 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             break
         case 5:
-            Twitter().oAuth(urlType: "httpRequest://success", completion: { (data, response, error) in
-                let responseData = String(data:data!, encoding:String.Encoding.utf8)
-                var attributes = responseData?.queryStringParameters
+            
+            Twitter.oAuth(urlType: "httpRequest://success", success: {
                 
-                if let attrbute = attributes?["oauth_token"] {
-                    let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + attrbute
-                    let queryURL = URL(string: url)!
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(queryURL, options: [:])
-                    } else {
-                        UIApplication.shared.openURL(queryURL)
-                    }
-                    self.apis.append("Tweet")
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                    }
+                self.apis.append("Tweet")
+                self.apis.append("users")
+                self.apis.append("follwers")
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
+                
+            }, failuer: { (error, responce) in
+                print("error: \(error) responce: \(responce)")
             })
+            
             break
         case 6:
-            Http().postTweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data, responce, error) in
+            
+            Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data) in
                 self.detail(data: data!)
+            }, failuer: { (responce, error) in
+                print ("responce: \(responce) error: \(error)")
             })
+            
+            break
+        case 7:
+            Twitter.users(success: { (data) in
+                self.detail(data: data!)
+            }, failuer: { (responce, error) in
+                print ("responce: \(responce) error: \(error)")
+            })
+            
+            break
+        case 8:
+            
+            Twitter.follwers(success: { (data) in
+                self.detail(data: data!)
+            }, failuer: { (responce, error) in
+                print ("responce: \(responce) error: \(error)")
+            })
+            
             break
         default:
             print ("Default")
