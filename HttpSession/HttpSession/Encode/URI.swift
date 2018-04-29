@@ -8,15 +8,15 @@
 
 import Foundation
 
-class URLEncode : NSObject {
+class URI : NSObject {
     
     /*
      * Base64 encode with comsumer key and comsmer secret
      * Twitter Beare token
      */
     public func base64EncodedCredentials() -> String {
-        let encodedKey = TwitterKey.shared.api.key.UrlEncode() //comsumerKey.UrlEncode()
-        let encodedSecret = TwitterKey.shared.api.secret.UrlEncode() //comsumerSecret.UrlEncode()
+        let encodedKey = TwitterKey.shared.api.key.percentEncode() //comsumerKey.UrlEncode()
+        let encodedSecret = TwitterKey.shared.api.secret.percentEncode() //comsumerSecret.UrlEncode()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
         guard let data = bearerTokenCredentials.data(using: .utf8) else {
             return ""
@@ -28,7 +28,7 @@ class URLEncode : NSObject {
      * It converts the value of Dictionary type
      * URL encoded into a character string and returns it.
      */
-    public func URLUTF8Encode(param: Dictionary<String, String>)->String{
+    public func twitterEncode(param: Dictionary<String, String>)->String{
         
         var parameter: String = String()
         
@@ -42,7 +42,7 @@ class URLEncode : NSObject {
                 || "oauth_signature" == keys[i]){
                 val = param[keys[i]]!
             }else{
-                val = (param[keys[i]]?.UrlEncode())!
+                val = (param[keys[i]]?.percentEncode())!
             }
             if(i == keys.count-1){
                 parameter = parameter + keys[i] + "=" +  val
@@ -52,14 +52,22 @@ class URLEncode : NSObject {
         }
         return parameter
     }
+    
+    public func encode(param: [String:String]) -> String {
+        return param.map{"\($0)=\($1.percentEncode())"}.joined(separator:"&")
+    }
 }
+
+//extension Dictionary Where [String:String] {
+//    
+//}
 
 extension String{
     
     /*
      * PersentEncode
      */
-    public func UrlEncode(_ encodeAll: Bool = false) -> String {
+    public func percentEncode(_ encodeAll: Bool = false) -> String {
         var allowedCharacterSet: CharacterSet = .urlQueryAllowed
         allowedCharacterSet.remove(charactersIn: "\n:#/?@!$&'()*+,;=")
         if !encodeAll {
@@ -113,8 +121,8 @@ extension Dictionary {
         var parts = [String]()
         
         for (key, value) in self {
-            let keyString = "\(key)".UrlEncode()
-            let valueString = "\(value)".UrlEncode(keyString == "status")
+            let keyString = "\(key)".percentEncode()
+            let valueString = "\(value)".percentEncode(keyString == "status")
             let query: String = "\(keyString)=\(valueString)"
             parts.append(query)
         }

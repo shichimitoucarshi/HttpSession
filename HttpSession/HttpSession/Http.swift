@@ -59,13 +59,13 @@ open class Http : NSObject, URLSessionDataDelegate {
     public func session(param: Dictionary<String, String> = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
         self.request?.headers(header: param)
-        self.sendRequest(request: (self.request?.postHttp(param: param))!)
+        self.sendRequest(request: (self.request?.post(param: param))!)
     }
     
     public func upload(param: Dictionary<String, MultipartDto>,
                        completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completionHandler
-        self.sendRequest(request: (self.request?.multipartReq(param: param))!)
+        self.sendRequest(request: (self.request?.multipart(param: param))!)
     }
     
     /*
@@ -78,7 +78,7 @@ open class Http : NSObject, URLSessionDataDelegate {
         
         self.completion = completionHandler
         
-        let user: String = URLEncode().URLUTF8Encode(param: userId)
+        let user: String = URI().twitterEncode(param: userId)
         let followers: String = url + "?" + user
         let request: URLRequest = Request(url: followers, method: .get).twitFollowersRequest(beare: beare)
         self.sendRequest(request: request)
@@ -110,7 +110,7 @@ open class Http : NSObject, URLSessionDataDelegate {
         let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
         self.sendRequest(request: (Request(url:u, method: .post).postTweet(tweet: tweet, imgae: img)))
     }
-    
+//
     /*
      * send Request
      */
