@@ -11,6 +11,10 @@ and Twitter OAuth
 
 ***API Server:*** http://153.126.160.55/
 
+### Recommended.
+
+SwiftyJSON is recommended.
+[SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 ## Installation
 
 ### Cocoapods
