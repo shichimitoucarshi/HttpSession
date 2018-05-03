@@ -33,12 +33,9 @@ open class Twitter:Http {
         })
     }
     
-    public static func access(token: String, success: @escaping ()-> Void, failuer: @escaping (HTTPURLResponse?,Error?)->Void){
+    public static func access(token: String, success: @escaping (TwiterUser)-> Void, failuer: @escaping (HTTPURLResponse?,Error?)->Void){
         Twitter().accessToken(token: token, success: { (twitter) in
-            Twitter().bearerToken(completion: { (data, responce, error) in
-                TwitterKey.shared.setBeareToken(data: data!)
-                success()
-            })
+            success(twitter)
         }, failuer: { (error,responce)  in
             failuer(responce,error)
         })

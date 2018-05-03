@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if(url.absoluteString.hasPrefix("httprequest://")){
             let splitPrefix: String = url.absoluteString.replacingOccurrences(of: "httprequest://success?", with: "")
-            Twitter.access(token: splitPrefix, success: {
+            Twitter.access(token: splitPrefix, success: { (twitterUSer) in
                 Twitter.beare(success: {
                     print ("SUCCESS")
                 }, failuer: { (responce, error) in
