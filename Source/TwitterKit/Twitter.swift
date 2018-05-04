@@ -14,7 +14,7 @@ open class Twitter:Http {
     
     public static func oAuth (urlType: String, success: @escaping () -> Void, failuer: @escaping(Error?,HTTPURLResponse?)->Void ) {
         
-        Twitter().twitOAuth(urlType: "httpRequest://success", completion: { (data, response, error) in
+        Twitter().twitOAuth(urlType: urlType, completion: { (data, response, error) in
             let responseData = String(data:data!, encoding:String.Encoding.utf8)
             var attributes = responseData?.queryStringParameters
             

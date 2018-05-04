@@ -9,14 +9,22 @@
 import Foundation
 
 public struct OAuth {
-    var token: String = ""
-    var secret: String = ""
+    public var token: String = ""
+    public var secret: String = ""
+    public init(){
+        self.token = ""
+        self.secret = ""
+    }
+    public init(token: String, secret: String ){
+        self.token = token
+        self.secret = secret
+    }
 }
 
 public struct TwiterUser {
-    var oAuth: OAuth = OAuth()
-    var screenName = ""
-    var userId = ""
+    public var oAuth: OAuth = OAuth()
+    public var screenName = ""
+    public var userId = ""
 }
 
 open class TwitAccount {
@@ -27,7 +35,7 @@ open class TwitAccount {
      * member value
      *
      */
-    var twitter: TwiterUser = TwiterUser()
+    public var twitter: TwiterUser = TwiterUser()
     
     /*
      * initialize
