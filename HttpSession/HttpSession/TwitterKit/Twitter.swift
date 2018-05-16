@@ -149,7 +149,7 @@ open class Twitter:Http {
         let url:String = "https://api.twitter.com/oauth2/token"
         self.completion = completion
         
-        let request: URLRequest = Request(url: url, method: .post).twitBeareRequest(param:["grant_type" : "client_credentials"])
+        let request: URLRequest = Request(url: url, method: .post).twitBeare(param:["grant_type" : "client_credentials"])
         self.send(request: request)
     }
     

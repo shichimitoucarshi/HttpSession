@@ -103,7 +103,7 @@ open class Request {
     
     public func post(param: Dictionary<String, String>) -> URLRequest{
         
-        let value: String = URI().encode(param: param)
+        let value: String = URI.encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data
         
         let header: [String:String] = ["Content-Type": "application/x-www-form-urlencoded",
@@ -123,7 +123,7 @@ open class Request {
         let data:Data = multipart.multiparts(params: param)
         
         let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)",
-            "Content-Length":"\(data.count)"]
+                      "Content-Length":"\(data.count)"]
         
         self.headers(header: header)
         self.urlReq.httpBody = data
@@ -131,12 +131,13 @@ open class Request {
     }
     
     public func twitterUser(param: [String: String]) -> URLRequest {
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .get ,parameters: param, isMediaUpload: false)
-        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
-        let charset = CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(4))!
-        self.urlReq.setValue("application/x-www-form-urlencoded; charset=\(charset)", forHTTPHeaderField: "Content-Type")
         
-        let query = param.urlEncodedQueryString(using: .utf8)
+        let header: [String:String] = ["Authorization": self.signature(param: param, isUpload: false),
+                                       "Content-Type":"application/x-www-form-urlencoded; charset=utf-8"]
+        
+        self.headers(header: header)
+        
+        let query = param.encodedQuery(using: .utf8)
         let str = self.url.absoluteString + (self.url.absoluteString.range(of: "?") != nil ? "&" : "?") + query
         self.urlReq.url = URL(string: str)
         return self.urlReq
@@ -150,22 +151,24 @@ open class Request {
      *
      * Twitter Beare Token
      */
-    public func twitBeareRequest(param: Dictionary<String, String>) -> URLRequest{
-        let credential = URI().base64EncodedCredentials()
-        self.urlReq.setValue("Basic " + credential, forHTTPHeaderField: "Authorization")
-        self.urlReq.setValue("application/x-www-form-urlencoded; charset=utf8", forHTTPHeaderField: "Content-Type")
-        let value: String = URI().twitterEncode(param: param)
-        let par: NSData = value.data(using: String.Encoding.utf8)! as NSData
-        self.urlReq.httpBody = par as Data
+    public func twitBeare(param: Dictionary<String, String>) -> URLRequest{
+        
+        let credential = URI.credentials
+        
+        let header: [String: String] = ["Authorization": "Basic " + credential,
+                                        "Content-Type":"application/x-www-form-urlencoded; charset=utf8"]
+        
+        self.headers(header: header)
+
+        let value: String = URI.twitterEncode(param: param)
+        let body: Data = value.data(using: String.Encoding.utf8)!
+        
+        self.urlReq.httpBody = body
         return self.urlReq
     }
     
-    func tweetHeader (boundary: String, contentLenght: Int, param: [String: String]){
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .post ,parameters:param, isMediaUpload: true)
-        let header:[String:String] = ["Content-Type" :"multipart/form-data; boundary=\(boundary)",
-            "Authorization": signature,
-            "Content-Length": String(contentLenght)]
-        self.headers(header: header)
+    func signature(param: [String: String], isUpload: Bool) -> String {
+        return OAuthKit.authorizationHeader(for: self.url!,method: HTTPMethod(rawValue: self.urlReq.httpMethod!)! ,param:param, isMediaUpload: isUpload)
     }
     
     public func postTweet(tweet: String, img: UIImage) -> URLRequest {
@@ -177,7 +180,11 @@ open class Request {
         
         let body = tweetMultipart.tweetMultipart(param: parameters ,img: img)
         
-        self.tweetHeader(boundary: tweetMultipart.bundary, contentLenght: body.count, param: parameters)
+        let header:[String:String] = ["Content-Type" :"multipart/form-data; boundary=\(tweetMultipart.bundary)",
+                                      "Authorization": self.signature(param: parameters, isUpload: true),
+                                      "Content-Length": body.count.description]
+        
+        self.headers(header: header)
         
         self.urlReq!.httpBody = body
         
