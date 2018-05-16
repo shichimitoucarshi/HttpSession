@@ -83,7 +83,7 @@ open class Request {
                 }()
                 return "\(executable)/\(appVersion) (\(bundle)) kCFBundleVersionKey/\(appBuild) \(version)"
             }
-            return "HttpSession"
+            return "HttpSession: \(VERSION)"
         }()
         
         return [
@@ -160,34 +160,25 @@ open class Request {
         return self.urlReq
     }
     
-    public func postTweet(tweet: String, imgae: UIImage) -> URLRequest {
+    func tweetHeader (boundary: String, contentLenght: Int, param: [String: String]){
+        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .post ,parameters:param, isMediaUpload: true)
+        let header:[String:String] = ["Content-Type" :"multipart/form-data; boundary=\(boundary)",
+            "Authorization": signature,
+            "Content-Length": String(contentLenght)]
+        self.headers(header: header)
+    }
+    
+    public func postTweet(tweet: String, img: UIImage) -> URLRequest {
         
-        let boundary = "--" + UUID().uuidString
-        
-        let contentType = "multipart/form-data; boundary=\(boundary)"
-        self.urlReq!.setValue(contentType, forHTTPHeaderField:"Content-Type")
-        
-        var body: Data = Data()
-        
-        var parameters = Dictionary<String, Any>()
+        var parameters:[String:String] = [:]
         parameters["status"] = tweet
         
-        let signature: String = OAuthKit().authorizationHeader(for: self.url!,method: .post ,parameters:parameters, isMediaUpload: true)
+        let tweetMultipart = Multipart()
         
-        self.urlReq.setValue(signature, forHTTPHeaderField: "Authorization")
+        let body = tweetMultipart.tweetMultipart(param: parameters ,img: img)
         
-        let multipartData = Multipart.mulipartContent(with: boundary, data: UIImagePNGRepresentation(imgae)!, fileName: "media.jpg", parameterName: "media[]", mimeType: "application/octet-stream")
-        body.append(multipartData)
+        self.tweetHeader(boundary: tweetMultipart.bundary, contentLenght: body.count, param: parameters)
         
-        for (key, value): (String, Any) in parameters {
-            body.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            body.append("\(value)".data(using: .utf8)!)
-        }
-        
-        body.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
-        
-        self.urlReq!.setValue("\(body.count)", forHTTPHeaderField: "Content-Length")
         self.urlReq!.httpBody = body
         
         return self.urlReq

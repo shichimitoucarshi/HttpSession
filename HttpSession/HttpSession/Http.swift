@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+let VERSION = "1.2.1"
+
 /*
  * Http method
  */
@@ -59,19 +61,19 @@ open class Http : NSObject, URLSessionDataDelegate {
     public func session(param: Dictionary<String, String> = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
         self.request?.headers(header: param)
-        self.sendRequest(request: (self.request?.post(param: param))!)
+        self.send(request: (self.request?.post(param: param))!)
     }
     
     public func upload(param: Dictionary<String, MultipartDto>,
                        completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completionHandler
-        self.sendRequest(request: (self.request?.multipart(param: param))!)
+        self.send(request: (self.request?.multipart(param: param))!)
     }
     
     /*
      * send Request
      */
-    func sendRequest(request: URLRequest){
+    func send(request: URLRequest){
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
         self.dataTask = session.dataTask(with: request)
         self.dataTask.resume()
