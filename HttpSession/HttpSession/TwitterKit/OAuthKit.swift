@@ -40,6 +40,10 @@ open class OAuthKit{
         static let signatureMethod = "HMAC-SHA1"
     }
     
+    public static func authorizationHeader(for url: URL,method: HTTPMethod, param: Dictionary<String, Any>, isMediaUpload: Bool = false ) -> String {
+        return OAuthKit().authorizationHeader(for: url,method: method ,parameters:param, isMediaUpload: isMediaUpload)
+    }
+    
     /*
      * create headers
      *
@@ -65,7 +69,7 @@ open class OAuthKit{
         
         authorization["oauth_signature"] = self.oauthSignature(for: url,method: method, parameters: final)
         
-        let authorizationParameterComponents = authorization.urlEncodedQueryString(using: .utf8).components(separatedBy: "&").sorted()
+        let authorizationParameterComponents = authorization.encodedQuery(using: .utf8).components(separatedBy: "&").sorted()
         
         var headerComponents = [String]()
         for component in authorizationParameterComponents {
@@ -86,7 +90,7 @@ open class OAuthKit{
         let tokenSecret = TwitAccount.shared.twitter.oAuth.secret
         let encodedConsumerSecret = TwitterKey.shared.api.secret.percentEncode()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"
-        let parameterComponents = parameters.urlEncodedQueryString(using: .utf8).components(separatedBy: "&").sorted()
+        let parameterComponents = parameters.encodedQuery(using: .utf8).components(separatedBy: "&").sorted()
         let parameterString = parameterComponents.joined(separator: "&")
         let encodedParameterString = parameterString.percentEncode()
         let encodedURL = url.absoluteString.percentEncode()

@@ -118,9 +118,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             Twitter.oAuth(urlType: "httpRequest://success", success: {
                 
-                self.apis.append("Tweet")
-                self.apis.append("users")
-                self.apis.append("follwers")
+                let vals: [String] = ["Tweet", "users", "follwers"]
+                
+                for val in vals {
+                    if self.apis.contains(val) == false {
+                        self.apis.append(val)
+                    }
+                }
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
