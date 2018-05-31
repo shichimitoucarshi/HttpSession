@@ -136,7 +136,7 @@ open class Twitter:Http {
         let followers: String = url + "?" + user
         let request: URLRequest = Request(url: followers, method: .get)
             .twitFollowersRequest(beare: TwitterKey.shared.beareToken!)
-        self.sendRequest(request: request)
+        self.send(request: request)
     }
     
     /*
@@ -149,21 +149,21 @@ open class Twitter:Http {
         let url:String = "https://api.twitter.com/oauth2/token"
         self.completion = completion
         
-        let request: URLRequest = Request(url: url, method: .post).twitBeareRequest(param:["grant_type" : "client_credentials"])
-        self.sendRequest(request: request)
+        let request: URLRequest = Request(url: url, method: .post).twitBeare(param:["grant_type" : "client_credentials"])
+        self.send(request: request)
     }
     
     func users(userId: String, success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
         self.completion = success
         let u = "https://api.twitter.com/1.1/users/show.json"
         let request: URLRequest = Request(url: u, method: .get).twitterUser(param: ["user_id":userId])
-        self.sendRequest(request: request)
+        self.send(request: request)
     }
     
     public func tweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         self.completion = success
         let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        self.sendRequest(request: (Request(url:u, method: .post).postTweet(tweet: tweet, imgae: img)))
+        self.send(request: (Request(url:u, method: .post).postTweet(tweet: tweet, img: img)))
     }
     
     private func authorize(url: String, param: [String: String], upload: Bool = false) -> [String: String] {

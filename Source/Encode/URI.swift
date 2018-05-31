@@ -14,7 +14,7 @@ class URI : NSObject {
      * Base64 encode with comsumer key and comsmer secret
      * Twitter Beare token
      */
-    public func base64EncodedCredentials() -> String {
+    public static var credentials: String {
         let encodedKey = TwitterKey.shared.api.key.percentEncode() //comsumerKey.UrlEncode()
         let encodedSecret = TwitterKey.shared.api.secret.percentEncode() //comsumerSecret.UrlEncode()
         let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
@@ -22,6 +22,10 @@ class URI : NSObject {
             return ""
         }
         return data.base64EncodedString(options: [])
+    }
+    
+    public static func twitterEncode (param: [String: String]) -> String {
+        return URI().twitterEncode(param:param)
     }
     
     /*
@@ -51,6 +55,10 @@ class URI : NSObject {
             }
         }
         return parameter
+    }
+    
+    public static func encode(param: [String:String]) -> String {
+        return URI().encode(param:param)
     }
     
     public func encode(param: [String:String]) -> String {
@@ -117,7 +125,7 @@ extension Dictionary {
      * encoded Dictionary's value
      *
      */
-    public func urlEncodedQueryString(using encoding: String.Encoding) -> String {
+    public func encodedQuery(using encoding: String.Encoding) -> String {
         var parts = [String]()
         
         for (key, value) in self {
