@@ -42,12 +42,12 @@ func ??=<T>(lhs: inout T?, rhs: T?) {
     lhs = rhs
 }
 
-class Auth {
+open class Auth {
     
-    static let user: String = "user"
-    static let password: String = "password"
+    public static let user: String = "user"
+    public static let password: String = "password"
     
-    init() {}
+    public init() {}
     
     public static func basicAuthenticate (user: String, password: String) -> String {
         let basic = "\(user):\(password)".data(using: .utf8)
