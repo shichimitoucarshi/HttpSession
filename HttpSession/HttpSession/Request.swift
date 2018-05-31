@@ -24,17 +24,22 @@ open class Request {
     
     var url: URL!
     var urlReq: URLRequest!
+    var reqHeaders: [String:String] = [:]
     
     /*
      * Initializer
      * parame: URLRequest
      *
      */
-    public init (url: String, method: HTTPMethod, cookie: Bool = false){
+    public init (url: String, method: HTTPMethod, cookie: Bool = false, basic: [String:String]? = nil){
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
         self.urlReq.allHTTPHeaderFields = Request.appInfo
+        if basic != nil{
+            self.headers(header: ["Authorization":Auth.basicAuthenticate(user: basic![Auth.user]!,
+                                                                         password: basic![Auth.password]!)])
+        }
         if cookie == true {
             self.urlReq.httpShouldHandleCookies = false
             self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
@@ -99,6 +104,11 @@ open class Request {
             self.urlReq.setValue(arg.value, forHTTPHeaderField: arg.key)
             return [arg.key:arg.value]
         }
+    }
+    
+    func basicAuthenticate (auth: [String:String]) -> [String:String] {
+        return ["Authorization": Auth.basicAuthenticate(user: auth[Auth.user]!,
+                                                        password: auth[Auth.password]!)]
     }
     
     public func post(param: Dictionary<String, String>) -> URLRequest{

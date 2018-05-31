@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let VERSION = "1.2.1"
+let VERSION = "1.3.0"
 
 /*
  * Http method
@@ -44,9 +44,9 @@ open class Http : NSObject, URLSessionDataDelegate {
         super.init()
     }
     
-    public init(url: String, method: HTTPMethod, cookie: Bool = false){
+    public init(url: String, method: HTTPMethod, cookie: Bool = false, basic: [String:String]? = nil){
         self.isCookie = cookie
-        self.request = Request(url: url, method: method,cookie:cookie)
+        self.request = Request(url: url, method: method,cookie:cookie,basic: basic)
     }
     
     /*

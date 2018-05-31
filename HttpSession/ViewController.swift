@@ -17,6 +17,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP POST Authentication",
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
+                "HTTP GET Basic Authenticate",
                 "HTTP POST Twitter OAuth"]
     
     var isAuth = false
@@ -115,6 +116,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             break
         case 5:
+            let basicAuth: [String:String] = [Auth.user: "httpSession",
+                                              Auth.password: "githubHttpsession"]
+            Http(url: "http://153.126.160.55/basicauth.json",
+                 method: .get,
+                 basic: basicAuth).session(completion: { (data, responce, error) in
+                self.detail(data: data!)
+            })
+            break
+        case 6:
             
             Twitter.oAuth(urlType: "httpRequest://success", success: {
                 
@@ -135,7 +145,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 6:
+        case 7:
             
             Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data) in
                 self.detail(data: data!)
@@ -144,7 +154,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 7:
+        case 8:
             Twitter.users(success: { (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
@@ -152,7 +162,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 8:
+        case 9:
             
             Twitter.follwers(success: { (data) in
                 self.detail(data: data!)
