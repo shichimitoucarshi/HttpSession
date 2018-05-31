@@ -44,9 +44,9 @@ open class Http : NSObject, URLSessionDataDelegate {
         super.init()
     }
     
-    public init(url: String, method: HTTPMethod, cookie: Bool = false){
+    public init(url: String, method: HTTPMethod, cookie: Bool = false, basic: [String:String]? = nil){
         self.isCookie = cookie
-        self.request = Request(url: url, method: method,cookie:cookie)
+        self.request = Request(url: url, method: method,cookie:cookie,basic: basic)
     }
     
     /*

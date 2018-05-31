@@ -41,3 +41,17 @@ func ??=<T>(lhs: inout T?, rhs: T?) {
     guard let rhs = rhs else { return }
     lhs = rhs
 }
+
+class Auth {
+    
+    static let user: String = "user"
+    static let password: String = "password"
+    
+    init() {}
+    
+    public static func basicAuthenticate (user: String, password: String) -> String {
+        let basic = "\(user):\(password)".data(using: .utf8)
+        let basicAuth = "Basic \(String(describing: basic!.base64EncodedString(options: [])))"
+        return basicAuth
+    }
+}
