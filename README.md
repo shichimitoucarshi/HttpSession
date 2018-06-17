@@ -13,7 +13,9 @@ and Twitter OAuth
 
 ### Recommended.
 
-SwiftyJSON and SWXMLHash is recommended.
+Codable SwiftyJSON and SWXMLHash is recommended.
+
+[Codable](https://developer.apple.com/documentation/swift/codable)
 
 [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 
