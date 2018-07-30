@@ -11,22 +11,37 @@ import UIKit
 
 let VERSION = "1.3.1"
 
-/*
- * Http method
- */
-public enum HTTPMethod: String{
-    case get  = "GET"
-    case head = "HEAD"
-    case post = "POST"
-    case put = "PUT"
-    case delete = "DELETE"
-    case connect = "CONNECT"
-    case options = "OPTIONS"
-    case trace = "TRACE"
-}
+///*
+// * Http method
+// */
+//public enum HTTPMethod: String{
+//    case get  = "GET"
+//    case head = "HEAD"
+//    case post = "POST"
+//    case put = "PUT"
+//    case delete = "DELETE"
+//    case connect = "CONNECT"
+//    case options = "OPTIONS"
+//    case trace = "TRACE"
+//}
 
 
 open class Http : NSObject, URLSessionDataDelegate {
+    
+    /*
+     * Http method
+     */
+    public enum method: String{
+        case get  = "GET"
+        case head = "HEAD"
+        case post = "POST"
+        case put = "PUT"
+        case delete = "DELETE"
+        case connect = "CONNECT"
+        case options = "OPTIONS"
+        case trace = "TRACE"
+    }
+
     
     /*
      * member's value
@@ -44,7 +59,7 @@ open class Http : NSObject, URLSessionDataDelegate {
         super.init()
     }
     
-    public init(url: String, method: HTTPMethod, cookie: Bool = false, basic: [String:String]? = nil){
+    public init(url: String, method: method, cookie: Bool = false, basic: [String:String]? = nil){
         self.isCookie = cookie
         self.request = Request(url: url, method: method,cookie:cookie,basic: basic)
     }
