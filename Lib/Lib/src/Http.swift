@@ -11,21 +11,6 @@ import UIKit
 
 let VERSION = "1.3.1"
 
-///*
-// * Http method
-// */
-//public enum HTTPMethod: String{
-//    case get  = "GET"
-//    case head = "HEAD"
-//    case post = "POST"
-//    case put = "PUT"
-//    case delete = "DELETE"
-//    case connect = "CONNECT"
-//    case options = "OPTIONS"
-//    case trace = "TRACE"
-//}
-
-
 open class Http : NSObject, URLSessionDataDelegate {
     
     /*
@@ -47,7 +32,7 @@ open class Http : NSObject, URLSessionDataDelegate {
      * member's value
      *
      */
-    public var responseData: Data = Data()
+    public var data: Data = Data()
     public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask!
     public var url: String?
@@ -104,7 +89,7 @@ open class Http : NSObject, URLSessionDataDelegate {
             self.isCookie = false
             Cookie.shared.set(responce: response!)
         }
-        self.completion?(self.responseData,self.response,error)
+        self.completion?(self.data,self.response,error)
     }
     
     /*
@@ -113,7 +98,7 @@ open class Http : NSObject, URLSessionDataDelegate {
      */
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         
-        self.responseData.append(data)
+        self.data.append(data)
         
         guard !data.isEmpty else { return }
     }
