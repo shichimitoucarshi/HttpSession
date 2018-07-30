@@ -58,13 +58,13 @@ open class Http : NSObject, URLSessionDataDelegate {
     
     public var completion: completionHandler?
     
-    public func session(param: Dictionary<String, String> = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
+    public func session(param: [String: String] = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
         self.request?.headers(header: param)
         self.send(request: (self.request?.post(param: param))!)
     }
     
-    public func upload(param: Dictionary<String, MultipartDto>,
+    public func upload(param: [String: MultipartDto],
                        completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completionHandler
         self.send(request: (self.request?.multipart(param: param))!)
@@ -97,6 +97,7 @@ open class Http : NSObject, URLSessionDataDelegate {
      *
      */
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        
         self.responseData.append(data)
         
         guard !data.isEmpty else { return }
