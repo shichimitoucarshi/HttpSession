@@ -20,6 +20,11 @@ Codable SwiftyJSON and SWXMLHash is recommended.
 [SwiftyJSON](https://github.com/SwiftyJSON/SwiftyJSON)
 
 [drmohundro/SWXMLHash](https://github.com/drmohundro/SWXMLHash)
+
+## Twitter API callback fix
+
+https://developer.twitter.com/en/docs/basics/callback_url.html
+
 ## Installation
 
 ### Cocoapods

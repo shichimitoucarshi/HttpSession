@@ -127,7 +127,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 6:
             
-            Twitter.oAuth(urlType: "httpRequest://success", success: {
+            Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: {
                 
                 let vals: [String] = ["Tweet", "users", "follwers"]
                 

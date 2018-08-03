@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "HttpSession"
-  s.version      = "1.3.1"
+  s.version      = "1.3.2"
   s.summary      = "Http Session"
   s.description  = <<-DESC
                         TCP / IP based HTTP communication can be simplified
@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/keisukeYamagishi/HttpSession", :tag => "#{s.version}" }
   s.ios.deployment_target = '8.0'
 
-  s.source_files  = "Source", "HttpSession/Lib/Lib/src/**/*.swift"
+  s.source_files  = "Source", "Lib/Lib/src/**/*.swift"
 end

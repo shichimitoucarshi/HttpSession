@@ -37,7 +37,7 @@ open class Request {
         self.urlReq.httpMethod = method.rawValue
         self.urlReq.allHTTPHeaderFields = Request.appInfo
         if basic != nil{
-            self.headers(header: ["Authorization":Auth.basicAuthenticate(user: basic![Auth.user]!,
+            self.headers(header: ["Authorization":Auth.basic(user: basic![Auth.user]!,
                                                                          password: basic![Auth.password]!)])
         }
         if cookie == true {
@@ -107,7 +107,7 @@ open class Request {
     }
     
     func basicAuthenticate (auth: [String:String]) -> [String:String] {
-        return ["Authorization": Auth.basicAuthenticate(user: auth[Auth.user]!,
+        return ["Authorization": Auth.basic(user: auth[Auth.user]!,
                                                         password: auth[Auth.password]!)]
     }
     

@@ -48,11 +48,11 @@ open class TwitAccount {
      *
      */
     public func setTwiAccount(data: Data){
-        let parameter = String(data:data, encoding:String.Encoding.utf8)
+        let parameter = String(data:data, encoding: .utf8)
         self.setAccount(param: (parameter?.queryStringParameters)!)
     }
     
-    private func setAccount(param: Dictionary<String, String>){
+    private func setAccount(param: [String: String]){
         self.twitter.screenName = param["screen_name"]!
         self.twitter.userId = param["user_id"]!
         self.twitter.oAuth.token = param["oauth_token"]!
