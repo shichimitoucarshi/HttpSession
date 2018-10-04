@@ -31,7 +31,7 @@ open class Request {
      * parame: URLRequest
      *
      */
-    public init (url: String, method: HTTPMethod, cookie: Bool = false, basic: [String:String]? = nil){
+    public init (url: String, method: Http.method, cookie: Bool = false, basic: [String:String]? = nil){
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
@@ -178,7 +178,7 @@ open class Request {
     }
     
     func signature(param: [String: String], isUpload: Bool) -> String {
-        return OAuthKit.authorizationHeader(for: self.url!,method: HTTPMethod(rawValue: self.urlReq.httpMethod!)! ,param:param, isMediaUpload: isUpload)
+        return OAuthKit.authorizationHeader(for: self.url!,method: Http.method(rawValue: self.urlReq.httpMethod!)! ,param:param, isMediaUpload: isUpload)
     }
     
     public func postTweet(tweet: String, img: UIImage) -> URLRequest {
