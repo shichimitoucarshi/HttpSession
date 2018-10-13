@@ -9,7 +9,7 @@
 TCP / IP based HTTP communication can be simplified
 and Twitter OAuth
 
-***API Server:*** http://153.126.160.55/
+***API Server:*** http://httpsession.work/
 
 ### Recommended.
 
