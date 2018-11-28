@@ -65,7 +65,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         switch indexPath.row {
         case 0:
-            Http(url: "http://153.126.160.55/getApi.json", method: .get)
+            Http(url: "https://httpsession.work/getApi.json", method: .get)
                 .session(completion: { (data, responce, error) in
                 self.detail(data: data!)
             })
@@ -74,9 +74,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             let param = ["http_post":"Http Request POST 😄"]
             
-            Http(url: "http://153.126.160.55/postApi.json",method: .post)
-                .session(param: param,
-                          completion: { (data, responce, error) in
+            Http(url: "https://httpsession.work/postApi.json",method: .post,params: param)
+                .session(completion: { (data, responce, error) in
                 self.detail(data: data!, param: param.hashString())
             })
             break
@@ -85,16 +84,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let param = ["http_sign_in":"Http Request SignIn",
                          "userId":"keisukeYamagishi",
                          "password": "password_jisjdhsnjfbns"]
+            let url = "https://httpsession.work/signIn.json"
             
-            Http(url: "http://153.126.160.55/signIn.json",method: .post, cookie: true)
-                .session(param: param,
-                          completion: { (data, responce, error) in
+            Http(url: url, method: .post, params:param)
+                .session(completion: { (data, responce, error) in
                             self.detail(data: data!,param: param.hashString())
                 })
             break
         case 3:
             
-            Http(url: "http://153.126.160.55/signIned.json", method: .get, cookie: true )
+            Http(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
                 .session(completion: { (data, responce, error) in
                     self.detail(data: data!)
             })
@@ -110,7 +109,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             dto.mimeType = "text/plain"
             dto.data = img
             
-            Http(url:"http://153.126.160.55/imageUp.json",method: .post)
+            Http(url:"https://httpsession.work/imageUp.json",method: .post)
                 .upload(param: ["img":dto], completionHandler: { (data, responce, error) in
                 self.detail(data: data!)
             })
@@ -119,7 +118,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         case 5:
             let basicAuth: [String:String] = [Auth.user: "httpSession",
                                               Auth.password: "githubHttpsession"]
-            Http(url: "http://153.126.160.55/basicauth.json",
+            Http(url: "https://httpsession.work/basicauth.json",
                  method: .get,
                  basic: basicAuth).session(completion: { (data, responce, error) in
                 self.detail(data: data!)

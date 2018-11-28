@@ -33,6 +33,7 @@ open class Http : NSObject, URLSessionDataDelegate {
      *
      */
     public var data: Data = Data()
+    public var params:[String:String]?
     public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask!
     public var url: String?
@@ -44,9 +45,21 @@ open class Http : NSObject, URLSessionDataDelegate {
         super.init()
     }
     
-    public init(url: String, method: method, cookie: Bool = false, basic: [String:String]? = nil){
+    public init(url: String,
+                method: method = .get,
+                header:[String:String] = [:],
+                params:[String:String] = [:],
+                cookie: Bool = false,
+                basic: [String:String]? = nil){
+        
         self.isCookie = cookie
-        self.request = Request(url: url, method: method,cookie:cookie,basic: basic)
+        self.params = params
+        self.request = Request(url: url,
+                               method: method,
+                               headers:header,
+                               parameter:params,
+                               cookie:cookie,
+                               basic: basic)
     }
     
     /*
@@ -58,10 +71,9 @@ open class Http : NSObject, URLSessionDataDelegate {
     
     public var completion: completionHandler?
     
-    public func session(param: [String: String] = [:], completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
+    public func session(completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
-        self.request?.headers(header: param)
-        self.send(request: (self.request?.post(param: param))!)
+        self.send(request: (self.request?.urlReq)!)
     }
     
     public func upload(param: [String: MultipartDto],

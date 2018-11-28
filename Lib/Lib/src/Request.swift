@@ -31,11 +31,26 @@ open class Request {
      * parame: URLRequest
      *
      */
-    public init (url: String, method: Http.method, cookie: Bool = false, basic: [String:String]? = nil){
+    public init (url: String,
+                 method: Http.method,
+                 headers: [String:String]? = nil,
+                 parameter:[String:String] = [:],
+                 cookie: Bool = false,
+                 basic: [String:String]? = nil){
+        
         self.url = URL(string: url)!
         self.urlReq = URLRequest(url: self.url)
         self.urlReq.httpMethod = method.rawValue
         self.urlReq.allHTTPHeaderFields = Request.appInfo
+        
+        if let header:[String:String] = headers {
+            self.headers(header: header)
+        }
+        
+        if isParamater(method: method) {
+            self.post(param: parameter)
+        }
+        
         if basic != nil{
             self.headers(header: ["Authorization":Auth.basic(user: basic![Auth.user]!,
                                                                          password: basic![Auth.password]!)])
@@ -43,6 +58,15 @@ open class Request {
         if cookie == true {
             self.urlReq.httpShouldHandleCookies = false
             self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
+        }
+    }
+    
+    func isParamater (method: Http.method) -> Bool {
+        switch method {
+        case .get, .delete, .head:
+            return false
+        default:
+            return true
         }
     }
     
@@ -99,10 +123,8 @@ open class Request {
     }()
     
     public func headers(header: [String:String]) {
-        
-        _ = header.map { (arg) -> [String: String] in
-            self.urlReq.setValue(arg.value, forHTTPHeaderField: arg.key)
-            return [arg.key:arg.value]
+        for (key,value) in header {
+            self.urlReq.setValue(value, forHTTPHeaderField:key)
         }
     }
     
@@ -111,7 +133,7 @@ open class Request {
                                                         password: auth[Auth.password]!)]
     }
     
-    public func post(param: Dictionary<String, String>) -> URLRequest{
+    public func post(param: [String:String]) {
         
         let value: String = URI.encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data
@@ -123,17 +145,14 @@ open class Request {
         self.headers(header: header)
         
         self.urlReq.httpBody = pData as Data
-        
-        return self.urlReq
     }
     
-    public func multipart(param: Dictionary<String, MultipartDto>) -> URLRequest{
+    public func multipart(param: Dictionary<String, MultipartDto>) -> URLRequest {
         
         let multipart: Multipart = Multipart()
         let data:Data = multipart.multiparts(params: param)
         
-        let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)",
-                      "Content-Length":"\(data.count)"]
+        let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)"]
         
         self.headers(header: header)
         self.urlReq.httpBody = data
