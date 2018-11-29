@@ -141,7 +141,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 }
                 
             }, failuer: { (error, responce) in
-                print("error: \(error) responce: \(responce)")
+                print("error: \(String(describing: error)) responce: \(String(describing: responce))")
             })
             
             break
@@ -150,7 +150,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
-                print ("responce: \(responce) error: \(error)")
+                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
             })
             
             break
@@ -158,7 +158,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             Twitter.users(success: { (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
-                print ("responce: \(responce) error: \(error)")
+                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
             })
             
             break
@@ -167,7 +167,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             Twitter.follwers(success: { (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
-                print ("responce: \(responce) error: \(error)")
+                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
             })
             
             break

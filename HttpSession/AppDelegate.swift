@@ -46,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         
-        if(url.absoluteString.hasPrefix("httprequest://")){
-            let splitPrefix: String = url.absoluteString.replacingOccurrences(of: "httprequest://success?", with: "")
+        if(url.absoluteString.hasPrefix("httprequest-nnkarevwgcn7riw02gcoyxsvp://")){
+            let splitPrefix: String = url.absoluteString.replacingOccurrences(of: "httprequest-nnkarevwgcn7riw02gcoyxsvp://?", with: "")
             Twitter.access(token: splitPrefix, success: { (twitterUSer) in
                 Twitter.beare(success: {
                     print ("SUCCESS")

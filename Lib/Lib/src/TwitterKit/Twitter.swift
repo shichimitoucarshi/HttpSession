@@ -106,8 +106,7 @@ open class Twitter:Http {
         
         let url = "https://api.twitter.com/oauth/access_token"
         let param = token.queryStringParameters
-
-        Http(url: url, method: .post,params: self.authorize(url: url, param: param))
+        Http(url: url, method: .post,header:self.authorize(url: url, param: token.queryStringParameters))
             .session(completion: { (data, responce, error) in
             /*
              * set authenticate user's info

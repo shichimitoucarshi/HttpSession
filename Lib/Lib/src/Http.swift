@@ -47,7 +47,7 @@ open class Http : NSObject, URLSessionDataDelegate {
     
     public init(url: String,
                 method: method = .get,
-                header:[String:String] = [:],
+                header:[String:String]? = nil,
                 params:[String:String] = [:],
                 cookie: Bool = false,
                 basic: [String:String]? = nil){
