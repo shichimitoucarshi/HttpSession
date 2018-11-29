@@ -105,7 +105,6 @@ open class Twitter:Http {
                        success: @escaping(TwiterUser) -> Void, failuer: @escaping(Error?,HTTPURLResponse?)->Void) {
         
         let url = "https://api.twitter.com/oauth/access_token"
-        let param = token.queryStringParameters
         Http(url: url, method: .post,header:self.authorize(url: url, param: token.queryStringParameters))
             .session(completion: { (data, responce, error) in
             /*
