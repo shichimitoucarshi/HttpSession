@@ -127,14 +127,10 @@ open class Twitter:Http {
      *
      */
     public func follower(userId: String, completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
-        
-        self.completion = completion
         let url = "https://api.twitter.com/1.1/followers/list.json"
         let user: String = URI().twitterEncode(param: ["user_id":userId])
         let followers: String = url + "?" + user
-        let request: URLRequest = Request(url: followers, method: .get)
-            .twitFollowersRequest(beare: TwitterKey.shared.beareToken!)
-        self.send(request: request)
+        Http(url: followers, method: .get, header: self.follwerHeader(beare: TwitterKey.shared.beareToken!)).session(completion: completion)
     }
     
     /*
@@ -170,5 +166,15 @@ open class Twitter:Http {
                                                                parameters: param,
                                                                isMediaUpload: false)
         return ["Authorization": signature]
+    }
+    
+    /*
+     * Authenticate: Bearer
+     * Header: Authorization Bearer
+     * Twitter Followe list
+     *
+     */
+    public func follwerHeader(beare: String) -> [String:String]{
+        return ["Authorization":"Bearer " + beare]
     }
 }

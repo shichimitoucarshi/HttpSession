@@ -220,14 +220,14 @@ open class Request {
         return self.urlReq
     }
     
-    /*
-     * Authenticate: Bearer
-     * Header: Authorization Bearer
-     * Twitter Followe list
-     *
-     */
-    public func twitFollowersRequest(beare: String) -> URLRequest{
-        self.urlReq.setValue("Bearer " + beare, forHTTPHeaderField: "Authorization")
-        return self.urlReq
-    }
+//    /*
+//     * Authenticate: Bearer
+//     * Header: Authorization Bearer
+//     * Twitter Followe list
+//     *
+//     */
+//    public func twitFollowersRequest(beare: String) -> URLRequest{
+//        self.urlReq.setValue("Bearer " + beare, forHTTPHeaderField: "Authorization")
+//        return self.urlReq
+//    }
 }
