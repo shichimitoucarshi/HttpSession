@@ -143,8 +143,11 @@ open class Twitter:Http {
         let url:String = "https://api.twitter.com/oauth2/token"
         self.completion = completion
         
-        let request: URLRequest = Request(url: url, method: .post).twitBeare(param:["grant_type" : "client_credentials"])
-        self.send(request: request)
+        let credential = URI.credentials
+        
+        let header: [String: String] = ["Authorization": "Basic " + credential,
+                                        "Content-Type":"application/x-www-form-urlencoded; charset=utf8"]
+        Http(url: url, method: .post, header: header,params:["grant_type" : "client_credentials"]).session(completion: completion)
     }
     
     func users(userId: String, success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
