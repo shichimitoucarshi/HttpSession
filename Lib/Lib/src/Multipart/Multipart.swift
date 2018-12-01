@@ -30,23 +30,6 @@ open class Multipart {
         return post
     }
     
-    public func textMultiPart(uuid: String, param: Dictionary<String, String>) -> Data{
-        var multiPart: Data = Data()
-        
-        for(key, value) in param{
-            
-            multiPart.append("--\(uuid)\r\n".data(using: .utf8)!)
-            
-            multiPart.append("Content-Disposition: form-data;".data(using: .utf8)!)
-            
-            multiPart.append("name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            
-            multiPart.append("\(value)\r\n".data(using: .utf8)!)
-            
-        }
-        return multiPart
-    }
-    
     public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
         
         var body = Data()
