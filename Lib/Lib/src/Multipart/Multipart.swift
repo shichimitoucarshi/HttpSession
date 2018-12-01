@@ -61,23 +61,6 @@ open class Multipart {
         return body
     }
     
-    func tweetMultipart (param: [String:String], img: UIImage) -> Data {
-        
-        var body: Data = Data()
-
-        let multipartData = Multipart.mulipartContent(with: self.bundary, data: UIImagePNGRepresentation(img)!, fileName: "media.jpg", parameterName: "media[]", mimeType: "application/octet-stream")
-        body.append(multipartData)
-        
-        for (key, value): (String, String) in param {
-            body.append("\r\n--\(self.bundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            body.append("\(value)".data(using: .utf8)!)
-        }
-        
-        body.append("\r\n--\(self.bundary)--\r\n".data(using: .utf8)!)
-        return body
-    }
-    
     public static func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName!)\"" : ""
