@@ -30,23 +30,6 @@ open class Multipart {
         return post
     }
     
-    public func textMultiPart(uuid: String, param: Dictionary<String, String>) -> Data{
-        var multiPart: Data = Data()
-        
-        for(key, value) in param{
-            
-            multiPart.append("--\(uuid)\r\n".data(using: .utf8)!)
-            
-            multiPart.append("Content-Disposition: form-data;".data(using: .utf8)!)
-            
-            multiPart.append("name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            
-            multiPart.append("\(value)\r\n".data(using: .utf8)!)
-            
-        }
-        return multiPart
-    }
-    
     public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
         
         var body = Data()
@@ -58,23 +41,6 @@ open class Multipart {
         body.append(CRLF.data(using: .utf8)!)
         body.append(("--\(self.bundary)--" + CRLF).data(using: .utf8)!)
         
-        return body
-    }
-    
-    func tweetMultipart (param: [String:String], img: UIImage) -> Data {
-        
-        var body: Data = Data()
-
-        let multipartData = Multipart.mulipartContent(with: self.bundary, data: UIImagePNGRepresentation(img)!, fileName: "media.jpg", parameterName: "media[]", mimeType: "application/octet-stream")
-        body.append(multipartData)
-        
-        for (key, value): (String, String) in param {
-            body.append("\r\n--\(self.bundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
-            body.append("\(value)".data(using: .utf8)!)
-        }
-        
-        body.append("\r\n--\(self.bundary)--\r\n".data(using: .utf8)!)
         return body
     }
     

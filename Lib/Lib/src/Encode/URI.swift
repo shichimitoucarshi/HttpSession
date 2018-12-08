@@ -10,53 +10,6 @@ import Foundation
 
 class URI : NSObject {
     
-    /*
-     * Base64 encode with comsumer key and comsmer secret
-     * Twitter Beare token
-     */
-    public static var credentials: String {
-        let encodedKey = TwitterKey.shared.api.key.percentEncode() //comsumerKey.UrlEncode()
-        let encodedSecret = TwitterKey.shared.api.secret.percentEncode() //comsumerSecret.UrlEncode()
-        let bearerTokenCredentials = "\(encodedKey):\(encodedSecret)"
-        guard let data = bearerTokenCredentials.data(using: .utf8) else {
-            return ""
-        }
-        return data.base64EncodedString(options: [])
-    }
-    
-    public static func twitterEncode (param: [String: String]) -> String {
-        return URI().twitterEncode(param:param)
-    }
-    
-    /*
-     * It converts the value of Dictionary type
-     * URL encoded into a character string and returns it.
-     */
-    public func twitterEncode(param: Dictionary<String, String>)->String{
-        
-        var parameter: String = String()
-        
-        var keys : Array = Array(param.keys)
-        
-        keys.sort{$0 < $1}
-        
-        for i in 0..<keys.count {
-            let val: String
-            if("oauth_callback" == keys[i]
-                || "oauth_signature" == keys[i]){
-                val = param[keys[i]]!
-            }else{
-                val = (param[keys[i]]?.percentEncode())!
-            }
-            if(i == keys.count-1){
-                parameter = parameter + keys[i] + "=" +  val
-            }else{
-                parameter = parameter + keys[i] + "=" +  val + "&"
-            }
-        }
-        return parameter
-    }
-    
     public static func encode(param: [String:String]) -> String {
         return URI().encode(param:param)
     }
@@ -82,40 +35,6 @@ extension String{
             allowedCharacterSet.insert(charactersIn: "[]")
         }
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
-    }
-    
-    /*
-     * Dictionary Converts a value to a string.
-     * key=value&key=value
-     * {
-     *   key : value,
-     *   key : value
-     * }
-     *
-     */
-    public var queryStringParameters: Dictionary<String, String> {
-        
-        var parameters = Dictionary<String, String>()
-        
-        let scanner = Scanner(string: self)
-        
-        var key: NSString?
-        var value: NSString?
-        
-        while !scanner.isAtEnd {
-            key = nil
-            scanner.scanUpTo("=", into: &key)
-            scanner.scanString("=", into: nil)
-            
-            value = nil
-            scanner.scanUpTo("&", into: &value)
-            scanner.scanString("&", into: nil)
-            
-            if let key = key as String?, let value = value as String? {
-                parameters.updateValue(value, forKey: key)
-            }
-        }
-        return parameters
     }
 }
 
