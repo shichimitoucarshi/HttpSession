@@ -20,6 +20,7 @@
 		C72543BC20E7DF7D00F9C0C2 /* TwitAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B020E7DF7D00F9C0C2 /* TwitAccount.swift */; };
 		C72543BD20E7DF7D00F9C0C2 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B120E7DF7D00F9C0C2 /* Twitter.swift */; };
 		C72543BE20E7DF7D00F9C0C2 /* TwitterApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B220E7DF7D00F9C0C2 /* TwitterApiKey.swift */; };
+		C735585B21B5662100583A64 /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735585A21B5662100583A64 /* ApiProtocol.swift */; };
 		C7954E5F21B27738007ADCC7 /* TwitterExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7954E5E21B27738007ADCC7 /* TwitterExtention.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 		C72543B020E7DF7D00F9C0C2 /* TwitAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitAccount.swift; sourceTree = "<group>"; };
 		C72543B120E7DF7D00F9C0C2 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
 		C72543B220E7DF7D00F9C0C2 /* TwitterApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterApiKey.swift; sourceTree = "<group>"; };
+		C735585A21B5662100583A64 /* ApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
 		C7954E5E21B27738007ADCC7 /* TwitterExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterExtention.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 				C72543AB20E7DF7D00F9C0C2 /* Multipart */,
 				C72543AD20E7DF7D00F9C0C2 /* Request.swift */,
 				C72543AE20E7DF7D00F9C0C2 /* TwitterKit */,
+				C735585A21B5662100583A64 /* ApiProtocol.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			files = (
 				C72543B720E7DF7D00F9C0C2 /* URI.swift in Sources */,
 				C72543BA20E7DF7D00F9C0C2 /* Request.swift in Sources */,
+				C735585B21B5662100583A64 /* ApiProtocol.swift in Sources */,
 				C72543B320E7DF7D00F9C0C2 /* AuthUtils.swift in Sources */,
 				C7954E5F21B27738007ADCC7 /* TwitterExtention.swift in Sources */,
 				C72543B920E7DF7D00F9C0C2 /* Multipart.swift in Sources */,

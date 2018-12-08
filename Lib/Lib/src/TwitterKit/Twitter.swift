@@ -54,7 +54,8 @@ open class Twitter:Http {
     
     public static func tweet (tweet: String, img: UIImage, success: @escaping(Data?)-> Void, failuer: @escaping(HTTPURLResponse?, Error?) -> Void) {
         Twitter().tweet(tweet: tweet, img: img, success: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
                 failuer(responce,error)
@@ -64,17 +65,19 @@ open class Twitter:Http {
     
     public static func users(success:@escaping(Data?)->Void, failuer:@escaping(HTTPURLResponse?,Error?)->Void){
         Twitter().users(userId: TwitAccount.shared.twitter.userId, success: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
-                failuer(responce, error)
+                failuer(responce,error)
             }
         })
     }
     
     public static func follwers (success: @escaping(Data?)-> Void, failuer: @escaping(HTTPURLResponse?,Error?)->Void){
         Twitter().follower(userId: TwitAccount.shared.twitter.userId, completion: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
                 failuer(responce,error)
@@ -151,7 +154,7 @@ open class Twitter:Http {
     }
     
     func users(userId: String, success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
-        self.completion = success
+//        self.completion = success
         let url = "https://api.twitter.com/1.1/users/show.json"
         let param = ["user_id":userId]
         let query = param.encodedQuery(using: .utf8)

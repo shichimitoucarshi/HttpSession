@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let VERSION = "1.3.1"
+let VERSION = "1.3.4"
 
 open class Http : NSObject, URLSessionDataDelegate {
     
@@ -61,6 +61,10 @@ open class Http : NSObject, URLSessionDataDelegate {
                                cookie:cookie,
                                basic: basic)
     }
+    
+//    public override init(api:ApiProtocol ) {
+//        self.init(url: api.domain, method: api., header: <#T##[String : String]?#>, params: <#T##[String : String]#>, cookie: <#T##Bool#>, basic: <#T##[String : String]?#>)
+//    }
     
     /*
      * Callback function
