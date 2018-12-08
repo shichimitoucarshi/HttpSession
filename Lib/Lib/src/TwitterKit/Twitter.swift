@@ -54,7 +54,8 @@ open class Twitter:Http {
     
     public static func tweet (tweet: String, img: UIImage, success: @escaping(Data?)-> Void, failuer: @escaping(HTTPURLResponse?, Error?) -> Void) {
         Twitter().tweet(tweet: tweet, img: img, success: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
                 failuer(responce,error)
@@ -64,17 +65,19 @@ open class Twitter:Http {
     
     public static func users(success:@escaping(Data?)->Void, failuer:@escaping(HTTPURLResponse?,Error?)->Void){
         Twitter().users(userId: TwitAccount.shared.twitter.userId, success: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
-                failuer(responce, error)
+                failuer(responce,error)
             }
         })
     }
     
     public static func follwers (success: @escaping(Data?)-> Void, failuer: @escaping(HTTPURLResponse?,Error?)->Void){
         Twitter().follower(userId: TwitAccount.shared.twitter.userId, completion: { (data, responce, error) in
-            if (responce?.statusCode)! < 300 {
+            if let res = responce
+                ,res.statusCode == 200 {
                 success(data)
             }else{
                 failuer(responce,error)
@@ -105,10 +108,8 @@ open class Twitter:Http {
                        success: @escaping(TwiterUser) -> Void, failuer: @escaping(Error?,HTTPURLResponse?)->Void) {
         
         let url = "https://api.twitter.com/oauth/access_token"
-        let param = token.queryStringParameters
-
-        Http(url: url, method: .post)
-            .session(param: self.authorize(url: url, param: param)) { (data, responce, error) in
+        Http(url: url, method: .post,header:self.authorize(url: url, param: token.queryStringParameters))
+            .session(completion: { (data, responce, error) in
             /*
              * set authenticate user's info
              *
@@ -119,7 +120,7 @@ open class Twitter:Http {
             }else{
                 failuer(error, responce)
             }
-        }
+        })
     }
     
     /*
@@ -129,14 +130,10 @@ open class Twitter:Http {
      *
      */
     public func follower(userId: String, completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
-        
-        self.completion = completion
         let url = "https://api.twitter.com/1.1/followers/list.json"
-        let user: String = URI().twitterEncode(param: ["user_id":userId])
+        let user: String = URI().encode(param: ["user_id":userId])//twitterEncode(param: ["user_id":userId])
         let followers: String = url + "?" + user
-        let request: URLRequest = Request(url: followers, method: .get)
-            .twitFollowersRequest(beare: TwitterKey.shared.beareToken!)
-        self.send(request: request)
+        Http(url: followers, method: .get, header: self.follwerHeader(beare: TwitterKey.shared.beareToken!)).session(completion: completion)
     }
     
     /*
@@ -149,21 +146,32 @@ open class Twitter:Http {
         let url:String = "https://api.twitter.com/oauth2/token"
         self.completion = completion
         
-        let request: URLRequest = Request(url: url, method: .post).twitBeare(param:["grant_type" : "client_credentials"])
-        self.send(request: request)
+        let credential = URI.credentials
+        
+        let header: [String: String] = ["Authorization": "Basic " + credential,
+                                        "Content-Type":"application/x-www-form-urlencoded; charset=utf8"]
+        Http(url: url, method: .post, header: header,params:["grant_type" : "client_credentials"]).session(completion: completion)
     }
     
     func users(userId: String, success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
-        self.completion = success
-        let u = "https://api.twitter.com/1.1/users/show.json"
-        let request: URLRequest = Request(url: u, method: .get).twitterUser(param: ["user_id":userId])
-        self.send(request: request)
+//        self.completion = success
+        let url = "https://api.twitter.com/1.1/users/show.json"
+        let param = ["user_id":userId]
+        let query = param.encodedQuery(using: .utf8)
+        let uri = url + (url.range(of: "?") != nil ? "&" : "?") + query
+        
+        let header: [String:String] = ["Authorization": self.signature(url: url,
+                                                                       method: .get,
+                                                                       param: param,
+                                                                       isUpload: false),
+                                       "Content-Type":"application/x-www-form-urlencoded; charset=utf-8"]
+        Http(url: uri, method: .get, header: header).session(completion: success)
     }
     
     public func tweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         self.completion = success
-        let u: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        self.send(request: (Request(url:u, method: .post).postTweet(tweet: tweet, img: img)))
+        let url: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
+        self.send(request: Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img))
     }
     
     private func authorize(url: String, param: [String: String], upload: Bool = false) -> [String: String] {
@@ -172,5 +180,19 @@ open class Twitter:Http {
                                                                parameters: param,
                                                                isMediaUpload: false)
         return ["Authorization": signature]
+    }
+    
+    /*
+     * Authenticate: Bearer
+     * Header: Authorization Bearer
+     * Twitter Followe list
+     *
+     */
+    public func follwerHeader(beare: String) -> [String:String]{
+        return ["Authorization":"Bearer " + beare]
+    }
+    
+    func signature(url:String,method:Http.method, param: [String: String], isUpload: Bool = false) -> String {
+        return OAuthKit.authorizationHeader(for: URL(string: url)!, method: method, param:param, isMediaUpload: isUpload)
     }
 }
