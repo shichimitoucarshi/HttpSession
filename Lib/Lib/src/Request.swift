@@ -70,7 +70,7 @@ open class Request {
         }
     }
     
-    open static let appInfo:[String: String] = {
+    public static let appInfo:[String: String] = {
         
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
         
