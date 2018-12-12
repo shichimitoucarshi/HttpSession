@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 Twitter.beare(success: {
                     print ("SUCCESS")
                 }, failuer: { (responce, error) in
-                    print("Error: \(error) responce: \(responce)")
+                    print("Error: \(String(describing: error)) responce: \(String(describing: responce))")
                 })
             }, failuer: { (responce, error) in
-                print ("Error: \(error) responce: \(responce)")
+                print ("Error: \(String(describing: error)) responce: \(String(describing: responce))")
             })
             
         }
