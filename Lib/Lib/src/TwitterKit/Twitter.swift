@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-open class Twitter:Http {
+open class Twitter {
     
     
     public static func oAuth (urlType: String, success: @escaping () -> Void, failuer: @escaping(Error?,HTTPURLResponse?)->Void ) {
@@ -171,7 +171,10 @@ open class Twitter:Http {
     public func tweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
         self.completion = success
         let url: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        self.send(request: Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img))
+        let http = Http(url: url, method: .post)
+        http.request?.urlReq = Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img)
+        http.session(completion: success)
+//        self.send(request: Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img))
     }
     
     private func authorize(url: String, param: [String: String], upload: Bool = false) -> [String: String] {
