@@ -131,7 +131,7 @@ open class Twitter {
      */
     public func follower(userId: String, completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         let url = "https://api.twitter.com/1.1/followers/list.json"
-        let user: String = URI().encode(param: ["user_id":userId])//twitterEncode(param: ["user_id":userId])
+        let user: String = URI().encode(param: ["user_id":userId])
         let followers: String = url + "?" + user
         Http(url: followers, method: .get, header: self.follwerHeader(beare: TwitterKey.shared.beareToken!)).session(completion: completion)
     }
@@ -144,7 +144,6 @@ open class Twitter {
      */
     public func bearerToken(completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void) {
         let url:String = "https://api.twitter.com/oauth2/token"
-        self.completion = completion
         
         let credential = URI.credentials
         
@@ -154,7 +153,6 @@ open class Twitter {
     }
     
     func users(userId: String, success: @escaping (Data?,HTTPURLResponse?, Error?) -> Void) {
-//        self.completion = success
         let url = "https://api.twitter.com/1.1/users/show.json"
         let param = ["user_id":userId]
         let query = param.encodedQuery(using: .utf8)
@@ -169,12 +167,10 @@ open class Twitter {
     }
     
     public func tweet (tweet: String, img: UIImage, success: @escaping (Data?,HTTPURLResponse?,Error?) -> Void) {
-        self.completion = success
         let url: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
         let http = Http(url: url, method: .post)
         http.request?.urlReq = Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img)
         http.session(completion: success)
-//        self.send(request: Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img))
     }
     
     private func authorize(url: String, param: [String: String], upload: Bool = false) -> [String: String] {
