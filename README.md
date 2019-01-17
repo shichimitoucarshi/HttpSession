@@ -93,3 +93,17 @@ Http(url: "http://153.126.160.55/postApi.json",method: .post)
 
 ```
 
+Download http method
+
+```swift
+Http(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
+                .download(progress: { (written, total, expectedToWrite) in
+                    let progress = Float(total) / Float(expectedToWrite)
+                    print(String(format: "%.2f", progress * 100) + "%")                    
+            }, download: { (location) in
+                print ("location: \(String(describing: location))")
+            }, completionHandler: { (data, responce, error) in
+                self.detail(data: data!)
+            })
+```
+
