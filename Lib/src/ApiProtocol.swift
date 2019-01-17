@@ -16,12 +16,12 @@ public protocol ApiProtocol {
     
     var method: Http.method { get }
     
-    var header:[String:String] { get }
+    var header:[String:String]? { get }
     
     var params:[String:String] { get }
     
     var isCookie:Bool { get }
     
-    var basicAuth:Bool { get }
+    var basicAuth:[String:String]? { get }
     
 }

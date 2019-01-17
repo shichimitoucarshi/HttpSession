@@ -19,6 +19,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
                 "HTTP GET Basic Authenticate",
+                "HTTP Download binary",
                 "HTTP POST Twitter OAuth"]
     
     var isAuth = false
@@ -126,6 +127,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 6:
             
+            Http(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
+                .download(progress: { (written, total, expectedToWrite) in
+                    let progress = Float(total) / Float(expectedToWrite)
+                    print(String(format: "%.2f", progress * 100) + "%")                    
+            }, download: { (location) in
+                print ("location: \(String(describing: location))")
+            }, completionHandler: { (data, responce, error) in
+                self.detail(data: data!)
+            })
+            
+            break
+        case 7:
+            
             Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: {
                 
                 let vals: [String] = ["Tweet", "users", "follwers"]
@@ -145,7 +159,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 7:
+        case 8:
             
             Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data) in
                 self.detail(data: data!)
@@ -154,7 +168,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 8:
+        case 9:
             Twitter.users(success: { (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
@@ -162,7 +176,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             })
             
             break
-        case 9:
+        case 10:
             
             Twitter.follwers(success: { (data) in
                 self.detail(data: data!)
