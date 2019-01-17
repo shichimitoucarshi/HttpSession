@@ -51,7 +51,7 @@ open class Request {
             self.post(param: parameter)
         }
         
-        if basic != nil{
+        if basic != nil {
             self.headers(header: ["Authorization":Auth.basic(user: basic![Auth.user]!,
                                                                          password: basic![Auth.password]!)])
         }

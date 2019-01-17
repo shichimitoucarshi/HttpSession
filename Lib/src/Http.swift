@@ -11,7 +11,7 @@ import UIKit
 
 let VERSION = "1.3.4"
 
-open class Http : NSObject, URLSessionDataDelegate {
+open class Http:NSObject {
     
     /*
      * Http method
@@ -36,14 +36,11 @@ open class Http : NSObject, URLSessionDataDelegate {
     public var params:[String:String]?
     public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask!
+    public var downloadTask: URLSessionDownloadTask!
     public var url: String?
     public var request: Request?
     
     public var isCookie: Bool = false
-    
-    public override init(){
-        super.init()
-    }
     
     public init(url: String,
                 method: method = .get,
@@ -62,22 +59,35 @@ open class Http : NSObject, URLSessionDataDelegate {
                                basic: basic)
     }
     
-//    public override init(api:ApiProtocol ) {
-//        self.init(url: api.domain, method: api., header: <#T##[String : String]?#>, params: <#T##[String : String]#>, cookie: <#T##Bool#>, basic: <#T##[String : String]?#>)
-//    }
-    
     /*
      * Callback function
      * success Handler
      *
      */
     public typealias completionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
+    public typealias progressHandler = (_ written: Int64,_ total: Int64,_ expectedToWrite: Int64) -> Void
+    public typealias downloadHandler = (_ path: URL?) -> Void
     
+    public var progress: progressHandler?
     public var completion: completionHandler?
+    public var download: downloadHandler?
     
     public func session(completion: @escaping(Data?,HTTPURLResponse?,Error?) -> Void){
         self.completion = completion
         self.send(request: (self.request?.urlReq)!)
+    }
+    
+    public func download (progress: @escaping (_ written: Int64,_ total: Int64,_ expectedToWrite: Int64) -> Void,
+                          download: @escaping (_ path: URL?) -> Void,
+                          completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void) {
+        self.progress = progress
+        self.completion = completionHandler
+        self.download = download
+        let sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
+        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: .main)
+        
+        self.downloadTask = session.downloadTask(with: (self.request?.urlReq)!)
+        self.downloadTask.resume()
     }
     
     public func upload(param: [String: MultipartDto],
@@ -93,6 +103,24 @@ open class Http : NSObject, URLSessionDataDelegate {
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
         self.dataTask = session.dataTask(with: request)
         self.dataTask.resume()
+    }
+}
+
+
+extension Http:URLSessionDataDelegate,URLSessionDownloadDelegate,URLSessionTaskDelegate {
+    
+    public func urlSession(_ session: URLSession,
+                           downloadTask: URLSessionDownloadTask,
+                           didFinishDownloadingTo location: URL) {
+        self.download?(location)
+    }
+    
+    public func urlSession(_ session: URLSession,
+                           downloadTask: URLSessionDownloadTask,
+                           didWriteData bytesWritten: Int64,
+                           totalBytesWritten: Int64,
+                           totalBytesExpectedToWrite: Int64) {
+        self.progress!(bytesWritten,totalBytesWritten,totalBytesExpectedToWrite)
     }
     
     /*

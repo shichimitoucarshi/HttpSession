@@ -7,41 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C725439C20E7DEF500F9C0C2 /* Lib.h in Headers */ = {isa = PBXBuildFile; fileRef = C725439A20E7DEF500F9C0C2 /* Lib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C72543B320E7DF7D00F9C0C2 /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543A420E7DF7D00F9C0C2 /* AuthUtils.swift */; };
-		C72543B420E7DF7D00F9C0C2 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543A520E7DF7D00F9C0C2 /* Cookie.swift */; };
-		C72543B520E7DF7D00F9C0C2 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543A620E7DF7D00F9C0C2 /* HMAC.swift */; };
-		C72543B620E7DF7D00F9C0C2 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543A720E7DF7D00F9C0C2 /* SHA1.swift */; };
-		C72543B720E7DF7D00F9C0C2 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543A920E7DF7D00F9C0C2 /* URI.swift */; };
-		C72543B820E7DF7D00F9C0C2 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543AA20E7DF7D00F9C0C2 /* Http.swift */; };
-		C72543B920E7DF7D00F9C0C2 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543AC20E7DF7D00F9C0C2 /* Multipart.swift */; };
-		C72543BA20E7DF7D00F9C0C2 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543AD20E7DF7D00F9C0C2 /* Request.swift */; };
-		C72543BB20E7DF7D00F9C0C2 /* OAuthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543AF20E7DF7D00F9C0C2 /* OAuthKit.swift */; };
-		C72543BC20E7DF7D00F9C0C2 /* TwitAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B020E7DF7D00F9C0C2 /* TwitAccount.swift */; };
-		C72543BD20E7DF7D00F9C0C2 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B120E7DF7D00F9C0C2 /* Twitter.swift */; };
-		C72543BE20E7DF7D00F9C0C2 /* TwitterApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72543B220E7DF7D00F9C0C2 /* TwitterApiKey.swift */; };
-		C735585B21B5662100583A64 /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C735585A21B5662100583A64 /* ApiProtocol.swift */; };
-		C7954E5F21B27738007ADCC7 /* TwitterExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7954E5E21B27738007ADCC7 /* TwitterExtention.swift */; };
+		C778554921F05AE2001D542B /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553721F05AE2001D542B /* HMAC.swift */; };
+		C778554A21F05AE2001D542B /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553821F05AE2001D542B /* SHA1.swift */; };
+		C778554B21F05AE2001D542B /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553921F05AE2001D542B /* Cookie.swift */; };
+		C778554C21F05AE2001D542B /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553A21F05AE2001D542B /* AuthUtils.swift */; };
+		C778554D21F05AE2001D542B /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553B21F05AE2001D542B /* ApiProtocol.swift */; };
+		C778554E21F05AE2001D542B /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553D21F05AE2001D542B /* URI.swift */; };
+		C778554F21F05AE2001D542B /* TwitterApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778553F21F05AE2001D542B /* TwitterApiKey.swift */; };
+		C778555021F05AE2001D542B /* TwitAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554021F05AE2001D542B /* TwitAccount.swift */; };
+		C778555121F05AE2001D542B /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554121F05AE2001D542B /* Twitter.swift */; };
+		C778555221F05AE2001D542B /* TwitterExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554321F05AE2001D542B /* TwitterExtention.swift */; };
+		C778555321F05AE2001D542B /* OAuthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554421F05AE2001D542B /* OAuthKit.swift */; };
+		C778555421F05AE2001D542B /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554521F05AE2001D542B /* Http.swift */; };
+		C778555521F05AE2001D542B /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554721F05AE2001D542B /* Multipart.swift */; };
+		C778555621F05AE2001D542B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C778554821F05AE2001D542B /* Request.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C725439720E7DEF500F9C0C2 /* HttpSession.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HttpSession.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C725439A20E7DEF500F9C0C2 /* Lib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Lib.h; sourceTree = "<group>"; };
-		C725439B20E7DEF500F9C0C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C72543A420E7DF7D00F9C0C2 /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
-		C72543A520E7DF7D00F9C0C2 /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
-		C72543A620E7DF7D00F9C0C2 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
-		C72543A720E7DF7D00F9C0C2 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
-		C72543A920E7DF7D00F9C0C2 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
-		C72543AA20E7DF7D00F9C0C2 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
-		C72543AC20E7DF7D00F9C0C2 /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
-		C72543AD20E7DF7D00F9C0C2 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		C72543AF20E7DF7D00F9C0C2 /* OAuthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthKit.swift; sourceTree = "<group>"; };
-		C72543B020E7DF7D00F9C0C2 /* TwitAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitAccount.swift; sourceTree = "<group>"; };
-		C72543B120E7DF7D00F9C0C2 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
-		C72543B220E7DF7D00F9C0C2 /* TwitterApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterApiKey.swift; sourceTree = "<group>"; };
-		C735585A21B5662100583A64 /* ApiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
-		C7954E5E21B27738007ADCC7 /* TwitterExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterExtention.swift; sourceTree = "<group>"; };
+		C778553721F05AE2001D542B /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		C778553821F05AE2001D542B /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
+		C778553921F05AE2001D542B /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		C778553A21F05AE2001D542B /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
+		C778553B21F05AE2001D542B /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
+		C778553D21F05AE2001D542B /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
+		C778553F21F05AE2001D542B /* TwitterApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterApiKey.swift; sourceTree = "<group>"; };
+		C778554021F05AE2001D542B /* TwitAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitAccount.swift; sourceTree = "<group>"; };
+		C778554121F05AE2001D542B /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
+		C778554321F05AE2001D542B /* TwitterExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterExtention.swift; sourceTree = "<group>"; };
+		C778554421F05AE2001D542B /* OAuthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthKit.swift; sourceTree = "<group>"; };
+		C778554521F05AE2001D542B /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
+		C778554721F05AE2001D542B /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
+		C778554821F05AE2001D542B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +55,7 @@
 		C725438D20E7DEF500F9C0C2 = {
 			isa = PBXGroup;
 			children = (
-				C725439920E7DEF500F9C0C2 /* Lib */,
+				C778553521F05AE2001D542B /* src */,
 				C725439820E7DEF500F9C0C2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,75 +68,65 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C725439920E7DEF500F9C0C2 /* Lib */ = {
+		C778553521F05AE2001D542B /* src */ = {
 			isa = PBXGroup;
 			children = (
-				C72543A220E7DF7D00F9C0C2 /* src */,
-				C725439A20E7DEF500F9C0C2 /* Lib.h */,
-				C725439B20E7DEF500F9C0C2 /* Info.plist */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		C72543A220E7DF7D00F9C0C2 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C72543A320E7DF7D00F9C0C2 /* AuthKit */,
-				C72543A820E7DF7D00F9C0C2 /* Encode */,
-				C72543AA20E7DF7D00F9C0C2 /* Http.swift */,
-				C72543AB20E7DF7D00F9C0C2 /* Multipart */,
-				C72543AD20E7DF7D00F9C0C2 /* Request.swift */,
-				C72543AE20E7DF7D00F9C0C2 /* TwitterKit */,
-				C735585A21B5662100583A64 /* ApiProtocol.swift */,
+				C778553621F05AE2001D542B /* AuthKit */,
+				C778553B21F05AE2001D542B /* ApiProtocol.swift */,
+				C778553C21F05AE2001D542B /* Encode */,
+				C778553E21F05AE2001D542B /* TwitterKit */,
+				C778554521F05AE2001D542B /* Http.swift */,
+				C778554621F05AE2001D542B /* Multipart */,
+				C778554821F05AE2001D542B /* Request.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		C72543A320E7DF7D00F9C0C2 /* AuthKit */ = {
+		C778553621F05AE2001D542B /* AuthKit */ = {
 			isa = PBXGroup;
 			children = (
-				C72543A420E7DF7D00F9C0C2 /* AuthUtils.swift */,
-				C72543A520E7DF7D00F9C0C2 /* Cookie.swift */,
-				C72543A620E7DF7D00F9C0C2 /* HMAC.swift */,
-				C72543A720E7DF7D00F9C0C2 /* SHA1.swift */,
+				C778553721F05AE2001D542B /* HMAC.swift */,
+				C778553821F05AE2001D542B /* SHA1.swift */,
+				C778553921F05AE2001D542B /* Cookie.swift */,
+				C778553A21F05AE2001D542B /* AuthUtils.swift */,
 			);
 			path = AuthKit;
 			sourceTree = "<group>";
 		};
-		C72543A820E7DF7D00F9C0C2 /* Encode */ = {
+		C778553C21F05AE2001D542B /* Encode */ = {
 			isa = PBXGroup;
 			children = (
-				C72543A920E7DF7D00F9C0C2 /* URI.swift */,
+				C778553D21F05AE2001D542B /* URI.swift */,
 			);
 			path = Encode;
 			sourceTree = "<group>";
 		};
-		C72543AB20E7DF7D00F9C0C2 /* Multipart */ = {
+		C778553E21F05AE2001D542B /* TwitterKit */ = {
 			isa = PBXGroup;
 			children = (
-				C72543AC20E7DF7D00F9C0C2 /* Multipart.swift */,
-			);
-			path = Multipart;
-			sourceTree = "<group>";
-		};
-		C72543AE20E7DF7D00F9C0C2 /* TwitterKit */ = {
-			isa = PBXGroup;
-			children = (
-				C7954E5D21B27724007ADCC7 /* Extention */,
-				C72543AF20E7DF7D00F9C0C2 /* OAuthKit.swift */,
-				C72543B020E7DF7D00F9C0C2 /* TwitAccount.swift */,
-				C72543B120E7DF7D00F9C0C2 /* Twitter.swift */,
-				C72543B220E7DF7D00F9C0C2 /* TwitterApiKey.swift */,
+				C778553F21F05AE2001D542B /* TwitterApiKey.swift */,
+				C778554021F05AE2001D542B /* TwitAccount.swift */,
+				C778554121F05AE2001D542B /* Twitter.swift */,
+				C778554221F05AE2001D542B /* Extention */,
+				C778554421F05AE2001D542B /* OAuthKit.swift */,
 			);
 			path = TwitterKit;
 			sourceTree = "<group>";
 		};
-		C7954E5D21B27724007ADCC7 /* Extention */ = {
+		C778554221F05AE2001D542B /* Extention */ = {
 			isa = PBXGroup;
 			children = (
-				C7954E5E21B27738007ADCC7 /* TwitterExtention.swift */,
+				C778554321F05AE2001D542B /* TwitterExtention.swift */,
 			);
 			path = Extention;
+			sourceTree = "<group>";
+		};
+		C778554621F05AE2001D542B /* Multipart */ = {
+			isa = PBXGroup;
+			children = (
+				C778554721F05AE2001D542B /* Multipart.swift */,
+			);
+			path = Multipart;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +136,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C725439C20E7DEF500F9C0C2 /* Lib.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,20 +207,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C72543B720E7DF7D00F9C0C2 /* URI.swift in Sources */,
-				C72543BA20E7DF7D00F9C0C2 /* Request.swift in Sources */,
-				C735585B21B5662100583A64 /* ApiProtocol.swift in Sources */,
-				C72543B320E7DF7D00F9C0C2 /* AuthUtils.swift in Sources */,
-				C7954E5F21B27738007ADCC7 /* TwitterExtention.swift in Sources */,
-				C72543B920E7DF7D00F9C0C2 /* Multipart.swift in Sources */,
-				C72543B420E7DF7D00F9C0C2 /* Cookie.swift in Sources */,
-				C72543BC20E7DF7D00F9C0C2 /* TwitAccount.swift in Sources */,
-				C72543B620E7DF7D00F9C0C2 /* SHA1.swift in Sources */,
-				C72543BB20E7DF7D00F9C0C2 /* OAuthKit.swift in Sources */,
-				C72543BE20E7DF7D00F9C0C2 /* TwitterApiKey.swift in Sources */,
-				C72543B520E7DF7D00F9C0C2 /* HMAC.swift in Sources */,
-				C72543BD20E7DF7D00F9C0C2 /* Twitter.swift in Sources */,
-				C72543B820E7DF7D00F9C0C2 /* Http.swift in Sources */,
+				C778554A21F05AE2001D542B /* SHA1.swift in Sources */,
+				C778555321F05AE2001D542B /* OAuthKit.swift in Sources */,
+				C778555021F05AE2001D542B /* TwitAccount.swift in Sources */,
+				C778555521F05AE2001D542B /* Multipart.swift in Sources */,
+				C778554C21F05AE2001D542B /* AuthUtils.swift in Sources */,
+				C778554E21F05AE2001D542B /* URI.swift in Sources */,
+				C778555421F05AE2001D542B /* Http.swift in Sources */,
+				C778555221F05AE2001D542B /* TwitterExtention.swift in Sources */,
+				C778555121F05AE2001D542B /* Twitter.swift in Sources */,
+				C778554F21F05AE2001D542B /* TwitterApiKey.swift in Sources */,
+				C778554D21F05AE2001D542B /* ApiProtocol.swift in Sources */,
+				C778555621F05AE2001D542B /* Request.swift in Sources */,
+				C778554B21F05AE2001D542B /* Cookie.swift in Sources */,
+				C778554921F05AE2001D542B /* HMAC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +354,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Lib/Info.plist;
+				INFOPLIST_FILE = info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.Lib;
@@ -389,7 +375,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Lib/Info.plist;
+				INFOPLIST_FILE = info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.Lib;

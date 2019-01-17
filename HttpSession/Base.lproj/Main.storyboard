@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B8H-gB-dPP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="B8H-gB-dPP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HttpRequest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HttpSessionSample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -54,7 +54,7 @@
         <!--Responce-->
         <scene sceneID="ajj-k7-pPX">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" title="Responce" id="jvf-lN-CBF" customClass="DetailViewController" customModule="HttpRequest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" title="Responce" id="jvf-lN-CBF" customClass="DetailViewController" customModule="HttpSessionSample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i6D-qF-xWL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,11 +69,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PER-t9-nEb" firstAttribute="centerY" secondItem="i6D-qF-xWL" secondAttribute="centerY" id="ERQ-p7-dZL"/>
                             <constraint firstItem="PER-t9-nEb" firstAttribute="bottom" secondItem="zLr-Se-1EJ" secondAttribute="bottom" id="IVK-Qb-3rd"/>
                             <constraint firstItem="PER-t9-nEb" firstAttribute="top" secondItem="i6D-qF-xWL" secondAttribute="top" id="KtV-1q-lVd"/>
                             <constraint firstItem="PER-t9-nEb" firstAttribute="trailing" secondItem="zLr-Se-1EJ" secondAttribute="trailing" id="Yvk-vF-mdS"/>
-                            <constraint firstItem="PER-t9-nEb" firstAttribute="centerX" secondItem="i6D-qF-xWL" secondAttribute="centerX" id="oMm-wh-Z9l"/>
                             <constraint firstItem="PER-t9-nEb" firstAttribute="leading" secondItem="zLr-Se-1EJ" secondAttribute="leading" id="onH-KL-TRb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zLr-Se-1EJ"/>
