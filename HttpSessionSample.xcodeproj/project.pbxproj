@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C72C2CFB21FC317400C9C6F9 /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CE921FC317400C9C6F9 /* HMAC.swift */; };
+		C72C2CFC21FC317400C9C6F9 /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CEA21FC317400C9C6F9 /* SHA1.swift */; };
+		C72C2CFD21FC317400C9C6F9 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CEB21FC317400C9C6F9 /* Cookie.swift */; };
+		C72C2CFE21FC317400C9C6F9 /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CEC21FC317400C9C6F9 /* AuthUtils.swift */; };
+		C72C2CFF21FC317400C9C6F9 /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CED21FC317400C9C6F9 /* ApiProtocol.swift */; };
+		C72C2D0021FC317400C9C6F9 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CEF21FC317400C9C6F9 /* URI.swift */; };
+		C72C2D0121FC317400C9C6F9 /* TwitterApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF121FC317400C9C6F9 /* TwitterApiKey.swift */; };
+		C72C2D0221FC317400C9C6F9 /* TwitAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF221FC317400C9C6F9 /* TwitAccount.swift */; };
+		C72C2D0321FC317400C9C6F9 /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF321FC317400C9C6F9 /* Twitter.swift */; };
+		C72C2D0421FC317400C9C6F9 /* TwitterExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF521FC317400C9C6F9 /* TwitterExtention.swift */; };
+		C72C2D0521FC317400C9C6F9 /* OAuthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF621FC317400C9C6F9 /* OAuthKit.swift */; };
+		C72C2D0621FC317400C9C6F9 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF721FC317400C9C6F9 /* Http.swift */; };
+		C72C2D0721FC317400C9C6F9 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CF921FC317400C9C6F9 /* Multipart.swift */; };
+		C72C2D0821FC317400C9C6F9 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72C2CFA21FC317400C9C6F9 /* Request.swift */; };
 		C73C4875208E559000176EFB /* GPSButton001.png in Resources */ = {isa = PBXBuildFile; fileRef = C73C4874208E559000176EFB /* GPSButton001.png */; };
 		C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C788B72E208F752900B3F108 /* DetailViewController.swift */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
@@ -15,7 +29,6 @@
 		C791EF4A208BA01000592178 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C791EF49208BA01000592178 /* Assets.xcassets */; };
 		C791EF4D208BA01000592178 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C791EF4B208BA01000592178 /* LaunchScreen.storyboard */; };
 		C7954E6721B2980D007ADCC7 /* HttpSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7954E6621B2980D007ADCC7 /* HttpSessionTests.swift */; };
-		C7E4CAFF21DBA2070072F45A /* ApiTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E4CAFE21DBA2070072F45A /* ApiTarget.swift */; };
 		C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F189208F0CC70034CD7F /* Re120.jpg */; };
 		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
 /* End PBXBuildFile section */
@@ -31,6 +44,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		C72C2CC221FC301300C9C6F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C7F2F18D208F12370034CD7F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -43,7 +66,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		C72C2CE921FC317400C9C6F9 /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
+		C72C2CEA21FC317400C9C6F9 /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
+		C72C2CEB21FC317400C9C6F9 /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		C72C2CEC21FC317400C9C6F9 /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
+		C72C2CED21FC317400C9C6F9 /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
+		C72C2CEF21FC317400C9C6F9 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
+		C72C2CF121FC317400C9C6F9 /* TwitterApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterApiKey.swift; sourceTree = "<group>"; };
+		C72C2CF221FC317400C9C6F9 /* TwitAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitAccount.swift; sourceTree = "<group>"; };
+		C72C2CF321FC317400C9C6F9 /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
+		C72C2CF521FC317400C9C6F9 /* TwitterExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterExtention.swift; sourceTree = "<group>"; };
+		C72C2CF621FC317400C9C6F9 /* OAuthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthKit.swift; sourceTree = "<group>"; };
+		C72C2CF721FC317400C9C6F9 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
+		C72C2CF921FC317400C9C6F9 /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
+		C72C2CFA21FC317400C9C6F9 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		C73C4874208E559000176EFB /* GPSButton001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GPSButton001.png; sourceTree = "<group>"; };
+		C77AD82521F9CCDB00218D4D /* HttpSession.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HttpSession.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C788B72E208F752900B3F108 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C791EF3F208BA01000592178 /* HttpSessionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpSessionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,7 +93,6 @@
 		C7954E6421B2980D007ADCC7 /* HttpSessionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HttpSessionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7954E6621B2980D007ADCC7 /* HttpSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpSessionTests.swift; sourceTree = "<group>"; };
 		C7954E6821B2980D007ADCC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7E4CAFE21DBA2070072F45A /* ApiTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTarget.swift; sourceTree = "<group>"; };
 		C7F2F189208F0CC70034CD7F /* Re120.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Re120.jpg; sourceTree = "<group>"; };
 		C7F2F18B208F103B0034CD7F /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,12 +115,90 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C72C2CE621FC317400C9C6F9 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CE721FC317400C9C6F9 /* src */,
+			);
+			path = Lib;
+			sourceTree = SOURCE_ROOT;
+		};
+		C72C2CE721FC317400C9C6F9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CE821FC317400C9C6F9 /* AuthKit */,
+				C72C2CED21FC317400C9C6F9 /* ApiProtocol.swift */,
+				C72C2CEE21FC317400C9C6F9 /* Encode */,
+				C72C2CF021FC317400C9C6F9 /* TwitterKit */,
+				C72C2CF721FC317400C9C6F9 /* Http.swift */,
+				C72C2CF821FC317400C9C6F9 /* Multipart */,
+				C72C2CFA21FC317400C9C6F9 /* Request.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		C72C2CE821FC317400C9C6F9 /* AuthKit */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CE921FC317400C9C6F9 /* HMAC.swift */,
+				C72C2CEA21FC317400C9C6F9 /* SHA1.swift */,
+				C72C2CEB21FC317400C9C6F9 /* Cookie.swift */,
+				C72C2CEC21FC317400C9C6F9 /* AuthUtils.swift */,
+			);
+			path = AuthKit;
+			sourceTree = "<group>";
+		};
+		C72C2CEE21FC317400C9C6F9 /* Encode */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CEF21FC317400C9C6F9 /* URI.swift */,
+			);
+			path = Encode;
+			sourceTree = "<group>";
+		};
+		C72C2CF021FC317400C9C6F9 /* TwitterKit */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CF121FC317400C9C6F9 /* TwitterApiKey.swift */,
+				C72C2CF221FC317400C9C6F9 /* TwitAccount.swift */,
+				C72C2CF321FC317400C9C6F9 /* Twitter.swift */,
+				C72C2CF421FC317400C9C6F9 /* Extention */,
+				C72C2CF621FC317400C9C6F9 /* OAuthKit.swift */,
+			);
+			path = TwitterKit;
+			sourceTree = "<group>";
+		};
+		C72C2CF421FC317400C9C6F9 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CF521FC317400C9C6F9 /* TwitterExtention.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		C72C2CF821FC317400C9C6F9 /* Multipart */ = {
+			isa = PBXGroup;
+			children = (
+				C72C2CF921FC317400C9C6F9 /* Multipart.swift */,
+			);
+			path = Multipart;
+			sourceTree = "<group>";
+		};
+		C77AD82421F9CCDB00218D4D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C77AD82521F9CCDB00218D4D /* HttpSession.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C791EF36208BA01000592178 = {
 			isa = PBXGroup;
 			children = (
 				C791EF41208BA01000592178 /* HttpSession */,
 				C7954E6521B2980D007ADCC7 /* HttpSessionTests */,
 				C791EF40208BA01000592178 /* Products */,
+				C77AD82421F9CCDB00218D4D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +214,7 @@
 		C791EF41208BA01000592178 /* HttpSession */ = {
 			isa = PBXGroup;
 			children = (
+				C72C2CE621FC317400C9C6F9 /* Lib */,
 				C791EF42208BA01000592178 /* AppDelegate.swift */,
 				C788B72E208F752900B3F108 /* DetailViewController.swift */,
 				C73C4874208E559000176EFB /* GPSButton001.png */,
@@ -109,7 +225,6 @@
 				C791EF4B208BA01000592178 /* LaunchScreen.storyboard */,
 				C791EF46208BA01000592178 /* Main.storyboard */,
 				C791EF44208BA01000592178 /* ViewController.swift */,
-				C7E4CAFE21DBA2070072F45A /* ApiTarget.swift */,
 			);
 			path = HttpSession;
 			sourceTree = "<group>";
@@ -134,6 +249,7 @@
 				C791EF3C208BA01000592178 /* Frameworks */,
 				C791EF3D208BA01000592178 /* Resources */,
 				C7F2F18D208F12370034CD7F /* CopyFiles */,
+				C72C2CC221FC301300C9C6F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,10 +346,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72C2D0421FC317400C9C6F9 /* TwitterExtention.swift in Sources */,
+				C72C2CFF21FC317400C9C6F9 /* ApiProtocol.swift in Sources */,
+				C72C2D0221FC317400C9C6F9 /* TwitAccount.swift in Sources */,
+				C72C2CFC21FC317400C9C6F9 /* SHA1.swift in Sources */,
+				C72C2D0021FC317400C9C6F9 /* URI.swift in Sources */,
+				C72C2CFD21FC317400C9C6F9 /* Cookie.swift in Sources */,
 				C791EF45208BA01000592178 /* ViewController.swift in Sources */,
+				C72C2D0821FC317400C9C6F9 /* Request.swift in Sources */,
 				C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */,
+				C72C2D0321FC317400C9C6F9 /* Twitter.swift in Sources */,
+				C72C2CFB21FC317400C9C6F9 /* HMAC.swift in Sources */,
+				C72C2CFE21FC317400C9C6F9 /* AuthUtils.swift in Sources */,
+				C72C2D0121FC317400C9C6F9 /* TwitterApiKey.swift in Sources */,
+				C72C2D0721FC317400C9C6F9 /* Multipart.swift in Sources */,
+				C72C2D0521FC317400C9C6F9 /* OAuthKit.swift in Sources */,
 				C791EF43208BA01000592178 /* AppDelegate.swift in Sources */,
-				C7E4CAFF21DBA2070072F45A /* ApiTarget.swift in Sources */,
+				C72C2D0621FC317400C9C6F9 /* Http.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +527,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpSession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -414,7 +543,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.shichimitoucarashi.inc.HttpSession;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

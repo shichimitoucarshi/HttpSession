@@ -38,9 +38,13 @@ open class Http:NSObject {
     public var dataTask: URLSessionDataTask!
     public var downloadTask: URLSessionDownloadTask!
     public var url: String?
+    public var sessionConfig: URLSessionConfiguration?
+    public var session:URLSession?
     public var request: Request?
     
     public var isCookie: Bool = false
+    
+    
     
     public init(url: String,
                 method: method = .get,
@@ -77,17 +81,29 @@ open class Http:NSObject {
         self.send(request: (self.request?.urlReq)!)
     }
     
-    public func download (progress: @escaping (_ written: Int64,_ total: Int64,_ expectedToWrite: Int64) -> Void,
+    public func download (resumeData:Data? = nil,
+                          progress: @escaping (_ written: Int64,_ total: Int64,_ expectedToWrite: Int64) -> Void,
                           download: @escaping (_ path: URL?) -> Void,
                           completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void) {
-        self.progress = progress
-        self.completion = completionHandler
-        self.download = download
-        let sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
-        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: .main)
         
-        self.downloadTask = session.downloadTask(with: (self.request?.urlReq)!)
+        if resumeData == nil {
+            self.progress = progress
+            self.completion = completionHandler
+            self.download = download
+            self.sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
+            self.session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
+            
+            self.downloadTask = self.session!.downloadTask(with: (self.request?.urlReq)!)
+        }else{
+            self.downloadTask = self.session?.downloadTask(withResumeData: resumeData!)
+        }
         self.downloadTask.resume()
+    }
+    
+    public func cancel (byResumeData: @escaping(Data?) -> Void) {
+        self.downloadTask.cancel { (data) in
+            byResumeData(data)
+        }
     }
     
     public func upload(param: [String: MultipartDto],
@@ -100,7 +116,11 @@ open class Http:NSObject {
      * send Request
      */
     func send(request: URLRequest){
-        let session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
+        if self.sessionConfig == nil {
+            self.sessionConfig = URLSessionConfiguration.default
+        }
+        let session = URLSession(configuration: self.sessionConfig!
+            , delegate: self, delegateQueue: .main)
         self.dataTask = session.dataTask(with: request)
         self.dataTask.resume()
     }

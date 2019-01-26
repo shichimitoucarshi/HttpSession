@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HttpSession
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HttpSession
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -127,15 +126,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             break
         case 6:
             
-            Http(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
-                .download(progress: { (written, total, expectedToWrite) in
-                    let progress = Float(total) / Float(expectedToWrite)
-                    print(String(format: "%.2f", progress * 100) + "%")                    
-            }, download: { (location) in
-                print ("location: \(String(describing: location))")
-            }, completionHandler: { (data, responce, error) in
-                self.detail(data: data!)
-            })
+            let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as! DetailViewController
+            self.navigationController?.pushViewController(detailViewController, animated: true)
+            detailViewController.isDL = true
             
             break
         case 7:
