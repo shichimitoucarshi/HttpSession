@@ -4,7 +4,4 @@
    <FileRef
       location = "group:HttpSessionSample.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Lib/HttpSession.xcodeproj">
-   </FileRef>
 </Workspace>
