@@ -107,3 +107,82 @@ Http(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
             })
 ```
 
+Like Moya
+
+
+```swift
+enum DemoApi {
+    case zen
+    case post(param:Tapul)
+    case download
+}
+
+extension DemoApi:ApiProtocol {
+    var domain: String{
+        switch self {
+        case .zen, .post:
+            return "https://httpsession.work"
+        case .download:
+            return "https://shichimitoucarashi.com"
+        }
+    }
+    
+    var endPoint: String {
+        switch self {
+        case .zen:
+            return "getApi.json"
+        case .post:
+            return "postApi.json"
+        case .download:
+            return "mp4/Designing_For_iPad_Pro_ad_hd.mp4"
+        }
+    }
+    
+    var method: Http.method {
+        switch self {
+        case .zen:
+            return .get
+        case .post:
+            return .post
+        case .download:
+            return .get
+        }
+    }
+    
+    var header: [String : String]? {
+        return [:]
+    }
+    
+    var params: [String : String] {
+        switch self {
+        case .zen:
+            return [:]
+        case .post(let val):
+            return [val.value.0:val.value.1]
+        case .download:
+            return [:]
+        }
+    }
+    
+    var isCookie: Bool {
+        return false
+    }
+    
+    var basicAuth: [String : String]? {
+        return nil
+    }
+}
+```
+
+```swift
+let provider:ApiProvider = ApiProvider<DemoApi>()
+
+provider.request(api: .zen) { (data, responce, error) in
+    self.detail(data: data!)
+}
+
+provider.request(api: .post(param: (key:"http_post",value:"Http Request POST 😄"))) { (data, responce, error) in
+    print (String(data: data!, encoding: .utf8))
+}
+```
+
