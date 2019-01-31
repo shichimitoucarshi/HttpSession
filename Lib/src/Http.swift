@@ -11,6 +11,46 @@ import UIKit
 
 let VERSION = "1.3.4"
 
+protocol HttpApi:AnyObject {
+    
+    associatedtype ApiType:ApiProtocol
+    
+    func request(api: ApiType, completion:@escaping(Data?,HTTPURLResponse?,Error?) -> Void)
+    
+    func download (api: ApiType,
+                   data:Data?,
+                   progress: @escaping (_ written: Int64,_ total: Int64,_ expectedToWrite: Int64) -> Void,
+                   download: @escaping (_ path: URL?) -> Void,
+                   completionHandler: @escaping(Data?,HTTPURLResponse?,Error?) -> Void)
+}
+
+open class ApiProvider<type: ApiProtocol>:HttpApi {
+    
+    typealias ApiType = type
+    var http:Http? = nil
+    
+    func request(api: type,completion:@escaping(Data?,HTTPURLResponse?,Error?) -> Void) {
+        if self.http == nil {
+            self.http = Http(api: api)
+        }
+        http!.session(completion: completion)
+    }
+    
+    func download(api: type,
+                  data:Data? = nil,
+                  progress: @escaping (Int64, Int64, Int64) -> Void,
+                  download: @escaping (URL?) -> Void,
+                  completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        if self.http == nil {
+            self.http = Http(api: api)
+        }
+        self.http!.download(resumeData:data,
+                           progress: progress,
+                           download: download,
+                           completionHandler: completionHandler)
+    }
+}
+
 open class Http:NSObject {
     
     /*
@@ -44,8 +84,6 @@ open class Http:NSObject {
     
     public var isCookie: Bool = false
     
-    
-    
     public init(url: String,
                 method: method = .get,
                 header:[String:String]? = nil,
@@ -61,6 +99,20 @@ open class Http:NSObject {
                                parameter:params,
                                cookie:cookie,
                                basic: basic)
+    }
+    
+    public convenience init(api: ApiProtocol) {
+        
+        let url = api.domain + "/" + api.endPoint
+        
+        print(api)
+        
+        self.init(url: url,
+                  method: api.method,
+                  header: api.header,
+                  params: api.params,
+                  cookie: api.isCookie,
+                  basic: api.basicAuth)
     }
     
     /*
