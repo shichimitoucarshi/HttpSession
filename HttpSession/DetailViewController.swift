@@ -19,18 +19,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     
-    var http:Http!
     var isDL:Bool = false
     var text: String = ""
     var data:Data? = nil
     var isCancel = false
+    
+    let provider:ApiProvider = ApiProvider<DemoApi>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if self.isDL == true {
             self.progress.setProgress(0.0, animated: true)
-            self.http = Http(url: "https://shichimitoucarashi.com/mp4/Designing_For_iPad_Pro_ad_hd.mp4", method: .get)
             self.httpDownload()
         }
     }
@@ -53,7 +53,9 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func pushStop(_ sender: Any) {
-        self.http.cancel { (data) in
+        self.provider
+            .http!
+            .cancel { (data) in
             self.data = data
             print("data")
             self.isCancel = true
@@ -65,26 +67,19 @@ class DetailViewController: UIViewController {
     }
     
     private func httpDownload (){
-        self.http.download(resumeData:self.data,
-                           progress: { (written, total, expectedToWrite) in
-            let progress = Float(total) / Float(expectedToWrite)
-            print ("progress \(progress)")
-            DispatchQueue.main.async(execute: {
-                self.progress.setProgress(progress, animated: true)
-                
-                self.status.text = "\(total)/\(expectedToWrite)"
-            })
+        provider.download(api: .download,
+                          data:self.data,
+                          progress: { (written, total, expectedToWrite) in
+                            let progress = Float(total) / Float(expectedToWrite)
+                            print ("progress \(progress)")
+                            DispatchQueue.main.async {
+                                self.status.text = "\(total)/\(expectedToWrite)"
+                                self.progress.setProgress(progress, animated: true)
+                            }
+        }, download: { (url) in
+            print ("location: \(String(describing: url))")
+        }) { (data, responce, error) in
             
-        }, download: { (location) in
-            print ("location: \(String(describing: location))")
-        }, completionHandler: { (data, responce, error) in
-            
-            if self.isCancel == false {
-                self.status.text = "Completed"
-            }else{
-                self.isCancel = false
-            }
-        })
+        }
     }
-    
 }
