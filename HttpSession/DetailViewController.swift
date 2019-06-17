@@ -11,34 +11,34 @@ import UIKit
 let detailViewControllerId: String = "DetailViewController"
 
 class DetailViewController: UIViewController {
-    
+
     @IBOutlet weak var responceText: UITextView!
-    
+
     @IBOutlet weak var progress: UIProgressView!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
-    
-    var isDL:Bool = false
+
+    var isDL: Bool = false
     var text: String = ""
-    var data:Data? = nil
+    var data: Data?
     var isCancel = false
-    
-    let provider:ApiProvider = ApiProvider<DemoApi>()
-    
+
+    let provider: ApiProvider = ApiProvider<DemoApi>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if self.isDL == true {
             self.progress.setProgress(0.0, animated: true)
             self.httpDownload()
         }
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let flg = self.isDL ? true : false
@@ -51,25 +51,25 @@ class DetailViewController: UIViewController {
             self.responceText.text = text
         }
     }
-    
+
     @IBAction func pushStop(_ sender: Any) {
         self.provider
             .http!
             .cancel { (data) in
-            self.data = data
-            print("data")
-            self.isCancel = true
+                self.data = data
+                print("data")
+                self.isCancel = true
         }
     }
-    
+
     @IBAction func pushStart(_ sender: Any) {
         self.httpDownload()
     }
-    
-    private func httpDownload (){
+
+    private func httpDownload () {
         provider.download(api: .download,
-                          data:self.data,
-                          progress: { (written, total, expectedToWrite) in
+                          data: self.data,
+                          progress: { (_, total, expectedToWrite) in
                             let progress = Float(total) / Float(expectedToWrite)
                             print ("progress \(progress)")
                             DispatchQueue.main.async {
@@ -78,8 +78,8 @@ class DetailViewController: UIViewController {
                             }
         }, download: { (url) in
             print ("location: \(String(describing: url))")
-        }) { (data, responce, error) in
-            
+        }) { (_, _, _) in
+
         }
     }
 }

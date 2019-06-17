@@ -7,23 +7,23 @@
 //
 
 import Foundation
-
-func rotateLeft(_ v:UInt16, n:UInt16) -> UInt16 {
+// swiftlint:disable all
+func rotateLeft(_ v: UInt16, n: UInt16) -> UInt16 {
     return ((v << n) & 0xFFFF) | (v >> (16 - n))
 }
 
-func rotateLeft(_ v:UInt32, n:UInt32) -> UInt32 {
+func rotateLeft(_ v: UInt32, n: UInt32) -> UInt32 {
     return ((v << n) & 0xFFFFFFFF) | (v >> (32 - n))
 }
 
-func rotateLeft(_ x:UInt64, n:UInt64) -> UInt64 {
+func rotateLeft(_ x: UInt64, n: UInt64) -> UInt64 {
     return (x << n) | (x >> (64 - n))
 }
 
 infix operator +|
 
-func +| <K,V>(left: Dictionary<K,V>, right: Dictionary<K,V>) -> Dictionary<K,V> {
-    var map = Dictionary<K,V>()
+func +| <K, V>(left: Dictionary<K, V>, right: Dictionary<K, V>) -> Dictionary<K, V> {
+    var map = Dictionary<K, V>()
     for (k, v) in left {
         map[k] = v
     }
@@ -43,15 +43,16 @@ func ??=<T>(lhs: inout T?, rhs: T?) {
 }
 
 open class Auth {
-    
+
     public static let user: String = "user"
     public static let password: String = "password"
-    
+
     public init() {}
-    
+
     public static func basic (user: String, password: String) -> String {
         let basic = "\(user):\(password)".data(using: .utf8)
         let basicAuth = "Basic \(String(describing: basic!.base64EncodedString(options: [])))"
         return basicAuth
     }
 }
+// swiftlint:enable all

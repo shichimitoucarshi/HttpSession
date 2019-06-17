@@ -9,19 +9,19 @@
 import Foundation
 
 public protocol ApiProtocol {
-    
-    var domain:String { get }
-    
-    var endPoint:String { get }
-    
-    var method: Http.method { get }
-    
-    var header:[String:String]? { get }
-    
-    var params:[String:String] { get }
-    
-    var isCookie:Bool { get }
-    
-    var basicAuth:[String:String]? { get }
-    
+
+    var domain: String { get }
+
+    var endPoint: String { get }
+
+    var method: Http.Method { get }
+
+    var header: [String: String]? { get }
+
+    var params: [String: String] { get }
+
+    var isCookie: Bool { get }
+
+    var basicAuth: [String: String]? { get }
+
 }

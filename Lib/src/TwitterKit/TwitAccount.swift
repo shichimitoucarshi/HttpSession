@@ -11,11 +11,11 @@ import Foundation
 public struct OAuth {
     public var token: String = ""
     public var secret: String = ""
-    public init(){
+    public init() {
         self.token = ""
         self.secret = ""
     }
-    public init(token: String, secret: String ){
+    public init(token: String, secret: String ) {
         self.token = token
         self.secret = secret
     }
@@ -28,31 +28,31 @@ public struct TwiterUser {
 }
 
 open class TwitAccount {
-    
+
     public static let shared: TwitAccount = TwitAccount()
-    
+
     /*
      * member value
      *
      */
     public var twitter: TwiterUser = TwiterUser()
-    
+
     /*
      * initialize
      *
      */
-    private init(){}
-    
+    private init() {}
+
     /*
      * set Twitter' user info
      *
      */
-    public func setTwiAccount(data: Data){
-        let parameter = String(data:data, encoding: .utf8)
+    public func setTwiAccount(data: Data) {
+        let parameter = String(data: data, encoding: .utf8)
         self.setAccount(param: (parameter?.queryStringParameters)!)
     }
-    
-    private func setAccount(param: [String: String]){
+
+    private func setAccount(param: [String: String]) {
         self.twitter.screenName = param["screen_name"]!
         self.twitter.userId = param["user_id"]!
         self.twitter.oAuth.token = param["oauth_token"]!
