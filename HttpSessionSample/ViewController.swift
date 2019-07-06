@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HttpSession
 
 enum DemoApi {
     case zen

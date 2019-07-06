@@ -18,9 +18,9 @@ extension String {
      * }
      *
      */
-    public var queryStringParameters: Dictionary<String, String> {
+    public var queryStringParameters: [String: String] {
 
-        var parameters = Dictionary<String, String>()
+        var parameters: [String: String] = [:]
 
         let scanner = Scanner(string: self)
 
@@ -68,7 +68,7 @@ extension URI {
      * It converts the value of Dictionary type
      * URL encoded into a character string and returns it.
      */
-    public func twitterEncode(param: Dictionary<String, String>) -> String {
+    public func twitterEncode(param: [String: String]) -> String {
 
         var parameter: String = String()
 

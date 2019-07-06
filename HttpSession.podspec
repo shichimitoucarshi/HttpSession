@@ -20,5 +20,5 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/keisukeYamagishi/HttpSession.git", :tag => "#{s.version}" }
   s.ios.deployment_target = '8.0'
 
-  s.source_files  = "Source", "Lib/src/**/*.swift"
+  s.source_files  = "Source", "HttpSession/**/*.swift"
 end

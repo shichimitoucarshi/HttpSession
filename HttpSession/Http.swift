@@ -11,7 +11,7 @@ import UIKit
 
 let VERSION = "1.3.4"
 // swiftlint:disable all
-protocol HttpApi: AnyObject {
+public protocol HttpApi: AnyObject {
 
     associatedtype ApiType: ApiProtocol
 
@@ -24,23 +24,25 @@ protocol HttpApi: AnyObject {
                    completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
 }
 
-open class ApiProvider<Type: ApiProtocol>:HttpApi {
+open class ApiProvider<Type: ApiProtocol>: HttpApi {
 
-    typealias ApiType = Type
-    var http: Http?
+    public typealias ApiType = Type
+    public var http: Http?
 
-    func request(api: Type, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
+    public init(){}
+
+    public func request(api: Type, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
         if self.http == nil {
             self.http = Http(api: api)
         }
         http!.session(completion: completion)
     }
 
-    func download(api: Type,
-                  data: Data? = nil,
-                  progress: @escaping (Int64, Int64, Int64) -> Void,
-                  download: @escaping (URL?) -> Void,
-                  completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+    public func download(api: Type,
+                         data: Data? = nil,
+                         progress: @escaping (Int64, Int64, Int64) -> Void,
+                         download: @escaping (URL?) -> Void,
+                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         if self.http == nil {
             self.http = Http(api: api)
         }

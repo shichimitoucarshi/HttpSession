@@ -21,8 +21,6 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
-			<key>CFBundleURLIconFile</key>
-			<string>GPSButton001</string>
 			<key>CFBundleURLName</key>
 			<string>com.shichimitoucarashi.inc.HttpSession</string>
 			<key>CFBundleURLSchemes</key>
@@ -37,10 +35,5 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-	</array>
 </dict>
 </plist>

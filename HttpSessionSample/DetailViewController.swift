@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import HttpSession
 
 let detailViewControllerId: String = "DetailViewController"
 
