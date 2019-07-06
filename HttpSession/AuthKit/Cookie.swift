@@ -9,28 +9,25 @@
 import Foundation
 
 open class Cookie {
-    
+
     public static let shared: Cookie = Cookie()
-    
+
     private
-    init(){}
-    
-    public func get(url: String) -> [String : String]{
+    init() {}
+
+    public func get(url: String) -> [String: String] {
         let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: url)!)
         return HTTPCookie.requestHeaderFields(with: cookie!)
     }
-    
-    public func set(responce: URLResponse){
-        
-        let res = responce as! HTTPURLResponse
-        
-        let cookies = HTTPCookie.cookies(withResponseHeaderFields: res.allHeaderFields as! [String : String], for: res.url!)
-        
-        for i in 0 ..< cookies.count{
-            let cookie = cookies[i]
+
+    public func set(responce: URLResponse) {
+
+        guard let res = responce as? HTTPURLResponse,
+            let header = res.allHeaderFields as? [String: String] else { return }
+        let cookies = HTTPCookie.cookies(withResponseHeaderFields: header, for: res.url!)
+
+        for cookie in cookies {
             HTTPCookieStorage.shared.setCookie(cookie)
-            
         }
     }
-    
 }

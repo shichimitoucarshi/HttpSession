@@ -8,22 +8,22 @@
 
 import Foundation
 
-open class OAuthKit{
-    
+open class OAuthKit {
+
     public var consumerSecret: String!
     public var tokenSecret: String!
-    
+
     /*
      * initialize function
      * initialize menbers value
      * comsumerSecret: String
      * tokenSecret: String
      */
-    public init(){
+    public init() {
         self.consumerSecret = ""
         self.tokenSecret = ""
     }
-    
+
     /*
      * initialize function
      * initialize members value
@@ -34,43 +34,43 @@ open class OAuthKit{
         self.consumerSecret = comsumersecret
         self.tokenSecret = tokenSecret
     }
-    
-    public struct OAuth{
+
+    public struct OAuth {
         static let version = "1.0"
         static let signatureMethod = "HMAC-SHA1"
     }
-    
-    public static func authorizationHeader(for url: URL,method: Http.method, param: Dictionary<String, Any>, isMediaUpload: Bool = false ) -> String {
-        return OAuthKit().authorizationHeader(for: url,method: method ,parameters:param, isMediaUpload: isMediaUpload)
+
+    public static func authorizationHeader(for url: URL, method: Http.Method, param: Dictionary<String, Any>, isMediaUpload: Bool = false ) -> String {
+        return OAuthKit().authorizationHeader(for: url, method: method, parameters: param, isMediaUpload: isMediaUpload)
     }
-    
+
     /*
      * create headers
      *
      *
      */
-    public func authorizationHeader(for url: URL,method: Http.method, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
+    public func authorizationHeader(for url: URL, method: Http.Method, parameters: Dictionary<String, Any>, isMediaUpload: Bool) -> String {
         var authorization = Dictionary<String, Any>()
         authorization["oauth_version"] = OAuth.version
         authorization["oauth_signature_method"] =  OAuth.signatureMethod
         authorization["oauth_consumer_key"] = TwitterKey.shared.api.key
         authorization["oauth_timestamp"] = String(Int(Date().timeIntervalSince1970))
         authorization["oauth_nonce"] = UUID().uuidString
-        
+
         authorization["oauth_token"] ??= TwitAccount.shared.twitter.oAuth.token
-        
+
         for (key, value) in parameters where key.hasPrefix("oauth_") {
             authorization.updateValue(value, forKey: key)
         }
-        
+
         let combinedParameters = authorization +| parameters
-        
+
         let final = isMediaUpload ? authorization : combinedParameters
-        
-        authorization["oauth_signature"] = self.oauthSignature(for: url,method: method, parameters: final)
-        
+
+        authorization["oauth_signature"] = self.oauthSignature(for: url, method: method, parameters: final)
+
         let authorizationParameterComponents = authorization.encodedQuery(using: .utf8).components(separatedBy: "&").sorted()
-        
+
         var headerComponents = [String]()
         for component in authorizationParameterComponents {
             let subcomponent = component.components(separatedBy: "=")
@@ -80,13 +80,13 @@ open class OAuthKit{
         }
         return "OAuth " + headerComponents.joined(separator: ", ")
     }
-    
+
     /*
      * OAuth signature
      * create signature value
      *
      */
-    public func oauthSignature(for url: URL, method: Http.method, parameters: Dictionary<String, Any>) -> String {
+    public func oauthSignature(for url: URL, method: Http.Method, parameters: Dictionary<String, Any>) -> String {
         let tokenSecret = TwitAccount.shared.twitter.oAuth.secret
         let encodedConsumerSecret = TwitterKey.shared.api.secret.percentEncode()
         let signingKey = "\(encodedConsumerSecret)&\(tokenSecret)"

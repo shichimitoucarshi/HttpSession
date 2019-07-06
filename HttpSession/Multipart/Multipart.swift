@@ -10,28 +10,28 @@ import Foundation
 import UIKit
 
 open class Multipart {
-    
+
     public var bundary: String
     public var uuid: String
-    
-    public init(){
+
+    public init() {
         self.uuid = UUID().uuidString
         self.bundary = String(format: "----\(self.uuid)")
     }
-    
-    public func multiparts(params: Dictionary<String, MultipartDto>) -> Data{
-        
+
+    public func multiparts(params: [String: MultipartDto]) -> Data {
+
         var post: Data = Data()
-        
+
         for(key, value) in params {
             let dto: MultipartDto = value
             post.append(multipart(key: key, fileName: dto.fileName as String, mineType: dto.mimeType, data: dto.data))
         }
         return post
     }
-    
-    public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data{
-        
+
+    public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data {
+
         var body = Data()
         let CRLF = "\r\n"
         body.append(("--\(self.bundary)" + CRLF).data(using: .utf8)!)
@@ -40,15 +40,19 @@ open class Multipart {
         body.append(data)
         body.append(CRLF.data(using: .utf8)!)
         body.append(("--\(self.bundary)--" + CRLF).data(using: .utf8)!)
-        
+
         return body
     }
-    
-    public static func mulipartContent(with boundary: String, data: Data, fileName: String?, parameterName: String,  mimeType mimeTypeOrNil: String?) -> Data {
+
+    public static func mulipartContent(with boundary: String,
+                                       data: Data,
+                                       fileName: String?,
+                                       parameterName: String,
+                                       mimeType mimeTypeOrNil: String?) -> Data {
         let mimeType = mimeTypeOrNil ?? "application/octet-stream"
         let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName!)\"" : ""
         let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
-        
+
         var tempData = Data()
         tempData.append("--\(boundary)\r\n".data(using: .utf8)!)
         tempData.append(contentDisposition.data(using: .utf8)!)
