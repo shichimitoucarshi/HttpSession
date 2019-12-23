@@ -93,27 +93,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
-        //        provider.request(api: .post(param: (key:"http_post",value:"Http Request POST 😄"))) { (data, responce, error) in
-        //            print (String(data: data!, encoding: .utf8))
-        //        }
-
-        //        provider.download(api: .download,
-        //                          data:nil,
-        //                          progress: { (written, total, expectedToWrite) in
-        //            let progress = Float(total) / Float(expectedToWrite)
-        //            print ("progress \(progress)")
-        //        }, download: { (url) in
-        //            print ("location: \(String(describing: url))")
-        //        }) { (data, responce, error) in
-        //
-        //        }
         // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     func detailViewController (param: String, text: String) {
