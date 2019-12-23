@@ -17,25 +17,22 @@ public protocol HttpApi: AnyObject {
 
     func request(api: ApiType, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void)
 
-    func download (api: ApiType,
-                   data: Data?,
-                   progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
-                   download: @escaping (_ path: URL?) -> Void,
-                   completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
+    func download(api: ApiType,
+                  data: Data?,
+                  progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
+                  download: @escaping (_ path: URL?) -> Void,
+                  completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
 }
 
 open class ApiProvider<Type: ApiProtocol>: HttpApi {
 
     public typealias ApiType = Type
     public var http: Http?
-
     public init(){}
 
     public func request(api: Type, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
-        if self.http == nil {
-            self.http = Http(api: api)
-        }
-        http!.session(completion: completion)
+        self.http = Http(api: api)
+        self.http!.session(completion: completion)
     }
 
     public func download(api: Type,
@@ -43,9 +40,7 @@ open class ApiProvider<Type: ApiProtocol>: HttpApi {
                          progress: @escaping (Int64, Int64, Int64) -> Void,
                          download: @escaping (URL?) -> Void,
                          completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        if self.http == nil {
-            self.http = Http(api: api)
-        }
+        self.http = Http(api: api)
         self.http!.download(resumeData: data,
                             progress: progress,
                             download: download,
