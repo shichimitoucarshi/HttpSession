@@ -15,7 +15,7 @@ open class Twitter {
 
         Twitter().twitOAuth(urlType: urlType, completion: { (data, response, error) in
             let responseData = String(data: data!, encoding: String.Encoding.utf8)
-            var attributes = responseData?.queryStringParameters
+            let attributes = responseData?.queryStringParameters
 
             if let attrbute = attributes?["oauth_token"] {
                 let url: String = "https://api.twitter.com/oauth/authorize?oauth_token=" + attrbute
