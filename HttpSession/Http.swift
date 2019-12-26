@@ -15,26 +15,35 @@ public protocol HttpApi: AnyObject {
 
     associatedtype ApiType: ApiProtocol
 
-    func request(api: ApiType, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void)
+    func send(api: ApiType, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void)
 
     func download(api: ApiType,
                   data: Data?,
                   progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
                   download: @escaping (_ path: URL?) -> Void,
                   completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
+
+    func upload(api: ApiType,
+                param: [String: Multipart.data],
+                completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
+    
+    func cancel (byResumeData: @escaping(Data?) -> Void)
 }
 
 open class ApiProvider<Type: ApiProtocol>: HttpApi {
 
-    public typealias ApiType = Type
-    public var http: Http?
+    public typealias ApiType = Type    
     public init(){}
 
-    public func request(api: Type, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
-        if self.http == nil {
-            self.http = Http(api: api)
-        }
-        self.http!.session(completion: completion)
+    public func send(api: Type,
+                        completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
+        Http.request(api: api).session(completion: completion)
+    }
+
+    public func upload(api: Type,
+                       param: [String: Multipart.data],
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        Http.request(api: api).upload(param: param, completionHandler: completion)
     }
 
     public func download(api: Type,
@@ -42,13 +51,16 @@ open class ApiProvider<Type: ApiProtocol>: HttpApi {
                          progress: @escaping (Int64, Int64, Int64) -> Void,
                          download: @escaping (URL?) -> Void,
                          completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        if self.http == nil {
-            self.http = Http(api: api)
+        Http.request(api: api).download(resumeData: data,
+                                        progress: progress,
+                                        download: download,
+                                        completionHandler: completionHandler)
+    }
+
+    public func cancel (byResumeData: @escaping(Data?) -> Void){
+        Http.shared.cancel { (data) in
+            byResumeData(data)
         }
-        self.http!.download(resumeData: data,
-                            progress: progress,
-                            download: download,
-                            completionHandler: completionHandler)
     }
 }
 
@@ -72,7 +84,7 @@ open class Http: NSObject {
      * member's value
      *
      */
-    public var data: Data = Data()
+    public var data: Data?
     public var params: [String: String]?
     public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask!
@@ -81,16 +93,20 @@ open class Http: NSObject {
     public var sessionConfig: URLSessionConfiguration?
     public var session: URLSession?
     public var request: Request?
-
     public var isCookie: Bool = false
+    public static let shared: Http = Http()
+    
+    private override init(){
+        super.init()
+    }
 
-    public init(url: String,
-                method: Method = .get,
-                header: [String: String]? = nil,
-                params: [String: String] = [:],
-                cookie: Bool = false,
-                basic: [String: String]? = nil) {
-
+    private func request(url: String,
+                         method: Method = .get,
+                         header: [String: String]? = nil,
+                         params: [String: String] = [:],
+                         cookie: Bool = false,
+                         basic: [String: String]? = nil) -> Http {
+        self.data = nil
         self.isCookie = cookie
         self.params = params
         self.request = Request(url: url,
@@ -99,20 +115,34 @@ open class Http: NSObject {
                                parameter: params,
                                cookie: cookie,
                                basic: basic)
+        return self
+    }
+    
+    public class func request(url: String,
+                        method: Method = .get,
+                        header: [String: String]? = nil,
+                        params: [String: String] = [:],
+                        cookie: Bool = false,
+                        basic: [String: String]? = nil) -> Http {
+        
+        return Http.shared.request(url: url,
+                                   method: method,
+                                   header: header,
+                                   params: params,
+                                   cookie: cookie,
+                                   basic: basic)
     }
 
-    public convenience init(api: ApiProtocol) {
+    public class func request(api: ApiProtocol) -> Http {
 
         let url = api.domain + "/" + api.endPoint
-
-        self.init(url: url,
-                  method: api.method,
-                  header: api.header,
-                  params: api.params,
-                  cookie: api.isCookie,
-                  basic: api.basicAuth)
+        return Http.shared.request(url: url,
+                                   method: api.method,
+                                   header: api.header,
+                                   params: api.params,
+                                   cookie: api.isCookie,
+                                   basic: api.basicAuth)
     }
-
     /*
      * Callback function
      * success Handler
@@ -136,6 +166,13 @@ open class Http: NSObject {
                           download: @escaping (_ path: URL?) -> Void,
                           completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
 
+        /*
+         /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+         
+         Resume data handling
+         
+         /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+         */
         if resumeData == nil {
             self.progress = progress
             self.completion = completionHandler
@@ -151,12 +188,15 @@ open class Http: NSObject {
     }
 
     public func cancel (byResumeData: @escaping(Data?) -> Void) {
-        self.downloadTask.cancel { (data) in
+        guard let downloadTask = self.downloadTask else {
+            return
+        }
+        downloadTask.cancel { (data) in
             byResumeData(data)
         }
     }
 
-    public func upload(param: [String: MultipartDto],
+    public func upload(param: [String: Multipart.data],
                        completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
         self.completion = completionHandler
         self.send(request: (self.request?.multipart(param: param))!)
@@ -209,10 +249,7 @@ extension Http: URLSessionDataDelegate, URLSessionDownloadDelegate, URLSessionTa
      *
      */
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-
-        self.data.append(data)
-
-        guard !data.isEmpty else { return }
+        self.recivedData(data: data)
     }
 
     /*
@@ -225,6 +262,14 @@ extension Http: URLSessionDataDelegate, URLSessionDownloadDelegate, URLSessionTa
                            completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         self.response = response as? HTTPURLResponse
         completionHandler(.allow)
+    }
+
+    func recivedData(data: Data) {
+        if self.data == nil {
+            self.data = data
+        }else{
+            self.data?.append(data)
+        }
     }
 }
 // swiftlint:enable all

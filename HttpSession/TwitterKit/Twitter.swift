@@ -87,9 +87,9 @@ open class Twitter {
      */
     public func twitOAuth(urlType: String, completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let url = "https://api.twitter.com/oauth/request_token"
-        let httpSession = Http(url: url, method: .post)
-        httpSession.request?.headers(header: self.authorize(url: url, param: ["oauth_callback": urlType]))
-        httpSession.session { (data, responce, error) in
+        let http = Http.request(url: url, method: .post)
+        http.request?.headers(header: self.authorize(url: url, param: ["oauth_callback": urlType]))
+        http.session { (data, responce, error) in
             completion(data, responce, error)
         }
     }
@@ -104,7 +104,7 @@ open class Twitter {
                             success: @escaping(TwiterUser) -> Void, failuer: @escaping(Error?, HTTPURLResponse?) -> Void) {
 
         let url = "https://api.twitter.com/oauth/access_token"
-        Http(url: url, method: .post, header: self.authorize(url: url, param: token.queryStringParameters))
+        Http.request(url: url, method: .post, header: self.authorize(url: url, param: token.queryStringParameters))
             .session(completion: { (data, responce, error) in
                 /*
                  * set authenticate user's info
@@ -129,7 +129,7 @@ open class Twitter {
         let url = "https://api.twitter.com/1.1/followers/list.json"
         let user: String = URI().encode(param: ["user_id": userId])
         let followers: String = url + "?" + user
-        Http(url: followers, method: .get, header: self.follwerHeader(beare: TwitterKey.shared.beareToken!)).session(completion: completion)
+        Http.request(url: followers, method: .get, header: self.follwerHeader(beare: TwitterKey.shared.beareToken!)).session(completion: completion)
     }
 
     /*
@@ -145,7 +145,7 @@ open class Twitter {
 
         let header: [String: String] = ["Authorization": "Basic " + credential,
                                         "Content-Type": "application/x-www-form-urlencoded; charset=utf8"]
-        Http(url: url, method: .post, header: header, params: ["grant_type": "client_credentials"]).session(completion: completion)
+        Http.request(url: url, method: .post, header: header, params: ["grant_type": "client_credentials"]).session(completion: completion)
     }
 
     func users(userId: String, success: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
@@ -159,12 +159,12 @@ open class Twitter {
                                                                         param: param,
                                                                         isUpload: false),
                                         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"]
-        Http(url: uri, method: .get, header: header).session(completion: success)
+        Http.request(url: uri, method: .get, header: header).session(completion: success)
     }
 
     public func tweet (tweet: String, img: UIImage, success: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
         let url: String = "https://api.twitter.com/1.1/statuses/update_with_media.json"
-        let http = Http(url: url, method: .post)
+        let http = Http.request(url: url, method: .post)
         http.request?.urlReq = Request(url: url, method: .post).postTweet(url: url, tweet: tweet, img: img)
         http.session(completion: success)
     }

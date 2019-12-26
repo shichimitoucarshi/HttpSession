@@ -21,7 +21,7 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpSession() {
         let exp = expectation(description: "Single Exception")
-        Http(url: "https://httpsession.work/getApi.json", method: .get)
+        Http.request(url: "https://httpsession.work/getApi.json", method: .get)
             .session { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
@@ -32,7 +32,7 @@ class HttpSessionTests: XCTestCase {
     func testHttpPost() {
         let exp = expectation(description: "Single Exception")
         let param = ["http_post": "Http Request POST 😄"]
-        Http(url: "https://httpsession.work/postApi.json", method: .post, params: param)
+        Http.request(url: "https://httpsession.work/postApi.json", method: .post, params: param)
             .session(completion: { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
@@ -47,7 +47,8 @@ class HttpSessionTests: XCTestCase {
                       "password": "password_jisjdhsnjfbns"]
         let url = "https://httpsession.work/signIn.json"
 
-        Http(url: url, method: .post, params: param1).session { (data, _, _) in
+        Http.request(url: url, method: .post, params: param1)
+            .session { (data, _, _) in
             XCTAssertNotNil(data)
             exp.fulfill()
         }
@@ -56,7 +57,7 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpCookieSignIned() {
         let exp = expectation(description: "Single Exception")
-        Http(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
+        Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
             .session(completion: { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
@@ -79,7 +80,7 @@ class HttpSessionTests: XCTestCase {
         dto.mimeType = "text/plain"
         dto.data = img
 
-        Http(url: "https://httpsession.work/imageUp.json", method: .post)
+        Http.request(url: "https://httpsession.work/imageUp.json", method: .post)
             .upload(param: ["img": dto], completionHandler: { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
@@ -91,7 +92,7 @@ class HttpSessionTests: XCTestCase {
         let exp = expectation(description: "Single Exception")
         let basicAuth: [String: String] = [Auth.user: "httpSession",
                                            Auth.password: "githubHttpsession"]
-        Http(url: "https://httpsession.work/basicauth.json",
+        Http.request(url: "https://httpsession.work/basicauth.json",
              method: .get,
              basic: basicAuth).session(completion: { (data, _, _) in
                 XCTAssertNotNil(data)
