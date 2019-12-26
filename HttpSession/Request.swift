@@ -133,7 +133,7 @@ open class Request {
                                             password: auth[Auth.password]!)]
     }
 
-    public func post(param: [String: String]) {
+    func post(param: [String: String]) {
 
         let value: String = URI.encode(param: param)
         let pData: Data = value.data(using: .utf8)! as Data

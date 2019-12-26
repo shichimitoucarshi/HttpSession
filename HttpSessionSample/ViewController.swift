@@ -21,7 +21,7 @@ extension DemoApi: ApiProtocol {
         case .zen, .post:
             return "https://httpsession.work"
         case .download:
-            return "https://shichimitoucarashi.com"
+            return "https://www.shichimitoucarashi.com"
         }
     }
 
@@ -86,7 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var isAuth = false
 
-    let provider: ApiProvider = ApiProvider<DemoApi>()
+//    let provider: ApiProvider = ApiProvider<DemoApi>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,13 +123,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         switch indexPath.row {
         case 0:
-            provider.request(api: .zen) { (data, _, _) in
+            ApiProvider<DemoApi>().request(api: .zen) { [unowned self] (data, _, _) in
                 self.detail(data: data!)
             }
             break
         case 1:
             let val: Tapul = Tapul(value: ("http_post", value:"Http Request POST 😄"))
-            provider.request(api: .post(param: val)) { (data, _, _) in
+            ApiProvider<DemoApi>().request(api: .post(param: val)) { [unowned self] (data, _, _) in
                 self.detail(data: data!, param: val.tapul)
             }
         case 2:
@@ -140,13 +140,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let url = "https://httpsession.work/signIn.json"
 
             Http(url: url, method: .post, params: param)
-                .session(completion: { (data, _, _) in
+                .session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!, param: param.toStr)
                 })
         case 3:
 
             Http(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
-                .session(completion: { (data, _, _) in
+                .session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!)
                 })
         case 4:
@@ -164,7 +164,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             dto.data = img
 
             Http(url: "https://httpsession.work/imageUp.json", method: .post)
-                .upload(param: ["img": dto], completionHandler: { (data, _, _) in
+                .upload(param: ["img": dto], completionHandler: { [unowned self] (data, _, _) in
                     self.detail(data: data!)
                 })
         case 5:
@@ -172,7 +172,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                                Auth.password: "githubHttpsession"]
             Http(url: "https://httpsession.work/basicauth.json",
                  method: .get,
-                 basic: basicAuth).session(completion: { (data, _, _) in
+                 basic: basicAuth).session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!)
                  })
         case 6:
@@ -182,7 +182,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             detailViewController.isDL = true
         case 7:
 
-            Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: {
+            Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: { [unowned self] in
 
                 let vals: [String] = ["Tweet", "users", "follwers"]
 
@@ -200,19 +200,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 print("error: \(String(describing: error)) responce: \(String(describing: responce))")
             })
         case 8:
-            Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { (data) in
+            Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { [unowned self] (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
                 print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
             })
         case 9:
-            Twitter.users(success: { (data) in
+            Twitter.users(success: { [unowned self] (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
                 print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
             })
         case 10:
-            Twitter.follwers(success: { (data) in
+            Twitter.follwers(success: { [unowned self] (data) in
                 self.detail(data: data!)
             }, failuer: { (responce, error) in
                 print ("responce: \(String(describing: responce)) error: \(String(describing: error))")

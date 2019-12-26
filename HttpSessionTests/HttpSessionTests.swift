@@ -110,38 +110,4 @@ class HttpSessionTests: XCTestCase {
         })
         wait(for: [exp], timeout: 60.0)
     }
-
-    func testProviderRequest() {
-        let exp = expectation(description: "Single Exception")
-        let provider = ApiProvider<TestApi>()
-        var test1Completion: Bool = false
-        var test2Completion: Bool = false
-        var differentRequests1: String?
-        var differentRequests2: String?
-        
-        let completion: (()->Void) = {
-            if test1Completion && test2Completion {
-                if differentRequests1 == differentRequests2 {
-                    XCTFail()
-                }
-                exp.fulfill()
-            }
-        }
-        
-        provider.request(api: .test1) { (data, responce, error) in
-            let codable = try! JSONDecoder().decode(TestCodable.self, from: data!)
-            differentRequests1 = codable.postParam
-            test1Completion = true
-            completion()
-        }
-        
-        provider.request(api: .test2) { (data, responce, error) in
-            let codable = try! JSONDecoder().decode(TestCodable.self, from: data!)
-            differentRequests2 = codable.postParam
-            test2Completion = true
-            completion()
-        }
-        
-        wait(for: [exp], timeout: 60.0)
-    }
 }
