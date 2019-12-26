@@ -56,10 +56,10 @@ class DetailViewController: UIViewController {
     @IBAction func pushStop(_ sender: Any) {
         self.provider
             .http!
-            .cancel { (data) in
-                self.data = data
+            .cancel { [weak self] (data) in
+                self?.data = data
                 print("data")
-                self.isCancel = true
+                self?.isCancel = true
         }
     }
 
@@ -70,12 +70,12 @@ class DetailViewController: UIViewController {
     private func httpDownload () {
         provider.download(api: .download,
                           data: self.data,
-                          progress: { (_, total, expectedToWrite) in
+                          progress: { [weak self] (_, total, expectedToWrite) in
                             let progress = Float(total) / Float(expectedToWrite)
                             print ("progress \(progress)")
                             DispatchQueue.main.async {
-                                self.status.text = "\(total)/\(expectedToWrite)"
-                                self.progress.setProgress(progress, animated: true)
+                                self?.status.text = "\(total)/\(expectedToWrite)"
+                                self?.progress.setProgress(progress, animated: true)
                             }
         }, download: { (url) in
             print ("location: \(String(describing: url))")

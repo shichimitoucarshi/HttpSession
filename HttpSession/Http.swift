@@ -31,7 +31,9 @@ open class ApiProvider<Type: ApiProtocol>: HttpApi {
     public init(){}
 
     public func request(api: Type, completion:@escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
-        self.http = Http(api: api)
+        if self.http == nil {
+            self.http = Http(api: api)
+        }
         self.http!.session(completion: completion)
     }
 
@@ -40,7 +42,9 @@ open class ApiProvider<Type: ApiProtocol>: HttpApi {
                          progress: @escaping (Int64, Int64, Int64) -> Void,
                          download: @escaping (URL?) -> Void,
                          completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        self.http = Http(api: api)
+        if self.http == nil {
+            self.http = Http(api: api)
+        }
         self.http!.download(resumeData: data,
                             progress: progress,
                             download: download,
