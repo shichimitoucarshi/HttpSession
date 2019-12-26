@@ -11,6 +11,17 @@ import UIKit
 
 open class Multipart {
 
+    public struct data {
+        public var fileName: String!
+        public var mimeType: String!
+        public var data: Data!
+        public init() {
+            self.fileName = ""
+            self.mimeType = ""
+            self.data = Data()
+        }
+    }
+
     public var bundary: String
     public var uuid: String
 
@@ -19,12 +30,12 @@ open class Multipart {
         self.bundary = String(format: "----\(self.uuid)")
     }
 
-    public func multiparts(params: [String: MultipartDto]) -> Data {
+    public func multiparts(params: [String: Multipart.data]) -> Data {
 
         var post: Data = Data()
 
         for(key, value) in params {
-            let dto: MultipartDto = value
+            let dto: Multipart.data = value
             post.append(multipart(key: key, fileName: dto.fileName as String, mineType: dto.mimeType, data: dto.data))
         }
         return post

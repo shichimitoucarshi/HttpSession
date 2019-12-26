@@ -31,35 +31,25 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         if self.isDL == true {
+            self.responceText.isHidden = true
             self.progress.setProgress(0.0, animated: true)
             self.httpDownload()
-        }
-    }
-
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let flg = self.isDL ? true : false
-        self.responceText.isHidden = flg
-        if flg != true {
+        }else{
             self.progress.isHidden = true
             self.status.isHidden = true
             self.stopButton.isHidden = true
             self.startButton.isHidden = true
+            self.responceText.text = ""
             self.responceText.text = text
         }
     }
 
     @IBAction func pushStop(_ sender: Any) {
         self.provider
-            .http!
             .cancel { [weak self] (data) in
-                self?.data = data
-                print("data")
-                self?.isCancel = true
+            self?.data = data
+            print("data")
+            self?.isCancel = true
         }
     }
 
@@ -81,6 +71,12 @@ class DetailViewController: UIViewController {
             print ("location: \(String(describing: url))")
         }) { (_, _, _) in
 
+        }
+    }
+    
+    deinit {
+        provider.cancel { _ in
+            print("Deinitializer")
         }
     }
 }

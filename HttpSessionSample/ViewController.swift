@@ -86,7 +86,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var isAuth = false
 
-//    let provider: ApiProvider = ApiProvider<DemoApi>()
+    let provider: ApiProvider = ApiProvider<DemoApi>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,10 +101,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         detailViewController.text = "param:\n\(param)\n responce:\n \(text)"
     }
 
-    func detail(data: Data, param: String = "") {
+    func detail(data: Data?, param: String = "") {
         DispatchQueue.main.async {
-            let responceStr = String(data: data, encoding: .utf8)
-            self.detailViewController(param: param, text: responceStr!)
+            if data != nil {
+                let responceStr = String(data: data!, encoding: .utf8)
+                self.detailViewController(param: param, text: responceStr!)
+            }
         }
     }
 
@@ -123,13 +125,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         switch indexPath.row {
         case 0:
-            ApiProvider<DemoApi>().request(api: .zen) { [unowned self] (data, _, _) in
+            provider.send(api: .zen) { [unowned self] (data, _, _) in
                 self.detail(data: data!)
             }
             break
         case 1:
             let val: Tapul = Tapul(value: ("http_post", value:"Http Request POST 😄"))
-            ApiProvider<DemoApi>().request(api: .post(param: val)) { [unowned self] (data, _, _) in
+            provider.send(api: .post(param: val)) { [unowned self] (data, _, _) in
                 self.detail(data: data!, param: val.tapul)
             }
         case 2:
@@ -139,18 +141,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                          "password": "password_jisjdhsnjfbns"]
             let url = "https://httpsession.work/signIn.json"
 
-            Http(url: url, method: .post, params: param)
+            Http.request(url: url, method: .post, params: param)
                 .session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!, param: param.toStr)
                 })
         case 3:
 
-            Http(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
+            Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
                 .session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!)
                 })
         case 4:
-            var dto: MultipartDto = MultipartDto()
+            var dto: Multipart.data = Multipart.data()
             let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
             let img: Data
             do {
@@ -163,14 +165,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             dto.mimeType = "text/plain"
             dto.data = img
 
-            Http(url: "https://httpsession.work/imageUp.json", method: .post)
+            Http.request(url: "https://httpsession.work/imageUp.json", method: .post)
                 .upload(param: ["img": dto], completionHandler: { [unowned self] (data, _, _) in
                     self.detail(data: data!)
                 })
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
                                                Auth.password: "githubHttpsession"]
-            Http(url: "https://httpsession.work/basicauth.json",
+            Http.request(url: "https://httpsession.work/basicauth.json",
                  method: .get,
                  basic: basicAuth).session(completion: { [unowned self] (data, _, _) in
                     self.detail(data: data!)

@@ -9,17 +9,6 @@
 import Foundation
 import UIKit
 
-public struct MultipartDto {
-    public var fileName: String!
-    public var mimeType: String!
-    public var data: Data!
-    public init() {
-        self.fileName = ""
-        self.mimeType = ""
-        self.data = Data()
-    }
-}
-
 open class Request {
 
     var url: URL!
@@ -147,7 +136,7 @@ open class Request {
         self.urlReq.httpBody = pData as Data
     }
 
-    public func multipart(param: [String: MultipartDto]) -> URLRequest {
+    public func multipart(param: [String: Multipart.data]) -> URLRequest {
 
         let multipart: Multipart = Multipart()
         let data: Data = multipart.multiparts(params: param)
