@@ -67,7 +67,7 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpMultipart() {
         let exp = expectation(description: "Single Exception")
-        var dto: MultipartDto = MultipartDto()
+        var dto: Multipart.data = Multipart.data()
         let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
         var img: Data = Data()
         do {
