@@ -73,7 +73,7 @@ $ git clone https://github.com/keisukeYamagishi/HttpSession.git
 GET http method
 
 ```swift
-Http(url: "http://153.126.160.55/getApi.json", method: .get)
+Http.request(url: "http://153.126.160.55/getApi.json", method: .get)
   .session(completion: { (data, responce, error) in
     self.detail(data: data!)
 })
@@ -85,7 +85,7 @@ POST http method
 
 let param = ["http_post":"Http Request POST 😄"]
             
-Http(url: "http://153.126.160.55/postApi.json",method: .post)
+Http.request(url: "http://153.126.160.55/postApi.json",method: .post)
   .session(param: param,
   completion: { (data, responce, error) in {
   self.detail(data: data!, param: param.hashString())
@@ -96,7 +96,7 @@ Http(url: "http://153.126.160.55/postApi.json",method: .post)
 Download http method
 
 ```swift
-Http(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
+Http.request(url: "https://shichimitoucarashi.com/mp4/file1.mp4", method: .get)
                 .download(progress: { (written, total, expectedToWrite) in
                     let progress = Float(total) / Float(expectedToWrite)
                     print(String(format: "%.2f", progress * 100) + "%")                    
@@ -177,11 +177,11 @@ extension DemoApi:ApiProtocol {
 ```swift
 let provider:ApiProvider = ApiProvider<DemoApi>()
 
-provider.request(api: .zen) { (data, responce, error) in
+provider.send(api: .zen) { (data, responce, error) in
     self.detail(data: data!)
 }
 
-provider.request(api: .post(param: (key:"http_post",value:"Http Request POST 😄"))) { (data, responce, error) in
+provider.send(api: .post(param: (key:"http_post",value:"Http Request POST 😄"))) { (data, responce, error) in
     print (String(data: data!, encoding: .utf8))
 }
 ```
