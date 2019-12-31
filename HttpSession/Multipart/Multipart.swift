@@ -41,7 +41,7 @@ open class Multipart {
         return post
     }
 
-    public func multipart( key: String, fileName: String, mineType: String, data: Data) -> Data {
+    public func multipart(key: String, fileName: String, mineType: String, data: Data) -> Data {
 
         var body = Data()
         let CRLF = "\r\n"
