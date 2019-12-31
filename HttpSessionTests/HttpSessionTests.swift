@@ -11,14 +11,6 @@ import HttpSession
 
 class HttpSessionTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testHttpSession() {
         let exp = expectation(description: "Single Exception")
         Http.request(url: "https://httpsession.work/getApi.json", method: .get)
@@ -32,11 +24,12 @@ class HttpSessionTests: XCTestCase {
     func testHttpPost() {
         let exp = expectation(description: "Single Exception")
         let param = ["http_post": "Http Request POST 😄"]
-        Http.request(url: "https://httpsession.work/postApi.json", method: .post, params: param)
-            .session(completion: { (data, _, _) in
+        Http.request(url: "https://httpsession.work/postApi.json",
+                     method: .post,
+                     params: param).session { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
-            })
+            }
         wait(for: [exp], timeout: 60.0)
     }
 
@@ -47,8 +40,9 @@ class HttpSessionTests: XCTestCase {
                       "password": "password_jisjdhsnjfbns"]
         let url = "https://httpsession.work/signIn.json"
 
-        Http.request(url: url, method: .post, params: param1)
-            .session { (data, _, _) in
+        Http.request(url: url,
+                     method: .post,
+                     params: param1).session { (data, _, _) in
             XCTAssertNotNil(data)
             exp.fulfill()
         }
@@ -57,17 +51,18 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpCookieSignIned() {
         let exp = expectation(description: "Single Exception")
-        Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
-            .session(completion: { (data, _, _) in
+        Http.request(url: "https://httpsession.work/signIned.json",
+                     method: .get,
+                     cookie: true ).session { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
-            })
+            }
         wait(for: [exp], timeout: 60.0)
     }
 
     func testHttpMultipart() {
         let exp = expectation(description: "Single Exception")
-        var dto: Multipart.data = Multipart.data()
+        var multipartData: Multipart.data = Multipart.data()
         let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
         var img: Data = Data()
         do {
@@ -76,12 +71,13 @@ class HttpSessionTests: XCTestCase {
 
         }
 
-        dto.fileName = "Hello.txt"
-        dto.mimeType = "text/plain"
-        dto.data = img
+        multipartData.fileName = "Hello.txt"
+        multipartData.mimeType = "text/plain"
+        multipartData.data = img
 
-        Http.request(url: "https://httpsession.work/imageUp.json", method: .post)
-            .upload(param: ["img": dto], completionHandler: { (data, _, _) in
+        Http.request(url: "https://httpsession.work/imageUp.json",
+                     method: .post).upload(param: ["img": multipartData],
+                                           completionHandler: { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
             })
@@ -94,10 +90,10 @@ class HttpSessionTests: XCTestCase {
                                            Auth.password: "githubHttpsession"]
         Http.request(url: "https://httpsession.work/basicauth.json",
              method: .get,
-             basic: basicAuth).session(completion: { (data, _, _) in
+             basic: basicAuth).session { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
-             })
+             }
         wait(for: [exp], timeout: 60.0)
     }
 
