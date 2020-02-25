@@ -28,6 +28,8 @@ public protocol HttpApi: AnyObject {
                 completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
     
     func cancel (byResumeData: @escaping(Data?) -> Void)
+
+    func cancelTask()
 }
 
 open class ApiProvider<Type: ApiProtocol>: HttpApi {
@@ -61,6 +63,10 @@ open class ApiProvider<Type: ApiProtocol>: HttpApi {
         Http.shared.cancel { (data) in
             byResumeData(data)
         }
+    }
+
+    public func cancelTask() {
+        Http.shared.cancel()
     }
 }
 
@@ -194,6 +200,10 @@ open class Http: NSObject {
         downloadTask.cancel { (data) in
             byResumeData(data)
         }
+    }
+
+    public func cancel (){
+        self.dataTask.cancel()
     }
 
     public func upload(param: [String: Multipart.data],
