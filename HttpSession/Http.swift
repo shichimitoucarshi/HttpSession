@@ -203,7 +203,7 @@ open class Http: NSObject {
     }
 
     public func cancel (){
-        self.dataTask.cancel()
+        self.dataTask?.cancel()
     }
 
     public func upload(param: [String: Multipart.data],
