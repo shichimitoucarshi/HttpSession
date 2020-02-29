@@ -21,19 +21,12 @@
 		C7D7A39022D0FE9200C6517B /* HttpSession.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7D7A38922D0FE9200C6517B /* HttpSession.framework */; };
 		C7D7A39122D0FE9200C6517B /* HttpSession.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C7D7A38922D0FE9200C6517B /* HttpSession.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C7D7A39E22D0FEBD00C6517B /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39522D0FEBD00C6517B /* ApiProtocol.swift */; };
-		C7D7A39F22D0FEBD00C6517B /* HMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39722D0FEBD00C6517B /* HMAC.swift */; };
-		C7D7A3A022D0FEBD00C6517B /* SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39822D0FEBD00C6517B /* SHA1.swift */; };
-		C7D7A3A122D0FEBD00C6517B /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39922D0FEBD00C6517B /* Cookie.swift */; };
-		C7D7A3A222D0FEBD00C6517B /* AuthUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39A22D0FEBD00C6517B /* AuthUtils.swift */; };
 		C7D7A3A322D0FEBD00C6517B /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39B22D0FEBD00C6517B /* Http.swift */; };
 		C7D7A3A422D0FEBD00C6517B /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A39D22D0FEBD00C6517B /* URI.swift */; };
 		C7D7A3AF22D0FEC500C6517B /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3A622D0FEC500C6517B /* Multipart.swift */; };
-		C7D7A3B022D0FEC500C6517B /* TwitterApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3A822D0FEC500C6517B /* TwitterApiKey.swift */; };
-		C7D7A3B122D0FEC500C6517B /* TwitAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3A922D0FEC500C6517B /* TwitAccount.swift */; };
-		C7D7A3B222D0FEC500C6517B /* Twitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3AA22D0FEC500C6517B /* Twitter.swift */; };
-		C7D7A3B322D0FEC500C6517B /* TwitterExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3AC22D0FEC500C6517B /* TwitterExtention.swift */; };
-		C7D7A3B422D0FEC500C6517B /* OAuthKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3AD22D0FEC500C6517B /* OAuthKit.swift */; };
 		C7D7A3B522D0FEC500C6517B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7A3AE22D0FEC500C6517B /* Request.swift */; };
+		C7DAF5DD240A6A0C005AC2A4 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DAF5DC240A6A0C005AC2A4 /* Cookie.swift */; };
+		C7DAF5DF240A6A43005AC2A4 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DAF5DE240A6A43005AC2A4 /* Auth.swift */; };
 		C7F2F18A208F0CC80034CD7F /* Re120.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F189208F0CC70034CD7F /* Re120.jpg */; };
 		C7F2F18C208F103B0034CD7F /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = C7F2F18B208F103B0034CD7F /* re.txt */; };
 /* End PBXBuildFile section */
@@ -97,19 +90,12 @@
 		C7D7A38B22D0FE9200C6517B /* HttpSession.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HttpSession.h; sourceTree = "<group>"; };
 		C7D7A38C22D0FE9200C6517B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D7A39522D0FEBD00C6517B /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
-		C7D7A39722D0FEBD00C6517B /* HMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMAC.swift; sourceTree = "<group>"; };
-		C7D7A39822D0FEBD00C6517B /* SHA1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SHA1.swift; sourceTree = "<group>"; };
-		C7D7A39922D0FEBD00C6517B /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
-		C7D7A39A22D0FEBD00C6517B /* AuthUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthUtils.swift; sourceTree = "<group>"; };
 		C7D7A39B22D0FEBD00C6517B /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
 		C7D7A39D22D0FEBD00C6517B /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
 		C7D7A3A622D0FEC500C6517B /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
-		C7D7A3A822D0FEC500C6517B /* TwitterApiKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterApiKey.swift; sourceTree = "<group>"; };
-		C7D7A3A922D0FEC500C6517B /* TwitAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitAccount.swift; sourceTree = "<group>"; };
-		C7D7A3AA22D0FEC500C6517B /* Twitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Twitter.swift; sourceTree = "<group>"; };
-		C7D7A3AC22D0FEC500C6517B /* TwitterExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterExtention.swift; sourceTree = "<group>"; };
-		C7D7A3AD22D0FEC500C6517B /* OAuthKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthKit.swift; sourceTree = "<group>"; };
 		C7D7A3AE22D0FEC500C6517B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		C7DAF5DC240A6A0C005AC2A4 /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		C7DAF5DE240A6A43005AC2A4 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		C7F2F189208F0CC70034CD7F /* Re120.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Re120.jpg; sourceTree = "<group>"; };
 		C7F2F18B208F103B0034CD7F /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,27 +186,16 @@
 			isa = PBXGroup;
 			children = (
 				C7D7A39522D0FEBD00C6517B /* ApiProtocol.swift */,
-				C7D7A39622D0FEBD00C6517B /* AuthKit */,
+				C7DAF5DE240A6A43005AC2A4 /* Auth.swift */,
+				C7DAF5DC240A6A0C005AC2A4 /* Cookie.swift */,
 				C7D7A39C22D0FEBD00C6517B /* Encode */,
 				C7D7A39B22D0FEBD00C6517B /* Http.swift */,
 				C7D7A38B22D0FE9200C6517B /* HttpSession.h */,
 				C7D7A38C22D0FE9200C6517B /* Info.plist */,
 				C7D7A3A522D0FEC500C6517B /* Multipart */,
 				C7D7A3AE22D0FEC500C6517B /* Request.swift */,
-				C7D7A3A722D0FEC500C6517B /* TwitterKit */,
 			);
 			path = HttpSession;
-			sourceTree = "<group>";
-		};
-		C7D7A39622D0FEBD00C6517B /* AuthKit */ = {
-			isa = PBXGroup;
-			children = (
-				C7D7A39722D0FEBD00C6517B /* HMAC.swift */,
-				C7D7A39822D0FEBD00C6517B /* SHA1.swift */,
-				C7D7A39922D0FEBD00C6517B /* Cookie.swift */,
-				C7D7A39A22D0FEBD00C6517B /* AuthUtils.swift */,
-			);
-			path = AuthKit;
 			sourceTree = "<group>";
 		};
 		C7D7A39C22D0FEBD00C6517B /* Encode */ = {
@@ -237,26 +212,6 @@
 				C7D7A3A622D0FEC500C6517B /* Multipart.swift */,
 			);
 			path = Multipart;
-			sourceTree = "<group>";
-		};
-		C7D7A3A722D0FEC500C6517B /* TwitterKit */ = {
-			isa = PBXGroup;
-			children = (
-				C7D7A3A822D0FEC500C6517B /* TwitterApiKey.swift */,
-				C7D7A3A922D0FEC500C6517B /* TwitAccount.swift */,
-				C7D7A3AA22D0FEC500C6517B /* Twitter.swift */,
-				C7D7A3AB22D0FEC500C6517B /* Extention */,
-				C7D7A3AD22D0FEC500C6517B /* OAuthKit.swift */,
-			);
-			path = TwitterKit;
-			sourceTree = "<group>";
-		};
-		C7D7A3AB22D0FEC500C6517B /* Extention */ = {
-			isa = PBXGroup;
-			children = (
-				C7D7A3AC22D0FEC500C6517B /* TwitterExtention.swift */,
-			);
-			path = Extention;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,19 +386,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7D7A39F22D0FEBD00C6517B /* HMAC.swift in Sources */,
-				C7D7A3A222D0FEBD00C6517B /* AuthUtils.swift in Sources */,
 				C7D7A3A422D0FEBD00C6517B /* URI.swift in Sources */,
-				C7D7A3A122D0FEBD00C6517B /* Cookie.swift in Sources */,
+				C7DAF5DD240A6A0C005AC2A4 /* Cookie.swift in Sources */,
 				C7D7A3AF22D0FEC500C6517B /* Multipart.swift in Sources */,
-				C7D7A3B122D0FEC500C6517B /* TwitAccount.swift in Sources */,
-				C7D7A3B422D0FEC500C6517B /* OAuthKit.swift in Sources */,
-				C7D7A3B022D0FEC500C6517B /* TwitterApiKey.swift in Sources */,
 				C7D7A39E22D0FEBD00C6517B /* ApiProtocol.swift in Sources */,
-				C7D7A3A022D0FEBD00C6517B /* SHA1.swift in Sources */,
-				C7D7A3B222D0FEC500C6517B /* Twitter.swift in Sources */,
+				C7DAF5DF240A6A43005AC2A4 /* Auth.swift in Sources */,
 				C7D7A3B522D0FEC500C6517B /* Request.swift in Sources */,
-				C7D7A3B322D0FEC500C6517B /* TwitterExtention.swift in Sources */,
 				C7D7A3A322D0FEBD00C6517B /* Http.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

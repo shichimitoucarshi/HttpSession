@@ -178,47 +178,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.detail(data: data!)
                  })
         case 6:
-
             let detailViewController: DetailViewController = (self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as? DetailViewController)!
             self.navigationController?.pushViewController(detailViewController, animated: true)
             detailViewController.isDL = true
-        case 7:
-
-            Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: { [unowned self] in
-
-                let vals: [String] = ["Tweet", "users", "follwers"]
-
-                for val in vals {
-                    if self.apis.contains(val) == false {
-                        self.apis.append(val)
-                    }
-                }
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-
-            }, failuer: { (error, responce) in
-                print("error: \(String(describing: error)) responce: \(String(describing: responce))")
-            })
-        case 8:
-            Twitter.tweet(tweet: "HttpSession https://cocoapods.org/pods/HttpSession", img: UIImage(named: "Re120.jpg")!, success: { [unowned self] (data) in
-                self.detail(data: data!)
-            }, failuer: { (responce, error) in
-                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
-            })
-        case 9:
-            Twitter.users(success: { [unowned self] (data) in
-                self.detail(data: data!)
-            }, failuer: { (responce, error) in
-                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
-            })
-        case 10:
-            Twitter.follwers(success: { [unowned self] (data) in
-                self.detail(data: data!)
-            }, failuer: { (responce, error) in
-                print ("responce: \(String(describing: responce)) error: \(String(describing: error))")
-            })
         default:
             print ("Default")
         }

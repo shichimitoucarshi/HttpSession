@@ -96,15 +96,4 @@ class HttpSessionTests: XCTestCase {
              }
         wait(for: [exp], timeout: 60.0)
     }
-
-    func testHttpTwitterOAuth() {
-        let exp = expectation(description: "Single Exception")
-        Twitter.oAuth(urlType: "httpRequest-NNKAREvWGCn7Riw02gcOYXSVP://", success: {
-            exp.fulfill()
-        }, failuer: { (_, _) in
-            XCTFail()
-            exp.fulfill()
-        })
-        wait(for: [exp], timeout: 60.0)
-    }
 }
