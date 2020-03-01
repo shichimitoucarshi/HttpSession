@@ -32,9 +32,11 @@ public protocol HttpApi: AnyObject {
     func cancelTask()
 }
 
-open class ApiProvider<Type: ApiProtocol>: HttpApi {
+public class ApiProvider<Type: ApiProtocol>: HttpApi {
 
     public typealias ApiType = Type
+
+    public init(){}
 
     public func send(api: Type,
                         completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
