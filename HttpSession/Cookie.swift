@@ -21,11 +21,9 @@ open class Cookie {
     }
 
     public func set(responce: URLResponse) {
-
         guard let res = responce as? HTTPURLResponse,
             let header = res.allHeaderFields as? [String: String] else { return }
         let cookies = HTTPCookie.cookies(withResponseHeaderFields: header, for: res.url!)
-
         for cookie in cookies {
             HTTPCookieStorage.shared.setCookie(cookie)
         }

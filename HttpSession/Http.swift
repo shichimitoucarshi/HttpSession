@@ -32,9 +32,10 @@ public protocol HttpApi: AnyObject {
     func cancelTask()
 }
 
-open class ApiProvider<Type: ApiProtocol>: HttpApi {
+public class ApiProvider<Type: ApiProtocol>: HttpApi {
 
-    public typealias ApiType = Type    
+    public typealias ApiType = Type
+
     public init(){}
 
     public func send(api: Type,
@@ -101,7 +102,7 @@ open class Http: NSObject {
     public var request: Request?
     public var isCookie: Bool = false
     public static let shared: Http = Http()
-    
+
     private override init(){
         super.init()
     }
@@ -123,7 +124,7 @@ open class Http: NSObject {
                                basic: basic)
         return self
     }
-    
+
     public class func request(url: String,
                         method: Method = .get,
                         header: [String: String]? = nil,
