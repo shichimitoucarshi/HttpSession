@@ -94,8 +94,8 @@ open class Http: NSObject {
     public var data: Data?
     public var params: [String: String]?
     public var response: HTTPURLResponse?
-    public var dataTask: URLSessionDataTask!
-    public var downloadTask: URLSessionDownloadTask!
+    public var dataTask: URLSessionDataTask?
+    public var downloadTask: URLSessionDownloadTask?
     public var url: String?
     public var sessionConfig: URLSessionConfiguration?
     public var session: URLSession?
@@ -186,19 +186,15 @@ open class Http: NSObject {
             self.download = download
             self.sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
             self.session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
-
-            self.downloadTask = self.session!.downloadTask(with: (self.request?.urlReq)!)
+            self.downloadTask = self.session?.downloadTask(with: (self.request?.urlReq)!)
         } else {
             self.downloadTask = self.session?.downloadTask(withResumeData: resumeData!)
         }
-        self.downloadTask.resume()
+        self.downloadTask?.resume()
     }
 
     public func cancel (byResumeData: @escaping(Data?) -> Void) {
-        guard let downloadTask = self.downloadTask else {
-            return
-        }
-        downloadTask.cancel { (data) in
+        downloadTask?.cancel { (data) in
             byResumeData(data)
         }
     }
@@ -216,13 +212,13 @@ open class Http: NSObject {
     /*
      * send Request
      */
-    func send(request: URLRequest) {
+    private func send(request: URLRequest) {
         if self.sessionConfig == nil {
             self.sessionConfig = URLSessionConfiguration.default
         }
         let session = URLSession(configuration: self.sessionConfig!, delegate: self, delegateQueue: .main)
         self.dataTask = session.dataTask(with: request)
-        self.dataTask.resume()
+        self.dataTask?.resume()
     }
 }
 
