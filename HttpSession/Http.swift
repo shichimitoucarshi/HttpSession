@@ -96,7 +96,6 @@ open class Http: NSObject {
     public var response: HTTPURLResponse?
     public var dataTask: URLSessionDataTask?
     public var downloadTask: URLSessionDownloadTask?
-    public var url: String?
     public var sessionConfig: URLSessionConfiguration?
     public var session: URLSession?
     public var request: Request?
