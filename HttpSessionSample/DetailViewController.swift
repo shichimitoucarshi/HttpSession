@@ -14,7 +14,6 @@ let detailViewControllerId: String = "DetailViewController"
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var responceText: UITextView!
-
     @IBOutlet weak var progress: UIProgressView!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var stopButton: UIButton!
