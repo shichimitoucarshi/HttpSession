@@ -81,8 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 "HTTP GET SignIned Connection",
                 "HTTP POST Upload image png",
                 "HTTP GET Basic Authenticate",
-                "HTTP Download binary",
-                "HTTP POST Twitter OAuth"]
+                "HTTP Download binary"]
 
     var isAuth = false
 
