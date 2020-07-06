@@ -54,21 +54,4 @@ open class Multipart {
 
         return body
     }
-
-    public static func mulipartContent(with boundary: String,
-                                       data: Data,
-                                       fileName: String?,
-                                       parameterName: String,
-                                       mimeType mimeTypeOrNil: String?) -> Data {
-        let mimeType = mimeTypeOrNil ?? "application/octet-stream"
-        let fileNameContentDisposition = fileName != nil ? "filename=\"\(fileName!)\"" : ""
-        let contentDisposition = "Content-Disposition: form-data; name=\"\(parameterName)\"; \(fileNameContentDisposition)\r\n"
-
-        var tempData = Data()
-        tempData.append("--\(boundary)\r\n".data(using: .utf8)!)
-        tempData.append(contentDisposition.data(using: .utf8)!)
-        tempData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8)!)
-        tempData.append(data)
-        return tempData
-    }
 }
