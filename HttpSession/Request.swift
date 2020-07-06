@@ -15,8 +15,12 @@ open class Request {
 
     /*
      * Initializer
-     * parame: URLRequest
-     *
+     * param url: String
+     *       method: Http.Method
+     *       headers: [String: String] nullable default parameter -> nil
+     *       parameter: [String: String]? nullable default parameter -> nil
+     *       cookie: Bool default parameter -> false
+     *       basic:
      */
     public init (url: String,
                  method: Http.Method,
@@ -49,14 +53,28 @@ open class Request {
         }
     }
 
+    /*
+     * private func buildRequest
+     * Function to build a URLRequest
+     * param  url: String
+     *        method: Http.Method
+     * Return URLRequest
+     * throws Invalid URL
+     */
     private func buildRequest(url: String, method: Http.Method) throws -> URLRequest {
-        self.urlRequest = try URLRequest(url: url.toUrl())
-        self.urlRequest.httpMethod = method.rawValue
-        self.urlRequest.allHTTPHeaderFields = HttpHeader.appInfo
-        return self.urlRequest
+        var request = try URLRequest(url: url.toUrl())
+        request.httpMethod = method.rawValue
+        request.allHTTPHeaderFields = HttpHeader.appInfo
+        return request
     }
 
-    func isParamater (method: Http.Method) -> Bool {
+    /*
+     * private func isParameter
+     * parameter is required or not.
+     * param method: Http.Method
+     * Return Bool
+     */
+    private func isParamater (method: Http.Method) -> Bool {
         switch method {
         case .get, .delete, .head:
             return false
@@ -65,28 +83,35 @@ open class Request {
         }
     }
 
-    func post(param: [String: String]) {
+    /*
+     * public func post
+     * Create a post method URLRequest.
+     * param param: [String: String]
+     * Retrun Void
+     */
+    public func post(param: [String: String]) -> Void {
 
-        let value: String = URI.encode(param: param)
-        let pData: Data = value.data(using: .utf8)! as Data
-
-        let header: [String: String] = HttpHeader.postHeader(pData.count.description)
-
+        guard let value: Data = URI.encode(param: param).data(using: .utf8) as Data? else {
+            return
+        }
+        let header: [String: String] = HttpHeader.postHeader(value.count.description)
         self.urlRequest.headers(header: header)
-
-        self.urlRequest.httpBody = pData as Data
+        self.urlRequest.httpBody = value
     }
 
+    /*
+     * public func multipart
+     * Create a multipart URLRequest.
+     * param [String: Multipart.data]
+     * Return URLRequest nullable
+     */
     public func multipart(param: [String: Multipart.data]) -> URLRequest? {
-
-        let multipart: Multipart = Multipart()
-        let data: Data = multipart.multiparts(params: param)
-
-        let header = HttpHeader.multipart(multipart.bundary)
         guard self.urlRequest != nil else {
             return nil
         }
-        self.urlRequest.headers(header: header)
+        let multipart: Multipart = Multipart()
+        let data: Data = multipart.multiparts(params: param)
+        self.urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
         self.urlRequest.httpBody = data
         return self.urlRequest
     }
