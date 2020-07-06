@@ -14,7 +14,7 @@ open class Auth {
 
     public static func basic (user: String, password: String) -> String {
         let basic = "\(user):\(password)".data(using: .utf8)
-        let basicAuth = "Basic \(String(describing: basic!.base64EncodedString(options: [])))"
+        let basicAuth = "Basic \(String(describing: basic?.base64EncodedString(options: [])))"
         return basicAuth
     }
 }

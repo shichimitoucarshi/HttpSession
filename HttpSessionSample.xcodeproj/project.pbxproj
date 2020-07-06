@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C73C4875208E559000176EFB /* GPSButton001.png in Resources */ = {isa = PBXBuildFile; fileRef = C73C4874208E559000176EFB /* GPSButton001.png */; };
+		C77F4B8E24B30B8600912361 /* HttpHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77F4B8D24B30B8600912361 /* HttpHeader.swift */; };
 		C788B72F208F752900B3F108 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C788B72E208F752900B3F108 /* DetailViewController.swift */; };
 		C791EF43208BA01000592178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF42208BA01000592178 /* AppDelegate.swift */; };
 		C791EF45208BA01000592178 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C791EF44208BA01000592178 /* ViewController.swift */; };
@@ -74,6 +75,7 @@
 /* Begin PBXFileReference section */
 		C73C4874208E559000176EFB /* GPSButton001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GPSButton001.png; sourceTree = "<group>"; };
 		C77AD82521F9CCDB00218D4D /* HttpSession.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = HttpSession.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C77F4B8D24B30B8600912361 /* HttpHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeader.swift; sourceTree = "<group>"; };
 		C788B72E208F752900B3F108 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C791EF3F208BA01000592178 /* HttpSessionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpSessionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C791EF42208BA01000592178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				C7D7A38C22D0FE9200C6517B /* Info.plist */,
 				C7D7A3A522D0FEC500C6517B /* Multipart */,
 				C7D7A3AE22D0FEC500C6517B /* Request.swift */,
+				C77F4B8D24B30B8600912361 /* HttpHeader.swift */,
 			);
 			path = HttpSession;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				C7DAF5DD240A6A0C005AC2A4 /* Cookie.swift in Sources */,
 				C7D7A3AF22D0FEC500C6517B /* Multipart.swift in Sources */,
 				C7D7A39E22D0FEBD00C6517B /* ApiProtocol.swift in Sources */,
+				C77F4B8E24B30B8600912361 /* HttpHeader.swift in Sources */,
 				C7DAF5DF240A6A43005AC2A4 /* Auth.swift in Sources */,
 				C7D7A3B522D0FEC500C6517B /* Request.swift in Sources */,
 				C7D7A3A322D0FEBD00C6517B /* Http.swift in Sources */,
