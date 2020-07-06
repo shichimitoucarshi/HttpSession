@@ -28,7 +28,7 @@ open class Request {
                  basic: [String: String]? = nil) {
 
         do {
-            self.urlRequest = try self.buildRequest(url: "こんにちわ", method: method)
+            self.urlRequest = try self.buildRequest(url: url, method: method)
         }catch{
             debugPrint(error)
             return
