@@ -32,5 +32,12 @@ extension String {
         }
         return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
     }
+
+    func toUrl() throws -> URL {
+        guard let url = URL(string: self) else {
+            throw NSError(domain: "Invalid URL", code: 1, userInfo: ["LocalizedSuggestion":"Incorrect URL, let's review the URL"])
+        }
+        return url
+    }
 }
 // swiftlint:enable all

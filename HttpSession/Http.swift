@@ -164,7 +164,10 @@ open class Http: NSObject {
 
     public func session(completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
         self.completion = completion
-        self.send(request: (self.request?.urlReq)!)
+        guard let request = self.request?.urlRequest else {
+            return
+        }
+        self.send(request: request)
     }
 
     public func download (resumeData: Data? = nil,
@@ -185,7 +188,12 @@ open class Http: NSObject {
             self.download = download
             self.sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
             self.session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
-            self.downloadTask = self.session?.downloadTask(with: (self.request?.urlReq)!)
+            
+            guard let urlRequest = self.request?.urlRequest else {
+                return
+            }
+            
+            self.downloadTask = self.session?.downloadTask(with: urlRequest)
         } else {
             self.downloadTask = self.session?.downloadTask(withResumeData: resumeData!)
         }
@@ -205,7 +213,9 @@ open class Http: NSObject {
     public func upload(param: [String: Multipart.data],
                        completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
         self.completion = completionHandler
-        self.send(request: (self.request?.multipart(param: param))!)
+        guard let request = self.request,
+            let urlRequest: URLRequest = request.multipart(param: param) else { return }
+        self.send(request: urlRequest)
     }
 
     /*

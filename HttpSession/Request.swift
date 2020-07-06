@@ -12,7 +12,7 @@ import UIKit
 open class Request {
 
     var url: URL!
-    var urlReq: URLRequest!
+    var urlRequest: URLRequest!
     var reqHeaders: [String: String] = [:]
 
     /*
@@ -27,10 +27,12 @@ open class Request {
                  cookie: Bool = false,
                  basic: [String: String]? = nil) {
 
-        self.url = URL(string: url)!
-        self.urlReq = URLRequest(url: self.url)
-        self.urlReq.httpMethod = method.rawValue
-        self.urlReq.allHTTPHeaderFields = Request.appInfo
+        do {
+            self.urlRequest = try self.buildRequest(url: "こんにちわ", method: method)
+        }catch{
+            debugPrint(error)
+            return
+        }
 
         if let header: [String: String] = headers {
             self.headers(header: header)
@@ -45,9 +47,16 @@ open class Request {
                                                               password: basic![Auth.password]!)])
         }
         if cookie == true {
-            self.urlReq.httpShouldHandleCookies = false
-            self.urlReq.allHTTPHeaderFields = Cookie.shared.get(url: url)
+            self.urlRequest.httpShouldHandleCookies = false
+            self.urlRequest.allHTTPHeaderFields = Cookie.shared.get(url: url)
         }
+    }
+
+    private func buildRequest(url: String, method: Http.Method) throws -> URLRequest {
+        self.urlRequest = try URLRequest(url: url.toUrl())
+        self.urlRequest.httpMethod = method.rawValue
+        self.urlRequest.allHTTPHeaderFields = Request.appInfo
+        return self.urlRequest
     }
 
     func isParamater (method: Http.Method) -> Bool {
@@ -113,7 +122,7 @@ open class Request {
 
     public func headers(header: [String: String]) {
         for (key, value) in header {
-            self.urlReq.setValue(value, forHTTPHeaderField: key)
+            self.urlRequest.setValue(value, forHTTPHeaderField: key)
         }
     }
 
@@ -133,18 +142,20 @@ open class Request {
 
         self.headers(header: header)
 
-        self.urlReq.httpBody = pData as Data
+        self.urlRequest.httpBody = pData as Data
     }
 
-    public func multipart(param: [String: Multipart.data]) -> URLRequest {
+    public func multipart(param: [String: Multipart.data]) -> URLRequest? {
 
         let multipart: Multipart = Multipart()
         let data: Data = multipart.multiparts(params: param)
 
         let header = ["Content-Type": "multipart/form-data; boundary=\(multipart.bundary)"]
-
+        guard self.urlRequest != nil else {
+            return nil
+        }
         self.headers(header: header)
-        self.urlReq.httpBody = data
-        return self.urlReq
+        self.urlRequest.httpBody = data
+        return self.urlRequest
     }
 }
