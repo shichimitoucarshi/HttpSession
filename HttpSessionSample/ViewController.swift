@@ -21,7 +21,7 @@ extension DemoApi: ApiProtocol {
         case .zen, .post:
             return "https://httpsession.work"
         case .download:
-            return "https://www.shichimitoucarashi.com"
+            return "https://shichimitoucarashi.com"
         }
     }
 
