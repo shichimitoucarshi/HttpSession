@@ -24,7 +24,6 @@ public protocol HttpApi: AnyObject {
                   completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
 
     func upload(api: ApiType,
-                param: [String: Multipart.data],
                 completion: @escaping(Data?, HTTPURLResponse?, Error?) -> Void)
     
     func cancel (byResumeData: @escaping(Data?) -> Void)
@@ -44,9 +43,8 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
     }
 
     public func upload(api: Type,
-                       param: [String: Multipart.data],
                        completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        Http.request(api: api).upload(param: param, completionHandler: completion)
+        Http.request(api: api).upload(completionHandler: completion)
     }
 
     public func download(api: Type,
@@ -109,7 +107,8 @@ open class Http: NSObject {
     private func request(url: String,
                          method: Method = .get,
                          header: [String: String]? = nil,
-                         params: [String: String] = [:],
+                         params: [String: String]? = nil,
+                         multipart: [String: Multipart.data]? = nil,
                          cookie: Bool = false,
                          basic: [String: String]? = nil) -> Http {
         self.data = nil
@@ -119,6 +118,7 @@ open class Http: NSObject {
                                method: method,
                                headers: header,
                                parameter: params,
+                               multipart: multipart,
                                cookie: cookie,
                                basic: basic)
         return self
@@ -127,7 +127,8 @@ open class Http: NSObject {
     public class func request(url: String,
                         method: Method = .get,
                         header: [String: String]? = nil,
-                        params: [String: String] = [:],
+                        params: [String: String]? = nil,
+                        multipart: [String: Multipart.data]? = nil,
                         cookie: Bool = false,
                         basic: [String: String]? = nil) -> Http {
         
@@ -135,6 +136,7 @@ open class Http: NSObject {
                                    method: method,
                                    header: header,
                                    params: params,
+                                   multipart: multipart,
                                    cookie: cookie,
                                    basic: basic)
     }
@@ -146,6 +148,7 @@ open class Http: NSObject {
                                    method: api.method,
                                    header: api.header,
                                    params: api.params,
+                                   multipart: api.multipart,
                                    cookie: api.isCookie,
                                    basic: api.basicAuth)
     }
@@ -210,11 +213,9 @@ open class Http: NSObject {
         self.dataTask?.cancel()
     }
 
-    public func upload(param: [String: Multipart.data],
-                       completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
+    public func upload(completionHandler: @escaping(Data?, HTTPURLResponse?, Error?) -> Void) {
         self.completion = completionHandler
-        guard let request = self.request,
-            let urlRequest: URLRequest = request.multipart(param: param) else { return }
+        guard let urlRequest = self.request?.urlRequest else { return }
         self.send(request: urlRequest)
     }
 

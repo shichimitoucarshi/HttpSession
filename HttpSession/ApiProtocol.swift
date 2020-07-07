@@ -18,7 +18,9 @@ public protocol ApiProtocol {
 
     var header: [String: String]? { get }
 
-    var params: [String: String] { get }
+    var params: [String: String]? { get }
+
+    var multipart: [String: Multipart.data]? { get }
 
     var isCookie: Bool { get }
 

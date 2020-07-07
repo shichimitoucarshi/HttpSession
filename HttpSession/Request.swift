@@ -25,7 +25,8 @@ open class Request {
     public init (url: String,
                  method: Http.Method,
                  headers: [String: String]? = nil,
-                 parameter: [String: String] = [:],
+                 parameter: [String: String]? = nil,
+                 multipart: [String: Multipart.data]? = nil,
                  cookie: Bool = false,
                  basic: [String: String]? = nil) {
         do {
@@ -39,12 +40,17 @@ open class Request {
             self.urlRequest.headers(header: header)
         }
 
-        if isParamater(method: method) {
-            self.post(param: parameter)
+        if isParamater(method: method),
+            let param = parameter {
+            self.post(param: param)
         }
 
-        if basic != nil {
-            self.urlRequest.headers(header: HttpHeader.basicAuthenticate(auth: basic!))
+        if let multipartData = multipart {
+            self.multipart(param: multipartData)
+        }
+
+        if let basicAuth = basic {
+            self.urlRequest.headers(header: HttpHeader.basicAuthenticate(auth: basicAuth))
         }
     
         if cookie == true {
@@ -105,14 +111,13 @@ open class Request {
      * param [String: Multipart.data]
      * Return URLRequest nullable
      */
-    public func multipart(param: [String: Multipart.data]) -> URLRequest? {
+    public func multipart(param: [String: Multipart.data]) {
         guard self.urlRequest != nil else {
-            return nil
+            return
         }
         let multipart: Multipart = Multipart()
         let data: Data = multipart.multiparts(params: param)
         self.urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
         self.urlRequest.httpBody = data
-        return self.urlRequest
     }
 }

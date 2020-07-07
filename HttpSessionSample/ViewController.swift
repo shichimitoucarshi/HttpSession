@@ -13,12 +13,14 @@ enum DemoApi {
     case zen
     case post(param:Tapul)
     case download
+    case upload
 }
 
 extension DemoApi: ApiProtocol {
+
     var domain: String {
         switch self {
-        case .zen, .post:
+        case .zen, .post, .upload:
             return "https://httpsession.work"
         case .download:
             return "https://shichimitoucarashi.com"
@@ -33,6 +35,8 @@ extension DemoApi: ApiProtocol {
             return "postApi.json"
         case .download:
             return "public/Apple_trim.mp4"
+        case .upload:
+            return "imageUp.json"
         }
     }
 
@@ -40,7 +44,7 @@ extension DemoApi: ApiProtocol {
         switch self {
         case .zen:
             return .get
-        case .post:
+        case .post, .upload:
             return .post
         case .download:
             return .get
@@ -48,17 +52,40 @@ extension DemoApi: ApiProtocol {
     }
 
     var header: [String: String]? {
-        return [:]
+        return nil
     }
 
-    var params: [String: String] {
+    var params: [String: String]? {
         switch self {
         case .zen:
-            return [:]
+            return nil
         case .post(let val):
             return [val.value.0: val.value.1]
+        case .upload:
+            return nil
         case .download:
-            return [:]
+            return nil
+        }
+    }
+
+    var multipart: [String : Multipart.data]? {
+        switch self {
+        case .upload:
+            var dto: Multipart.data = Multipart.data()
+            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
+            let img: Data
+            do {
+                img = try Data(contentsOf: URL(fileURLWithPath: image!))
+            } catch {
+                img = Data()
+            }
+
+            dto.fileName = "Hello.txt"
+            dto.mimeType = "text/plain"
+            dto.data = img
+            return ["img": dto]
+        case .zen, .post, .download:
+            return nil
         }
     }
 
@@ -93,18 +120,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tableView.dataSource = self
     }
 
-    func detailViewController (param: String, text: String) {
+    func detailViewController (param: String,
+                               result: String = "",
+                               responce: String = "",
+                               error: String = "") {
         let detailViewController: DetailViewController = (self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as? DetailViewController)!
-        print ("text: \(text)")
         self.navigationController?.pushViewController(detailViewController, animated: true)
-        detailViewController.text = "param:\n\(param)\n responce:\n \(text)"
+        detailViewController.text = "param:\n\(param)\nresponce header:\n\(responce)\nresult:\n \n\(result)\n\(error)"
     }
 
-    func detail(data: Data?, param: String = "") {
+    func detail(data: Data?,
+                param: String = "",
+                responce: HTTPURLResponse?,
+                error: Error?) {
         DispatchQueue.main.async {
-            if data != nil {
-                let responceStr = String(data: data!, encoding: .utf8)
-                self.detailViewController(param: param, text: responceStr!)
+            if let unwrapData = data,
+                let result = String(data: unwrapData, encoding: .utf8),
+                let unwrapResponce = responce{
+                self.detailViewController(param: param,
+                                          result: result,
+                                          responce: String(describing: unwrapResponce))
+            }else if let unwrapResponce = responce {
+                self.detailViewController(param: param,
+                                          responce: String(describing: unwrapResponce))
+            }else if let unwrapError = error {
+                self.detailViewController(param: param,
+                                          error: String(describing: unwrapError))
             }
         }
     }
@@ -124,14 +165,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         switch indexPath.row {
         case 0:
-            provider.send(api: .zen) { [unowned self] (data, _, _) in
-                self.detail(data: data!)
+            provider.send(api: .zen) { [unowned self] (data, responce, error) in
+                self.detail(data: data,
+                            responce: responce,
+                            error: error)
             }
             break
         case 1:
             let val: Tapul = Tapul(value: ("http_post", value:"Http Request POST 😄"))
-            provider.send(api: .post(param: val)) { [unowned self] (data, _, _) in
-                self.detail(data: data!, param: val.tapul)
+            provider.send(api: .post(param: val)) { [unowned self] (data, responce, error) in
+                self.detail(data: data,
+                            param: val.tapul,
+                            responce: responce,
+                            error: error)
             }
         case 2:
 
@@ -141,40 +187,35 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let url = "https://httpsession.work/signIn.json"
 
             Http.request(url: url, method: .post, params: param)
-                .session(completion: { [unowned self] (data, _, _) in
-                    self.detail(data: data!, param: param.toStr)
+                .session(completion: { [unowned self] (data, responce, error) in
+                    self.detail(data: data,
+                                param: param.toStr,
+                                responce: responce,
+                                error: error)
                 })
         case 3:
 
             Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true )
-                .session(completion: { [unowned self] (data, _, _) in
-                    self.detail(data: data!)
+                .session(completion: { [unowned self] (data, responce, error) in
+                    self.detail(data: data,
+                                responce: responce,
+                                error: error)
                 })
         case 4:
-            var dto: Multipart.data = Multipart.data()
-            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
-            let img: Data
-            do {
-                img = try Data(contentsOf: URL(fileURLWithPath: image!))
-            } catch {
-                img = Data()
+            provider.upload(api: .upload) {[unowned self] (data, responce, error) in
+                self.detail(data: data,
+                            responce: responce,
+                            error: error)
             }
-
-            dto.fileName = "Hello.txt"
-            dto.mimeType = "text/plain"
-            dto.data = img
-
-            Http.request(url: "https://httpsession.work/imageUp.json", method: .post)
-                .upload(param: ["img": dto], completionHandler: { [unowned self] (data, _, _) in
-                    self.detail(data: data!)
-                })
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
                                                Auth.password: "githubHttpsession"]
             Http.request(url: "https://httpsession.work/basicauth.json",
                  method: .get,
-                 basic: basicAuth).session(completion: { [unowned self] (data, _, _) in
-                    self.detail(data: data!)
+                 basic: basicAuth).session(completion: { [unowned self] (data, responce, error) in
+                    self.detail(data: data,
+                                responce: responce,
+                                error: error)
                  })
         case 6:
             let detailViewController: DetailViewController = (self.storyboard?.instantiateViewController(withIdentifier: detailViewControllerId) as? DetailViewController)!
