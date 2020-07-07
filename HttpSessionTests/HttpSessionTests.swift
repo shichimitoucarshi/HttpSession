@@ -96,4 +96,18 @@ class HttpSessionTests: XCTestCase {
              }
         wait(for: [exp], timeout: 60.0)
     }
+
+    func testHttpDownload(){
+        let exp = expectation(description: "Download Exception")
+        Http.request(url: "https://shichimitoucarashi.com/public/Apple_trim.mp4", method: .get).download(progress: { (_, total, expectedToWrite) in
+            let progress = Float(total) / Float(expectedToWrite)
+            print("progress \(progress)")
+        }, download: { (url) in
+            print("URL: \(String(describing: url))")
+            XCTAssertNotNil(url)
+        }) { (data, _, _) in
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 60.0)
+    }
 }
