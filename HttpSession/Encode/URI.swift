@@ -10,8 +10,8 @@ import Foundation
 // swiftlint:disable all
 class URI: NSObject {
 
-    public static func encode(param: [String: String]) -> String {
-        return URI().encode(param: param)
+    public static func encode(param: [String: String]) -> Data? {
+        return URI().encode(param: param).data(using: .utf8)
     }
 
     public func encode(param: [String: String]) -> String {
