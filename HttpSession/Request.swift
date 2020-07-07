@@ -91,7 +91,7 @@ open class Request {
      */
     public func post(param: [String: String]) -> Void {
 
-        guard let value: Data = URI.encode(param: param).data(using: .utf8) as Data? else {
+        guard let value = URI.encode(param: param) as Data? else {
             return
         }
         let header: [String: String] = HttpHeader.postHeader(value.count.description)
