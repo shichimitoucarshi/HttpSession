@@ -7,8 +7,7 @@ notifications:
 
 # Ensure that fastlane is at the latest version
 before_install:
-- brew update
-- bundle install
+- make 
 
 jobs:
   include:
