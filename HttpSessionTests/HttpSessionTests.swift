@@ -76,8 +76,8 @@ class HttpSessionTests: XCTestCase {
         multipartData.data = img
 
         Http.request(url: "https://httpsession.work/imageUp.json",
-                     method: .post).upload(param: ["img": multipartData],
-                                           completionHandler: { (data, _, _) in
+                     method: .post, multipart: ["img": multipartData])
+            .upload(completionHandler: { (data, _, _) in
                 XCTAssertNotNil(data)
                 exp.fulfill()
             })
@@ -106,6 +106,15 @@ class HttpSessionTests: XCTestCase {
             print("URL: \(String(describing: url))")
             XCTAssertNotNil(url)
         }) { (data, _, _) in
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 60.0)
+    }
+
+    func testApiProtoccol_Upload(){
+        let exp = expectation(description: "Download Exception")
+        ApiProvider<TestApi>().upload(api: .test3) { (data, responce, error) in
+            XCTAssertNotNil(data)
             exp.fulfill()
         }
         wait(for: [exp], timeout: 60.0)
