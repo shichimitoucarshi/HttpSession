@@ -16,7 +16,6 @@ enum TestApi {
 }
 
 extension TestApi: ApiProtocol {
-
     var domain: String {
         switch self {
         case .test1, .test2, .test3:
@@ -48,7 +47,7 @@ extension TestApi: ApiProtocol {
     var params: [String: String]? {
         switch self {
         case .test1:
-            return ["http_post":"TEST1"]
+            return ["http_post": "TEST1"]
         case .test2:
             return ["http_post": "TEST2"]
         case .test3:
@@ -56,7 +55,7 @@ extension TestApi: ApiProtocol {
         }
     }
 
-    var multipart: [String : Multipart.data]? {
+    var multipart: [String: Multipart.data]? {
         switch self {
         case .test1, .test2:
             return nil
@@ -66,9 +65,7 @@ extension TestApi: ApiProtocol {
             var img: Data = Data()
             do {
                 img = try Data(contentsOf: URL(fileURLWithPath: image!))
-            } catch {
-
-            }
+            } catch {}
             multipartData.fileName = "Hello.txt"
             multipartData.mimeType = "text/plain"
             multipartData.data = img

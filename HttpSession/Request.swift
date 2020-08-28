@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 open class Request {
-
     public var urlRequest: URLRequest!
 
     /*
@@ -22,27 +21,29 @@ open class Request {
      *       cookie: Bool default parameter -> false
      *       basic:
      */
-    public init (url: String,
-                 method: Http.Method,
-                 headers: [String: String]? = nil,
-                 parameter: [String: String]? = nil,
-                 multipart: [String: Multipart.data]? = nil,
-                 cookie: Bool = false,
-                 basic: [String: String]? = nil) {
+    public init(url: String,
+                method: Http.Method,
+                headers: [String: String]? = nil,
+                parameter: [String: String]? = nil,
+                multipart: [String: Multipart.data]? = nil,
+                cookie: Bool = false,
+                basic: [String: String]? = nil)
+    {
         do {
-            self.urlRequest = try self.buildRequest(url: url, method: method)
-        }catch{
+            urlRequest = try buildRequest(url: url, method: method)
+        } catch {
             debugPrint(error)
             return
         }
 
         if let header: [String: String] = headers {
-            self.urlRequest.headers(header: header)
+            urlRequest.headers(header: header)
         }
 
         if isParamater(method: method),
-            let param = parameter {
-            self.post(param: param)
+            let param = parameter
+        {
+            post(param: param)
         }
 
         if let multipartData = multipart {
@@ -50,12 +51,12 @@ open class Request {
         }
 
         if let basicAuth = basic {
-            self.urlRequest.headers(header: HttpHeader.basicAuthenticate(auth: basicAuth))
+            urlRequest.headers(header: HttpHeader.basicAuthenticate(auth: basicAuth))
         }
-    
+
         if cookie == true {
-            self.urlRequest.httpShouldHandleCookies = false
-            self.urlRequest.allHTTPHeaderFields = Cookie.shared.get(url: url)
+            urlRequest.httpShouldHandleCookies = false
+            urlRequest.allHTTPHeaderFields = Cookie.shared.get(url: url)
         }
     }
 
@@ -80,7 +81,7 @@ open class Request {
      * param method: Http.Method
      * Return Bool
      */
-    private func isParamater (method: Http.Method) -> Bool {
+    private func isParamater(method: Http.Method) -> Bool {
         switch method {
         case .get, .delete, .head:
             return false
@@ -95,14 +96,13 @@ open class Request {
      * param param: [String: String]
      * Retrun Void
      */
-    public func post(param: [String: String]) -> Void {
-
+    public func post(param: [String: String]) {
         guard let value = URI.encode(param: param) as Data? else {
             return
         }
         let header: [String: String] = HttpHeader.postHeader(value.count.description)
-        self.urlRequest.headers(header: header)
-        self.urlRequest.httpBody = value
+        urlRequest.headers(header: header)
+        urlRequest.httpBody = value
     }
 
     /*
@@ -112,12 +112,12 @@ open class Request {
      * Return URLRequest nullable
      */
     public func multipart(param: [String: Multipart.data]) {
-        guard self.urlRequest != nil else {
+        guard urlRequest != nil else {
             return
         }
         let multipart: Multipart = Multipart()
         let data: Data = multipart.multiparts(params: param)
-        self.urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
-        self.urlRequest.httpBody = data
+        urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
+        urlRequest.httpBody = data
     }
 }

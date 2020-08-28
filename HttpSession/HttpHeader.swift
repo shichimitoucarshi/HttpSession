@@ -9,16 +9,14 @@
 import Foundation
 
 class HttpHeader {
-
     public static let appInfo: [String: String] = {
-
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
 
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
         let acceptLang = Locale.preferredLanguages.prefix(6).enumerated().map { index, languageCode in
             let quality = 1.0 - (Double(index) * 0.1)
             return "\(languageCode);q=\(quality)"
-            }.joined(separator: ", ")
+        }.joined(separator: ", ")
 
         // User-Agent Header; see https://tools.ietf.org/html/rfc7231#section-5.5.3
         let userAgent: String = {
@@ -34,17 +32,17 @@ class HttpHeader {
 
                     let osName: String = {
                         #if os(iOS)
-                        return "iOS"
+                            return "iOS"
                         #elseif os(watchOS)
-                        return "watchOS"
+                            return "watchOS"
                         #elseif os(tvOS)
-                        return "tvOS"
+                            return "tvOS"
                         #elseif os(macOS)
-                        return "OS X"
+                            return "OS X"
                         #elseif os(Linux)
-                        return "Linux"
+                            return "Linux"
                         #else
-                        return "Unknown"
+                            return "Unknown"
                         #endif
                     }()
 
@@ -58,7 +56,7 @@ class HttpHeader {
         return [
             "Accept-Encoding": acceptEncoding,
             "Accept-Language": acceptLang,
-            "User-Agent": userAgent
+            "User-Agent": userAgent,
         ]
     }()
 
@@ -72,7 +70,7 @@ class HttpHeader {
         return ["Content-Type": "multipart/form-data; boundary=\(bundary)"]
     }
 
-    static func basicAuthenticate (auth: [String: String]) -> [String: String] {
+    static func basicAuthenticate(auth: [String: String]) -> [String: String] {
         return ["Authorization": Auth.basic(user: auth[Auth.user] ?? "",
                                             password: auth[Auth.password] ?? "")]
     }
@@ -81,7 +79,7 @@ class HttpHeader {
 extension URLRequest {
     public mutating func headers(header: [String: String]) {
         for (key, value) in header {
-            self.setValue(value, forHTTPHeaderField: key)
+            setValue(value, forHTTPHeaderField: key)
         }
     }
 }

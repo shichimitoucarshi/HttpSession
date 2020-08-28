@@ -9,18 +9,16 @@
 import Foundation
 // swiftlint:disable all
 class URI: NSObject {
-
     public static func encode(param: [String: String]) -> Data? {
         return URI().encode(param: param).data(using: .utf8)
     }
 
     public func encode(param: [String: String]) -> String {
-        return param.map {"\($0)=\($1.percentEncode())"}.joined(separator: "&")
+        return param.map { "\($0)=\($1.percentEncode())" }.joined(separator: "&")
     }
 }
 
 extension String {
-
     /*
      * PersentEncode
      */
@@ -30,14 +28,15 @@ extension String {
         if !encodeAll {
             allowedCharacterSet.insert(charactersIn: "[]")
         }
-        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
+        return addingPercentEncoding(withAllowedCharacters: allowedCharacterSet)!
     }
 
     func toUrl() throws -> URL {
         guard let url = URL(string: self) else {
-            throw NSError(domain: "Invalid URL", code: -10001, userInfo: ["LocalizedSuggestion":"Incorrect URL, let's review the URL"])
+            throw NSError(domain: "Invalid URL", code: -10001, userInfo: ["LocalizedSuggestion": "Incorrect URL, let's review the URL"])
         }
         return url
     }
 }
+
 // swiftlint:enable all

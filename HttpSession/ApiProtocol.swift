@@ -9,7 +9,6 @@
 import Foundation
 
 public protocol ApiProtocol {
-
     var domain: String { get }
 
     var endPoint: String { get }
@@ -25,5 +24,4 @@ public protocol ApiProtocol {
     var isCookie: Bool { get }
 
     var basicAuth: [String: String]? { get }
-
 }
