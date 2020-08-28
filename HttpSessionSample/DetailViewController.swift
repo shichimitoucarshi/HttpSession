@@ -6,18 +6,17 @@
 //  Copyright © 2018年 keisuke yamagishi. All rights reserved.
 //
 
-import UIKit
 import HttpSession
+import UIKit
 
 let detailViewControllerId: String = "DetailViewController"
 
 class DetailViewController: UIViewController {
-
-    @IBOutlet weak var responceText: UITextView!
-    @IBOutlet weak var progress: UIProgressView!
-    @IBOutlet weak var status: UILabel!
-    @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var startButton: UIButton!
+    @IBOutlet var responceText: UITextView!
+    @IBOutlet var progress: UIProgressView!
+    @IBOutlet var status: UILabel!
+    @IBOutlet var stopButton: UIButton!
+    @IBOutlet var startButton: UIButton!
 
     var isDL: Bool = false
     var text: String = ""
@@ -29,50 +28,49 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if self.isDL == true {
-            self.responceText.isHidden = true
-            self.progress.setProgress(0.0, animated: true)
-            self.httpDownload()
-        }else{
-            self.progress.isHidden = true
-            self.status.isHidden = true
-            self.stopButton.isHidden = true
-            self.startButton.isHidden = true
-            self.responceText.text = ""
-            self.responceText.text = text
+        if isDL == true {
+            responceText.isHidden = true
+            progress.setProgress(0.0, animated: true)
+            httpDownload()
+        } else {
+            progress.isHidden = true
+            status.isHidden = true
+            stopButton.isHidden = true
+            startButton.isHidden = true
+            responceText.text = ""
+            responceText.text = text
         }
     }
 
-    @IBAction func pushStop(_ sender: Any) {
-        self.provider
-            .cancel { [weak self] (data) in
-            self?.data = data
-            print("data")
-            self?.isCancel = true
-        }
+    @IBAction func pushStop(_: Any) {
+        provider
+            .cancel { [weak self] data in
+                self?.data = data
+                print("data")
+                self?.isCancel = true
+            }
     }
 
-    @IBAction func pushStart(_ sender: Any) {
-        self.httpDownload()
+    @IBAction func pushStart(_: Any) {
+        httpDownload()
     }
 
-    private func httpDownload () {
+    private func httpDownload() {
         provider.download(api: .download,
-                          data: self.data,
-                          progress: { [weak self] (_, total, expectedToWrite) in
-                            let progress = Float(total) / Float(expectedToWrite)
-                            print ("progress \(progress)")
-                            DispatchQueue.main.async {
-                                self?.status.text = "\(total)/\(expectedToWrite)"
-                                self?.progress.setProgress(progress, animated: true)
-                            }
-        }, download: { (url) in
-            print ("location: \(String(describing: url))")
-        }) { (_, _, _) in
-
+                          data: data,
+                          progress: { [weak self] _, total, expectedToWrite in
+                              let progress = Float(total) / Float(expectedToWrite)
+                              print("progress \(progress)")
+                              DispatchQueue.main.async {
+                                  self?.status.text = "\(total)/\(expectedToWrite)"
+                                  self?.progress.setProgress(progress, animated: true)
+                              }
+                          }, download: { url in
+                              print("location: \(String(describing: url))")
+                          }) { _, _, _ in
         }
     }
-    
+
     deinit {
         provider.cancel { _ in
             print("Deinitializer")

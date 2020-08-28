@@ -9,7 +9,6 @@
 import Foundation
 
 open class Cookie {
-
     public static let shared: Cookie = Cookie()
 
     private
