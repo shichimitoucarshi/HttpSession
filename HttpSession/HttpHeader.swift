@@ -8,7 +8,7 @@
 
 import Foundation
 
-class HttpHeader {
+public class HttpHeader {
     public static let appInfo: [String: String] = {
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
 
