@@ -11,7 +11,7 @@ import UIKit
 
 open class Request {
     public var urlRequest: URLRequest!
-    private var isNeedDefaultHeader: Bool = true
+    private let isNeedDefaultHeader: Bool
     
     /*
      * Initializer
