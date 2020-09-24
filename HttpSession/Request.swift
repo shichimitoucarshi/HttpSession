@@ -24,12 +24,14 @@ open class Request {
      */
     public init(url: String,
                 method: Http.Method,
+                isNeedDefaultHeader: Bool = true,
                 headers: [String: String]? = nil,
                 parameter: [String: String]? = nil,
                 multipart: [String: Multipart.data]? = nil,
                 cookie: Bool = false,
                 basic: [String: String]? = nil)
     {
+        self.isNeedDefaultHeader = isNeedDefaultHeader
         do {
             urlRequest = try buildRequest(url: url, method: method)
         } catch {

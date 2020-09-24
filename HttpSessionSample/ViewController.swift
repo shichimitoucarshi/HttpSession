@@ -17,6 +17,11 @@ enum DemoApi {
 }
 
 extension DemoApi: ApiProtocol {
+
+    var isNeedDefaultHeader: Bool {
+        return true
+    }
+    
     var domain: String {
         switch self {
         case .zen, .post, .upload:
