@@ -11,7 +11,8 @@ import UIKit
 
 open class Request {
     public var urlRequest: URLRequest!
-
+    private var isNeedDefaultHeader: Bool = true
+    
     /*
      * Initializer
      * param url: String
@@ -71,7 +72,9 @@ open class Request {
     private func buildRequest(url: String, method: Http.Method) throws -> URLRequest {
         var request = try URLRequest(url: url.toUrl())
         request.httpMethod = method.rawValue
-        request.allHTTPHeaderFields = HttpHeader.appInfo
+        if isNeedDefaultHeader {
+            request.allHTTPHeaderFields = HttpHeader.appInfo
+        }
         return request
     }
 
