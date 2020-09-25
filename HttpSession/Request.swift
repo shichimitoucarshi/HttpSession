@@ -12,7 +12,7 @@ import UIKit
 open class Request {
     public var urlRequest: URLRequest!
     private let isNeedDefaultHeader: Bool
-    
+
     /*
      * Initializer
      * param url: String
