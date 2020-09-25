@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-let VERSION = "1.4.1"
+let VERSION = "1.7.0"
 // swiftlint:disable all
 public protocol HttpApi: AnyObject {
     associatedtype ApiType: ApiProtocol
