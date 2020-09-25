@@ -16,6 +16,11 @@ enum TestApi {
 }
 
 extension TestApi: ApiProtocol {
+
+    var isNeedDefaultHeader: Bool {
+        return true
+    }
+
     var domain: String {
         switch self {
         case .test1, .test2, .test3:

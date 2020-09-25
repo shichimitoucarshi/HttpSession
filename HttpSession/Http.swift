@@ -106,6 +106,7 @@ open class Http: NSObject {
 
     private func request(url: String,
                          method: Method = .get,
+                         isNeedDefaultHeader: Bool = true,
                          header: [String: String]? = nil,
                          params: [String: String]? = nil,
                          multipart: [String: Multipart.data]? = nil,
@@ -117,6 +118,7 @@ open class Http: NSObject {
         self.params = params
         request = Request(url: url,
                           method: method,
+                          isNeedDefaultHeader: isNeedDefaultHeader,
                           headers: header,
                           parameter: params,
                           multipart: multipart,
@@ -127,6 +129,7 @@ open class Http: NSObject {
 
     public class func request(url: String,
                               method: Method = .get,
+                              isNeedDefaultHeader: Bool = true,
                               header: [String: String]? = nil,
                               params: [String: String]? = nil,
                               multipart: [String: Multipart.data]? = nil,
@@ -135,6 +138,7 @@ open class Http: NSObject {
     {
         return Http.shared.request(url: url,
                                    method: method,
+                                   isNeedDefaultHeader: isNeedDefaultHeader,
                                    header: header,
                                    params: params,
                                    multipart: multipart,
@@ -146,6 +150,7 @@ open class Http: NSObject {
         let url = api.domain + "/" + api.endPoint
         return Http.shared.request(url: url,
                                    method: api.method,
+                                   isNeedDefaultHeader: api.isNeedDefaultHeader,
                                    header: api.header,
                                    params: api.params,
                                    multipart: api.multipart,
