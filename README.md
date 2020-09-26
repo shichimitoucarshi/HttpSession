@@ -1,8 +1,8 @@
 # HttpSession
 
 [![](https://img.shields.io/badge/twitter-brew__0__O-fc3158)](https://twitter.com/brew_0_O)
-[![](https://img.shields.io/badge/lang-swift4.0-ff69b4.svg)](https://developer.apple.com/jp/swift/)
-[![](https://img.shields.io/badge/licence-MIT-green.svg)](https://github.com/keisukeYamagishi/HttpRequest/blob/master/LICENSE)
+[![](https://img.shields.io/badge/Lang-Swift-ff69b4)](https://developer.apple.com/jp/swift/)
+[![](https://img.shields.io/badge/twitter-brew__0-blue)](https://github.com/keisukeYamagishi/HttpRequest/blob/master/LICENSE)
 
 ### Overview
 
