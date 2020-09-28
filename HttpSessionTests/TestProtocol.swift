@@ -16,7 +16,6 @@ enum TestApi {
 }
 
 extension TestApi: ApiProtocol {
-
     var isNeedDefaultHeader: Bool {
         return true
     }
