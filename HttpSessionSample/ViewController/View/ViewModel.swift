@@ -83,7 +83,7 @@ extension ViewModel: ViewModelInput {
 extension ViewModel: ViewModelOutput {
     var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void {
         get {
-            _detail
+            return _detail
         }
         set {
             _detail = newValue
@@ -92,7 +92,7 @@ extension ViewModel: ViewModelOutput {
 
     var pushDetailViewController: () -> Void {
         get {
-            _pushDetailViewController
+            return _pushDetailViewController
         }
         set {
             _pushDetailViewController = newValue
