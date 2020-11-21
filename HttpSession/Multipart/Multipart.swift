@@ -10,31 +10,28 @@ import Foundation
 import UIKit
 
 open class Multipart {
-    public struct data {
-        public var fileName: String!
-        public var mimeType: String!
-        public var data: Data!
-        public init() {
-            fileName = ""
-            mimeType = ""
-            data = Data()
-        }
-    }
-
+    public var fileName: String
+    public var mimeType: String
+    public var data: Data
     public var bundary: String
     public var uuid: String
 
     public init() {
+        fileName = ""
+        mimeType = ""
+        data = Data()
         uuid = UUID().uuidString
         bundary = String(format: "----\(uuid)")
     }
 
-    public func multiparts(params: [String: Multipart.data]) -> Data {
+    public func multiparts(params: [String: Multipart]) -> Data {
         var post: Data = Data()
 
-        for (key, value) in params {
-            let dto: Multipart.data = value
-            post.append(multipart(key: key, fileName: dto.fileName as String, mineType: dto.mimeType, data: dto.data))
+        params.forEach {
+            post.append(multipart(key: $0.key,
+                                  fileName: $0.value.fileName as String,
+                                  mineType: $0.value.mimeType,
+                                  data: $0.value.data))
         }
         return post
     }

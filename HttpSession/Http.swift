@@ -109,10 +109,10 @@ open class Http: NSObject {
                          isNeedDefaultHeader: Bool = true,
                          header: [String: String]? = nil,
                          params: [String: String]? = nil,
-                         multipart: [String: Multipart.data]? = nil,
+                         multipart: [String: Multipart]? = nil,
+
                          cookie: Bool = false,
-                         basic: [String: String]? = nil) -> Http
-    {
+                         basic: [String: String]? = nil) -> Http {
         data = nil
         isCookie = cookie
         self.params = params
@@ -132,10 +132,9 @@ open class Http: NSObject {
                               isNeedDefaultHeader: Bool = true,
                               header: [String: String]? = nil,
                               params: [String: String]? = nil,
-                              multipart: [String: Multipart.data]? = nil,
+                              multipart: [String: Multipart]? = nil,
                               cookie: Bool = false,
-                              basic: [String: String]? = nil) -> Http
-    {
+                              basic: [String: String]? = nil) -> Http {
         return Http.shared.request(url: url,
                                    method: method,
                                    isNeedDefaultHeader: isNeedDefaultHeader,

@@ -70,10 +70,10 @@ extension DemoApi: ApiProtocol {
         }
     }
 
-    var multipart: [String: Multipart.data]? {
+    var multipart: [String: Multipart]? {
         switch self {
         case .upload:
-            var dto: Multipart.data = Multipart.data()
+            let dto = Multipart()
             let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
             let img: Data
             do {
