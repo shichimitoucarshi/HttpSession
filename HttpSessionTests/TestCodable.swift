@@ -9,11 +9,21 @@
 import Foundation
 
 class TestCodable: Decodable {
-    var status: Int?
-    var UserAgent: String?
-    var HttpRequest: String?
-    var postParam: String?
-    var auther: String?
-    var autherHP: String?
-    var autherGitHub: String?
+    let status: Int?
+    let userAgent: String?
+    let httpRequest: String?
+    let postParam: String?
+    let auther: String?
+    let autherHP: String?
+    let autherGitHub: String?
+
+    enum CodingKeys: String, CodingKey {
+        case status: Int?
+        case userAgent: String? = "UserAgent"
+        case HttpRequest: String? = "HttpRequest"
+        case postParam: String?
+        case auther: String?
+        case autherHP: String?
+        case autherGitHub
+    }
 }
