@@ -23,10 +23,12 @@ final class ViewController: UIViewController {
                               result: String = "",
                               responce: String = "",
                               error: String = "",
-                              isDL: Bool = false)
-    {
-        let detailViewController: DetailViewController = (storyboard?.instantiateViewController(withIdentifier: DetailViewController.detailViewControllerId) as? DetailViewController)!
-        detailViewController.viewModel = DetailViewModel(text: "param:\n\(param)\nresponce header:\n\(responce)\nresult:\n \n\(result)\n\(error)",
+                              isDL: Bool = false) {
+        let identifer = DetailViewController.detailViewControllerId
+        let detailViewController = (storyboard?
+                                        .instantiateViewController(withIdentifier: identifer) as? DetailViewController)!
+        let text = "param:\n\(param)\nresponce header:\n\(responce)\nresult:\n \n\(result)\n\(error)"
+        detailViewController.viewModel = DetailViewModel(text: text,
                                                          isDL: isDL)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
@@ -34,13 +36,11 @@ final class ViewController: UIViewController {
     func detail(data: Data?,
                 param: String = "",
                 responce: HTTPURLResponse?,
-                error: Error?)
-    {
+                error: Error?) {
         DispatchQueue.main.async {
             if let unwrapData = data,
-                let result = String(data: unwrapData, encoding: .utf8),
-                let unwrapResponce = responce
-            {
+               let result = String(data: unwrapData, encoding: .utf8),
+               let unwrapResponce = responce {
                 self.detailViewController(param: param,
                                           result: result,
                                           responce: String(describing: unwrapResponce))
