@@ -9,7 +9,7 @@
 TCP / IP based HTTP communication can be simplified
 and Twitter OAuth
 
-***API Server:*** https://sevens-api.herokuapp.com/
+***API Server:*** https://httpsession.work/
 
 ### Recommended.
 
