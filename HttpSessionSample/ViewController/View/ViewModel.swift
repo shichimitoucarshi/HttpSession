@@ -36,12 +36,12 @@ extension ViewModel: ViewModelInput {
         switch indexPath.row {
         case 0:
             _provider.send(api: .zen) { [unowned self] data, responce, error in
-                self._detail(data, "", responce, error)
+                _detail(data, "", responce, error)
             }
         case 1:
             let val: Tapul = Tapul(value: ("http_post", value: "Http Request POST 😄"))
             _provider.send(api: .post(param: val)) { [unowned self] data, responce, error in
-                self._detail(data, "", responce, error)
+                _detail(data, "", responce, error)
             }
         case 2:
 
@@ -52,17 +52,17 @@ extension ViewModel: ViewModelInput {
 
             Http.request(url: url, method: .post, params: param)
                 .session(completion: { [unowned self] data, responce, error in
-                    self._detail(data, "", responce, error)
+                    _detail(data, "", responce, error)
                 })
         case 3:
 
             Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true)
                 .session(completion: { [unowned self] data, responce, error in
-                    self._detail(data, "", responce, error)
+                    _detail(data, "", responce, error)
                 })
         case 4:
             _provider.upload(api: .upload) { [unowned self] data, responce, error in
-                self._detail(data, "", responce, error)
+                _detail(data, "", responce, error)
             }
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
@@ -70,7 +70,7 @@ extension ViewModel: ViewModelInput {
             Http.request(url: "https://httpsession.work/basicauth.json",
                          method: .get,
                          basic: basicAuth).session(completion: { [unowned self] data, responce, error in
-                self._detail(data, "", responce, error)
+                            _detail(data, "", responce, error)
             })
         case 6:
             _pushDetailViewController?()
@@ -83,7 +83,7 @@ extension ViewModel: ViewModelInput {
 extension ViewModel: ViewModelOutput {
     var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void {
         get {
-            _detail
+            return _detail
         }
         set {
             _detail = newValue
@@ -92,7 +92,7 @@ extension ViewModel: ViewModelOutput {
 
     var pushDetailViewController: () -> Void {
         get {
-            _pushDetailViewController
+            return _pushDetailViewController
         }
         set {
             _pushDetailViewController = newValue

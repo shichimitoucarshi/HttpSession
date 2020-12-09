@@ -26,9 +26,9 @@ class HttpSessionTests: XCTestCase {
         Http.request(url: "https://httpsession.work/postApi.json",
                      method: .post,
                      params: param).session { data, _, _ in
-            XCTAssertNotNil(data)
-            exp.fulfill()
-        }
+                        XCTAssertNotNil(data)
+                        exp.fulfill()
+                     }
         wait(for: [exp], timeout: 60.0)
     }
 
@@ -42,9 +42,9 @@ class HttpSessionTests: XCTestCase {
         Http.request(url: url,
                      method: .post,
                      params: param1).session { data, _, _ in
-            XCTAssertNotNil(data)
-            exp.fulfill()
-        }
+                        XCTAssertNotNil(data)
+                        exp.fulfill()
+                     }
         wait(for: [exp], timeout: 60.0)
     }
 
@@ -53,15 +53,15 @@ class HttpSessionTests: XCTestCase {
         Http.request(url: "https://httpsession.work/signIned.json",
                      method: .get,
                      cookie: true).session { data, _, _ in
-            XCTAssertNotNil(data)
-            exp.fulfill()
-        }
+                        XCTAssertNotNil(data)
+                        exp.fulfill()
+                     }
         wait(for: [exp], timeout: 60.0)
     }
 
     func testHttpMultipart() {
         let exp = expectation(description: "Single Exception")
-        var multipartData: Multipart.data = Multipart.data()
+        let multipartData = Multipart()
         let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
         var img: Data = Data()
         do {
@@ -88,9 +88,9 @@ class HttpSessionTests: XCTestCase {
         Http.request(url: "https://httpsession.work/basicauth.json",
                      method: .get,
                      basic: basicAuth).session { data, _, _ in
-            XCTAssertNotNil(data)
-            exp.fulfill()
-        }
+                        XCTAssertNotNil(data)
+                        exp.fulfill()
+                     }
         wait(for: [exp], timeout: 60.0)
     }
 

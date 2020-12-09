@@ -59,12 +59,12 @@ extension TestApi: ApiProtocol {
         }
     }
 
-    var multipart: [String: Multipart.data]? {
+    var multipart: [String: Multipart]? {
         switch self {
         case .test1, .test2:
             return nil
         case .test3:
-            var multipartData: Multipart.data = Multipart.data()
+            let multipartData = Multipart()
             let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
             var img: Data = Data()
             do {

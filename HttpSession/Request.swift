@@ -27,10 +27,9 @@ open class Request {
                 isNeedDefaultHeader: Bool = true,
                 headers: [String: String]? = nil,
                 parameter: [String: String]? = nil,
-                multipart: [String: Multipart.data]? = nil,
+                multipart: [String: Multipart]? = nil,
                 cookie: Bool = false,
-                basic: [String: String]? = nil)
-    {
+                basic: [String: String]? = nil) {
         self.isNeedDefaultHeader = isNeedDefaultHeader
         do {
             urlRequest = try buildRequest(url: url, method: method)
@@ -44,8 +43,7 @@ open class Request {
         }
 
         if isParamater(method: method),
-            let param = parameter
-        {
+           let param = parameter {
             post(param: param)
         }
 
@@ -116,7 +114,7 @@ open class Request {
      * param [String: Multipart.data]
      * Return URLRequest nullable
      */
-    public func multipart(param: [String: Multipart.data]) {
+    public func multipart(param: [String: Multipart]) {
         guard urlRequest != nil else {
             return
         }
