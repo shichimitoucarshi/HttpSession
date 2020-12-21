@@ -2,11 +2,10 @@
 //  HttpSession.h
 //  HttpSession
 //
-//  Created by Shichimitoucarashi on 07/07/2019.
-//  Copyright © 2019 keisuke yamagishi. All rights reserved.
+//  Created by keisuke yamagishi on 2020/12/20.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for HttpSession.
 FOUNDATION_EXPORT double HttpSessionVersionNumber;

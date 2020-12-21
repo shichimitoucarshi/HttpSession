@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HttpHeader {
+public enum HttpHeader {
     public static let appInfo: [String: String] = {
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
 
@@ -32,17 +32,17 @@ public class HttpHeader {
 
                     let osName: String = {
                         #if os(iOS)
-                        return "iOS"
+                            return "iOS"
                         #elseif os(watchOS)
-                        return "watchOS"
+                            return "watchOS"
                         #elseif os(tvOS)
-                        return "tvOS"
+                            return "tvOS"
                         #elseif os(macOS)
-                        return "OS X"
+                            return "OS X"
                         #elseif os(Linux)
-                        return "Linux"
+                            return "Linux"
                         #else
-                        return "Unknown"
+                            return "Unknown"
                         #endif
                     }()
 
@@ -56,7 +56,7 @@ public class HttpHeader {
         return [
             "Accept-Encoding": acceptEncoding,
             "Accept-Language": acceptLang,
-            "User-Agent": userAgent
+            "User-Agent": userAgent,
         ]
     }()
 
@@ -76,8 +76,8 @@ public class HttpHeader {
     }
 }
 
-extension URLRequest {
-    public mutating func headers(header: [String: String]) {
+public extension URLRequest {
+    mutating func headers(header: [String: String]) {
         for (key, value) in header {
             setValue(value, forHTTPHeaderField: key)
         }

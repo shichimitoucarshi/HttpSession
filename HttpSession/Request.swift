@@ -29,7 +29,8 @@ open class Request {
                 parameter: [String: String]? = nil,
                 multipart: [String: Multipart]? = nil,
                 cookie: Bool = false,
-                basic: [String: String]? = nil) {
+                basic: [String: String]? = nil)
+    {
         self.isNeedDefaultHeader = isNeedDefaultHeader
         do {
             urlRequest = try buildRequest(url: url, method: method)
@@ -43,7 +44,8 @@ open class Request {
         }
 
         if isParamater(method: method),
-           let param = parameter {
+           let param = parameter
+        {
             post(param: param)
         }
 
@@ -118,7 +120,7 @@ open class Request {
         guard urlRequest != nil else {
             return
         }
-        let multipart: Multipart = Multipart()
+        let multipart = Multipart()
         let data: Data = multipart.multiparts(params: param)
         urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
         urlRequest.httpBody = data

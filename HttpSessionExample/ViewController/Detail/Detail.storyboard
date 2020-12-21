@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Lyb-5e-UN5">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Responce-->
+        <scene sceneID="jPv-jD-y6X">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" title="Responce" id="Lyb-5e-UN5" customClass="DetailViewController" customModule="HttpSessionSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ep6-8X-kdd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8s7-RX-bb7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <viewLayoutGuide key="safeArea" id="zOp-id-IB1"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oPi-EI-gsw">
+                                <rect key="frame" x="109" y="538" width="196" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="196" id="nKz-Yh-RYz"/>
+                                    <constraint firstAttribute="height" constant="2" id="sAo-wr-Fce"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhg-8x-nND">
+                                <rect key="frame" x="107.5" y="593" width="199" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="199" id="Kci-Lp-ExQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hPS-D6-1Tj">
+                                <rect key="frame" x="191.5" y="688" width="31" height="30"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="pushStop:" destination="Lyb-5e-UN5" eventType="touchUpInside" id="4wS-cq-0mI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jg-xU-Bp0">
+                                <rect key="frame" x="191" y="739" width="32" height="30"/>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="pushStart:" destination="Lyb-5e-UN5" eventType="touchUpInside" id="DZv-xP-3LL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2yb-fh-DtY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="3jg-xU-Bp0" firstAttribute="top" secondItem="hPS-D6-1Tj" secondAttribute="bottom" constant="21" id="6Pc-Rf-OXo"/>
+                            <constraint firstItem="8s7-RX-bb7" firstAttribute="top" secondItem="2yb-fh-DtY" secondAttribute="top" id="9Tv-LF-hIK"/>
+                            <constraint firstItem="3jg-xU-Bp0" firstAttribute="top" secondItem="hPS-D6-1Tj" secondAttribute="bottom" constant="21" id="AH0-94-ftr"/>
+                            <constraint firstItem="oPi-EI-gsw" firstAttribute="centerX" secondItem="Ep6-8X-kdd" secondAttribute="centerX" id="Bsq-qa-GTy"/>
+                            <constraint firstItem="3jg-xU-Bp0" firstAttribute="centerX" secondItem="Ep6-8X-kdd" secondAttribute="centerX" id="HfH-Xj-ZMO"/>
+                            <constraint firstItem="2yb-fh-DtY" firstAttribute="bottom" secondItem="3jg-xU-Bp0" secondAttribute="bottom" constant="93" id="MGu-bx-Mn7"/>
+                            <constraint firstItem="2yb-fh-DtY" firstAttribute="bottom" secondItem="Zhg-8x-nND" secondAttribute="bottom" constant="248" id="MML-5J-riw"/>
+                            <constraint firstItem="hPS-D6-1Tj" firstAttribute="top" secondItem="Zhg-8x-nND" secondAttribute="bottom" constant="74" id="Zul-4J-60n"/>
+                            <constraint firstItem="8s7-RX-bb7" firstAttribute="leading" secondItem="2yb-fh-DtY" secondAttribute="leading" id="g6t-Xt-PVr"/>
+                            <constraint firstItem="hPS-D6-1Tj" firstAttribute="centerX" secondItem="Ep6-8X-kdd" secondAttribute="centerX" id="nag-X8-gKf"/>
+                            <constraint firstItem="Zhg-8x-nND" firstAttribute="centerX" secondItem="Ep6-8X-kdd" secondAttribute="centerX" id="ukk-gd-bIq"/>
+                            <constraint firstItem="Zhg-8x-nND" firstAttribute="top" secondItem="oPi-EI-gsw" secondAttribute="bottom" constant="53" id="vrm-Ve-Rjh"/>
+                            <constraint firstItem="8s7-RX-bb7" firstAttribute="trailing" secondItem="2yb-fh-DtY" secondAttribute="trailing" id="y51-ea-7kG"/>
+                            <constraint firstItem="8s7-RX-bb7" firstAttribute="bottom" secondItem="2yb-fh-DtY" secondAttribute="bottom" id="yuk-aT-tpz"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progress" destination="oPi-EI-gsw" id="UjJ-jc-KoP"/>
+                        <outlet property="responceText" destination="8s7-RX-bb7" id="tv6-kT-IBN"/>
+                        <outlet property="startButton" destination="3jg-xU-Bp0" id="inU-oN-8BA"/>
+                        <outlet property="status" destination="Zhg-8x-nND" id="eYG-qM-aiR"/>
+                        <outlet property="stopButton" destination="hPS-D6-1Tj" id="aeP-7h-GhJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NBs-V4-ooo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1925.5999999999999" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>

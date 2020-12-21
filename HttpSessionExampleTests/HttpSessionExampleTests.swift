@@ -1,14 +1,14 @@
 //
-//  HttpSessionTests.swift
-//  HttpSessionTests
+//  HttpSessionExampleTests.swift
+//  HttpSessionExampleTests
 //
 //  Created by keisuke yamagishi on 2020/12/20.
 //
 
-@testable import HttpSession
+@testable import HttpSessionExample
 import XCTest
 
-class HttpSessionTests: XCTestCase {
+class HttpSessionExampleTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }

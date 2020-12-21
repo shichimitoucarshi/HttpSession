@@ -35,12 +35,14 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
     public init() {}
 
     public func send(api: Type,
-                     completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                     completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         Http.request(api: api).session(completion: completion)
     }
 
     public func upload(api: Type,
-                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         Http.request(api: api).upload(completionHandler: completion)
     }
 
@@ -48,7 +50,8 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
                          data: Data? = nil,
                          progress: @escaping (Int64, Int64, Int64) -> Void,
                          download: @escaping (URL?) -> Void,
-                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         Http.request(api: api).download(resumeData: data,
                                         progress: progress,
                                         download: download,
@@ -94,7 +97,7 @@ open class Http: NSObject {
     public var session: URLSession?
     public var request: Request?
     public var isCookie: Bool = false
-    public static let shared: Http = Http()
+    public static let shared = Http()
 
     override private init() {
         super.init()
@@ -108,7 +111,8 @@ open class Http: NSObject {
                          multipart: [String: Multipart]? = nil,
 
                          cookie: Bool = false,
-                         basic: [String: String]? = nil) -> Http {
+                         basic: [String: String]? = nil) -> Http
+    {
         data = nil
         isCookie = cookie
         self.params = params
@@ -130,7 +134,8 @@ open class Http: NSObject {
                               params: [String: String]? = nil,
                               multipart: [String: Multipart]? = nil,
                               cookie: Bool = false,
-                              basic: [String: String]? = nil) -> Http {
+                              basic: [String: String]? = nil) -> Http
+    {
         return Http.shared.request(url: url,
                                    method: method,
                                    isNeedDefaultHeader: isNeedDefaultHeader,
@@ -177,7 +182,8 @@ open class Http: NSObject {
     public func download(resumeData: Data? = nil,
                          progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
                          download: @escaping (_ path: URL?) -> Void,
-                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         /*
          /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
@@ -235,7 +241,8 @@ open class Http: NSObject {
 extension Http: URLSessionDataDelegate, URLSessionDownloadDelegate, URLSessionTaskDelegate {
     public func urlSession(_: URLSession,
                            downloadTask _: URLSessionDownloadTask,
-                           didFinishDownloadingTo location: URL) {
+                           didFinishDownloadingTo location: URL)
+    {
         download?(location)
     }
 
@@ -243,7 +250,8 @@ extension Http: URLSessionDataDelegate, URLSessionDownloadDelegate, URLSessionTa
                            downloadTask _: URLSessionDownloadTask,
                            didWriteData bytesWritten: Int64,
                            totalBytesWritten: Int64,
-                           totalBytesExpectedToWrite: Int64) {
+                           totalBytesExpectedToWrite: Int64)
+    {
         progress!(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
     }
 
@@ -275,7 +283,8 @@ extension Http: URLSessionDataDelegate, URLSessionDownloadDelegate, URLSessionTa
     public func urlSession(_: URLSession,
                            dataTask _: URLSessionDataTask,
                            didReceive response: URLResponse,
-                           completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+                           completionHandler: @escaping (URLSession.ResponseDisposition) -> Void)
+    {
         self.response = response as? HTTPURLResponse
         completionHandler(.allow)
     }
