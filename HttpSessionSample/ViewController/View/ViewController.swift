@@ -13,20 +13,13 @@ final class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     var viewModel: ViewModel = ViewModel()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-
     func detailViewController(param: String = "",
                               result: String = "",
                               responce: String = "",
                               error: String = "",
                               isDL: Bool = false) {
-        let identifer = DetailViewController.detailViewControllerId
-        let detailViewController = (storyboard?
-                                        .instantiateViewController(withIdentifier: identifer) as? DetailViewController)!
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+        guard let detailViewController = storyboard.instantiateInitialViewController() as? DetailViewController else { return }
         let text = "param:\n\(param)\nresponce header:\n\(responce)\nresult:\n \n\(result)\n\(error)"
         detailViewController.viewModel = DetailViewModel(text: text,
                                                          isDL: isDL)

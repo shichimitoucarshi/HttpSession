@@ -28,7 +28,7 @@ platform :ios do
 
   desc "Run the tests"
   private_lane :test_lib do  
-    scan(workspace: "HttpSessionSample.xcworkspace",
+    scan(project: "HttpSessionSample.xcodeproj",
          scheme: "HttpSessionSample"
         )
   end
