@@ -24,7 +24,6 @@
 		900AE22425978408002FF546 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE22225978408002FF546 /* Multipart.swift */; };
 		900AE22525978408002FF546 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE22325978408002FF546 /* Request.swift */; };
 		900AE22D2597842D002FF546 /* TestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE22C2597842D002FF546 /* TestProtocol.swift */; };
-		900AE23525978435002FF546 /* HttpSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE23425978435002FF546 /* HttpSessionTests.swift */; };
 		900AE2472597844F002FF546 /* Tapul+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE2412597844F002FF546 /* Tapul+.swift */; };
 		900AE2482597844F002FF546 /* Dictionary+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE2422597844F002FF546 /* Dictionary+.swift */; };
 		900AE2492597844F002FF546 /* Apis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE2442597844F002FF546 /* Apis.swift */; };
@@ -37,6 +36,7 @@
 		900AE25E2597845F002FF546 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE25A2597845F002FF546 /* ViewModel.swift */; };
 		900AE26625978489002FF546 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900AE26525978489002FF546 /* Detail.storyboard */; };
 		900AE26B259784A2002FF546 /* View.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900AE26A259784A2002FF546 /* View.storyboard */; };
+		908D69902598226E00BB3BB0 /* HttpSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,7 +98,6 @@
 		900AE22225978408002FF546 /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		900AE22325978408002FF546 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		900AE22C2597842D002FF546 /* TestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestProtocol.swift; sourceTree = "<group>"; };
-		900AE23425978435002FF546 /* HttpSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpSessionTests.swift; path = ../../../HttpSession/HttpSessionTests/HttpSessionTests.swift; sourceTree = "<group>"; };
 		900AE2412597844F002FF546 /* Tapul+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Tapul+.swift"; sourceTree = "<group>"; };
 		900AE2422597844F002FF546 /* Dictionary+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+.swift"; sourceTree = "<group>"; };
 		900AE2442597844F002FF546 /* Apis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apis.swift; sourceTree = "<group>"; };
@@ -111,6 +110,7 @@
 		900AE25A2597845F002FF546 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		900AE26525978489002FF546 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		900AE26A259784A2002FF546 /* View.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = View.storyboard; sourceTree = "<group>"; };
+		908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +195,8 @@
 		900AE1FE259783E4002FF546 /* HttpSessionTests */ = {
 			isa = PBXGroup;
 			children = (
+				908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */,
 				900AE22C2597842D002FF546 /* TestProtocol.swift */,
-				900AE23425978435002FF546 /* HttpSessionTests.swift */,
 				900AE201259783E4002FF546 /* Info.plist */,
 			);
 			path = HttpSessionTests;
@@ -454,7 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				900AE23525978435002FF546 /* HttpSessionTests.swift in Sources */,
+				908D69902598226E00BB3BB0 /* HttpSessionTests.swift in Sources */,
 				900AE22D2597842D002FF546 /* TestProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
