@@ -4,6 +4,10 @@
 [![](https://img.shields.io/badge/Lang-Swift-ff69b4)](https://developer.apple.com/jp/swift/)
 [![](https://img.shields.io/badge/LICENCE-MIT-orange)](https://github.com/keisukeYamagishi/HttpRequest/blob/master/LICENSE)
 
+***Build status***
+
+![build](https://github.com/keisukeYamagishi/HttpSession/workflows/build/badge.svg)
+
 ### Overview
 
 TCP / IP based HTTP communication can be simplified
