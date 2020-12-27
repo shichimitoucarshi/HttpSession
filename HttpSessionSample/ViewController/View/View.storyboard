@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ty-Ba-xCb">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="kO3-pc-sih">
+            <objects>
+                <viewController id="6Ty-Ba-xCb" customClass="ViewController" customModule="HttpSessionSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ixk-gd-Mmk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Hr-DN-8G0">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="DgC-VQ-lAW">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DgC-VQ-lAW" id="VWs-8C-Nas">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="6Ty-Ba-xCb" id="mqk-zI-ICO"/>
+                                    <outlet property="delegate" destination="6Ty-Ba-xCb" id="BH8-Fk-jGu"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="dl3-Ww-ZJD"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="top" secondItem="Ixk-gd-Mmk" secondAttribute="top" id="4XB-jJ-LFH"/>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="trailing" secondItem="dl3-Ww-ZJD" secondAttribute="trailing" id="FEY-Ua-8F0"/>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="bottom" secondItem="dl3-Ww-ZJD" secondAttribute="bottom" id="HAP-2W-a3U"/>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="leading" secondItem="dl3-Ww-ZJD" secondAttribute="leading" id="ztW-Q1-EL1"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QwM-ZD-ktv"/>
+                    <connections>
+                        <outlet property="tableView" destination="3Hr-DN-8G0" id="3vY-Cb-ngF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Te9-PE-nGY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1153" y="133"/>
+        </scene>
+    </scenes>
+</document>

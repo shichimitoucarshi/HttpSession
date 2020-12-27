@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rja-Qg-fh7">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Responce-->
+        <scene sceneID="OWe-7j-bio">
+            <objects>
+                <viewController storyboardIdentifier="DetailViewController" title="Responce" id="rja-Qg-fh7" customClass="DetailViewController" customModule="HttpSessionSample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VXY-Th-rdd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Saj-L0-dju">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <viewLayoutGuide key="safeArea" id="XMC-y0-pMH"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h4U-CJ-mza">
+                                <rect key="frame" x="109" y="538" width="196" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="72c-xY-DuB"/>
+                                    <constraint firstAttribute="width" constant="196" id="WUo-So-piq"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpd-Ni-pkl">
+                                <rect key="frame" x="107.5" y="593" width="199" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="199" id="mWl-Uu-za3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNt-d6-Sp3">
+                                <rect key="frame" x="191.5" y="688" width="31" height="30"/>
+                                <state key="normal" title="stop"/>
+                                <connections>
+                                    <action selector="pushStop:" destination="rja-Qg-fh7" eventType="touchUpInside" id="Ecc-oC-Yzg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSK-3M-vUa">
+                                <rect key="frame" x="191" y="739" width="32" height="30"/>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="pushStart:" destination="rja-Qg-fh7" eventType="touchUpInside" id="D1q-IC-OPq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xkl-iK-UBQ"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xkl-iK-UBQ" firstAttribute="bottom" secondItem="Fpd-Ni-pkl" secondAttribute="bottom" constant="248" id="2d2-ZZ-g62"/>
+                            <constraint firstItem="uSK-3M-vUa" firstAttribute="top" secondItem="cNt-d6-Sp3" secondAttribute="bottom" constant="21" id="439-tC-crD"/>
+                            <constraint firstItem="uSK-3M-vUa" firstAttribute="top" secondItem="cNt-d6-Sp3" secondAttribute="bottom" constant="21" id="55L-AH-1uD"/>
+                            <constraint firstItem="Saj-L0-dju" firstAttribute="bottom" secondItem="xkl-iK-UBQ" secondAttribute="bottom" id="9nz-Hk-1ht"/>
+                            <constraint firstItem="xkl-iK-UBQ" firstAttribute="bottom" secondItem="uSK-3M-vUa" secondAttribute="bottom" constant="93" id="ETl-Nu-K54"/>
+                            <constraint firstItem="h4U-CJ-mza" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="IY7-gL-vDR"/>
+                            <constraint firstItem="uSK-3M-vUa" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="Lyr-Kn-ca7"/>
+                            <constraint firstItem="Fpd-Ni-pkl" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="QtZ-di-wSA"/>
+                            <constraint firstItem="Saj-L0-dju" firstAttribute="leading" secondItem="xkl-iK-UBQ" secondAttribute="leading" id="RJP-RG-j5P"/>
+                            <constraint firstItem="cNt-d6-Sp3" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="aBg-5h-UNi"/>
+                            <constraint firstItem="Saj-L0-dju" firstAttribute="top" secondItem="xkl-iK-UBQ" secondAttribute="top" id="aVJ-Rg-R8r"/>
+                            <constraint firstItem="Saj-L0-dju" firstAttribute="trailing" secondItem="xkl-iK-UBQ" secondAttribute="trailing" id="aWR-td-R3T"/>
+                            <constraint firstItem="cNt-d6-Sp3" firstAttribute="top" secondItem="Fpd-Ni-pkl" secondAttribute="bottom" constant="74" id="avo-az-qsX"/>
+                            <constraint firstItem="Fpd-Ni-pkl" firstAttribute="top" secondItem="h4U-CJ-mza" secondAttribute="bottom" constant="53" id="yBj-gs-bak"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="progress" destination="h4U-CJ-mza" id="3eO-bg-ihC"/>
+                        <outlet property="responceText" destination="Saj-L0-dju" id="EYK-E0-77Q"/>
+                        <outlet property="startButton" destination="uSK-3M-vUa" id="jol-Zi-m60"/>
+                        <outlet property="status" destination="Fpd-Ni-pkl" id="6sE-iM-KAn"/>
+                        <outlet property="stopButton" destination="cNt-d6-Sp3" id="KIb-kk-O55"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f3C-jj-TBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1925.5999999999999" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>

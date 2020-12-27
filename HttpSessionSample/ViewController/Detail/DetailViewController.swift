@@ -20,8 +20,8 @@ final class DetailViewController: UIViewController {
     @IBOutlet var startButton: UIButton!
     var viewModel: DetailViewModel!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
 
         if viewModel.output.isDL == true {
             responceText.isHidden = true

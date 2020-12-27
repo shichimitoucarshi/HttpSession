@@ -28,8 +28,9 @@ platform :ios do
 
   desc "Run the tests"
   private_lane :test_lib do  
-    scan(workspace: "HttpSessionSample.xcworkspace",
-         scheme: "HttpSessionSample"
+    scan(project: "HttpSessionSample.xcodeproj",
+         scheme: "HttpSessionSample",
+         xcargs: "-allowProvisioningUpdates"
         )
   end
 

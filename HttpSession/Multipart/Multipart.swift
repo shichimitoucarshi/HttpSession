@@ -6,7 +6,6 @@
 //  Copyright © 2017年 shichimitoucarashi. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 open class Multipart {
@@ -45,7 +44,6 @@ open class Multipart {
         body.append(data)
         body.append(CRLF.data(using: .utf8)!)
         body.append(("--\(bundary)--" + CRLF).data(using: .utf8)!)
-
         return body
     }
 }
