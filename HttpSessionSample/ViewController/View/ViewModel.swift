@@ -26,22 +26,22 @@ final class ViewModel: ViewModelType {
     var input: ViewModelInput { get { return self } set {} }
     var output: ViewModelOutput { get { return self } set {} }
 
-    private let _provider: ApiProvider = ApiProvider<DemoApi>()
-    private var _detail: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
-    private var _pushDetailViewController: (() -> Void)!
+    private let provider: ApiProvider = ApiProvider<DemoApi>()
+    private var detailClosure: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
+    private var pushDetailClosure: (() -> Void)!
 }
 
 extension ViewModel: ViewModelInput {
     func callApi(_ indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            _provider.send(api: .zen) { [unowned self] data, responce, error in
-                _detail(data, "", responce, error)
+            provider.send(api: .zen) { [unowned self] data, responce, error in
+                detailClosure(data, "", responce, error)
             }
         case 1:
             let val: Tapul = Tapul(value: ("http_post", value: "Http Request POST 😄"))
-            _provider.send(api: .post(param: val)) { [unowned self] data, responce, error in
-                _detail(data, "", responce, error)
+            provider.send(api: .post(param: val)) { [unowned self] data, responce, error in
+                detailClosure(data, "", responce, error)
             }
         case 2:
 
@@ -52,17 +52,17 @@ extension ViewModel: ViewModelInput {
 
             Http.request(url: url, method: .post, params: param)
                 .session(completion: { [unowned self] data, responce, error in
-                    _detail(data, "", responce, error)
+                    detailClosure(data, "", responce, error)
                 })
         case 3:
 
             Http.request(url: "https://httpsession.work/signIned.json", method: .get, cookie: true)
                 .session(completion: { [unowned self] data, responce, error in
-                    _detail(data, "", responce, error)
+                    detailClosure(data, "", responce, error)
                 })
         case 4:
-            _provider.upload(api: .upload) { [unowned self] data, responce, error in
-                _detail(data, "", responce, error)
+            provider.upload(api: .upload) { [unowned self] data, responce, error in
+                detailClosure(data, "", responce, error)
             }
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
@@ -70,10 +70,10 @@ extension ViewModel: ViewModelInput {
             Http.request(url: "https://httpsession.work/basicauth.json",
                          method: .get,
                          basic: basicAuth).session(completion: { [unowned self] data, responce, error in
-                            _detail(data, "", responce, error)
+                            detailClosure(data, "", responce, error)
             })
         case 6:
-            _pushDetailViewController?()
+            pushDetailClosure?()
         default:
             print("Default")
         }
@@ -83,19 +83,19 @@ extension ViewModel: ViewModelInput {
 extension ViewModel: ViewModelOutput {
     var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void {
         get {
-            return _detail
+            return detailClosure
         }
         set {
-            _detail = newValue
+            detailClosure = newValue
         }
     }
 
     var pushDetailViewController: () -> Void {
         get {
-            return _pushDetailViewController
+            return pushDetailClosure
         }
         set {
-            _pushDetailViewController = newValue
+            pushDetailClosure = newValue
         }
     }
 }
