@@ -32,13 +32,13 @@ final class DetailViewModel: DetailViewModelType {
     let provider: ApiProvider = ApiProvider<DemoApi>()
     var input: DetailViewModelInput { return self }
     var output: DetailViewModelOutput { get { return self } set {} }
-    var _progress: ((Int64, Int64, Float) -> Void)?
-    var _isDL: Bool = false
-    var _text: String = ""
+    var progressClosure: ((Int64, Int64, Float) -> Void)?
+    var isDownload: Bool = false
+    var internalText: String = ""
 
     init(text: String, isDL: Bool) {
-        _isDL = isDL
-        _text = text
+        isDownload = isDL
+        internalText = text
     }
 }
 
@@ -71,7 +71,7 @@ extension DetailViewModel: DetailViewModelInput {
                               guard let self = self else { return }
                               DispatchQueue.main.async {
                                   let progress = Float(total) / Float(expectedToWrite)
-                                  self._progress?(total, expectedToWrite, progress)
+                                  self.progressClosure?(total, expectedToWrite, progress)
                               }
                           }, download: { url in
                               print("location: \(String(describing: url))")
@@ -83,18 +83,18 @@ extension DetailViewModel: DetailViewModelInput {
 extension DetailViewModel: DetailViewModelOutput {
     var progress: ((Int64, Int64, Float) -> Void)? {
         get {
-            _progress
+            progressClosure
         }
         set {
-            _progress = newValue
+            progressClosure = newValue
         }
     }
 
     var text: String {
-        _text
+        internalText
     }
 
     var isDL: Bool {
-        _isDL
+        isDownload
     }
 }
