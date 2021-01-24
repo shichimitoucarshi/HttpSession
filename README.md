@@ -13,7 +13,7 @@
 TCP / IP based HTTP communication can be simplified
 and Twitter OAuth
 
-***API Server:*** https://httpsession.work/
+***API Server:*** https://sevens-api.herokuapp.com/
 
 ### Recommended.
 
@@ -77,7 +77,7 @@ $ git clone https://github.com/keisukeYamagishi/HttpSession.git
 GET http method
 
 ```swift
-Http.request(url: "http://153.126.160.55/getApi.json", method: .get)
+Http.request(url: "https://sevens-api.herokuapp.com/getApi.json", method: .get)
   .session(completion: { (data, responce, error) in
     self.detail(data: data!)
 })
@@ -89,7 +89,7 @@ POST http method
 
 let param = ["http_post":"Http Request POST 😄"]
             
-Http.request(url: "http://153.126.160.55/postApi.json",method: .post)
+Http.request(url: "https://sevens-api.herokuapp.com/postApi.json",method: .post)
   .session(param: param,
   completion: { (data, responce, error) in {
   self.detail(data: data!, param: param.hashString())
@@ -125,7 +125,7 @@ extension DemoApi:ApiProtocol {
     var domain: String{
         switch self {
         case .zen, .post:
-            return "https://httpsession.work"
+            return "https://sevens-api.herokuapp.com/"
         case .download:
             return "https://shichimitoucarashi.com"
         }
