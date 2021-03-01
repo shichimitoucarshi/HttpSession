@@ -24,7 +24,7 @@ open class Multipart {
     }
 
     public func multiparts(params: [String: Multipart]) -> Data {
-        var post: Data = Data()
+        var post = Data()
 
         params.forEach {
             post.append(multipart(key: $0.key,

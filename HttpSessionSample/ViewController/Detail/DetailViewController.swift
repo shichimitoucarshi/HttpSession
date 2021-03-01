@@ -10,7 +10,6 @@ import HttpSession
 import UIKit
 
 final class DetailViewController: UIViewController {
-
     static let detailViewControllerId: String = "DetailViewController"
 
     @IBOutlet var responceText: UITextView!
@@ -29,7 +28,7 @@ final class DetailViewController: UIViewController {
             viewModel.input.download()
             viewModel.output.progress = { [weak self] total, expectedToWrite, progress in
                 guard let self = self else { return }
-                self.status.text = "\(total)/\(expectedToWrite)"
+                self.status.text = "\(total)byte/\(expectedToWrite)byte"
                 self.progress.setProgress(progress, animated: true)
             }
         } else {

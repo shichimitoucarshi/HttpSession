@@ -29,9 +29,9 @@ protocol DetailViewModelType: AnyObject {
 final class DetailViewModel: DetailViewModelType {
     var data: Data?
     var isCancel = false
-    let provider: ApiProvider = ApiProvider<DemoApi>()
-    var input: DetailViewModelInput { return self }
-    var output: DetailViewModelOutput { get { return self } set {} }
+    let provider = ApiProvider<DemoApi>()
+    var input: DetailViewModelInput { self }
+    var output: DetailViewModelOutput { get { self } set {} }
     var progressClosure: ((Int64, Int64, Float) -> Void)?
     var isDownload: Bool = false
     var internalText: String = ""
