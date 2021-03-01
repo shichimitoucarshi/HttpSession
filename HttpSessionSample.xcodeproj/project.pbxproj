@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9009DEC825EC98D2002DCE37 /* URLSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9009DEC725EC98D2002DCE37 /* URLSessionManager.swift */; };
 		900AE1B7259783BE002FF546 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE1B6259783BE002FF546 /* AppDelegate.swift */; };
 		900AE1B9259783BE002FF546 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE1B8259783BE002FF546 /* SceneDelegate.swift */; };
 		900AE1C0259783BE002FF546 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 900AE1BF259783BE002FF546 /* Assets.xcassets */; };
@@ -78,6 +79,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9009DEC725EC98D2002DCE37 /* URLSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionManager.swift; sourceTree = "<group>"; };
 		900AE1B3259783BE002FF546 /* HttpSessionSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HttpSessionSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		900AE1B6259783BE002FF546 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		900AE1B8259783BE002FF546 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				900AE1F3259783E4002FF546 /* Info.plist */,
 				900AE22125978408002FF546 /* Multipart */,
 				900AE22325978408002FF546 /* Request.swift */,
+				9009DEC725EC98D2002DCE37 /* URLSessionManager.swift */,
 			);
 			path = HttpSession;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9009DEC825EC98D2002DCE37 /* URLSessionManager.swift in Sources */,
 				900AE218259783FC002FF546 /* HttpHeader.swift in Sources */,
 				900AE22525978408002FF546 /* Request.swift in Sources */,
 				900AE21B259783FC002FF546 /* Http.swift in Sources */,

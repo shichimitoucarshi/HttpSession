@@ -11,13 +11,14 @@ import UIKit
 
 final class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    var viewModel: ViewModel = ViewModel()
+    var viewModel = ViewModel()
 
     func detailViewController(param: String = "",
                               result: String = "",
                               responce: String = "",
                               error: String = "",
-                              isDL: Bool = false) {
+                              isDL: Bool = false)
+    {
         let storyboard = UIStoryboard(name: "Detail", bundle: nil)
         guard let detailViewController = storyboard.instantiateInitialViewController() as? DetailViewController else { return }
         let text = "param:\n\(param)\nresponce header:\n\(responce)\nresult:\n \n\(result)\n\(error)"
@@ -29,11 +30,13 @@ final class ViewController: UIViewController {
     func detail(data: Data?,
                 param: String = "",
                 responce: HTTPURLResponse?,
-                error: Error?) {
+                error: Error?)
+    {
         DispatchQueue.main.async {
             if let unwrapData = data,
                let result = String(data: unwrapData, encoding: .utf8),
-               let unwrapResponce = responce {
+               let unwrapResponce = responce
+            {
                 self.detailViewController(param: param,
                                           result: result,
                                           responce: String(describing: unwrapResponce))
@@ -50,7 +53,7 @@ final class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return apis.count
+        apis.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,8 +65,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.input.callApi(indexPath)
-
+        tableView.deselectRow(at: indexPath, animated: true)
         viewModel.output.detail = { [unowned self] data, str, res, error in
             self.detail(data: data, param: str, responce: res, error: error)
         }
@@ -71,5 +73,6 @@ extension ViewController: UITableViewDelegate {
         viewModel.output.pushDetailViewController = { [unowned self] in
             self.detailViewController(isDL: true)
         }
+        viewModel.input.callApi(indexPath)
     }
 }

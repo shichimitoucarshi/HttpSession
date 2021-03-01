@@ -23,8 +23,8 @@ protocol ViewModelType: AnyObject {
 }
 
 final class ViewModel: ViewModelType {
-    var input: ViewModelInput { get { return self } set {} }
-    var output: ViewModelOutput { get { return self } set {} }
+    var input: ViewModelInput { get { self } set {} }
+    var output: ViewModelOutput { get { self } set {} }
 
     private let provider = ApiProvider<DemoApi>()
     private var detailClosure: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
@@ -83,7 +83,7 @@ extension ViewModel: ViewModelInput {
 extension ViewModel: ViewModelOutput {
     var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void {
         get {
-            return detailClosure
+            detailClosure
         }
         set {
             detailClosure = newValue
@@ -92,7 +92,7 @@ extension ViewModel: ViewModelOutput {
 
     var pushDetailViewController: () -> Void {
         get {
-            return pushDetailClosure
+            pushDetailClosure
         }
         set {
             pushDetailClosure = newValue

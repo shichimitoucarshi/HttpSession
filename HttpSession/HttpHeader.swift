@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class HttpHeader {
+public enum HttpHeader {
     public static let appInfo: [String: String] = {
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
 
@@ -32,17 +32,17 @@ public class HttpHeader {
 
                     let osName: String = {
                         #if os(iOS)
-                        return "iOS"
+                            return "iOS"
                         #elseif os(watchOS)
-                        return "watchOS"
+                            return "watchOS"
                         #elseif os(tvOS)
-                        return "tvOS"
+                            return "tvOS"
                         #elseif os(macOS)
-                        return "OS X"
+                            return "OS X"
                         #elseif os(Linux)
-                        return "Linux"
+                            return "Linux"
                         #else
-                        return "Unknown"
+                            return "Unknown"
                         #endif
                     }()
 
@@ -56,28 +56,28 @@ public class HttpHeader {
         return [
             "Accept-Encoding": acceptEncoding,
             "Accept-Language": acceptLang,
-            "User-Agent": userAgent
+            "User-Agent": userAgent,
         ]
     }()
 
     static func postHeader(_ contentLength: String) -> [String: String] {
-        return ["Content-Type": "application/x-www-form-urlencoded",
-                "Accept": "application/x-www-form-urlencoded",
-                "Content-Length": contentLength]
+        ["Content-Type": "application/x-www-form-urlencoded",
+         "Accept": "application/x-www-form-urlencoded",
+         "Content-Length": contentLength]
     }
 
     static func multipart(_ bundary: String) -> [String: String] {
-        return ["Content-Type": "multipart/form-data; boundary=\(bundary)"]
+        ["Content-Type": "multipart/form-data; boundary=\(bundary)"]
     }
 
     static func basicAuthenticate(auth: [String: String]) -> [String: String] {
-        return ["Authorization": Auth.basic(user: auth[Auth.user] ?? "",
-                                            password: auth[Auth.password] ?? "")]
+        ["Authorization": Auth.basic(user: auth[Auth.user] ?? "",
+                                     password: auth[Auth.password] ?? "")]
     }
 }
 
-extension URLRequest {
-    public mutating func headers(header: [String: String]) {
+public extension URLRequest {
+    mutating func headers(header: [String: String]) {
         for (key, value) in header {
             setValue(value, forHTTPHeaderField: key)
         }

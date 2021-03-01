@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rja-Qg-fh7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rja-Qg-fh7">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,10 +31,7 @@
                                 </constraints>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fpd-Ni-pkl">
-                                <rect key="frame" x="107.5" y="593" width="199" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="199" id="mWl-Uu-za3"/>
-                                </constraints>
+                                <rect key="frame" x="10" y="593" width="394" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -64,12 +61,14 @@
                             <constraint firstItem="xkl-iK-UBQ" firstAttribute="bottom" secondItem="uSK-3M-vUa" secondAttribute="bottom" constant="93" id="ETl-Nu-K54"/>
                             <constraint firstItem="h4U-CJ-mza" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="IY7-gL-vDR"/>
                             <constraint firstItem="uSK-3M-vUa" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="Lyr-Kn-ca7"/>
+                            <constraint firstItem="Fpd-Ni-pkl" firstAttribute="leading" secondItem="xkl-iK-UBQ" secondAttribute="leading" constant="10" id="Oue-3B-ihT"/>
                             <constraint firstItem="Fpd-Ni-pkl" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="QtZ-di-wSA"/>
                             <constraint firstItem="Saj-L0-dju" firstAttribute="leading" secondItem="xkl-iK-UBQ" secondAttribute="leading" id="RJP-RG-j5P"/>
                             <constraint firstItem="cNt-d6-Sp3" firstAttribute="centerX" secondItem="VXY-Th-rdd" secondAttribute="centerX" id="aBg-5h-UNi"/>
                             <constraint firstItem="Saj-L0-dju" firstAttribute="top" secondItem="xkl-iK-UBQ" secondAttribute="top" id="aVJ-Rg-R8r"/>
                             <constraint firstItem="Saj-L0-dju" firstAttribute="trailing" secondItem="xkl-iK-UBQ" secondAttribute="trailing" id="aWR-td-R3T"/>
                             <constraint firstItem="cNt-d6-Sp3" firstAttribute="top" secondItem="Fpd-Ni-pkl" secondAttribute="bottom" constant="74" id="avo-az-qsX"/>
+                            <constraint firstItem="xkl-iK-UBQ" firstAttribute="trailing" secondItem="Fpd-Ni-pkl" secondAttribute="trailing" constant="10" id="gGN-8y-4Fi"/>
                             <constraint firstItem="Fpd-Ni-pkl" firstAttribute="top" secondItem="h4U-CJ-mza" secondAttribute="bottom" constant="53" id="yBj-gs-bak"/>
                         </constraints>
                     </view>
