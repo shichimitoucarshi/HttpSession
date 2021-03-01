@@ -23,14 +23,16 @@ extension TestApi: ApiProtocol {
     var domain: String {
         switch self {
         case .test1, .test2, .test3:
-            return "https://httpsession.work"
+            return "https://sevens-api.herokuapp.com"
         }
     }
 
     var endPoint: String {
         switch self {
-        case .test1, .test2, .test3:
+        case .test1, .test2:
             return "postApi.json"
+        case .test3:
+            return "imageUp.json"
         }
     }
 
@@ -66,7 +68,7 @@ extension TestApi: ApiProtocol {
         case .test3:
             let multipartData = Multipart()
             let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
-            var img: Data = Data()
+            var img = Data()
             do {
                 img = try Data(contentsOf: URL(fileURLWithPath: image!))
             } catch {}

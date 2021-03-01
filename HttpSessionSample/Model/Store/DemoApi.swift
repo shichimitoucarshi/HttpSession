@@ -23,7 +23,7 @@ extension DemoApi: ApiProtocol {
     var domain: String {
         switch self {
         case .zen, .post, .upload:
-            return "https://httpsession.work"
+            return "https://sevens-api.herokuapp.com"
         case .download:
             return "https://shichimitoucarashi.com"
         }
@@ -36,7 +36,7 @@ extension DemoApi: ApiProtocol {
         case .post:
             return "postApi.json"
         case .download:
-            return "public/Apple_trim.mp4"
+            return "apple-movie.mp4"
         case .upload:
             return "imageUp.json"
         }
