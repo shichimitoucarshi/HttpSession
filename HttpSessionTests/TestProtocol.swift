@@ -8,6 +8,9 @@
 
 import Foundation
 import HttpSession
+import XCTest
+
+let TestUrl: String = "https://sevens-api.herokuapp.com"
 
 enum TestApi {
     case test1
@@ -17,14 +20,11 @@ enum TestApi {
 
 extension TestApi: ApiProtocol {
     var isNeedDefaultHeader: Bool {
-        return true
+        true
     }
 
     var domain: String {
-        switch self {
-        case .test1, .test2, .test3:
-            return "https://sevens-api.herokuapp.com"
-        }
+        TestUrl
     }
 
     var endPoint: String {
@@ -37,17 +37,11 @@ extension TestApi: ApiProtocol {
     }
 
     var method: Http.Method {
-        switch self {
-        case .test1, .test2, .test3:
-            return .post
-        }
+        .post
     }
 
     var header: [String: String]? {
-        switch self {
-        case .test1, .test2, .test3:
-            return nil
-        }
+        nil
     }
 
     var params: [String: String]? {
@@ -61,35 +55,30 @@ extension TestApi: ApiProtocol {
         }
     }
 
-    var multipart: [String: Multipart]? {
+    var multipart: [Multipartible]? {
         switch self {
         case .test1, .test2:
             return nil
         case .test3:
-            let multipartData = Multipart()
-            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
+            guard let image: String = Bundle.main.path(forResource: "re", ofType: "txt") else { return nil }
             var img = Data()
             do {
-                img = try Data(contentsOf: URL(fileURLWithPath: image!))
-            } catch {}
-            multipartData.fileName = "Hello.txt"
-            multipartData.mimeType = "text/plain"
-            multipartData.data = img
-            return ["img": multipartData]
+                img = try Data(contentsOf: URL(fileURLWithPath: image))
+            } catch {
+                XCTFail()
+            }
+            return [Multipartible(key: "img",
+                                  fileName: "Hello.txt",
+                                  mineType: "text/plain",
+                                  data: img)]
         }
     }
 
     var isCookie: Bool {
-        switch self {
-        case .test1, .test2, .test3:
-            return false
-        }
+        false
     }
 
     var basicAuth: [String: String]? {
-        switch self {
-        case .test1, .test2, .test3:
-            return nil
-        }
+        nil
     }
 }

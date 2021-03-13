@@ -66,11 +66,11 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.output.detail = { [unowned self] data, str, res, error in
+        viewModel.output.detail { [unowned self] data, str, res, error in
             self.detail(data: data, param: str, responce: res, error: error)
         }
 
-        viewModel.output.pushDetailViewController = { [unowned self] in
+        viewModel.output.transition { [unowned self] in
             self.detailViewController(isDL: true)
         }
         viewModel.input.callApi(indexPath)

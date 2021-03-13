@@ -26,7 +26,7 @@ final class DetailViewController: UIViewController {
             responceText.isHidden = true
             progress.setProgress(0.0, animated: true)
             viewModel.input.download()
-            viewModel.output.progress = { [weak self] total, expectedToWrite, progress in
+            viewModel.output.progress { [weak self] total, expectedToWrite, progress in
                 guard let self = self else { return }
                 self.status.text = "\(total)byte/\(expectedToWrite)byte"
                 self.progress.setProgress(progress, animated: true)

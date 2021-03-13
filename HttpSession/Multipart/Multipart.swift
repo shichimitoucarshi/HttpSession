@@ -8,42 +8,104 @@
 
 import UIKit
 
-open class Multipart {
-    public var fileName: String
-    public var mimeType: String
-    public var data: Data
-    public var bundary: String
-    public var uuid: String
+let carriageReturnString: String = "\r\n"
 
-    public init() {
-        fileName = ""
-        mimeType = ""
-        data = Data()
-        uuid = UUID().uuidString
-        bundary = String(format: "----\(uuid)")
+public struct Multipartible {
+    public let key: String
+    public let fileName: String
+    public let mimeType: String
+    public let data: Data
+
+    public init(key: String,
+                fileName: String,
+                mineType: String,
+                data: Data)
+    {
+        self.key = key
+        self.fileName = fileName
+        mimeType = mineType
+        self.data = data
+    }
+}
+
+public class Multipart {
+    public let multipart: Multipartible
+    public let boundary: Data
+
+    public init(_ multipart: Multipartible, boundary: Data) {
+        self.multipart = multipart
+        self.boundary = boundary
     }
 
-    public func multiparts(params: [String: Multipart]) -> Data {
-        var post = Data()
-
-        params.forEach {
-            post.append(multipart(key: $0.key,
-                                  fileName: $0.value.fileName as String,
-                                  mineType: $0.value.mimeType,
-                                  data: $0.value.data))
-        }
-        return post
+    func create() -> Data? {
+        create(multipart)
     }
 
-    public func multipart(key: String, fileName: String, mineType: String, data: Data) -> Data {
+    func create(_ multipart: Multipartible) -> Data? {
         var body = Data()
-        let CRLF = "\r\n"
-        body.append(("--\(bundary)" + CRLF).data(using: .utf8)!)
-        body.append(("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(fileName)\"" + CRLF).data(using: .utf8)!)
-        body.append(("Content-Type: \(mineType)" + CRLF + CRLF).data(using: .utf8)!)
-        body.append(data)
-        body.append(CRLF.data(using: .utf8)!)
-        body.append(("--\(bundary)--" + CRLF).data(using: .utf8)!)
+        guard let unwrapContentDispostion = contentDisposition(multipart.key, multipart.fileName) else { return nil }
+        guard let unwrapContentType = contentType(multipart.mimeType) else { return nil }
+        guard let unwrapCarriageReturn = carriageReturn else { return nil }
+        body.append(boundary)
+        body.append(unwrapContentDispostion)
+        body.append(unwrapContentType)
+        body.append(multipart.data)
+        body.append(unwrapCarriageReturn)
+        body.append(boundary)
         return body
+    }
+
+    public func contentDisposition(_ key: String, _ fileName: String) -> Data? {
+        configureUtf8Data("Content-Disposition", "form-data; name=\"\(key)\"; filename=\"\(fileName)\"\(carriageReturnString)")
+    }
+
+    public func contentType(_ mineType: String) -> Data? {
+        configureUtf8Data("Content-Type", "\(mineType)\(carriageReturnString)\(carriageReturnString)")
+    }
+
+    public var carriageReturn: Data? {
+        carriageReturnString.data(using: .utf8)
+    }
+
+    public func configureParameter(_ key: String, _ value: String) -> String {
+        "\(key): \(value)"
+    }
+
+    public func configureUtf8Data(_ key: String, _ value: String, encoding: String.Encoding = .utf8) -> Data? {
+        configureParameter(key, value).data(using: encoding)
+    }
+}
+
+public class MultipartCreator {
+    public let uuid: String
+    public let boundaryString: String
+
+    init() {
+        uuid = UUID().uuidString
+        boundaryString = String(format: "----\(uuid)")
+    }
+
+    class func multiparts(_ multipart: [Multipartible]) -> (data: Data?, boundary: String) {
+        MultipartCreator().multiparts(multipart)
+    }
+
+    func multiparts(_ params: [Multipartible]) -> (Data?, String) {
+        var post = Data()
+        guard let unwrapBoundary = boundary else { return (nil, boundaryString) }
+        params.forEach {
+            let multipartData = Multipartible(key: $0.key,
+                                              fileName: $0.fileName,
+                                              mineType: $0.mimeType,
+                                              data: $0.data)
+            let multipart = Multipart(multipartData,
+                                      boundary: unwrapBoundary)
+            guard let unwrapMultipart = multipart.create() else { return }
+            post.append(unwrapMultipart)
+        }
+        return (post, boundaryString)
+    }
+
+    public var boundary: Data? {
+        ("--\(boundaryString)--\(carriageReturnString)").data(using: .utf8)
     }
 }

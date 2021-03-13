@@ -6,7 +6,7 @@
 //  Copyright © 2018 keisuke yamagishi. All rights reserved.
 //
 
-import HttpSession
+@testable import HttpSession
 import XCTest
 
 class HttpSessionTests: XCTestCase {
@@ -53,6 +53,7 @@ class HttpSessionTests: XCTestCase {
         Http.request(url: "https://sevens-api.herokuapp.com/signIned.json",
                      method: .get,
                      cookie: true).session { data, _, _ in
+            XCTAssert(!Cookie.shared.get("https://sevens-api.herokuapp.com/signIned.json").isEmpty)
             XCTAssertNotNil(data)
             exp.fulfill()
         }
@@ -61,19 +62,19 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpMultipart() {
         let exp = expectation(description: #function)
-        let multipartData = Multipart()
         let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
         var img = Data()
         do {
             img = try Data(contentsOf: URL(fileURLWithPath: image!))
         } catch {}
 
-        multipartData.fileName = "Hello.txt"
-        multipartData.mimeType = "text/plain"
-        multipartData.data = img
+        let multipartible = Multipartible(key: "img",
+                                          fileName: "Hello.txt",
+                                          mineType: "text/plain",
+                                          data: img)
 
         Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
-                     method: .post, multipart: ["img": multipartData])
+                     method: .post, multipart: [multipartible])
             .upload(completionHandler: { data, _, _ in
                 XCTAssertNotNil(data)
                 exp.fulfill()

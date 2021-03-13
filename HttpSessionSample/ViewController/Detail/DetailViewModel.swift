@@ -16,14 +16,14 @@ protocol DetailViewModelInput: AnyObject {
 }
 
 protocol DetailViewModelOutput: AnyObject {
-    var progress: ((Int64, Int64, Float) -> Void)? { get set }
+    func progress(_ progress: ((Int64, Int64, Float) -> Void)?)
     var isDL: Bool { get }
     var text: String { get }
 }
 
 protocol DetailViewModelType: AnyObject {
     var input: DetailViewModelInput { get }
-    var output: DetailViewModelOutput { get set }
+    var output: DetailViewModelOutput { get }
 }
 
 final class DetailViewModel: DetailViewModelType {
@@ -31,7 +31,7 @@ final class DetailViewModel: DetailViewModelType {
     var isCancel = false
     let provider = ApiProvider<DemoApi>()
     var input: DetailViewModelInput { self }
-    var output: DetailViewModelOutput { get { self } set {} }
+    var output: DetailViewModelOutput { self }
     var progressClosure: ((Int64, Int64, Float) -> Void)?
     var isDownload: Bool = false
     var internalText: String = ""
@@ -81,13 +81,8 @@ extension DetailViewModel: DetailViewModelInput {
 }
 
 extension DetailViewModel: DetailViewModelOutput {
-    var progress: ((Int64, Int64, Float) -> Void)? {
-        get {
-            progressClosure
-        }
-        set {
-            progressClosure = newValue
-        }
+    func progress(_ progress: ((Int64, Int64, Float) -> Void)?) {
+        progressClosure = progress
     }
 
     var text: String {

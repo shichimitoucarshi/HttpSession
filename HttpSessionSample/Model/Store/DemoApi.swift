@@ -70,10 +70,9 @@ extension DemoApi: ApiProtocol {
         }
     }
 
-    var multipart: [String: Multipart]? {
+    var multipart: [Multipartible]? {
         switch self {
         case .upload:
-            let dto = Multipart()
             let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
             let img: Data
             do {
@@ -82,10 +81,10 @@ extension DemoApi: ApiProtocol {
                 img = Data()
             }
 
-            dto.fileName = "Hello.txt"
-            dto.mimeType = "text/plain"
-            dto.data = img
-            return ["img": dto]
+            return [Multipartible(key: "img",
+                                  fileName: "Hello.txt",
+                                  mineType: "text/plain",
+                                  data: img)]
         case .zen, .post, .download:
             return nil
         }

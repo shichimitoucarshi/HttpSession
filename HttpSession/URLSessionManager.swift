@@ -13,37 +13,34 @@ class URLSessionManager: NSObject {
      * success Handler
      *
      */
-    public typealias CompletionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
-    public typealias ProgressHandler = (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void
-    public typealias DownloadHandler = (_ path: URL?) -> Void
+    typealias CompletionHandler = (Data?, HTTPURLResponse?, Error?) -> Void
+    typealias ProgressHandler = (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void
+    typealias DownloadHandler = (_ path: URL?) -> Void
 
-    public var progress: ProgressHandler?
-    public var completion: CompletionHandler?
-    public var download: DownloadHandler?
+    var progress: ProgressHandler?
+    var completion: CompletionHandler?
+    var download: DownloadHandler?
 
-    public var response: HTTPURLResponse?
-    public var dataTask: URLSessionDataTask?
-    public var downloadTask: URLSessionDownloadTask?
-    public var request: Request?
-    public var data: Data?
-    public var params: [String: String]?
-    public var isCookie: Bool = false
-    public var sessionConfig: URLSessionConfiguration?
-    public var session: URLSession?
+    var response: HTTPURLResponse?
+    var dataTask: URLSessionDataTask?
+    var downloadTask: URLSessionDownloadTask?
+    var request: Request?
+    var data: Data?
+    var isCookie: Bool = false
+    var sessionConfig: URLSessionConfiguration?
+    var session: URLSession?
 
     func request(url: String,
                  method: Http.Method = .get,
                  isNeedDefaultHeader: Bool = true,
                  header: [String: String]? = nil,
                  params: [String: String]? = nil,
-                 multipart: [String: Multipart]? = nil,
-
+                 multipart: [Multipartible]? = nil,
                  cookie: Bool = false,
                  basic: [String: String]? = nil)
     {
         data = nil
         isCookie = cookie
-        self.params = params
         request = Request(url: url,
                           method: method,
                           isNeedDefaultHeader: isNeedDefaultHeader,
@@ -135,7 +132,7 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
                            totalBytesWritten: Int64,
                            totalBytesExpectedToWrite: Int64)
     {
-        progress!(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
+        progress?(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
     }
 
     /*
@@ -147,7 +144,7 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
         if isCookie {
             isCookie = false
             if let unwrapResponce = response {
-                Cookie.shared.set(responce: unwrapResponce)
+                Cookie.shared.set(unwrapResponce)
             }
         }
         completion?(data, response, error)
