@@ -14,12 +14,12 @@ open class Cookie {
     private
     init() {}
 
-    public func get(url: String) -> [String: String] {
+    public func get(_ url: String) -> [String: String] {
         let cookie = HTTPCookieStorage.shared.cookies(for: URL(string: url)!)
         return HTTPCookie.requestHeaderFields(with: cookie!)
     }
 
-    public func set(responce: URLResponse) {
+    public func set(_ responce: URLResponse) {
         guard let res = responce as? HTTPURLResponse,
               let header = res.allHeaderFields as? [String: String] else { return }
         let cookies = HTTPCookie.cookies(withResponseHeaderFields: header, for: res.url!)

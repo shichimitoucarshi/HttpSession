@@ -8,8 +8,8 @@
 
 import Foundation
 
-public enum HttpHeader {
-    public static let appInfo: [String: String] = {
+enum HttpHeader {
+    static let appInfo: [String: String] = {
         let acceptEncoding: String = "gzip;q=1.0, compress;q=0.5"
 
         // Accept-Language HTTP Header; see https://tools.ietf.org/html/rfc7231#section-5.3.5
@@ -70,16 +70,8 @@ public enum HttpHeader {
         ["Content-Type": "multipart/form-data; boundary=\(bundary)"]
     }
 
-    static func basicAuthenticate(auth: [String: String]) -> [String: String] {
+    static func basicAuthenticate(_ auth: [String: String]) -> [String: String] {
         ["Authorization": Auth.basic(user: auth[Auth.user] ?? "",
                                      password: auth[Auth.password] ?? "")]
-    }
-}
-
-public extension URLRequest {
-    mutating func headers(header: [String: String]) {
-        for (key, value) in header {
-            setValue(value, forHTTPHeaderField: key)
-        }
     }
 }

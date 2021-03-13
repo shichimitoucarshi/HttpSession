@@ -21,7 +21,7 @@ public protocol ApiProtocol {
 
     var isNeedDefaultHeader: Bool { get }
 
-    var multipart: [String: Multipart]? { get }
+    var multipart: [Multipartible]? { get }
 
     var isCookie: Bool { get }
 

@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 
 open class Request {
-    public var urlRequest: URLRequest!
-    private let isNeedDefaultHeader: Bool
+    var urlRequest: URLRequest?
 
     /*
      * Initializer
@@ -27,39 +26,41 @@ open class Request {
                 isNeedDefaultHeader: Bool = true,
                 headers: [String: String]? = nil,
                 parameter: [String: String]? = nil,
-                multipart: [String: Multipart]? = nil,
+                multipart: [Multipartible]? = nil,
                 cookie: Bool = false,
                 basic: [String: String]? = nil)
     {
-        self.isNeedDefaultHeader = isNeedDefaultHeader
         do {
-            urlRequest = try buildRequest(url: url, method: method)
+            urlRequest = try buildRequest(url, method, isNeedDefaultHeader)
         } catch {
             debugPrint(error)
             return
         }
 
-        if let header: [String: String] = headers {
-            urlRequest.headers(header: header)
+        if let header = headers {
+            configureHeader(header)
         }
 
-        if isParamater(method: method),
-           let param = parameter
+        if isPostable(method),
+           let param = parameter,
+           !param.isEmpty
         {
-            post(param: param)
+            configurePostData(param)
         }
 
-        if let multipartData = multipart {
-            self.multipart(param: multipartData)
+        if isPostable(method),
+           let multipartData = multipart
+        {
+            configureMultipart(multipartData)
         }
 
         if let basicAuth = basic {
-            urlRequest.headers(header: HttpHeader.basicAuthenticate(auth: basicAuth))
+            configureHeader(HttpHeader.basicAuthenticate(basicAuth))
         }
 
-        if cookie == true {
-            urlRequest.httpShouldHandleCookies = false
-            urlRequest.allHTTPHeaderFields = Cookie.shared.get(url: url)
+        if cookie {
+            urlRequest?.httpShouldHandleCookies = false
+            urlRequest?.allHTTPHeaderFields = Cookie.shared.get(url)
         }
     }
 
@@ -71,7 +72,7 @@ open class Request {
      * Return URLRequest
      * throws Invalid URL
      */
-    private func buildRequest(url: String, method: Http.Method) throws -> URLRequest {
+    private func buildRequest(_ url: String, _ method: Http.Method, _ isNeedDefaultHeader: Bool) throws -> URLRequest {
         var request = try URLRequest(url: url.toUrl())
         request.httpMethod = method.rawValue
         if isNeedDefaultHeader {
@@ -80,13 +81,19 @@ open class Request {
         return request
     }
 
+    private func configureHeader(_ header: [String: String]) {
+        header.forEach {
+            urlRequest?.setValue($0.value, forHTTPHeaderField: $0.key)
+        }
+    }
+
     /*
      * private func isParameter
      * parameter is required or not.
      * param method: Http.Method
      * Return Bool
      */
-    private func isParamater(method: Http.Method) -> Bool {
+    private func isPostable(_ method: Http.Method) -> Bool {
         switch method {
         case .get, .delete, .head:
             return false
@@ -101,13 +108,13 @@ open class Request {
      * param param: [String: String]
      * Retrun Void
      */
-    public func post(param: [String: String]) {
-        guard let value = URI.encode(param: param) as Data? else {
+    public func configurePostData(_ param: [String: String]) {
+        guard let value = URI.encode(param) as Data? else {
             return
         }
         let header: [String: String] = HttpHeader.postHeader(value.count.description)
-        urlRequest.headers(header: header)
-        urlRequest.httpBody = value
+        configureHeader(header)
+        urlRequest?.httpBody = value
     }
 
     /*
@@ -116,13 +123,13 @@ open class Request {
      * param [String: Multipart.data]
      * Return URLRequest nullable
      */
-    public func multipart(param: [String: Multipart]) {
+    public func configureMultipart(_ multiparts: [Multipartible]) {
         guard urlRequest != nil else {
             return
         }
-        let multipart = Multipart()
-        let data: Data = multipart.multiparts(params: param)
-        urlRequest.headers(header: HttpHeader.multipart(multipart.bundary))
-        urlRequest.httpBody = data
+
+        let multipart = MultipartCreator.multiparts(multiparts)
+        configureHeader(HttpHeader.multipart(multipart.boundary))
+        urlRequest?.httpBody = multipart.data
     }
 }

@@ -97,7 +97,7 @@ open class Http {
                          isNeedDefaultHeader: Bool = true,
                          header: [String: String]? = nil,
                          params: [String: String]? = nil,
-                         multipart: [String: Multipart]? = nil,
+                         multipart: [Multipartible]? = nil,
                          cookie: Bool = false,
                          basic: [String: String]? = nil) -> Http
     {
@@ -117,7 +117,7 @@ open class Http {
                               isNeedDefaultHeader: Bool = true,
                               header: [String: String]? = nil,
                               params: [String: String]? = nil,
-                              multipart: [String: Multipart]? = nil,
+                              multipart: [Multipartible]? = nil,
                               cookie: Bool = false,
                               basic: [String: String]? = nil) -> Http
     {

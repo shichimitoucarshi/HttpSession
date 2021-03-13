@@ -13,8 +13,8 @@ protocol ViewModelInput: AnyObject {
 }
 
 protocol ViewModelOutput: AnyObject {
-    var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void { get set }
-    var pushDetailViewController: () -> Void { get set }
+    func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void)
+    func transition(_ callBack: @escaping () -> Void)
 }
 
 protocol ViewModelType: AnyObject {
@@ -81,21 +81,11 @@ extension ViewModel: ViewModelInput {
 }
 
 extension ViewModel: ViewModelOutput {
-    var detail: (Data?, String, HTTPURLResponse?, Error?) -> Void {
-        get {
-            detailClosure
-        }
-        set {
-            detailClosure = newValue
-        }
+    func transition(_ callBack: @escaping () -> Void) {
+        pushDetailClosure = callBack
     }
 
-    var pushDetailViewController: () -> Void {
-        get {
-            pushDetailClosure
-        }
-        set {
-            pushDetailClosure = newValue
-        }
+    func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void) {
+        detailClosure = result
     }
 }
