@@ -15,6 +15,7 @@ protocol ViewModelInput: AnyObject {
 protocol ViewModelOutput: AnyObject {
     func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void)
     func transition(_ callBack: @escaping () -> Void)
+    func progress(_ handler: @escaping ((Float) -> Void))
 }
 
 protocol ViewModelType: AnyObject {
@@ -28,6 +29,7 @@ final class ViewModel: ViewModelType {
 
     private let provider = ApiProvider<DemoApi>()
     private var detailClosure: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
+    private var uploadProgress: ((Float) -> Void)?
     private var pushDetailClosure: (() -> Void)!
 }
 
@@ -61,7 +63,11 @@ extension ViewModel: ViewModelInput {
                     detailClosure(data, "", responce, error)
                 })
         case 4:
-            provider.upload(api: .upload) { [unowned self] data, responce, error in
+            
+            provider.upload(api: .upload) { (_, sent, totalByte) in
+                let percentage = Float(sent) / Float(totalByte)
+                self.uploadProgress?(percentage)
+            } completion: { [self] (data, responce, error) in
                 detailClosure(data, "", responce, error)
             }
         case 5:
@@ -87,5 +93,9 @@ extension ViewModel: ViewModelOutput {
 
     func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void) {
         detailClosure = result
+    }
+    
+    func progress(_ handler: @escaping ((Float) -> Void)) {
+        uploadProgress = handler
     }
 }

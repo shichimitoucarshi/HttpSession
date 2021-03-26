@@ -17,7 +17,7 @@ final class DetailViewController: UIViewController {
     @IBOutlet var status: UILabel!
     @IBOutlet var stopButton: UIButton!
     @IBOutlet var startButton: UIButton!
-    var viewModel: DetailViewModel!
+    var viewModel: DetailViewModelType!
 
     override func loadView() {
         super.loadView()

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ty-Ba-xCb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Ty-Ba-xCb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Hr-DN-8G0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="DgC-VQ-lAW">
@@ -33,24 +33,32 @@
                                     <outlet property="delegate" destination="6Ty-Ba-xCb" id="BH8-Fk-jGu"/>
                                 </connections>
                             </tableView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EKs-wF-Yh0">
+                                <rect key="frame" x="0.0" y="44" width="414" height="4"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dl3-Ww-ZJD"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="top" secondItem="Ixk-gd-Mmk" secondAttribute="top" id="4XB-jJ-LFH"/>
                             <constraint firstItem="3Hr-DN-8G0" firstAttribute="trailing" secondItem="dl3-Ww-ZJD" secondAttribute="trailing" id="FEY-Ua-8F0"/>
                             <constraint firstItem="3Hr-DN-8G0" firstAttribute="bottom" secondItem="dl3-Ww-ZJD" secondAttribute="bottom" id="HAP-2W-a3U"/>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="top" secondItem="EKs-wF-Yh0" secondAttribute="bottom" id="ITY-t3-d0y"/>
+                            <constraint firstItem="3Hr-DN-8G0" firstAttribute="top" secondItem="dl3-Ww-ZJD" secondAttribute="top" constant="4" id="UcT-Hj-dKv"/>
+                            <constraint firstItem="EKs-wF-Yh0" firstAttribute="top" secondItem="dl3-Ww-ZJD" secondAttribute="top" id="egW-To-F8R"/>
+                            <constraint firstItem="EKs-wF-Yh0" firstAttribute="leading" secondItem="dl3-Ww-ZJD" secondAttribute="leading" id="q1L-ba-B5H"/>
+                            <constraint firstItem="EKs-wF-Yh0" firstAttribute="trailing" secondItem="dl3-Ww-ZJD" secondAttribute="trailing" id="qsd-5Q-wRy"/>
                             <constraint firstItem="3Hr-DN-8G0" firstAttribute="leading" secondItem="dl3-Ww-ZJD" secondAttribute="leading" id="ztW-Q1-EL1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QwM-ZD-ktv"/>
                     <connections>
+                        <outlet property="progressView" destination="EKs-wF-Yh0" id="CXs-ua-Pad"/>
                         <outlet property="tableView" destination="3Hr-DN-8G0" id="3vY-Cb-ngF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Te9-PE-nGY" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1153" y="133"/>
+            <point key="canvasLocation" x="1150.7246376811595" y="132.58928571428572"/>
         </scene>
     </scenes>
 </document>

@@ -11,7 +11,8 @@ import UIKit
 
 final class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    var viewModel = ViewModel()
+    @IBOutlet weak var progressView: UIProgressView!
+    var viewModel: ViewModelType = ViewModel()
 
     func detailViewController(param: String = "",
                               result: String = "",
@@ -66,6 +67,7 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        progressView.progress = 0.0
         viewModel.output.detail { [unowned self] data, str, res, error in
             self.detail(data: data, param: str, responce: res, error: error)
         }
@@ -73,6 +75,12 @@ extension ViewController: UITableViewDelegate {
         viewModel.output.transition { [unowned self] in
             self.detailViewController(isDL: true)
         }
+        
+        viewModel.output.progress { percentage in
+            self.progressView.progress = percentage
+            print("\(Int(percentage * 100))%")
+        }
+        
         viewModel.input.callApi(indexPath)
     }
 }
