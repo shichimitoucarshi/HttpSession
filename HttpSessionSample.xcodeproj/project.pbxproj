@@ -42,6 +42,7 @@
 		90AC27FB25FA455100B6954D /* HttpHeaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */; };
 		90AC27FF25FA4B4A00B6954D /* HttpParameterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */; };
 		90B37AA5260E2DBC0093E36E /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90B37AA4260E2DBC0093E36E /* re.txt */; };
+		90D20A52260E3B6A007B42B9 /* Hello.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90D20A51260E3B6A007B42B9 /* Hello.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeaderTest.swift; sourceTree = "<group>"; };
 		90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterTest.swift; sourceTree = "<group>"; };
 		90B37AA4260E2DBC0093E36E /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
+		90D20A51260E3B6A007B42B9 /* Hello.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hello.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				900AE23F2597844F002FF546 /* Model */,
 				900AE1B6259783BE002FF546 /* AppDelegate.swift */,
 				900AE1B8259783BE002FF546 /* SceneDelegate.swift */,
+				90D20A51260E3B6A007B42B9 /* Hello.txt */,
 				900AE1BF259783BE002FF546 /* Assets.xcassets */,
 				900AE1C1259783BE002FF546 /* LaunchScreen.storyboard */,
 				900AE2542597845F002FF546 /* ViewController */,
@@ -410,6 +413,7 @@
 				90B37AA5260E2DBC0093E36E /* re.txt in Resources */,
 				900AE1C3259783BE002FF546 /* LaunchScreen.storyboard in Resources */,
 				900AE26B259784A2002FF546 /* View.storyboard in Resources */,
+				90D20A52260E3B6A007B42B9 /* Hello.txt in Resources */,
 				900AE1C0259783BE002FF546 /* Assets.xcassets in Resources */,
 				900AE26625978489002FF546 /* Detail.storyboard in Resources */,
 			);

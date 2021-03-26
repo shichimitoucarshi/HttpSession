@@ -62,7 +62,7 @@ class HttpSessionTests: XCTestCase {
 
     func testHttpMultipart() {
         let exp = expectation(description: #function)
-        let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
+        let image: String? = Bundle.main.path(forResource: "Hello", ofType: "txt")
         var img = Data()
         do {
             img = try Data(contentsOf: URL(fileURLWithPath: image!))
@@ -75,7 +75,7 @@ class HttpSessionTests: XCTestCase {
 
         Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
                      method: .post, multipart: [multipartible])
-            .upload(completionHandler: { data, _, _ in
+            .upload(completion: { data, _, _ in
                 XCTAssertNotNil(data)
                 exp.fulfill()
             })
@@ -115,6 +115,6 @@ class HttpSessionTests: XCTestCase {
             XCTAssertNotNil(data)
             exp.fulfill()
         }
-        wait(for: [exp], timeout: 60.0)
+        wait(for: [exp], timeout: 300.0)
     }
 }
