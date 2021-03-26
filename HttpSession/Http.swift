@@ -22,6 +22,7 @@ public protocol HttpApi: AnyObject {
                   completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
 
     func upload(api: ApiType,
+                progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)?,
                 completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
 
     func cancel(byResumeData: @escaping (Data?) -> Void)
@@ -41,9 +42,10 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
     }
 
     public func upload(api: Type,
+                       progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
                        completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
-        Http.request(api: api).upload(completionHandler: completion)
+        Http.request(api: api).upload(progress: progress, completion: completion)
     }
 
     public func download(api: Type,
@@ -162,7 +164,7 @@ open class Http {
         sessionManager.download(resumeData: resumeData,
                                 progress: progress,
                                 download: download,
-                                completionHandler: completionHandler)
+                                completion: completionHandler)
     }
 
     public func cancel(byResumeData: @escaping (Data?) -> Void) {
@@ -173,7 +175,8 @@ open class Http {
         sessionManager.cancel()
     }
 
-    public func upload(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        sessionManager.upload(completionHandler: completionHandler)
+    public func upload(progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        sessionManager.upload(progress: progress, completion: completion)
     }
 }
