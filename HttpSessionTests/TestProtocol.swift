@@ -60,7 +60,7 @@ extension TestApi: ApiProtocol {
         case .test1, .test2:
             return nil
         case .test3:
-            guard let image: String = Bundle.main.path(forResource: "re", ofType: "txt") else { return nil }
+            guard let image: String = Bundle.main.path(forResource: "Hello", ofType: "txt") else { return nil }
             var img = Data()
             do {
                 img = try Data(contentsOf: URL(fileURLWithPath: image))

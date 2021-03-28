@@ -17,9 +17,9 @@ class URLSessionManager: NSObject {
     typealias ProgressHandler = (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void
     typealias DownloadHandler = (_ path: URL?) -> Void
 
-    var progress: ProgressHandler?
-    var completion: CompletionHandler?
-    var download: DownloadHandler?
+    var progressHandler: ProgressHandler?
+    var completionHandler: CompletionHandler?
+    var downloadHandler: DownloadHandler?
 
     var response: HTTPURLResponse?
     var dataTask: URLSessionDataTask?
@@ -52,8 +52,8 @@ class URLSessionManager: NSObject {
     }
 
     public func session(completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        self.completion = completion
-        guard let request = self.request?.urlRequest else {
+        completionHandler = completion
+        guard let request = request?.urlRequest else {
             return
         }
         send(request: request)
@@ -62,7 +62,7 @@ class URLSessionManager: NSObject {
     public func download(resumeData: Data? = nil,
                          progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
                          download: @escaping (_ path: URL?) -> Void,
-                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+                         completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
         /*
          /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -72,9 +72,9 @@ class URLSessionManager: NSObject {
          /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
          */
         if resumeData == nil {
-            self.progress = progress
-            completion = completionHandler
-            self.download = download
+            progressHandler = progress
+            completionHandler = completion
+            downloadHandler = download
             sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
             session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
 
@@ -99,8 +99,10 @@ class URLSessionManager: NSObject {
         dataTask?.cancel()
     }
 
-    public func upload(completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        completion = completionHandler
+    public func upload(progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        progressHandler = progress
+        completionHandler = completion
         guard let urlRequest = request?.urlRequest else { return }
         send(request: urlRequest)
     }
@@ -123,16 +125,24 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
                            downloadTask _: URLSessionDownloadTask,
                            didFinishDownloadingTo location: URL)
     {
-        download?(location)
+        downloadHandler?(location)
     }
 
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    didSendBodyData bytesSent: Int64,
+                    totalBytesSent: Int64,
+                    totalBytesExpectedToSend: Int64) {
+        progressHandler?(bytesSent, totalBytesSent, totalBytesExpectedToSend)
+    }
+    
     public func urlSession(_: URLSession,
                            downloadTask _: URLSessionDownloadTask,
                            didWriteData bytesWritten: Int64,
                            totalBytesWritten: Int64,
                            totalBytesExpectedToWrite: Int64)
     {
-        progress?(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
+        progressHandler?(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite)
     }
 
     /*
@@ -147,7 +157,7 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
                 Cookie.shared.set(unwrapResponce)
             }
         }
-        completion?(data, response, error)
+        completionHandler?(data, response, error)
     }
 
     /*
