@@ -86,7 +86,7 @@ public class Http {
         case trace = "TRACE"
     }
 
-    public let sessionManager: URLSessionManager
+    let sessionManager: URLSessionManager
 
     public static let shared = Http()
 
