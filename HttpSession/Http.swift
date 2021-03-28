@@ -71,7 +71,7 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
     }
 }
 
-open class Http {
+public class Http {
     /*
      * Http method
      */
@@ -86,7 +86,7 @@ open class Http {
         case trace = "TRACE"
     }
 
-    let sessionManager: URLSessionManager
+    public let sessionManager: URLSessionManager
 
     public static let shared = Http()
 
