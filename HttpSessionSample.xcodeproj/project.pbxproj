@@ -41,8 +41,8 @@
 		908D69902598226E00BB3BB0 /* HttpSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */; };
 		90AC27FB25FA455100B6954D /* HttpHeaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */; };
 		90AC27FF25FA4B4A00B6954D /* HttpParameterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */; };
-		90B37AA5260E2DBC0093E36E /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90B37AA4260E2DBC0093E36E /* re.txt */; };
 		90D20A52260E3B6A007B42B9 /* Hello.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90D20A51260E3B6A007B42B9 /* Hello.txt */; };
+		90E034712610BD2E00FAC1C6 /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90E034702610BD2E00FAC1C6 /* re.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,8 +121,8 @@
 		908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpSessionTests.swift; sourceTree = "<group>"; };
 		90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeaderTest.swift; sourceTree = "<group>"; };
 		90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterTest.swift; sourceTree = "<group>"; };
-		90B37AA4260E2DBC0093E36E /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 		90D20A51260E3B6A007B42B9 /* Hello.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hello.txt; sourceTree = "<group>"; };
+		90E034702610BD2E00FAC1C6 /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +181,7 @@
 				90D20A51260E3B6A007B42B9 /* Hello.txt */,
 				900AE1BF259783BE002FF546 /* Assets.xcassets */,
 				900AE1C1259783BE002FF546 /* LaunchScreen.storyboard */,
+				90E034702610BD2E00FAC1C6 /* re.txt */,
 				900AE2542597845F002FF546 /* ViewController */,
 				900AE1C4259783BE002FF546 /* Info.plist */,
 			);
@@ -238,7 +239,6 @@
 		900AE23F2597844F002FF546 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				90B37AA4260E2DBC0093E36E /* re.txt */,
 				900AE2402597844F002FF546 /* Extension */,
 				900AE2432597844F002FF546 /* Store */,
 			);
@@ -410,8 +410,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90B37AA5260E2DBC0093E36E /* re.txt in Resources */,
 				900AE1C3259783BE002FF546 /* LaunchScreen.storyboard in Resources */,
+				90E034712610BD2E00FAC1C6 /* re.txt in Resources */,
 				900AE26B259784A2002FF546 /* View.storyboard in Resources */,
 				90D20A52260E3B6A007B42B9 /* Hello.txt in Resources */,
 				900AE1C0259783BE002FF546 /* Assets.xcassets in Resources */,
