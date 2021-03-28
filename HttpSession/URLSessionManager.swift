@@ -21,11 +21,11 @@ class URLSessionManager: NSObject {
     var completionHandler: CompletionHandler?
     var downloadHandler: DownloadHandler?
 
-    var response: HTTPURLResponse?
+    var urlResponse: HTTPURLResponse?
     var dataTask: URLSessionDataTask?
     var downloadTask: URLSessionDownloadTask?
     var request: Request?
-    var data: Data?
+    var responceData: Data?
     var isCookie: Bool = false
     var sessionConfig: URLSessionConfiguration?
     var session: URLSession?
@@ -39,7 +39,7 @@ class URLSessionManager: NSObject {
                  cookie: Bool = false,
                  basic: [String: String]? = nil)
     {
-        data = nil
+        responceData = nil
         isCookie = cookie
         request = Request(url: url,
                           method: method,
@@ -153,11 +153,11 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
     public func urlSession(_: URLSession, task _: URLSessionTask, didCompleteWithError error: Error?) {
         if isCookie {
             isCookie = false
-            if let unwrapResponce = response {
+            if let unwrapResponce = urlResponse {
                 Cookie.shared.set(unwrapResponce)
             }
         }
-        completionHandler?(data, response, error)
+        completionHandler?(responceData, urlResponse, error)
     }
 
     /*
@@ -177,15 +177,15 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
                            didReceive response: URLResponse,
                            completionHandler: @escaping (URLSession.ResponseDisposition) -> Void)
     {
-        self.response = response as? HTTPURLResponse
+        urlResponse = response as? HTTPURLResponse
         completionHandler(.allow)
     }
 
     func recivedData(_ data: Data) {
-        if self.data == nil {
-            self.data = data
+        if responceData == nil {
+            responceData = data
         } else {
-            self.data?.append(data)
+            responceData?.append(data)
         }
     }
 }
