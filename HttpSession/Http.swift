@@ -71,7 +71,7 @@ public class ApiProvider<Type: ApiProtocol>: HttpApi {
     }
 }
 
-open class Http {
+public class Http {
     /*
      * Http method
      */
