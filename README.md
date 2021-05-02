@@ -1,6 +1,6 @@
 # HttpSession
 
-[![](https://img.shields.io/badge/twitter-brew__0-blue)](https://twitter.com/brew_0_O)
+[![](https://img.shields.io/badge/HP-shichimitoucarashi-00acee)](https://shichimitoucarashi.com/)
 [![](https://img.shields.io/badge/Lang-Swift-ff69b4)](https://developer.apple.com/jp/swift/)
 [![](https://img.shields.io/badge/LICENCE-MIT-orange)](https://github.com/keisukeYamagishi/HttpRequest/blob/master/LICENSE)
 
