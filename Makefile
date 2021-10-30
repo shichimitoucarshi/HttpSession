@@ -23,7 +23,7 @@ test:
 	-configuration Debug \
 	-project HttpSessionSample.xcodeproj \
 	-scheme HttpSessionSample \
-	-destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=14.4' \
+	-destination 'platform=iOS Simulator,name=iPhone 12 Pro,OS=15.0' \
 	clean test CODE_SIGNING_ALLOWED=NO
 
 code-coverage:
