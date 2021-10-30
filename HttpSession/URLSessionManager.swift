@@ -27,7 +27,7 @@ class URLSessionManager: NSObject {
     var request: Request?
     var responceData: Data?
     var isCookie: Bool = false
-    var sessionConfig: URLSessionConfiguration?
+    let sessionConfig: URLSessionConfiguration = .default
     var session: URLSession?
 
     func request(url: String,
@@ -75,8 +75,7 @@ class URLSessionManager: NSObject {
             progressHandler = progress
             completionHandler = completion
             downloadHandler = download
-            sessionConfig = URLSessionConfiguration.background(withIdentifier: "httpSession-background")
-            session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
+            session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: .main)
 
             guard let urlRequest = request?.urlRequest else {
                 return
@@ -111,10 +110,7 @@ class URLSessionManager: NSObject {
      * send Request
      */
     private func send(request: URLRequest) {
-        if sessionConfig == nil {
-            sessionConfig = URLSessionConfiguration.default
-        }
-        let session = URLSession(configuration: sessionConfig!, delegate: self, delegateQueue: .main)
+        let session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: .main)
         dataTask = session.dataTask(with: request)
         dataTask?.resume()
     }

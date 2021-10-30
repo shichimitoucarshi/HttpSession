@@ -7,12 +7,6 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        destination: [
-          'macOS', 
-          'iOS Simulator,name=iPhone 8', 
-          'tvOS Simulator,name=Apple TV', 
-          'watchOS Simulator,name=Apple Watch Series 5 - 40mm'
-        ]
         swift-version: [5.0, 4.2, 4.0]
     steps:
       - uses: actions/checkout@v1
@@ -23,10 +17,15 @@ jobs:
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - name: Bundle setup
-        run: make
+      - name: build config
+        run: make build_config
+      - name: Build debug
+        run: make debug-build
+      - name: Build lib
+        run: make debug-lib-build
       - name: Run tests
-        env:
-          DESTINATION: platform=${{ matrix.destination }}
+        env:          
           SWIFT_VERSION: ${{ matrix.swift-version }}
-        run: bundle exec fastlane ios test
+        run: make test
+      - name: code-coverage
+        run: make code-coverage
