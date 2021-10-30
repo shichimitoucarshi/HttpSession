@@ -41,16 +41,13 @@ open class Request {
             configureHeader(header)
         }
 
-        if isPostable(method),
-           let param = parameter,
+        if let param = parameter,
            !param.isEmpty
         {
             configurePostData(param)
         }
 
-        if isPostable(method),
-           let multipartData = multipart
-        {
+        if let multipartData = multipart {
             configureMultipart(multipartData)
         }
 
@@ -84,21 +81,6 @@ open class Request {
     private func configureHeader(_ header: [String: String]) {
         header.forEach {
             urlRequest?.setValue($0.value, forHTTPHeaderField: $0.key)
-        }
-    }
-
-    /*
-     * private func isParameter
-     * parameter is required or not.
-     * param method: Http.Method
-     * Return Bool
-     */
-    private func isPostable(_ method: Http.Method) -> Bool {
-        switch method {
-        case .get, .delete, .head:
-            return false
-        default:
-            return true
         }
     }
 
