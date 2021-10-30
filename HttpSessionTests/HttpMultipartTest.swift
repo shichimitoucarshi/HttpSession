@@ -21,7 +21,7 @@ class HttpMultipartTest: XCTestCase {
                                 method: .get,
                                 isNeedDefaultHeader: false,
                                 multipart: [multipartible])
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
     }
 
     func testMultipartIsNilHeadMethod() {
@@ -29,7 +29,7 @@ class HttpMultipartTest: XCTestCase {
                                 method: .head,
                                 isNeedDefaultHeader: false,
                                 multipart: [multipartible])
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
     }
 
     func testMultipartIsNilDeleteMethod() {
@@ -37,7 +37,7 @@ class HttpMultipartTest: XCTestCase {
                                 method: .delete,
                                 isNeedDefaultHeader: false,
                                 multipart: [multipartible])
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
     }
 
     func testMultipartIsNilPostMethod() {

@@ -61,8 +61,8 @@ class HttpParameterTest: XCTestCase {
                                 method: .get,
                                 isNeedDefaultHeader: false,
                                 params: params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == [:])
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields != nil)
     }
 
     func testParameterIsNilHeadMethod() {
@@ -70,8 +70,8 @@ class HttpParameterTest: XCTestCase {
                                 method: .head,
                                 isNeedDefaultHeader: false,
                                 params: params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == [:])
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields != nil)
     }
 
     func testParameterIsNilDeleteMethod() {
@@ -79,8 +79,8 @@ class HttpParameterTest: XCTestCase {
                                 method: .delete,
                                 isNeedDefaultHeader: false,
                                 params: params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == nil)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == [:])
+        XCTAssert(http.sessionManager.request?.urlRequest?.httpBody != nil)
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields != nil)
     }
 
     func testParameterIsNotNilPutMethod() {
