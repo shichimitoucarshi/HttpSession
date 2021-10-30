@@ -27,5 +27,5 @@ jobs:
         env:          
           SWIFT_VERSION: ${{ matrix.swift-version }}
         run: make test
-      - name code-coverage:
+      - name: code-coverage
         run: make code-coverage
