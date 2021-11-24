@@ -8,24 +8,29 @@
 
 import HttpSession
 
-protocol ViewModelInput: AnyObject {
+protocol ViewModelReceive: AnyObject {
     func callApi(_ indexPath: IndexPath)
 }
 
-protocol ViewModelOutput: AnyObject {
+protocol ViewModelRoute: AnyObject {
     func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void)
     func transition(_ callBack: @escaping () -> Void)
+}
+
+protocol ViewModelUI: AnyObject {
     func progress(_ handler: @escaping ((Float) -> Void))
 }
 
 protocol ViewModelType: AnyObject {
-    var input: ViewModelInput { get }
-    var output: ViewModelOutput { get }
+    var receive: ViewModelReceive { get }
+    var ui: ViewModelUI { get }
+    var route: ViewModelRoute { get }
 }
 
 final class ViewModel: ViewModelType {
-    var input: ViewModelInput { self }
-    var output: ViewModelOutput { self }
+    var receive: ViewModelReceive { self }
+    var ui: ViewModelUI { self }
+    var route: ViewModelRoute { self }
 
     private let provider = ApiProvider<DemoApi>()
     private var detailClosure: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
@@ -33,7 +38,7 @@ final class ViewModel: ViewModelType {
     private var pushDetailClosure: (() -> Void)!
 }
 
-extension ViewModel: ViewModelInput {
+extension ViewModel: ViewModelReceive {
     func callApi(_ indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
@@ -86,7 +91,7 @@ extension ViewModel: ViewModelInput {
     }
 }
 
-extension ViewModel: ViewModelOutput {
+extension ViewModel: ViewModelRoute {
     func transition(_ callBack: @escaping () -> Void) {
         pushDetailClosure = callBack
     }
@@ -94,7 +99,9 @@ extension ViewModel: ViewModelOutput {
     func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void) {
         detailClosure = result
     }
+}
 
+extension ViewModel: ViewModelUI {
     func progress(_ handler: @escaping ((Float) -> Void)) {
         uploadProgress = handler
     }

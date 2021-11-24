@@ -22,11 +22,11 @@ final class DetailViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        if viewModel.output.isDL == true {
+        if viewModel.ui.isDL == true {
             responceText.isHidden = true
             progress.setProgress(0.0, animated: true)
-            viewModel.input.download()
-            viewModel.output.progress { [weak self] total, expectedToWrite, progress in
+            viewModel.receive.download()
+            viewModel.ui.progress { [weak self] total, expectedToWrite, progress in
                 guard let self = self else { return }
                 self.status.text = "\(total)byte/\(expectedToWrite)byte"
                 self.progress.setProgress(progress, animated: true)
@@ -37,19 +37,19 @@ final class DetailViewController: UIViewController {
             stopButton.isHidden = true
             startButton.isHidden = true
             responceText.text = ""
-            responceText.text = viewModel.output.text
+            responceText.text = viewModel.ui.text
         }
     }
 
     @IBAction func pushStop(_: Any) {
-        viewModel.input.stopDownload()
+        viewModel.receive.stopDownload()
     }
 
     @IBAction func pushStart(_: Any) {
-        viewModel.input.reDwonload()
+        viewModel.receive.reDwonload()
     }
 
     deinit {
-        viewModel.input.cancel()
+        viewModel.receive.cancel()
     }
 }

@@ -8,30 +8,30 @@
 
 import HttpSession
 
-protocol DetailViewModelInput: AnyObject {
+protocol DetailViewModelReceive: AnyObject {
     func download()
     func cancel()
     func reDwonload()
     func stopDownload()
 }
 
-protocol DetailViewModelOutput: AnyObject {
+protocol DetailViewModelUI: AnyObject {
     func progress(_ progress: ((Int64, Int64, Float) -> Void)?)
     var isDL: Bool { get }
     var text: String { get }
 }
 
 protocol DetailViewModelType: AnyObject {
-    var input: DetailViewModelInput { get }
-    var output: DetailViewModelOutput { get }
+    var receive: DetailViewModelReceive { get }
+    var ui: DetailViewModelUI { get }
 }
 
 final class DetailViewModel: DetailViewModelType {
     var data: Data?
     var isCancel = false
     let provider = ApiProvider<DemoApi>()
-    var input: DetailViewModelInput { self }
-    var output: DetailViewModelOutput { self }
+    var receive: DetailViewModelReceive { self }
+    var ui: DetailViewModelUI { self }
     var progressClosure: ((Int64, Int64, Float) -> Void)?
     var isDownload: Bool = false
     var internalText: String = ""
@@ -42,7 +42,7 @@ final class DetailViewModel: DetailViewModelType {
     }
 }
 
-extension DetailViewModel: DetailViewModelInput {
+extension DetailViewModel: DetailViewModelReceive {
     func download() {
         httpDownload()
     }
@@ -80,7 +80,7 @@ extension DetailViewModel: DetailViewModelInput {
     }
 }
 
-extension DetailViewModel: DetailViewModelOutput {
+extension DetailViewModel: DetailViewModelUI {
     func progress(_ progress: ((Int64, Int64, Float) -> Void)?) {
         progressClosure = progress
     }
