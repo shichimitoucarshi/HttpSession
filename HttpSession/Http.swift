@@ -176,7 +176,8 @@ public class Http {
     }
 
     public func upload(progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
-                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         sessionManager.upload(progress: progress, completion: completion)
     }
 }

@@ -19,13 +19,13 @@ protocol ViewModelOutput: AnyObject {
 }
 
 protocol ViewModelType: AnyObject {
-    var input: ViewModelInput { get set }
-    var output: ViewModelOutput { get set }
+    var input: ViewModelInput { get }
+    var output: ViewModelOutput { get }
 }
 
 final class ViewModel: ViewModelType {
-    var input: ViewModelInput { get { self } set {} }
-    var output: ViewModelOutput { get { self } set {} }
+    var input: ViewModelInput { self }
+    var output: ViewModelOutput { self }
 
     private let provider = ApiProvider<DemoApi>()
     private var detailClosure: ((Data?, String, HTTPURLResponse?, Error?) -> Void)!
@@ -63,11 +63,11 @@ extension ViewModel: ViewModelInput {
                     detailClosure(data, "", responce, error)
                 })
         case 4:
-            
-            provider.upload(api: .upload) { (_, sent, totalByte) in
+
+            provider.upload(api: .upload) { _, sent, totalByte in
                 let percentage = Float(sent) / Float(totalByte)
                 self.uploadProgress?(percentage)
-            } completion: { [self] (data, responce, error) in
+            } completion: { [self] data, responce, error in
                 detailClosure(data, "", responce, error)
             }
         case 5:
@@ -94,7 +94,7 @@ extension ViewModel: ViewModelOutput {
     func detail(_ result: @escaping (Data?, String, HTTPURLResponse?, Error?) -> Void) {
         detailClosure = result
     }
-    
+
     func progress(_ handler: @escaping ((Float) -> Void)) {
         uploadProgress = handler
     }
