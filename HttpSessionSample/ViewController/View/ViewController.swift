@@ -11,7 +11,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet var progressView: UIProgressView!
     var viewModel: ViewModelType = ViewModel()
 
     func detailViewController(param: String = "",
@@ -75,12 +75,12 @@ extension ViewController: UITableViewDelegate {
         viewModel.output.transition { [unowned self] in
             self.detailViewController(isDL: true)
         }
-        
+
         viewModel.output.progress { percentage in
             self.progressView.progress = percentage
             print("\(Int(percentage * 100))%")
         }
-        
+
         viewModel.input.callApi(indexPath)
     }
 }

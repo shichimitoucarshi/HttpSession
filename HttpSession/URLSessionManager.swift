@@ -99,7 +99,8 @@ class URLSessionManager: NSObject {
     }
 
     public func upload(progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
-                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    {
         progressHandler = progress
         completionHandler = completion
         guard let urlRequest = request?.urlRequest else { return }
@@ -124,14 +125,15 @@ extension URLSessionManager: URLSessionDataDelegate, URLSessionDownloadDelegate,
         downloadHandler?(location)
     }
 
-    func urlSession(_ session: URLSession,
-                    task: URLSessionTask,
+    func urlSession(_: URLSession,
+                    task _: URLSessionTask,
                     didSendBodyData bytesSent: Int64,
                     totalBytesSent: Int64,
-                    totalBytesExpectedToSend: Int64) {
+                    totalBytesExpectedToSend: Int64)
+    {
         progressHandler?(bytesSent, totalBytesSent, totalBytesExpectedToSend)
     }
-    
+
     public func urlSession(_: URLSession,
                            downloadTask _: URLSessionDownloadTask,
                            didWriteData bytesWritten: Int64,
