@@ -15,6 +15,8 @@ public protocol ApiProtocol {
 
     var method: Http.Method { get }
 
+    var encode: Http.Encode { get }
+
     var header: [String: String]? { get }
 
     var params: [String: String]? { get }

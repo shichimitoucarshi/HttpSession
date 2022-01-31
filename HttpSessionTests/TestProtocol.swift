@@ -19,6 +19,10 @@ enum TestApi {
 }
 
 extension TestApi: ApiProtocol {
+    var encode: Http.Encode {
+        .url
+    }
+
     var isNeedDefaultHeader: Bool {
         true
     }

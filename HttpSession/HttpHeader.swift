@@ -60,10 +60,14 @@ enum HttpHeader {
         ]
     }()
 
-    static func postHeader(_ contentLength: String) -> [String: String] {
+    static func urlEncodeHeader(_ contentLength: String) -> [String: String] {
         ["Content-Type": "application/x-www-form-urlencoded",
          "Accept": "application/x-www-form-urlencoded",
          "Content-Length": contentLength]
+    }
+
+    static var jsonEncodeHeder: [String: String] {
+        ["Content-Type": "application/json"]
     }
 
     static func multipart(_ bundary: String) -> [String: String] {

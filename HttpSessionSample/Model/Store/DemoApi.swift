@@ -11,11 +11,21 @@ import HttpSession
 enum DemoApi {
     case zen
     case post(param: Tapul)
+    case jsonPost(param: [String: String])
     case download
     case upload
 }
 
 extension DemoApi: ApiProtocol {
+    var encode: Http.Encode {
+        switch self {
+        case .zen, .post, .upload, .download:
+            return .url
+        case .jsonPost:
+            return .json
+        }
+    }
+
     var isNeedDefaultHeader: Bool {
         return true
     }
@@ -26,6 +36,8 @@ extension DemoApi: ApiProtocol {
             return "https://sevens-api.herokuapp.com"
         case .download:
             return "https://shichimitoucarashi.com"
+        case .jsonPost:
+            return "https://decoy-sevens.herokuapp.com"
         }
     }
 
@@ -39,6 +51,8 @@ extension DemoApi: ApiProtocol {
             return "apple-movie.mp4"
         case .upload:
             return "imageUp.json"
+        case .jsonPost:
+            return "json.json"
         }
     }
 
@@ -46,7 +60,7 @@ extension DemoApi: ApiProtocol {
         switch self {
         case .zen:
             return .get
-        case .post, .upload:
+        case .post, .jsonPost, .upload:
             return .post
         case .download:
             return .get
@@ -63,6 +77,8 @@ extension DemoApi: ApiProtocol {
             return nil
         case let .post(val):
             return [val.value.0: val.value.1]
+        case let .jsonPost(param):
+            return param
         case .upload:
             return nil
         case .download:
@@ -85,7 +101,7 @@ extension DemoApi: ApiProtocol {
                                   fileName: "Hello.txt",
                                   mineType: "text/plain",
                                   data: img)]
-        case .zen, .post, .download:
+        case .zen, .post, .jsonPost, .download:
             return nil
         }
     }

@@ -86,6 +86,11 @@ public class Http {
         case trace = "TRACE"
     }
 
+    public enum Encode {
+        case url
+        case json
+    }
+
     let sessionManager: URLSessionManager
 
     public static let shared = Http()
@@ -96,6 +101,7 @@ public class Http {
 
     private func request(url: String,
                          method: Method = .get,
+                         encode: Encode = .url,
                          isNeedDefaultHeader: Bool = true,
                          header: [String: String]? = nil,
                          params: [String: String]? = nil,
@@ -105,6 +111,7 @@ public class Http {
     {
         sessionManager.request(url: url,
                                method: method,
+                               encode: encode,
                                isNeedDefaultHeader: isNeedDefaultHeader,
                                header: header,
                                params: params,
@@ -116,6 +123,7 @@ public class Http {
 
     public class func request(url: String,
                               method: Method = .get,
+                              encode: Encode = .url,
                               isNeedDefaultHeader: Bool = true,
                               header: [String: String]? = nil,
                               params: [String: String]? = nil,
@@ -125,6 +133,7 @@ public class Http {
     {
         return Http.shared.request(url: url,
                                    method: method,
+                                   encode: encode,
                                    isNeedDefaultHeader: isNeedDefaultHeader,
                                    header: header,
                                    params: params,
@@ -137,6 +146,7 @@ public class Http {
         let url = api.domain + "/" + api.endPoint
         return Http.shared.request(url: url,
                                    method: api.method,
+                                   encode: api.encode,
                                    isNeedDefaultHeader: api.isNeedDefaultHeader,
                                    header: api.header,
                                    params: api.params,

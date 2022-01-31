@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+///
 open class Request {
     var urlRequest: URLRequest?
 
@@ -23,6 +24,7 @@ open class Request {
      */
     public init(url: String,
                 method: Http.Method,
+                encode: Http.Encode = .url,
                 isNeedDefaultHeader: Bool = true,
                 headers: [String: String]? = nil,
                 parameter: [String: String]? = nil,
@@ -44,7 +46,7 @@ open class Request {
         if let param = parameter,
            !param.isEmpty
         {
-            configurePostData(param)
+            encodingParameter(encode, parameters: param)
         }
 
         if let multipartData = multipart {
@@ -84,19 +86,37 @@ open class Request {
         }
     }
 
+    public func encodingParameter(_ encoder: Http.Encode, parameters: [String: Any]) {
+        switch encoder {
+        case .url:
+            urlEncoding(parameters.mapValues { $0 as? String ?? "" })
+        case .json:
+            jsonEncoding(parameters)
+        }
+    }
+
     /*
      * public func post
      * Create a post method URLRequest.
-     * param param: [String: String]
+     * param parameter: [String: String]
      * Retrun Void
      */
-    public func configurePostData(_ param: [String: String]) {
-        guard let value = URI.encode(param) as Data? else {
+    public func urlEncoding(_ parameter: [String: String]) {
+        guard let value = URI.encode(parameter) as Data? else {
             return
         }
-        let header: [String: String] = HttpHeader.postHeader(value.count.description)
+        let header = HttpHeader.urlEncodeHeader(value.count.description)
         configureHeader(header)
         urlRequest?.httpBody = value
+    }
+
+    /// public function jsonEncoding
+    /// - Parameter param: post body data
+    public func jsonEncoding(_ parameter: [String: Any]) {
+        let header = HttpHeader.jsonEncodeHeder
+        configureHeader(header)
+        let data = try? JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)
+        urlRequest?.httpBody = data
     }
 
     /*
@@ -112,6 +132,6 @@ open class Request {
 
         let multipart = MultipartCreator.multiparts(multiparts)
         configureHeader(HttpHeader.multipart(multipart.boundary))
-        urlRequest?.httpBody = multipart.data
+        urlRequest!.httpBody = multipart.data
     }
 }

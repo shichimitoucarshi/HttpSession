@@ -9,8 +9,7 @@
 import XCTest
 
 class HttpParameterTest: XCTestCase {
-    let params = ["Test": "Value",
-                  "Test1": "Value2"]
+    let params = ["Test": "Value"]
 
     func testParameterNotDefaultHeader() {
         let http = Http.request(url: TestUrl,
@@ -18,7 +17,7 @@ class HttpParameterTest: XCTestCase {
                                 isNeedDefaultHeader: false,
                                 params: params)
         let testValue = URI.encode(params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.postHeader((testValue?.count.description)!))
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.urlEncodeHeader((testValue?.count.description)!))
         XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == testValue)
     }
 
@@ -30,7 +29,7 @@ class HttpParameterTest: XCTestCase {
         let testValue = URI.encode(params)
         var testHeaderValue = HttpHeader.appInfo
 
-        for (key, value) in HttpHeader.postHeader((testValue?.count.description)!) {
+        for (key, value) in HttpHeader.urlEncodeHeader((testValue?.count.description)!) {
             testHeaderValue[key] = value
         }
 
@@ -89,7 +88,7 @@ class HttpParameterTest: XCTestCase {
                                 isNeedDefaultHeader: false,
                                 params: params)
         let testValue = URI.encode(params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.postHeader((testValue?.count.description)!))
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.urlEncodeHeader((testValue?.count.description)!))
         XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == testValue)
     }
 
@@ -99,7 +98,7 @@ class HttpParameterTest: XCTestCase {
                                 isNeedDefaultHeader: false,
                                 params: params)
         let testValue = URI.encode(params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.postHeader((testValue?.count.description)!))
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.urlEncodeHeader((testValue?.count.description)!))
         XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == testValue)
     }
 
@@ -109,7 +108,7 @@ class HttpParameterTest: XCTestCase {
                                 isNeedDefaultHeader: false,
                                 params: params)
         let testValue = URI.encode(params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.postHeader((testValue?.count.description)!))
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.urlEncodeHeader((testValue?.count.description)!))
         XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == testValue)
     }
 
@@ -119,7 +118,7 @@ class HttpParameterTest: XCTestCase {
                                 isNeedDefaultHeader: false,
                                 params: params)
         let testValue = URI.encode(params)
-        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.postHeader((testValue?.count.description)!))
+        XCTAssert(http.sessionManager.request?.urlRequest?.allHTTPHeaderFields == HttpHeader.urlEncodeHeader((testValue?.count.description)!))
         XCTAssert(http.sessionManager.request?.urlRequest?.httpBody == testValue)
     }
 }
