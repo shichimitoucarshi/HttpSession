@@ -58,8 +58,8 @@ open class Request {
         }
 
         if cookie {
-            urlRequest?.httpShouldHandleCookies = false
-            urlRequest?.allHTTPHeaderFields = Cookie.shared.get(url)
+            urlRequest!.httpShouldHandleCookies = false
+            urlRequest!.allHTTPHeaderFields = Cookie.shared.get(url)
         }
     }
 
@@ -82,7 +82,7 @@ open class Request {
 
     private func configureHeader(_ header: [String: String]) {
         header.forEach {
-            urlRequest?.setValue($0.value, forHTTPHeaderField: $0.key)
+            urlRequest!.setValue($0.value, forHTTPHeaderField: $0.key)
         }
     }
 
@@ -107,7 +107,7 @@ open class Request {
         }
         let header = HttpHeader.urlEncodeHeader(value.count.description)
         configureHeader(header)
-        urlRequest?.httpBody = value
+        urlRequest!.httpBody = value
     }
 
     /// public function jsonEncoding
@@ -116,7 +116,7 @@ open class Request {
         let header = HttpHeader.jsonEncodeHeder
         configureHeader(header)
         let data = try? JSONSerialization.data(withJSONObject: parameter, options: .prettyPrinted)
-        urlRequest?.httpBody = data
+        urlRequest!.httpBody = data
     }
 
     /*
