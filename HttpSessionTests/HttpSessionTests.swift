@@ -117,4 +117,14 @@ class HttpSessionTests: XCTestCase {
         }
         wait(for: [exp], timeout: 300.0)
     }
+
+    func testJsonHttpSession() {
+        let exp = expectation(description: #function)
+        Http.request(url: "https://decoy-sevens.herokuapp.com/json.json", method: .post)
+            .session { data, _, _ in
+                XCTAssertNotNil(data)
+                exp.fulfill()
+            }
+        wait(for: [exp], timeout: 60.0)
+    }
 }
