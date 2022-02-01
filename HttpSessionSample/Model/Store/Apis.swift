@@ -14,4 +14,5 @@ let apis = ["HTTP Get connection",
             "HTTP GET SignIned Connection",
             "HTTP POST Upload image png",
             "HTTP GET Basic Authenticate",
-            "HTTP Download binary"]
+            "HTTP Download binary",
+            "HTTP JSON POST connection"]

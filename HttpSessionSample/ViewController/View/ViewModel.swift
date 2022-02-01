@@ -6,6 +6,7 @@
 //  Copyright © 2020 keisuke yamagishi. All rights reserved.
 //
 
+import Foundation
 import HttpSession
 
 protocol ViewModelInput: AnyObject {
@@ -80,6 +81,11 @@ extension ViewModel: ViewModelInput {
             })
         case 6:
             pushDetailClosure?()
+        case 7:
+            provider.send(api: .jsonPost(param: ["Swift-Http-Client-lib": "HttpSession",
+                                                 "Lang": "Swift"])) { [unowned self] data, responce, error in
+                detailClosure(data, "", responce, error)
+            }
         default:
             print("Default")
         }

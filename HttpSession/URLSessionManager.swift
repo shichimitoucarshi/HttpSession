@@ -32,6 +32,7 @@ class URLSessionManager: NSObject {
 
     func request(url: String,
                  method: Http.Method = .get,
+                 encode: Http.Encode = .url,
                  isNeedDefaultHeader: Bool = true,
                  header: [String: String]? = nil,
                  params: [String: String]? = nil,
@@ -43,6 +44,7 @@ class URLSessionManager: NSObject {
         isCookie = cookie
         request = Request(url: url,
                           method: method,
+                          encode: encode,
                           isNeedDefaultHeader: isNeedDefaultHeader,
                           headers: header,
                           parameter: params,
