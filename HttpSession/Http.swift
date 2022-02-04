@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-let VERSION = "1.8.0"
+let VERSION = "1.10.0"
+
 public protocol HttpApi: AnyObject {
     associatedtype ApiType: ApiProtocol
 
