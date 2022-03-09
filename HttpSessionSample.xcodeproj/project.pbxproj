@@ -38,6 +38,7 @@
 		900AE26B259784A2002FF546 /* View.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 900AE26A259784A2002FF546 /* View.storyboard */; };
 		900DA85425FBC38C0086C448 /* HttpMultipartTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DA85325FBC38C0086C448 /* HttpMultipartTest.swift */; };
 		900DA85825FC972D0086C448 /* HttpURLTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900DA85725FC972D0086C448 /* HttpURLTest.swift */; };
+		905D44B827ACE9FF0006D0A7 /* BuildData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905D44B727ACE9FF0006D0A7 /* BuildData.swift */; };
 		908D69902598226E00BB3BB0 /* HttpSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */; };
 		90AC27FB25FA455100B6954D /* HttpHeaderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */; };
 		90AC27FF25FA4B4A00B6954D /* HttpParameterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */; };
@@ -118,6 +119,7 @@
 		900AE26A259784A2002FF546 /* View.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = View.storyboard; sourceTree = "<group>"; };
 		900DA85325FBC38C0086C448 /* HttpMultipartTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMultipartTest.swift; sourceTree = "<group>"; };
 		900DA85725FC972D0086C448 /* HttpURLTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpURLTest.swift; sourceTree = "<group>"; };
+		905D44B727ACE9FF0006D0A7 /* BuildData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildData.swift; sourceTree = "<group>"; };
 		908D698F2598226E00BB3BB0 /* HttpSessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpSessionTests.swift; sourceTree = "<group>"; };
 		90AC27FA25FA455100B6954D /* HttpHeaderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHeaderTest.swift; sourceTree = "<group>"; };
 		90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterTest.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 			children = (
 				900AE2402597844F002FF546 /* Extension */,
 				900AE2432597844F002FF546 /* Store */,
+				905D44B727ACE9FF0006D0A7 /* BuildData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				905D44B827ACE9FF0006D0A7 /* BuildData.swift in Sources */,
 				900AE25B2597845F002FF546 /* DetailViewController.swift in Sources */,
 				900AE2492597844F002FF546 /* Apis.swift in Sources */,
 				900AE2472597844F002FF546 /* Tapul+.swift in Sources */,
