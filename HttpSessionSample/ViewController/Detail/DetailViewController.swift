@@ -10,8 +10,6 @@ import HttpSession
 import UIKit
 
 final class DetailViewController: UIViewController {
-    static let detailViewControllerId: String = "DetailViewController"
-
     @IBOutlet var responceText: UITextView!
     @IBOutlet var progress: UIProgressView!
     @IBOutlet var status: UILabel!
@@ -22,7 +20,7 @@ final class DetailViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        if viewModel.output.isDL == true {
+        if viewModel.output.isDL {
             responceText.isHidden = true
             progress.setProgress(0.0, animated: true)
             viewModel.input.download()
