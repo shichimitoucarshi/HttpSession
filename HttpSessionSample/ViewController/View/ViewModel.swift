@@ -124,28 +124,25 @@ extension ViewModel: ViewModelInput {
         let parameter = parameter.map {
             "\($0.key): \($0.value)\n"
         }.joined()
+        if let unwrapData = data,
+           let result = String(data: unwrapData, encoding: .utf8),
+           let unwrapResponce = responce
+        {
+            let responceString = String(describing: unwrapResponce)
+            let result = BuildData.build(param: parameter,
+                                         responce: responceString,
+                                         result: result)
 
-        DispatchQueue.main.async {
-            if let unwrapData = data,
-               let result = String(data: unwrapData, encoding: .utf8),
-               let unwrapResponce = responce
-            {
-                let responceString = String(describing: unwrapResponce)
-                let result = BuildData.build(param: parameter,
-                                             responce: responceString,
-                                             result: result)
+            detailClosure(result)
+        } else if let unwrapResponce = responce {
+            let responceString = String(describing: unwrapResponce)
+            let result = BuildData.build(param: parameter, responce: responceString)
 
-                self.detailClosure(result)
-            } else if let unwrapResponce = responce {
-                let responceString = String(describing: unwrapResponce)
-                let result = BuildData.build(param: parameter, responce: responceString)
-
-                self.detailClosure(result)
-            } else if let unwrapError = error {
-                let errorString = String(describing: unwrapError)
-                let result = BuildData.build(param: parameter, error: errorString)
-                self.detailClosure(result)
-            }
+            detailClosure(result)
+        } else if let unwrapError = error {
+            let errorString = String(describing: unwrapError)
+            let result = BuildData.build(param: parameter, error: errorString)
+            detailClosure(result)
         }
     }
 }

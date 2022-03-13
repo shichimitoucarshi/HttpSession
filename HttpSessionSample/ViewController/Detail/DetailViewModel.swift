@@ -69,10 +69,8 @@ extension DetailViewModel: DetailViewModelInput {
                           data: data,
                           progress: { [weak self] _, total, expectedToWrite in
                               guard let self = self else { return }
-                              DispatchQueue.main.async {
-                                  let progress = Float(total) / Float(expectedToWrite)
-                                  self.progressClosure?(total, expectedToWrite, progress)
-                              }
+                              let progress = Float(total) / Float(expectedToWrite)
+                              self.progressClosure?(total, expectedToWrite, progress)
                           }, download: { url in
                               print("location: \(String(describing: url))")
                           }) { _, _, _ in
