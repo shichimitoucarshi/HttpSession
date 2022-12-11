@@ -117,20 +117,37 @@ Like Moya
 ```swift
 enum DemoApi {
     case zen
-    case post(param:Tapul)
+    case post(param: Tapul)
+    case jsonPost(param: [String: String])
     case download
+    case upload
 }
 
-extension DemoApi:ApiProtocol {
-    var domain: String{
+extension DemoApi: ApiProtocol {
+    var encode: Http.Encode {
         switch self {
-        case .zen, .post:
-            return "https://sevens-api.herokuapp.com/"
-        case .download:
-            return "https://shichimitoucarashi.com"
+        case .zen, .post, .upload, .download:
+            return .url
+        case .jsonPost:
+            return .json
         }
     }
-    
+
+    var isNeedDefaultHeader: Bool {
+        true
+    }
+
+    var domain: String {
+        switch self {
+        case .zen, .post, .upload:
+            return "https://sevens-api.herokuapp.com"
+        case .download:
+            return "https://shichimitoucarashi.com"
+        case .jsonPost:
+            return "https://decoy-sevens.herokuapp.com"
+        }
+    }
+
     var endPoint: String {
         switch self {
         case .zen:
@@ -138,44 +155,73 @@ extension DemoApi:ApiProtocol {
         case .post:
             return "postApi.json"
         case .download:
-            return "mp4/Designing_For_iPad_Pro_ad_hd.mp4"
+            return "apple-movie.mp4"
+        case .upload:
+            return "imageUp.json"
+        case .jsonPost:
+            return "json.json"
         }
     }
-    
-    var method: Http.method {
+
+    var method: Http.Method {
         switch self {
         case .zen:
             return .get
-        case .post:
+        case .post, .jsonPost, .upload:
             return .post
         case .download:
             return .get
         }
     }
-    
-    var header: [String : String]? {
-        return [:]
+
+    var header: [String: String]? {
+        nil
     }
-    
-    var params: [String : String] {
+
+    var params: [String: String]? {
         switch self {
         case .zen:
-            return [:]
-        case .post(let val):
-            return [val.value.0:val.value.1]
+            return nil
+        case let .post(val):
+            return [val.value.0: val.value.1]
+        case let .jsonPost(param):
+            return param
+        case .upload:
+            return nil
         case .download:
-            return [:]
+            return nil
         }
     }
-    
-    var isCookie: Bool {
-        return false
+
+    var multipart: [Multipartible]? {
+        switch self {
+        case .upload:
+            let image: String? = Bundle.main.path(forResource: "re", ofType: "txt")
+            let img: Data
+            do {
+                img = try Data(contentsOf: URL(fileURLWithPath: image!))
+            } catch {
+                img = Data()
+            }
+
+            return [Multipartible(key: "img",
+                                  fileName: "Hello.txt",
+                                  mineType: "text/plain",
+                                  data: img)]
+        case .zen, .post, .jsonPost, .download:
+            return nil
+        }
     }
-    
-    var basicAuth: [String : String]? {
-        return nil
+
+    var isCookie: Bool {
+        false
+    }
+
+    var basicAuth: [String: String]? {
+        nil
     }
 }
+
 ```
 
 ```swift
