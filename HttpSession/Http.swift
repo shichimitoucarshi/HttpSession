@@ -132,7 +132,7 @@ public class Http {
                               cookie: Bool = false,
                               basic: [String: String]? = nil) -> Http
     {
-        return Http.shared.request(url: url,
+        Http.shared.request(url: url,
                                    method: method,
                                    encode: encode,
                                    isNeedDefaultHeader: isNeedDefaultHeader,
@@ -144,8 +144,7 @@ public class Http {
     }
 
     public class func request(api: ApiProtocol) -> Http {
-        let url = api.domain + "/" + api.endPoint
-        return Http.shared.request(url: url,
+        Http.shared.request(url: api.domain + "/" + api.endPoint,
                                    method: api.method,
                                    encode: api.encode,
                                    isNeedDefaultHeader: api.isNeedDefaultHeader,
