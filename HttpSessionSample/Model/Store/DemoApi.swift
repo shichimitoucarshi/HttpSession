@@ -27,7 +27,7 @@ extension DemoApi: ApiProtocol {
     }
 
     var isNeedDefaultHeader: Bool {
-        return true
+        true
     }
 
     var domain: String {
@@ -68,7 +68,7 @@ extension DemoApi: ApiProtocol {
     }
 
     var header: [String: String]? {
-        return nil
+        nil
     }
 
     var params: [String: String]? {
@@ -107,10 +107,10 @@ extension DemoApi: ApiProtocol {
     }
 
     var isCookie: Bool {
-        return false
+        false
     }
 
     var basicAuth: [String: String]? {
-        return nil
+        nil
     }
 }
