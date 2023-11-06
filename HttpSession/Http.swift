@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 let VERSION = "1.10.0"
 
