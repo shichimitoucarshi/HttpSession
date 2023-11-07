@@ -45,6 +45,7 @@
 		90E034712610BD2E00FAC1C6 /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90E034702610BD2E00FAC1C6 /* re.txt */; };
 		90EBDD3F2AF9C826001A30AF /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBDD3E2AF9C826001A30AF /* ApiProtocol.swift */; };
 		90EBDD412AF9C854001A30AF /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBDD402AF9C854001A30AF /* ApiProvider.swift */; };
+		90EBDD432AF9CD6F001A30AF /* InfoPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBDD422AF9CD6F001A30AF /* InfoPlist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +128,7 @@
 		90E034702610BD2E00FAC1C6 /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
 		90EBDD3E2AF9C826001A30AF /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
 		90EBDD402AF9C854001A30AF /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
+		90EBDD422AF9CD6F001A30AF /* InfoPlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoPlist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +207,7 @@
 				900AE22125978408002FF546 /* Multipart */,
 				900AE22325978408002FF546 /* Request.swift */,
 				9009DEC725EC98D2002DCE37 /* URLSessionManager.swift */,
+				90EBDD422AF9CD6F001A30AF /* InfoPlist.swift */,
 			);
 			path = HttpSession;
 			sourceTree = "<group>";
@@ -473,6 +476,7 @@
 				900AE21B259783FC002FF546 /* Http.swift in Sources */,
 				900AE22425978408002FF546 /* Multipart.swift in Sources */,
 				900AE21D259783FC002FF546 /* URI.swift in Sources */,
+				90EBDD432AF9CD6F001A30AF /* InfoPlist.swift in Sources */,
 				900AE21A259783FC002FF546 /* Cookie.swift in Sources */,
 				900AE219259783FC002FF546 /* Auth.swift in Sources */,
 			);

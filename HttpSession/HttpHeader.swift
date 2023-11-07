@@ -50,7 +50,7 @@ enum HttpHeader {
                 }()
                 return "\(executable)/\(appVersion) (\(bundle)) kCFBundleVersionKey/\(appBuild) \(version)"
             }
-            return "HttpSession: \(VERSION)"
+            return "HttpSession: \(String(describing: Version))"
         }()
 
         return [

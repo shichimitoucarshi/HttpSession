@@ -8,8 +8,6 @@
 
 import Foundation
 
-let VERSION = "1.10.0"
-
 public class Http {
     /*
      * Http method
@@ -71,14 +69,14 @@ public class Http {
                               basic: [String: String]? = nil) -> Http
     {
         Http.shared.request(url: url,
-                                   method: method,
-                                   encode: encode,
-                                   isNeedDefaultHeader: isNeedDefaultHeader,
-                                   header: header,
-                                   params: params,
-                                   multipart: multipart,
-                                   cookie: cookie,
-                                   basic: basic)
+                            method: method,
+                            encode: encode,
+                            isNeedDefaultHeader: isNeedDefaultHeader,
+                            header: header,
+                            params: params,
+                            multipart: multipart,
+                            cookie: cookie,
+                            basic: basic)
     }
 
     public func session(completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
