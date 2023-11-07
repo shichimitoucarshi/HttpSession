@@ -11,7 +11,7 @@ import XCTest
 class HttpURLTest: XCTestCase {
     func testURLVaridationSuccessTest() {
         do {
-            _ = try TestUrl.toUrl()
+            _ = try "https://shichimitoucarashi.herokuapp.com/".toUrl()
         } catch {
             print("Excetion: \(error)")
             XCTFail()
