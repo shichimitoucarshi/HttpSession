@@ -6,7 +6,7 @@
 //  Copyright © 2018 keisuke yamagishi. All rights reserved.
 //
 
-import Foundation
+import HttpSession
 
 public protocol ApiProtocol {
     var domain: String { get }

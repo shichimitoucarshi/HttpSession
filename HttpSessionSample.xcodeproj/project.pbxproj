@@ -20,7 +20,6 @@
 		900AE219259783FC002FF546 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE212259783FC002FF546 /* Auth.swift */; };
 		900AE21A259783FC002FF546 /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE213259783FC002FF546 /* Cookie.swift */; };
 		900AE21B259783FC002FF546 /* Http.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE214259783FC002FF546 /* Http.swift */; };
-		900AE21C259783FC002FF546 /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE215259783FC002FF546 /* ApiProtocol.swift */; };
 		900AE21D259783FC002FF546 /* URI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE217259783FC002FF546 /* URI.swift */; };
 		900AE22425978408002FF546 /* Multipart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE22225978408002FF546 /* Multipart.swift */; };
 		900AE22525978408002FF546 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900AE22325978408002FF546 /* Request.swift */; };
@@ -44,6 +43,8 @@
 		90AC27FF25FA4B4A00B6954D /* HttpParameterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */; };
 		90D20A52260E3B6A007B42B9 /* Hello.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90D20A51260E3B6A007B42B9 /* Hello.txt */; };
 		90E034712610BD2E00FAC1C6 /* re.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90E034702610BD2E00FAC1C6 /* re.txt */; };
+		90EBDD3F2AF9C826001A30AF /* ApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBDD3E2AF9C826001A30AF /* ApiProtocol.swift */; };
+		90EBDD412AF9C854001A30AF /* ApiProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EBDD402AF9C854001A30AF /* ApiProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +102,6 @@
 		900AE212259783FC002FF546 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		900AE213259783FC002FF546 /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		900AE214259783FC002FF546 /* Http.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Http.swift; sourceTree = "<group>"; };
-		900AE215259783FC002FF546 /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
 		900AE217259783FC002FF546 /* URI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URI.swift; sourceTree = "<group>"; };
 		900AE22225978408002FF546 /* Multipart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multipart.swift; sourceTree = "<group>"; };
 		900AE22325978408002FF546 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
@@ -125,6 +125,8 @@
 		90AC27FE25FA4B4A00B6954D /* HttpParameterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpParameterTest.swift; sourceTree = "<group>"; };
 		90D20A51260E3B6A007B42B9 /* Hello.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Hello.txt; sourceTree = "<group>"; };
 		90E034702610BD2E00FAC1C6 /* re.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = re.txt; sourceTree = "<group>"; };
+		90EBDD3E2AF9C826001A30AF /* ApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiProtocol.swift; sourceTree = "<group>"; };
+		90EBDD402AF9C854001A30AF /* ApiProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,7 +195,6 @@
 		900AE1F1259783E4002FF546 /* HttpSession */ = {
 			isa = PBXGroup;
 			children = (
-				900AE215259783FC002FF546 /* ApiProtocol.swift */,
 				900AE212259783FC002FF546 /* Auth.swift */,
 				900AE213259783FC002FF546 /* Cookie.swift */,
 				900AE216259783FC002FF546 /* Encode */,
@@ -241,9 +242,11 @@
 		900AE23F2597844F002FF546 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				90EBDD3E2AF9C826001A30AF /* ApiProtocol.swift */,
 				900AE2402597844F002FF546 /* Extension */,
 				900AE2432597844F002FF546 /* Store */,
 				905D44B727ACE9FF0006D0A7 /* BuildData.swift */,
+				90EBDD402AF9C854001A30AF /* ApiProvider.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -448,12 +451,14 @@
 				900AE2492597844F002FF546 /* Apis.swift in Sources */,
 				900AE2472597844F002FF546 /* Tapul+.swift in Sources */,
 				900AE25C2597845F002FF546 /* DetailViewModel.swift in Sources */,
+				90EBDD412AF9C854001A30AF /* ApiProvider.swift in Sources */,
 				900AE25D2597845F002FF546 /* ViewController.swift in Sources */,
 				900AE2482597844F002FF546 /* Dictionary+.swift in Sources */,
 				900AE24B2597844F002FF546 /* Tapul.swift in Sources */,
 				900AE1B7259783BE002FF546 /* AppDelegate.swift in Sources */,
 				900AE1B9259783BE002FF546 /* SceneDelegate.swift in Sources */,
 				900AE25E2597845F002FF546 /* ViewModel.swift in Sources */,
+				90EBDD3F2AF9C826001A30AF /* ApiProtocol.swift in Sources */,
 				900AE24A2597844F002FF546 /* DemoApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +473,6 @@
 				900AE21B259783FC002FF546 /* Http.swift in Sources */,
 				900AE22425978408002FF546 /* Multipart.swift in Sources */,
 				900AE21D259783FC002FF546 /* URI.swift in Sources */,
-				900AE21C259783FC002FF546 /* ApiProtocol.swift in Sources */,
 				900AE21A259783FC002FF546 /* Cookie.swift in Sources */,
 				900AE219259783FC002FF546 /* Auth.swift in Sources */,
 			);

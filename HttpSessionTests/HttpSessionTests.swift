@@ -111,11 +111,14 @@ class HttpSessionTests: XCTestCase {
 
     func testApiProtoccol_Upload() {
         let exp = expectation(description: #function)
-        ApiProvider<TestApi>().upload(api: .test3) { data, _, _ in
-            XCTAssertNotNil(data)
-            exp.fulfill()
+        Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
+                     method: .post,
+                     multipart: Parameter.Multipart)
+            .session { data, _, _ in
+                XCTAssertNotNil(data)
+                exp.fulfill()
         }
-        wait(for: [exp], timeout: 300.0)
+        wait(for: [exp], timeout: 100.0)
     }
 
     func testJsonHttpSession() {
