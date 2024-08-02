@@ -10,11 +10,15 @@ import Foundation
 // swiftlint:disable all
 class URI: NSObject {
     public static func encode(_ param: [String: String]) -> Data? {
-        return URI().encode(param).data(using: .utf8)
+        URI()
+            .encode(param)
+            .data(using: .utf8)
     }
 
     public func encode(_ param: [String: String]) -> String {
-        return param.map { "\($0)=\($1.percentEncode())" }.joined(separator: "&")
+        param
+            .map { "\($0)=\($1.percentEncode())" }
+            .joined(separator: "&")
     }
 }
 
