@@ -8,5 +8,7 @@
 import Foundation
 
 public var Version: String? {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    Bundle
+        .main
+        .object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
 }
