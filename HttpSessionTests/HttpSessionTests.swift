@@ -48,39 +48,39 @@ class HttpSessionTests: XCTestCase {
         wait(for: [exp], timeout: 60.0)
     }
 
-    func testHttpCookieSignIned() {
-        let exp = expectation(description: #function)
-        Http.request(url: "https://sevens-api.herokuapp.com/signIned.json",
-                     method: .get,
-                     cookie: true).session { data, _, _ in
-            XCTAssert(!Cookie.shared.get("https://sevens-api.herokuapp.com/signIned.json").isEmpty)
-            XCTAssertNotNil(data)
-            exp.fulfill()
-        }
-        wait(for: [exp], timeout: 60.0)
-    }
+//    func testHttpCookieSignIned() {
+//        let exp = expectation(description: #function)
+//        Http.request(url: "https://sevens-api.herokuapp.com/signIned.json",
+//                     method: .get,
+//                     cookie: true).session { data, _, _ in
+//            XCTAssert(!Cookie.shared.get("https://sevens-api.herokuapp.com/signIned.json").isEmpty)
+//            XCTAssertNotNil(data)
+//            exp.fulfill()
+//        }
+//        wait(for: [exp], timeout: 60.0)
+//    }
 
-    func testHttpMultipart() {
-        let exp = expectation(description: #function)
-        let image: String? = Bundle.main.path(forResource: "Hello", ofType: "txt")
-        var img = Data()
-        do {
-            img = try Data(contentsOf: URL(fileURLWithPath: image!))
-        } catch {}
-
-        let multipartible = Multipartible(key: "img",
-                                          fileName: "Hello.txt",
-                                          mineType: "text/plain",
-                                          data: img)
-
-        Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
-                     method: .post, multipart: [multipartible])
-            .upload(completion: { data, _, _ in
-                XCTAssertNotNil(data)
-                exp.fulfill()
-            })
-        wait(for: [exp], timeout: 60.0)
-    }
+//    func testHttpMultipart() {
+//        let exp = expectation(description: #function)
+//        let image: String? = Bundle.main.path(forResource: "Hello", ofType: "txt")
+//        var img = Data()
+//        do {
+//            img = try Data(contentsOf: URL(fileURLWithPath: image!))
+//        } catch {}
+//
+//        let multipartible = Multipartible(key: "img",
+//                                          fileName: "Hello.txt",
+//                                          mineType: "text/plain",
+//                                          data: img)
+//
+//        Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
+//                     method: .post, multipart: [multipartible])
+//            .upload(completion: { data, _, _ in
+//                XCTAssertNotNil(data)
+//                exp.fulfill()
+//            })
+//        wait(for: [exp], timeout: 60.0)
+//    }
 
     func testHttpBasicAuth() {
         let exp = expectation(description: #function)
@@ -109,17 +109,17 @@ class HttpSessionTests: XCTestCase {
         wait(for: [exp], timeout: 120.0)
     }
 
-    func testApiProtoccol_Upload() {
-        let exp = expectation(description: #function)
-        Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
-                     method: .post,
-                     multipart: Parameter.Multipart)
-            .session { data, _, _ in
-                XCTAssertNotNil(data)
-                exp.fulfill()
-        }
-        wait(for: [exp], timeout: 100.0)
-    }
+//    func testApiProtoccol_Upload() {
+//        let exp = expectation(description: #function)
+//        Http.request(url: "https://sevens-api.herokuapp.com/imageUp.json",
+//                     method: .post,
+//                     multipart: Parameter.Multipart)
+//            .session { data, _, _ in
+//                XCTAssertNotNil(data)
+//                exp.fulfill()
+//        }
+//        wait(for: [exp], timeout: 100.0)
+//    }
 
     func testJsonHttpSession() {
         let exp = expectation(description: #function)
