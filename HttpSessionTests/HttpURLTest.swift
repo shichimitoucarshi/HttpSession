@@ -20,7 +20,7 @@ class HttpURLTest: XCTestCase {
 
     func testURLVaridationFailuerTest() {
         do {
-            _ = try "Hello world".toUrl()
+            _ = try "".toUrl()
             XCTFail()
         } catch {
             print("Excetion: \(error)")
