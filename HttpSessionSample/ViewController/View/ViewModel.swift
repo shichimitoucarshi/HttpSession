@@ -39,19 +39,18 @@ extension ViewModel: ViewModelInput {
         switch indexPath.row {
         case 0:
             provider.send(api: .zen) { [unowned self] data, responce, error in
-                self.buildData(data: data,
-                               parameter: [:],
-                               responce: responce,
-                               error: error)
+                buildData(data: data,
+                          parameter: [:],
+                          responce: responce,
+                          error: error)
             }
         case 1:
             let val = Tapul(value: ("http_post", value: "Http Request POST 😄"))
             provider.send(api: .post(param: val)) { [unowned self] data, responce, error in
-
-                self.buildData(data: data,
-                               parameter: [val.value.0: val.value.1],
-                               responce: responce,
-                               error: error)
+                buildData(data: data,
+                          parameter: [val.value.0: val.value.1],
+                          responce: responce,
+                          error: error)
             }
         case 2:
 
@@ -62,19 +61,19 @@ extension ViewModel: ViewModelInput {
 
             Http.request(url: url, method: .post, params: param)
                 .session(completion: { [unowned self] data, responce, error in
-                    self.buildData(data: data,
-                                   parameter: param,
-                                   responce: responce,
-                                   error: error)
+                    buildData(data: data,
+                              parameter: param,
+                              responce: responce,
+                              error: error)
                 })
         case 3:
 
             Http.request(url: "https://sevens-api.herokuapp.com/signIned.json", method: .get, cookie: true)
                 .session(completion: { [unowned self] data, responce, error in
-                    self.buildData(data: data,
-                                   parameter: [:],
-                                   responce: responce,
-                                   error: error)
+                    buildData(data: data,
+                              parameter: [:],
+                              responce: responce,
+                              error: error)
                 })
         case 4:
 
@@ -84,10 +83,10 @@ extension ViewModel: ViewModelInput {
                 self.uploadProgress?(percentage)
 
             } completion: { [self] data, responce, error in
-                self.buildData(data: data,
-                               parameter: [:],
-                               responce: responce,
-                               error: error)
+                buildData(data: data,
+                          parameter: [:],
+                          responce: responce,
+                          error: error)
             }
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
@@ -95,10 +94,10 @@ extension ViewModel: ViewModelInput {
             Http.request(url: "https://sevens-api.herokuapp.com/basicauth.json",
                          method: .get,
                          basic: basicAuth).session(completion: { [unowned self] data, responce, error in
-                self.buildData(data: data,
-                               parameter: [:],
-                               responce: responce,
-                               error: error)
+                buildData(data: data,
+                          parameter: [:],
+                          responce: responce,
+                          error: error)
             })
         case 6:
             pushDetailClosure?()
@@ -106,10 +105,10 @@ extension ViewModel: ViewModelInput {
             let parameter = ["Swift-Http-Client-lib": "HttpSession",
                              "Lang": "Swift"]
             provider.send(api: .jsonPost(param: parameter)) { [unowned self] data, responce, error in
-                self.buildData(data: data,
-                               parameter: parameter,
-                               responce: responce,
-                               error: error)
+                buildData(data: data,
+                          parameter: parameter,
+                          responce: responce,
+                          error: error)
             }
         default:
             print("Default")

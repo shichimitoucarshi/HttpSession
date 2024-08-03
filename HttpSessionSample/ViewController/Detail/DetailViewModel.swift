@@ -58,9 +58,9 @@ extension DetailViewModel: DetailViewModelInput {
     func stopDownload() {
         provider
             .cancel { [weak self] data in
-                self?.data = data
-                print("data")
-                self?.isCancel = true
+                guard let self = self else { return }
+                self.data = data
+                isCancel = true
             }
     }
 
@@ -70,7 +70,7 @@ extension DetailViewModel: DetailViewModelInput {
                           progress: { [weak self] _, total, expectedToWrite in
                               guard let self = self else { return }
                               let progress = Float(total) / Float(expectedToWrite)
-                              self.progressClosure?(total, expectedToWrite, progress)
+                              progressClosure?(total, expectedToWrite, progress)
                           }, download: { url in
                               print("location: \(String(describing: url))")
                           }) { _, _, _ in
