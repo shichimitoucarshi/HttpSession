@@ -41,18 +41,24 @@ extension ViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         progressView.progress = 0.0
-        viewModel.output.detail { result in
-            self.detailViewController(text: result)
-        }
+        viewModel
+            .output
+            .detail { [unowned self] result in
+                detailViewController(text: result)
+            }
 
-        viewModel.output.transition { [unowned self] in
-            self.detailViewController(isDL: true)
-        }
+        viewModel
+            .output
+            .transition { [unowned self] in
+                detailViewController(isDL: true)
+            }
 
-        viewModel.output.progress { percentage in
-            self.progressView.progress = percentage
-            print("\(Int(percentage * 100))%")
-        }
+        viewModel
+            .output
+            .progress { [unowned self] percentage in
+                progressView.progress = percentage
+                print("\(Int(percentage * 100))%")
+            }
 
         viewModel.input.callApi(indexPath)
     }
