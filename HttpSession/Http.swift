@@ -68,25 +68,34 @@ public class Http {
                               cookie: Bool = false,
                               basic: [String: String]? = nil) -> Http
     {
-        Http.shared.request(url: url,
-                            method: method,
-                            encode: encode,
-                            isNeedDefaultHeader: isNeedDefaultHeader,
-                            header: header,
-                            params: params,
-                            multipart: multipart,
-                            cookie: cookie,
-                            basic: basic)
+        Http.shared
+            .request(url: url,
+                     method: method,
+                     encode: encode,
+                     isNeedDefaultHeader: isNeedDefaultHeader,
+                     header: header,
+                     params: params,
+                     multipart: multipart,
+                     cookie: cookie,
+                     basic: basic)
     }
 
-    public func session(completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
-        sessionManager.session(completion: completion)
+    public func session(completion: @escaping (Data?,
+                                               HTTPURLResponse?,
+                                               Error?) -> Void)
+    {
+        sessionManager
+            .session(completion: completion)
     }
 
     public func download(resumeData: Data? = nil,
-                         progress: @escaping (_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void,
+                         progress: @escaping (_ written: Int64,
+                                              _ total: Int64,
+                                              _ expectedToWrite: Int64) -> Void,
                          download: @escaping (_ path: URL?) -> Void,
-                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+                         completionHandler: @escaping (Data?,
+                                                       HTTPURLResponse?,
+                                                       Error?) -> Void)
     {
         /*
          /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
@@ -95,23 +104,29 @@ public class Http {
 
          /_/_/_/_/_/_/_/_/_/_/_/_/_/_/
          */
-        sessionManager.download(resumeData: resumeData,
-                                progress: progress,
-                                download: download,
-                                completion: completionHandler)
+        sessionManager
+            .download(resumeData: resumeData,
+                      progress: progress,
+                      download: download,
+                      completion: completionHandler)
     }
 
     public func cancel(byResumeData: @escaping (Data?) -> Void) {
-        sessionManager.cancel(byResumeData: byResumeData)
+        sessionManager
+            .cancel(byResumeData: byResumeData)
     }
 
     public func cancel() {
-        sessionManager.cancel()
+        sessionManager
+            .cancel()
     }
 
-    public func upload(progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
-                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
-    {
-        sessionManager.upload(progress: progress, completion: completion)
+    public func upload(progress: ((_ written: Int64,
+                                   _ total: Int64,
+                                   _ expectedToWrite: Int64) -> Void)? = nil,
+    completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void) {
+        sessionManager
+            .upload(progress: progress,
+                    completion: completion)
     }
 }
