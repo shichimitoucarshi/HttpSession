@@ -10,12 +10,13 @@ import HttpSession
 import UIKit
 
 final class ViewController: UIViewController {
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var progressView: UIProgressView!
-    var viewModel: ViewModelType = ViewModel()
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var progressView: UIProgressView!
 
-    func detailViewController(text: String = "",
-                              isDL: Bool = false)
+    private var viewModel: ViewModelType = ViewModel()
+
+    private func detailViewController(text: String = "",
+                                      isDL: Bool = false)
     {
         let storyboard = UIStoryboard(name: "Detail", bundle: nil)
         guard let detailViewController = storyboard.instantiateInitialViewController() as? DetailViewController else { return }
