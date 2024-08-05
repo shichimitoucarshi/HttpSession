@@ -8,18 +8,18 @@
 import HttpSession
 
 extension Http {
-    public class func request(api: ApiProtocol) -> Http {
-        Http.request(url: api.domain + "/" + api.endPoint,
-                                       method: api.method,
-                                       encode: api.encode,
-                                       isNeedDefaultHeader: api.isNeedDefaultHeader,
-                                       header: api.header,
-                                       params: api.params,
-                                       multipart: api.multipart,
-                                       cookie: api.isCookie,
-                                       basic: api.basicAuth)
-        }
-
+    class func request(api: ApiProtocol) -> Http {
+        Http
+            .request(url: api.domain + "/" + api.endPoint,
+                     method: api.method,
+                     encode: api.encode,
+                     isNeedDefaultHeader: api.isNeedDefaultHeader,
+                     header: api.header,
+                     params: api.params,
+                     multipart: api.multipart,
+                     cookie: api.isCookie,
+                     basic: api.basicAuth)
+    }
 }
 
 protocol HttpApi: AnyObject {
@@ -42,44 +42,54 @@ protocol HttpApi: AnyObject {
     func cancelTask()
 }
 
-public class ApiProvider<Type: ApiProtocol>: HttpApi {
-    public typealias ApiType = Type
+class ApiProvider<Type: ApiProtocol>: HttpApi {
+    typealias ApiType = Type
 
-    public init() {}
+    init() {}
 
-    public func send(api: Type,
-                     completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    func send(api: Type,
+              completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
-        Http.request(api: api).session(completion: completion)
+        Http
+            .request(api: api)
+            .session(completion: completion)
     }
 
-    public func upload(api: Type,
-                       progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
-                       completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    func upload(api: Type,
+                progress: ((_ written: Int64, _ total: Int64, _ expectedToWrite: Int64) -> Void)? = nil,
+                completion: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
-        Http.request(api: api).upload(progress: progress, completion: completion)
+        Http
+            .request(api: api)
+            .upload(progress: progress,
+                    completion: completion)
     }
 
-    public func download(api: Type,
-                         data: Data? = nil,
-                         progress: @escaping (Int64, Int64, Int64) -> Void,
-                         download: @escaping (URL?) -> Void,
-                         completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
+    func download(api: Type,
+                  data: Data? = nil,
+                  progress: @escaping (Int64, Int64, Int64) -> Void,
+                  download: @escaping (URL?) -> Void,
+                  completionHandler: @escaping (Data?, HTTPURLResponse?, Error?) -> Void)
     {
-        Http.request(api: api).download(resumeData: data,
-                                        progress: progress,
-                                        download: download,
-                                        completionHandler: completionHandler)
+        Http
+            .request(api: api)
+            .download(resumeData: data,
+                      progress: progress,
+                      download: download,
+                      completionHandler: completionHandler)
     }
 
-    public func cancel(byResumeData: @escaping (Data?) -> Void) {
-        Http.shared.cancel { data in
-            byResumeData(data)
-        }
+    func cancel(byResumeData: @escaping (Data?) -> Void) {
+        Http
+            .shared
+            .cancel { data in
+                byResumeData(data)
+            }
     }
 
-    public func cancelTask() {
-        Http.shared.cancel()
+    func cancelTask() {
+        Http
+            .shared
+            .cancel()
     }
 }
-

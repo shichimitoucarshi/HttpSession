@@ -12,7 +12,7 @@ import XCTest
 
 let TestUrl = "https://shichimitoucarashi.herokuapp.com/"
 
-struct Parameter {
+enum Parameter {
     static var Multipart: [Multipartible] {
         guard let image = Bundle.main.path(forResource: "Hello", ofType: "txt") else { return [] }
         var img = Data()
