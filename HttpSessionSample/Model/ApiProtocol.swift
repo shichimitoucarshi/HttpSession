@@ -8,7 +8,7 @@
 
 import HttpSession
 
-public protocol ApiProtocol {
+protocol ApiProtocol {
     var domain: String { get }
 
     var endPoint: String { get }
