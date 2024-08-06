@@ -39,18 +39,21 @@ extension ViewModel: ViewModelInput {
         switch indexPath.row {
         case 0:
             provider.send(api: .zen) { [unowned self] data, responce, error in
-                buildData(data: data,
-                          parameter: [:],
-                          responce: responce,
-                          error: error)
+                BuildData.build(data: data,
+                                parameter: [:],
+                                responce: responce,
+                                error: error,
+                                completion: detailClosure)
             }
         case 1:
             let val = Tapul(value: ("http_post", value: "Http Request POST 😄"))
             provider.send(api: .post(param: val)) { [unowned self] data, responce, error in
-                buildData(data: data,
-                          parameter: [val.value.0: val.value.1],
-                          responce: responce,
-                          error: error)
+                BuildData
+                    .build(data: data,
+                           parameter: [val.value.0: val.value.1],
+                           responce: responce,
+                           error: error,
+                           completion: detailClosure)
             }
         case 2:
 
@@ -61,19 +64,21 @@ extension ViewModel: ViewModelInput {
 
             Http.request(url: url, method: .post, params: param)
                 .session(completion: { [unowned self] data, responce, error in
-                    buildData(data: data,
-                              parameter: param,
-                              responce: responce,
-                              error: error)
+                    BuildData.build(data: data,
+                                    parameter: param,
+                                    responce: responce,
+                                    error: error,
+                                    completion: detailClosure)
                 })
         case 3:
 
             Http.request(url: "https://sevens-api.herokuapp.com/signIned.json", method: .get, cookie: true)
                 .session(completion: { [unowned self] data, responce, error in
-                    buildData(data: data,
-                              parameter: [:],
-                              responce: responce,
-                              error: error)
+                    BuildData.build(data: data,
+                                    parameter: [:],
+                                    responce: responce,
+                                    error: error,
+                                    completion: detailClosure)
                 })
         case 4:
 
@@ -83,10 +88,11 @@ extension ViewModel: ViewModelInput {
                 self.uploadProgress?(percentage)
 
             } completion: { [self] data, responce, error in
-                buildData(data: data,
-                          parameter: [:],
-                          responce: responce,
-                          error: error)
+                BuildData.build(data: data,
+                                parameter: [:],
+                                responce: responce,
+                                error: error,
+                                completion: detailClosure)
             }
         case 5:
             let basicAuth: [String: String] = [Auth.user: "httpSession",
@@ -94,10 +100,12 @@ extension ViewModel: ViewModelInput {
             Http.request(url: "https://sevens-api.herokuapp.com/basicauth.json",
                          method: .get,
                          basic: basicAuth).session(completion: { [unowned self] data, responce, error in
-                buildData(data: data,
-                          parameter: [:],
-                          responce: responce,
-                          error: error)
+
+                BuildData.build(data: data,
+                                parameter: [:],
+                                responce: responce,
+                                error: error,
+                                completion: detailClosure)
             })
         case 6:
             pushDetailClosure?()
@@ -105,43 +113,14 @@ extension ViewModel: ViewModelInput {
             let parameter = ["Swift-Http-Client-lib": "HttpSession",
                              "Lang": "Swift"]
             provider.send(api: .jsonPost(param: parameter)) { [unowned self] data, responce, error in
-                buildData(data: data,
-                          parameter: parameter,
-                          responce: responce,
-                          error: error)
+                BuildData.build(data: data,
+                                parameter: parameter,
+                                responce: responce,
+                                error: error,
+                                completion: detailClosure)
             }
         default:
             print("Default")
-        }
-    }
-
-    func buildData(data: Data?,
-                   parameter: [String: String],
-                   responce: HTTPURLResponse?,
-                   error: Error?)
-    {
-        let parameter = parameter.map {
-            "\($0.key): \($0.value)\n"
-        }.joined()
-        if let unwrapData = data,
-           let result = String(data: unwrapData, encoding: .utf8),
-           let unwrapResponce = responce
-        {
-            let responceString = String(describing: unwrapResponce)
-            let result = BuildData.build(param: parameter,
-                                         responce: responceString,
-                                         result: result)
-
-            detailClosure(result)
-        } else if let unwrapResponce = responce {
-            let responceString = String(describing: unwrapResponce)
-            let result = BuildData.build(param: parameter, responce: responceString)
-
-            detailClosure(result)
-        } else if let unwrapError = error {
-            let errorString = String(describing: unwrapError)
-            let result = BuildData.build(param: parameter, error: errorString)
-            detailClosure(result)
         }
     }
 }
