@@ -10,6 +10,6 @@ import Foundation
 
 extension Tapul {
     var tapul: String {
-        return "\(value.0)\(value.1)"
+        "\(value.0)\(value.1)"
     }
 }
